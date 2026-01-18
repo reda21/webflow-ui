@@ -1,16 +1,33 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
+import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     vue(),
-    dts({
+    tailwindcss(),
+    // Only generate types during build
+    command === 'build' && dts({
       include: ['src/**/*.ts', 'src/**/*.vue'],
       insertTypesEntry: true,
     }),
-  ],
+  ].filter(Boolean),
+  
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
+  
+  // Dev server configuration
+  server: {
+    port: 5173,
+    open: true,
+  },
+  
+  // Build configuration (library mode)
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
@@ -32,4 +49,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));
