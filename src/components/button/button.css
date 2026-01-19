@@ -203,7 +203,39 @@
 .btn-ghost {
   background-color: transparent !important;
   border-color: transparent !important;
-  color: var(--btn-color) !important;
+  color: var(--foreground) !important;
+}
+
+.btn-ghost.btn-secondary {
+  color: var(--muted-foreground) !important;
+}
+
+.btn-ghost.btn-primary {
+  color: var(--primary) !important;
+}
+
+.btn-ghost.btn-danger {
+  color: var(--danger) !important;
+}
+
+.btn-ghost.btn-success {
+  color: var(--success) !important;
+}
+
+.btn-ghost.btn-info {
+  color: var(--info) !important;
+}
+
+.btn-ghost.btn-warn {
+  color: var(--warn) !important;
+}
+
+.btn-ghost.btn-help {
+  color: var(--help) !important;
+}
+
+.btn-ghost.btn-contrast {
+  color: var(--contrast) !important;
 }
 
 .btn-ghost:hover {

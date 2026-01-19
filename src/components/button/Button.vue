@@ -1,11 +1,14 @@
 <template>
     <component :is="componentTag" :class="buttonClasses" :disabled="isDisabled" :href="as === 'a' ? href : undefined"
         :type="as === 'button' ? type : as === 'input' ? 'button' : undefined"
-        :value="as === 'input' ? value : undefined" :aria-expanded="ariaExpanded" :aria-pressed="ariaPressed"
-        :aria-describedby="ariaDescribedby" :aria-controls="ariaControls" :aria-haspopup="ariaHaspopup"
-        :aria-current="ariaCurrent" :aria-live="ariaLive" :aria-atomic="ariaAtomic" :aria-relevant="ariaRelevant"
-        :aria-disabled="isDisabled" :aria-hidden="ariaHidden" :aria-labelledby="ariaLabelledby" :aria-label="ariaLabel"
-        v-bind="$attrs" @click="handleClick">
+        :value="as === 'input' ? value : undefined" :aria-expanded="ariaExpanded || undefined"
+        :aria-pressed="ariaPressed || undefined" :aria-describedby="ariaDescribedby || undefined"
+        :aria-controls="ariaControls || undefined" :aria-haspopup="ariaHaspopup || undefined"
+        :aria-current="ariaCurrent || undefined" :aria-live="ariaLive || undefined"
+        :aria-atomic="ariaAtomic || undefined" :aria-relevant="ariaRelevant || undefined"
+        :aria-disabled="isDisabled || undefined" :aria-hidden="ariaHidden || undefined"
+        :aria-labelledby="ariaLabelledby || undefined" :aria-label="ariaLabel || undefined" v-bind="$attrs"
+        @click="handleClick">
         <!-- Loading Spinner -->
         <svg v-if="loading" class="animate-spin shrink-0" :class="spinnerSizeClass" xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24" aria-hidden="true">

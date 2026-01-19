@@ -1,6 +1,7 @@
 import { defineNuxtModule, addComponentsDir, createResolver } from '@nuxt/kit'
+import type { NuxtModule } from '@nuxt/schema'
 
-export default defineNuxtModule({
+const module: NuxtModule<any> = defineNuxtModule({
   meta: {
     name: 'webflow-ui',
     configKey: 'webflowUi'
@@ -20,7 +21,7 @@ export default defineNuxtModule({
     nuxt.options.build.transpile.push(resolve('./'))
 
     // 3. Autoriser Vite à accéder aux fichiers de la bibliothèque (nécessaire en monorepo)
-    nuxt.hook('vite:extendConfig', (config) => {
+    nuxt.hook('vite:extendConfig', (config: any) => {
       config.server = config.server || {}
       config.server.fs = config.server.fs || {}
       config.server.fs.allow = config.server.fs.allow || []
@@ -28,3 +29,5 @@ export default defineNuxtModule({
     })
   }
 })
+
+export default module
