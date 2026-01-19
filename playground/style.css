@@ -1,173 +1,440 @@
+/* ============================================================================
+   WEBFLOW UI - PLAYGROUND STYLES
+   ============================================================================
+   Ce fichier contient tous les styles personnalisés pour le playground.
+   Il est organisé en sections pour faciliter la compréhension et la maintenance.
+   
+   SOMMAIRE:
+   1. Imports & Tailwind
+   2. Variables CSS (Light & Dark Mode)
+   3. Base Styles
+   4. Scrollbar Personnalisé
+   5. Effets de Fond (Background)
+   6. Cartes Glassmorphism
+   7. Texte Dégradé Animé
+   8. Effets Glow (Lueur)
+   9. Cartes de Fonctionnalités
+   10. Boutons Personnalisés
+   11. Champs de Saisie
+   12. Blocs de Code
+   13. Statistiques
+   14. Animations
+   15. Sections
+   16. Composants Utilitaires
+   17. Footer
+   18. Responsive
+   ============================================================================ */
+
 @import "tailwindcss";
 
-/* ==========================================================================
-   WebMX UI Playground - Premium Design System
-   ========================================================================== */
+/* Ensure dark mode works with the .dark class */
+@variant dark (&:where(.dark, .dark *));
 
-@theme {
-  /* Premium Color Palette */
-  --color-primary-400: oklch(0.72 0.19 265);
-  --color-primary-500: oklch(0.62 0.22 265);
-  --color-primary-600: oklch(0.52 0.20 265);
-  
-  --color-accent-400: oklch(0.78 0.18 180);
-  --color-accent-500: oklch(0.68 0.20 180);
-  
-  /* Animation Easings */
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* --------------------------------------------------------------------------
-   Root Variables
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   2. VARIABLES CSS - THÈME CLAIR (par défaut)
+   ============================================================================ */
 :root {
-  --color-bg: #f8fafc;
-  --color-bg-secondary: #ffffff;
-  --color-bg-tertiary: #f1f5f9;
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
+  /* --- Couleurs de Base --- */
+  --background: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-tertiary: #f1f5f9;
   
-  /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
-  --gradient-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.3), transparent);
+  /* --- Texte --- */
+  --foreground: #0f172a;
+  --foreground-secondary: #475569;
+  --foreground-muted: #94a3b8;
+  
+  /* --- Bordures --- */
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  
+  /* --- Couleurs de Thème (Base values) --- */
+  /* Note: On utilise des noms simples sans préfixe ici, puis on les mappe dans @theme */
+  --primary: #6366f1;      /* indigo-500 */
+  --primary-foreground: #ffffff;
+  
+  --secondary: #94a3b8;    /* slate-400 */
+  --secondary-soft: #f3f4f6; /* gray-100 */
+  --secondary-foreground: #1f2937; /* gray-800 */
+  
+  --success: #10b981;      /* emerald-500 */
+  --success-foreground: #ffffff;
+  
+  --info: #0ea5e9;         /* sky-500 */
+  --info-foreground: #ffffff;
+  
+  --warn: #f59e0b;         /* amber-500 */
+  --warn-foreground: #ffffff;
+  
+  --help: #8b5cf6;         /* violet-500 */
+  --help-foreground: #ffffff;
+  
+  --danger: #f43f5e;       /* rose-500 */
+  --danger-foreground: #ffffff;
+  
+  --contrast: #171717;     /* neutral-900 */
+  --contrast-foreground: #ffffff;
+  
+  --accent: #764ba2;
+  --accent-foreground: #ffffff;
+
+  /* --- Dégradés --- */
+  --gradient-glow: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(120, 119, 198, 0.15) 0%,
+    transparent 50%
+  );
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(248, 250, 252, 0.8)
+  );
+  
+  /* --- Transitions --- */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* ============================================================================
+   2b. VARIABLES CSS - THÈME SOMBRE (Dark Mode)
+   ============================================================================ */
 .dark {
-  --color-bg: #0a0a0f;
-  --color-bg-secondary: #12121a;
-  --color-bg-tertiary: #1a1a24;
-  --color-text: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-  --color-border: #1e293b;
-  --color-border-hover: #334155;
+  /* --- Couleurs de Base --- */
+  --background: #0f172a;
+  --background-secondary: #1e293b;
+  --background-tertiary: #334155;
   
-  --gradient-card: linear-gradient(145deg, rgba(30,30,40,0.8), rgba(20,20,30,0.6));
-  --gradient-glow: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent);
+  /* --- Texte --- */
+  --foreground: #f1f5f9;
+  --foreground-secondary: #94a3b8;
+  --foreground-muted: #64748b;
+  
+  /* --- Bordures --- */
+  --border: #334155;
+  --border-hover: #475569;
+  
+  /* --- Couleurs de Thème (Dark Mode overrides) --- */
+  --primary: #818cf8;      /* indigo-400 */
+  --primary-foreground: #ffffff;
+  
+  --secondary: #94a3b8;    /* slate-400 */
+  --secondary-soft: #1e293b; /* slate-800/900 background */
+  --secondary-foreground: #f1f5f9;
+  
+  --success: #34d399;      /* emerald-400 */
+  --success-foreground: #ffffff;
+  
+  --info: #38bdf8;         /* sky-400 */
+  --info-foreground: #ffffff;
+  
+  --warn: #fbbf24;         /* amber-400 */
+  --warn-foreground: #ffffff;
+  
+  --help: #a78bfa;         /* violet-400 */
+  --help-foreground: #ffffff;
+  
+  --danger: #fb7185;       /* rose-400 */
+  --danger-foreground: #ffffff;
+  
+  --contrast: #ffffff;     /* White in dark mode */
+  --contrast-foreground: #000000; /* Black text for contrast in dark mode */
+
+  /* --- Dégradés --- */
+  --gradient-glow: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(120, 119, 198, 0.25) 0%,
+    transparent 50%
+  );
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(30, 41, 59, 0.9),
+    rgba(15, 23, 42, 0.8)
+  );
 }
 
-/* --------------------------------------------------------------------------
-   Base Styles
-   -------------------------------------------------------------------------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ============================================================================
+   2c. TAILWIND THEME CONFIGURATION (Tailwind v4)
+   ============================================================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  /* Mapping des couleurs thématiques */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-success: var(--success);
+  --color-info: var(--info);
+  --color-warn: var(--warn);
+  --color-help: var(--help);
+  --color-danger: var(--danger);
+  --color-contrast: var(--contrast);
+  --color-accent: var(--accent);
+
+  --animate-gradient-shift: gradient-shift 3s ease-in-out infinite;
+  --animate-border-rotate: border-rotate 4s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.6s var(--ease-smooth) forwards;
+  --animate-slide-in-right: slide-in-right 0.6s var(--ease-smooth) forwards;
 }
+
+/* ============================================================================
+   2d. CUSTOM COMPONENT CLASSES (Tailwind Components)
+   ============================================================================ */
+@layer components {
+  /* --- Base Button --- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 font-semibold transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 leading-none disabled:opacity-50 disabled:cursor-not-allowed rounded-lg;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  /* --- Severities --- */
+  .btn-primary { 
+    @apply bg-primary dark:text-gray-800 text-white border-transparent hover:bg-indigo-600;
+  }
+  
+  .btn-secondary { 
+    --btn-color: var(--secondary);
+    --btn-ring: #cbd5e1; /* gray-300 */
+    /* Secondary est spécial car il utilise une version "soft" par défaut */
+    @apply bg-primary text-gray-800 border-transparent focus:ring-[var(--btn-ring)] hover:bg-gray-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700;
+  }
+
+  .btn-success { 
+    --btn-color: var(--success);
+    --btn-ring: #34d399; /* emerald-400 */
+    @apply bg-success text-white border-transparent focus:ring-[var(--btn-ring)] hover:bg-emerald-600;
+  }
+
+  .btn-info { 
+    --btn-color: var(--info);
+    --btn-ring: #38bdf8; /* sky-400 */
+    @apply bg-info text-white border-transparent focus:ring-[var(--btn-ring)] hover:bg-sky-600;
+  }
+
+  .btn-warn { 
+    --btn-color: var(--warn);
+    --btn-ring: #fbbf24; /* amber-400 */
+    @apply bg-warn text-white border-transparent focus:ring-[var(--btn-ring)] hover:bg-amber-600;
+  }
+
+  .btn-help { 
+    --btn-color: var(--help);
+    --btn-ring: #a78bfa; /* violet-400 */
+    @apply bg-help text-white border-transparent focus:ring-[var(--btn-ring)] hover:bg-violet-600;
+  }
+
+  .btn-danger { 
+    --btn-color: var(--danger);
+    --btn-ring: #fb7185; /* rose-400 */
+    @apply bg-danger text-white border-transparent focus:ring-[var(--btn-ring)] hover:bg-rose-600;
+  }
+
+  .btn-contrast { 
+    --btn-color: var(--contrast);
+    --btn-ring: #3f3f46; /* neutral-700 */
+    @apply bg-contrast text-[var(--contrast-foreground)] border-transparent focus:ring-[var(--btn-ring)];
+  }
+
+  /* --- Variant Modifiers --- */
+  .btn-outlined {
+    @apply bg-transparent! border-[var(--btn-color)]! text-[var(--btn-color)]! hover:bg-[var(--btn-color)]! hover:text-[var(--btn-text)]!;
+  }
+
+  .btn-subtle {
+    /* Utilise une opacité de la couleur de sévérité */
+    background-color: color-mix(in srgb, var(--btn-color), transparent 90%);
+    color: var(--btn-color);
+    border-color: transparent;
+  }
+  .btn-subtle:hover {
+    background-color: color-mix(in srgb, var(--btn-color), transparent 80%);
+  }
+
+  .btn-ghost {
+    @apply bg-transparent! border-transparent! text-[var(--btn-color)]! hover:bg-[var(--btn-color)]/10!;
+  }
+
+  .btn-link {
+    @apply bg-transparent! border-transparent! text-[var(--btn-color)]! hover:underline! px-0! h-auto!;
+  }
+}
+
+
+/* ============================================================================
+   3. BASE STYLES
+   ============================================================================
+   Note: Tailwind CSS v4 inclut déjà Preflight (reset CSS moderne).
+   On n'ajoute ici que les styles personnalisés supplémentaires.
+   ============================================================================ */
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  background: var(--color-bg);
-  color: var(--color-text);
+  font-family:
+    "Inter",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--background);
+  color: var(--foreground);
   min-height: 100vh;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.3s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.3s ease;
 }
 
-/* --------------------------------------------------------------------------
-   Custom Scrollbar
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   4. SCROLLBAR PERSONNALISÉ
+   ============================================================================
+   Style moderne pour la barre de défilement avec dégradé
+   ============================================================================ */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-primary-500), var(--color-accent-500));
+  background: linear-gradient(
+    180deg,
+    var(--primary-500),
+    var(--accent-500)
+  );
   border-radius: 10px;
-  border: 2px solid var(--color-bg);
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--color-primary-400), var(--color-accent-400));
+  background: linear-gradient(
+    180deg,
+    var(--primary-400),
+    var(--accent-400)
+  );
 }
 
-/* --------------------------------------------------------------------------
-   Background Effects
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   5. EFFETS DE FOND (BACKGROUND)
+   ============================================================================
+   Effets visuels subtils pour l'arrière-plan (mesh + grille)
+   ============================================================================ */
+
+/* --- Mesh Gradient Background --- */
 .bg-mesh {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--color-bg);
+  background: var(--background);
 }
 
 .bg-mesh::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: var(--gradient-glow);
 }
 
 .bg-mesh::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(67, 217, 173, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.04) 0%, transparent 50%);
+  background-image:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(67, 217, 173, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 107, 107, 0.04) 0%,
+      transparent 50%
+    );
 }
 
-/* Grid Pattern */
+/* --- Grid Pattern Overlay --- */
 .bg-grid {
   position: fixed;
   inset: 0;
   z-index: -1;
   background-size: 60px 60px;
-  background-image: 
-    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
   opacity: 0.3;
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, black 70%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    black 70%,
+    transparent 100%
+  );
 }
 
-/* --------------------------------------------------------------------------
-   Glassmorphism Cards
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   6. CARTES GLASSMORPHISM
+   ============================================================================
+   Effet de verre flou moderne avec transparence
+   ============================================================================ */
 .glass-card {
   background: var(--gradient-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
   border-radius: 24px;
-  box-shadow: 
+  box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+  transition:
+    transform 0.3s var(--ease-smooth),
+    box-shadow 0.3s var(--ease-smooth);
 }
 
 .glass-card:hover {
   transform: translateY(-4px);
-  box-shadow: 
+  box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.15),
     0 10px 10px -5px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+/* --- Version Dark Mode --- */
 .dark .glass-card {
-  background: linear-gradient(145deg, rgba(30, 30, 45, 0.7), rgba(15, 15, 25, 0.5));
+  background: linear-gradient(
+    145deg,
+    rgba(30, 30, 45, 0.7),
+    rgba(15, 15, 25, 0.5)
+  );
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* --------------------------------------------------------------------------
-   Animated Gradient Text
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   7. TEXTE DÉGRADÉ ANIMÉ
+   ============================================================================
+   Texte avec effet de dégradé qui change de couleur
+   ============================================================================ */
 .gradient-text {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   background-size: 200% auto;
@@ -178,13 +445,20 @@ body {
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
 }
 
-/* --------------------------------------------------------------------------
-   Glow Effects
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   8. EFFETS GLOW (LUEUR)
+   ============================================================================
+   Effets de lueur pour mettre en valeur certains éléments
+   ============================================================================ */
 .glow-primary {
   box-shadow: 0 0 40px rgba(102, 126, 234, 0.4);
 }
@@ -193,14 +467,14 @@ body {
   box-shadow: 0 0 40px rgba(67, 217, 173, 0.4);
 }
 
-/* Animated Border Glow */
+/* --- Bordure Animée avec Lueur --- */
 .border-glow {
   position: relative;
   overflow: hidden;
 }
 
 .border-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -2px;
   background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
@@ -211,32 +485,45 @@ body {
 }
 
 @keyframes border-rotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* --------------------------------------------------------------------------
-   Feature Cards
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   9. CARTES DE FONCTIONNALITÉS
+   ============================================================================
+   Cartes utilisées pour présenter les fonctionnalités avec animation au survol
+   ============================================================================ */
 .feature-card {
   position: relative;
   padding: 1.5rem;
   border-radius: 20px;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
+  background: var(--background-secondary);
+  border: 1px solid var(--border);
   overflow: hidden;
   transition: all 0.4s var(--ease-smooth);
 }
 
+/* --- Barre de couleur en haut au survol --- */
 .feature-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--card-accent, #667eea), var(--card-accent-end, #764ba2));
+  background: linear-gradient(
+    90deg,
+    var(--card-accent, #667eea),
+    var(--card-accent-end, #764ba2)
+  );
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s var(--ease-spring);
@@ -252,11 +539,7 @@ body {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
-.dark .feature-card {
-  background: var(--color-bg-secondary);
-}
-
-/* Card Icon Container */
+/* --- Icône de Fonctionnalité --- */
 .feature-icon {
   width: 56px;
   height: 56px;
@@ -266,7 +549,11 @@ body {
   justify-content: center;
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--icon-bg, rgba(102, 126, 234, 0.1)), var(--icon-bg-end, rgba(118, 75, 162, 0.1)));
+  background: linear-gradient(
+    135deg,
+    var(--icon-bg, rgba(102, 126, 234, 0.1)),
+    var(--icon-bg-end, rgba(118, 75, 162, 0.1))
+  );
   border: 1px solid var(--icon-border, rgba(102, 126, 234, 0.2));
   transition: transform 0.3s var(--ease-spring);
 }
@@ -275,99 +562,37 @@ body {
   transform: scale(1.1) rotate(-5deg);
 }
 
-/* --------------------------------------------------------------------------
-   Buttons
-   -------------------------------------------------------------------------- */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: white;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-smooth);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.btn-primary:hover::before {
-  opacity: 1;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px -10px rgba(102, 126, 234, 0.5);
-}
-
-.btn-primary span {
-  position: relative;
-  z-index: 1;
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  color: var(--color-text);
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-smooth);
-}
-
-.btn-secondary:hover {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-border-hover);
-  transform: translateY(-2px);
-}
-
-/* --------------------------------------------------------------------------
-   Inputs
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   11. CHAMPS DE SAISIE
+   ============================================================================
+   Style moderne pour les inputs
+   ============================================================================ */
 .input-modern {
   width: 100%;
   padding: 0.875rem 1rem;
   font-size: 0.9375rem;
-  color: var(--color-text);
-  background: var(--color-bg);
-  border: 2px solid var(--color-border);
+  color: var(--foreground);
+  background: var(--background);
+  border: 2px solid var(--border);
   border-radius: 14px;
   outline: none;
   transition: all 0.3s var(--ease-smooth);
 }
 
 .input-modern:focus {
-  border-color: var(--color-primary-500);
+  border-color: var(--primary-500);
   box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
 }
 
 .input-modern::placeholder {
-  color: var(--color-text-muted);
+  color: var(--foreground-muted);
 }
 
-/* --------------------------------------------------------------------------
-   Code Blocks
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   12. BLOCS DE CODE
+   ============================================================================
+   Style pour les exemples de code avec coloration syntaxique
+   ============================================================================ */
 .code-block {
   position: relative;
   background: linear-gradient(145deg, #1a1a2e, #16162a);
@@ -376,8 +601,9 @@ body {
   overflow: hidden;
 }
 
+/* Indicateurs de fenêtre (points rouge/jaune/vert) */
 .code-block::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -397,24 +623,40 @@ body {
 }
 
 .code-block code {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 0.875rem;
   line-height: 1.7;
   color: #e2e8f0;
 }
 
-/* Syntax Highlighting */
-.code-keyword { color: #c792ea; }
-.code-string { color: #c3e88d; }
-.code-function { color: #82aaff; }
-.code-comment { color: #546e7a; }
-.code-tag { color: #f07178; }
-.code-attr { color: #ffcb6b; }
-.code-value { color: #c3e88d; }
+/* --- Coloration Syntaxique --- */
+.code-keyword {
+  color: #c792ea;
+}
+.code-string {
+  color: #c3e88d;
+}
+.code-function {
+  color: #82aaff;
+}
+.code-comment {
+  color: #546e7a;
+}
+.code-tag {
+  color: #f07178;
+}
+.code-attr {
+  color: #ffcb6b;
+}
+.code-value {
+  color: #c3e88d;
+}
 
-/* --------------------------------------------------------------------------
-   Stats Counter
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   13. STATISTIQUES
+   ============================================================================
+   Affichage des chiffres clés avec style
+   ============================================================================ */
 .stat-item {
   text-align: center;
   padding: 1.5rem;
@@ -428,23 +670,39 @@ body {
 }
 
 .stat-label {
-  color: var(--color-text-secondary);
+  color: var(--foreground-secondary);
   font-size: 0.9375rem;
 }
 
-/* --------------------------------------------------------------------------
-   Animations
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   14. ANIMATIONS
+   ============================================================================
+   Animations réutilisables pour donner vie à l'interface
+   ============================================================================ */
+
+/* --- Float (Flottement) --- */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
+/* --- Pulse Glow (Pulsation lumineuse) --- */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
-  50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.6); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.6);
+  }
 }
 
+/* --- Fade Up (Apparition vers le haut) --- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -456,6 +714,7 @@ body {
   }
 }
 
+/* --- Slide In Right (Glissement depuis la droite) --- */
 @keyframes slide-in-right {
   from {
     opacity: 0;
@@ -467,6 +726,7 @@ body {
   }
 }
 
+/* --- Classes d'Animation --- */
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -483,16 +743,28 @@ body {
   animation: slide-in-right 0.6s var(--ease-smooth) forwards;
 }
 
-/* Stagger delays */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
+/* --- Délais d'Animation (Stagger) --- */
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+.delay-400 {
+  animation-delay: 400ms;
+}
+.delay-500 {
+  animation-delay: 500ms;
+}
 
-/* --------------------------------------------------------------------------
-   Section Styles
-   -------------------------------------------------------------------------- */
+/* ============================================================================
+   15. SECTIONS
+   ============================================================================
+   Styles pour les en-têtes de section
+   ============================================================================ */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -505,7 +777,7 @@ body {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-primary-500);
+  color: var(--primary-500);
   background: rgba(102, 126, 234, 0.1);
   border: 1px solid rgba(102, 126, 234, 0.2);
   border-radius: 100px;
@@ -517,45 +789,33 @@ body {
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1rem;
+  color: var(--foreground);
 }
 
 .section-description {
   font-size: 1.125rem;
-  color: var(--color-text-secondary);
+  color: var(--foreground-secondary);
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* --------------------------------------------------------------------------
-   Responsive
-   -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 1.875rem;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .feature-card {
-    padding: 1.25rem;
-  }
-}
+/* ============================================================================
+   16. COMPOSANTS UTILITAIRES
+   ============================================================================
+   Composants réutilisables divers
+   ============================================================================ */
 
-/* --------------------------------------------------------------------------
-   Component Showcase
-   -------------------------------------------------------------------------- */
+/* --- Showcase de Composant --- */
 .component-showcase {
   position: relative;
   padding: 2rem;
   border-radius: 24px;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
+  background: var(--background-secondary);
+  border: 1px solid var(--border);
 }
 
 .component-showcase::before {
-  content: 'LIVE PREVIEW';
+  content: "LIVE PREVIEW";
   position: absolute;
   top: -12px;
   left: 24px;
@@ -568,19 +828,19 @@ body {
   border-radius: 6px;
 }
 
-/* Toggle Switch */
+/* --- Toggle Switch --- */
 .toggle-switch {
   position: relative;
   width: 48px;
   height: 26px;
-  background: var(--color-border);
+  background: var(--border);
   border-radius: 100px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .toggle-switch::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 3px;
   left: 3px;
@@ -600,12 +860,12 @@ body {
   transform: translateX(22px);
 }
 
-/* Event Log */
+/* --- Event Log (Journal d'événements) --- */
 .event-log {
   background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
   border-radius: 16px;
   padding: 1.5rem;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 0.8125rem;
   max-height: 200px;
   overflow-y: auto;
@@ -631,20 +891,43 @@ body {
   color: #4ade80;
 }
 
-/* Footer */
+/* ============================================================================
+   17. FOOTER
+   ============================================================================
+   Pied de page avec dégradé subtil
+   ============================================================================ */
 .footer {
   padding: 3rem 0;
   text-align: center;
-  border-top: 1px solid var(--color-border);
-  background: linear-gradient(180deg, transparent, var(--color-bg-secondary));
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, var(--background-secondary));
 }
 
 .footer-text {
-  color: var(--color-text-muted);
+  color: var(--foreground-muted);
   font-size: 0.9375rem;
 }
 
 .footer-heart {
   color: #f43f5e;
   animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* ============================================================================
+   18. RESPONSIVE
+   ============================================================================
+   Adaptations pour les écrans mobiles et tablettes
+   ============================================================================ */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.875rem;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .feature-card {
+    padding: 1.25rem;
+  }
 }

@@ -1,9 +1,6 @@
 <template>
-    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" :class="[
-        isScrolled ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-black/5' : 'bg-transparent',
-        { 'border-b border-slate-200/50 dark:border-slate-800/50': isScrolled }
-    ]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-md dark:shadow-lg dark:shadow-slate-900/50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
@@ -25,7 +22,7 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center gap-1">
+                <div class="hidden md:flex items-center gap-2">
                     <a v-for="item in navItems" :key="item.label" :href="item.href"
                         class="relative px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-800/50"
                         :class="{ 'text-indigo-600 dark:text-indigo-400': item.active }"
@@ -37,7 +34,7 @@
                 </div>
 
                 <!-- Right Section -->
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-4">
                     <!-- Search Button -->
                     <button v-if="showSearch"
                         class="hidden sm:flex items-center gap-2 px-3 py-2 text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200"
@@ -160,19 +157,13 @@ defineEmits<{
     'cta-click': [event: MouseEvent]
 }>()
 
-const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 
-const handleScroll = () => {
-    isScrolled.value = window.scrollY > 20
-}
-
 onMounted(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
+    // Component mounted
 })
 
 onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll)
+    // Component unmounted
 })
 </script>
