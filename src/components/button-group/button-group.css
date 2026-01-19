@@ -1,0 +1,60 @@
+/* --- Button Group Styles --- */
+.btn-group {
+  @apply inline-flex isolate;
+}
+
+.btn-group-horizontal {
+  @apply flex-row -space-x-px;
+}
+
+.btn-group-vertical {
+  @apply flex-col -space-y-px;
+}
+
+/* Horizontal group - first button */
+.btn-group-horizontal > .btn:first-child:not(:last-child) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Horizontal group - last button */
+.btn-group-horizontal > .btn:last-child:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+/* Horizontal group - middle buttons */
+.btn-group-horizontal > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0 !important;
+}
+
+/* Vertical group - first button */
+.btn-group-vertical > .btn:first-child:not(:last-child) {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* Vertical group - last button */
+.btn-group-vertical > .btn:last-child:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* Vertical group - middle buttons */
+.btn-group-vertical > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0 !important;
+}
+
+/* Z-index for stacking on hover/focus */
+.btn-group > .btn {
+  position: relative;
+  z-index: 0;
+}
+
+.btn-group > .btn:hover {
+  z-index: 10;
+}
+
+.btn-group > .btn:focus {
+  z-index: 20;
+}

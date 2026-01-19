@@ -18,6 +18,7 @@ const navItems = computed<NavItem[]>(() => [
 
 const toggleDarkMode = () => {
     isDark.value = !isDark.value
+    localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
 }
 
 const handleNavClick = (item: NavItem, event: MouseEvent) => {
@@ -33,13 +34,24 @@ const handleCtaClick = () => {
 }
 
 watch(isDark, (dark) => {
-    document.documentElement.classList.toggle('dark', dark)
+    const html = document.documentElement
+    if (dark) {
+        html.classList.add('dark')
+    } else {
+        html.classList.remove('dark')
+    }
 })
 
 onMounted(() => {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+        isDark.value = savedTheme === 'dark'
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         isDark.value = true
     }
+
+    // Immediate application to avoid flicker
+    document.documentElement.classList.toggle('dark', isDark.value)
 })
 </script>
 

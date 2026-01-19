@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
-import { Navbar, Button, ButtonGroup, type NavItem } from '../../src/index'
+import { Navbar, Button, SocialButton, ButtonGroup, type NavItem } from '../../src/index'
 
 const isDark = ref(false)
 const brandName = ref('WebFlow UI')
@@ -21,16 +21,23 @@ const demoNavItems = ref<NavItem[]>([
 
 // Button Configurator State
 type ButtonVariant = 'soft' | 'outlined' | 'subtle' | 'ghost' | 'link'
-type ButtonSeverity = 'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'help' | 'danger' | 'contrast' | 'google' | 'facebook' | 'github' | 'twitter' | 'linkedin'
-type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+type ButtonRounded = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
+type ButtonShadow = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner'
+type ButtonRing = 'none' | '1' | '2' | '4'
 
 const selectedSeverity = ref<ButtonSeverity>('primary')
 const selectedVariant = ref<ButtonVariant>('soft')
 const selectedSize = ref<ButtonSize>('md')
+const selectedRounded = ref<ButtonRounded>('md')
+const selectedShadow = ref<ButtonShadow>('none')
+const selectedRing = ref<ButtonRing>('none')
 
-const severityOptions: ButtonSeverity[] = ['primary', 'secondary', 'success', 'info', 'warn', 'help', 'danger', 'contrast', 'google', 'facebook', 'github', 'twitter', 'linkedin']
+const severityOptions: ButtonSeverity[] = ['primary', 'secondary', 'success', 'info', 'warn', 'help', 'danger', 'contrast']
 const variantOptions: ButtonVariant[] = ['soft', 'outlined', 'subtle', 'ghost', 'link']
 const sizeOptions: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl']
+const roundedOptions: ButtonRounded[] = ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full']
+const shadowOptions: ButtonShadow[] = ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'inner']
+const ringOptions: ButtonRing[] = ['none', '1', '2', '4']
 
 const buttonCodeExample = computed(() => {
     let props = ''
@@ -42,6 +49,15 @@ const buttonCodeExample = computed(() => {
     }
     if (selectedSize.value !== 'md') {
         props += ` size="${selectedSize.value}"`
+    }
+    if (selectedRounded.value !== 'md') {
+        props += ` rounded="${selectedRounded.value}"`
+    }
+    if (selectedShadow.value !== 'none') {
+        props += ` shadow="${selectedShadow.value}"`
+    }
+    if (selectedRing.value !== 'none') {
+        props += ` ring="${selectedRing.value}"`
     }
     return `<Button${props}>Button</Button>`
 })
@@ -425,12 +441,33 @@ onUnmounted(() => {
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Rounded Select -->
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400">rounded</span>
+                                <div class="relative">
+                                    <select v-model="selectedRounded"
+                                        class="appearance-none bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 pr-8 text-sm font-medium text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer">
+                                        <option v-for="rounded in roundedOptions" :key="rounded" :value="rounded">
+                                            {{ rounded }}
+                                        </option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                        <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Live Preview -->
                         <div
                             class="bg-white dark:bg-slate-900 p-12 flex items-center justify-center min-h-[160px] transition-colors duration-300">
-                            <Button :severity="selectedSeverity" :variant="selectedVariant" :size="selectedSize">
+                            <Button :severity="selectedSeverity" :variant="selectedVariant" :size="selectedSize"
+                                :rounded="selectedRounded">
                                 Button
                             </Button>
                         </div>
@@ -477,7 +514,7 @@ onUnmounted(() => {
                         <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Social Buttons</h3>
                         <div
                             class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-4">
-                            <Button severity="google">
+                            <SocialButton provider="google">
                                 <template #icon>
                                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -485,8 +522,8 @@ onUnmounted(() => {
                                     </svg>
                                 </template>
                                 Google
-                            </Button>
-                            <Button severity="github">
+                            </SocialButton>
+                            <SocialButton provider="github">
                                 <template #icon>
                                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path
@@ -494,10 +531,10 @@ onUnmounted(() => {
                                     </svg>
                                 </template>
                                 GitHub
-                            </Button>
-                            <Button severity="facebook">Facebook</Button>
-                            <Button severity="twitter">Twitter</Button>
-                            <Button severity="linkedin">LinkedIn</Button>
+                            </SocialButton>
+                            <SocialButton provider="facebook">Facebook</SocialButton>
+                            <SocialButton provider="twitter">Twitter</SocialButton>
+                            <SocialButton provider="linkedin">LinkedIn</SocialButton>
                         </div>
                     </div>
 

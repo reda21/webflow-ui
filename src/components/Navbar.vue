@@ -1,9 +1,10 @@
 <template>
-    <nav class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-md dark:shadow-lg dark:shadow-slate-900/50">
+    <nav
+        class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-md dark:shadow-lg dark:shadow-slate-900/50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0">
+                <div class="shrink-0">
                     <a :href="logoHref" class="flex items-center gap-3 group" @click="$emit('logo-click', $event)">
                         <div
                             class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">

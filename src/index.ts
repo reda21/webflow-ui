@@ -5,7 +5,7 @@ import './style.css';
 export { default as Navbar } from './components/Navbar.vue';
 export type { NavItem } from './components/Navbar.vue';
 
-export { default as Button } from './components/Button.vue';
+export { default as Button } from './components/button/Button.vue';
 export type {
     ButtonProps,
     ButtonVariant,
@@ -16,7 +16,10 @@ export type {
     ButtonIconPos,
     ButtonShadow,
     ButtonRing,
-} from './components/Button.vue';
+} from './components/button/types';
 
-export { default as ButtonGroup } from './components/ButtonGroup.vue';
-export type { ButtonGroupProps, ButtonGroupDirection } from './components/ButtonGroup.vue';
+export { default as SocialButton } from './components/social-button/SocialButton.vue';
+export type { SocialProvider } from './components/social-button/types';
+
+export { default as ButtonGroup } from './components/button-group/ButtonGroup.vue';
+export type { ButtonGroupProps, ButtonGroupDirection } from './components/button-group/types';

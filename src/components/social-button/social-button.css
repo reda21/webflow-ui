@@ -1,0 +1,72 @@
+/* --- Social Button Styles --- */
+
+/* Provider-specific colors */
+.social-google {
+  @apply bg-[#DB4437] text-white border-transparent;
+}
+.social-google:hover {
+  @apply bg-[#C53929];
+}
+
+.social-facebook {
+  @apply bg-[#1877F2] text-white border-transparent;
+}
+.social-facebook:hover {
+  @apply bg-[#1565D8];
+}
+
+.social-github {
+  @apply bg-[#24292F] text-white border-transparent;
+}
+.social-github:hover {
+  @apply bg-[#1B1F23];
+}
+
+.social-twitter {
+  @apply bg-[#1DA1F2] text-white border-transparent;
+}
+.social-twitter:hover {
+  @apply bg-[#1A91DA];
+}
+
+.social-linkedin {
+  @apply bg-[#0077B5] text-white border-transparent;
+}
+.social-linkedin:hover {
+  @apply bg-[#006097];
+}
+
+.social-apple {
+  @apply bg-[#000000] text-white border-transparent;
+}
+.social-apple:hover {
+  @apply bg-[#1a1a1a];
+}
+
+.social-microsoft {
+  @apply bg-[#00A4EF] text-white border-transparent;
+}
+.social-microsoft:hover {
+  @apply bg-[#0090D0];
+}
+
+.social-discord {
+  @apply bg-[#5865F2] text-white border-transparent;
+}
+.social-discord:hover {
+  @apply bg-[#4752C4];
+}
+
+.social-slack {
+  @apply bg-[#4A154B] text-white border-transparent;
+}
+.social-slack:hover {
+  @apply bg-[#3E1140];
+}
+
+.social-spotify {
+  @apply bg-[#1DB954] text-white border-transparent;
+}
+.social-spotify:hover {
+  @apply bg-[#1AA34A];
+}

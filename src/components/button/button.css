@@ -1,0 +1,226 @@
+/* --- Base Button --- */
+.btn {
+  --btn-color: var(--primary);
+  --btn-text: white;
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm h-10 font-semibold transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 leading-none disabled:opacity-50 disabled:cursor-not-allowed bg-primary text-white hover:brightness-110;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+/* --- Severities --- */
+.btn-primary {
+  /* Already handled by .btn defaults */
+}
+
+.btn-secondary {
+  --btn-color: var(--secondary);
+  --btn-text: var(--secondary-foreground);
+  @apply bg-secondary-soft text-secondary-foreground hover:bg-border;
+
+  @variant dark {
+    --btn-text: var(--foreground);
+    @apply text-foreground;
+  }
+}
+
+.btn-success {
+  --btn-color: var(--success);
+  --btn-text: white;
+  @apply bg-success text-white hover:brightness-110;
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+.btn-info {
+  --btn-color: var(--info);
+  --btn-text: white;
+  @apply bg-info text-white hover:brightness-110;
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+.btn-warn {
+  --btn-color: var(--warn);
+  --btn-text: white;
+  @apply bg-warn text-white hover:brightness-110;
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+.btn-help {
+  --btn-color: var(--help);
+  --btn-text: white;
+  @apply bg-help text-white hover:brightness-110;
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+.btn-danger {
+  --btn-color: var(--danger);
+  --btn-text: white;
+  @apply bg-danger text-white hover:brightness-110;
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+.btn-contrast {
+  --btn-color: var(--contrast);
+  --btn-text: var(--contrast-foreground);
+  @apply bg-contrast text-contrast-foreground;
+
+  @variant dark {
+    --btn-text: theme('colors.gray.900');
+    @apply text-gray-900;
+  }
+}
+
+/* --- Sizes --- */
+.btn-xs {
+  @apply px-2 py-1 text-xs h-7 gap-1;
+}
+
+.btn-sm {
+  @apply px-3 py-1.5 text-sm h-8 gap-1.5;
+}
+
+.btn-md {
+  @apply px-4 py-2 text-sm h-10 gap-2;
+}
+
+.btn-lg {
+  @apply px-6 py-3 text-base h-12 gap-2.5;
+}
+
+.btn-xl {
+  @apply px-8 py-4 text-lg h-14 gap-3;
+}
+
+.btn-2xl {
+  @apply px-10 py-5 text-xl h-16 gap-4;
+}
+
+/* Icon-Only Sizes */
+.btn-icon-only.btn-xs {
+  @apply w-7 p-0;
+}
+
+.btn-icon-only.btn-sm {
+  @apply w-8 p-0;
+}
+
+.btn-icon-only.btn-md {
+  @apply w-10 p-0;
+}
+
+.btn-icon-only.btn-lg {
+  @apply w-12 p-0;
+}
+
+.btn-icon-only.btn-xl {
+  @apply w-14 p-0;
+}
+
+.btn-icon-only.btn-2xl {
+  @apply w-16 p-0;
+}
+
+/* --- Rounding --- */
+.round-none {
+  border-radius: 0;
+}
+
+.round-xs {
+  border-radius: var(--radius-sm);
+}
+
+.round-sm {
+  border-radius: var(--radius-md);
+}
+
+.round-md {
+  border-radius: var(--radius-lg);
+}
+
+.round-lg {
+  border-radius: var(--radius-xl);
+}
+
+.round-xl {
+  border-radius: var(--radius-2xl);
+}
+
+.round-2xl {
+  border-radius: 2rem;
+}
+
+.round-full {
+  border-radius: var(--radius-full);
+}
+
+.btn-soft {
+  /* Implicitly handled by .btn defaults */
+}
+
+/* --- Variants --- */
+.btn-outlined {
+  @apply bg-transparent! border-[var(--btn-color)]! text-[var(--btn-color)]!;
+}
+
+.btn-outlined:hover {
+  @apply bg-[var(--btn-color)]! text-[var(--btn-text)]!;
+}
+
+.btn-subtle {
+  background-color: color-mix(in srgb, var(--btn-color), transparent 90%) !important;
+  color: var(--btn-color) !important;
+  border-color: transparent !important;
+}
+
+.btn-subtle:hover {
+  background-color: color-mix(in srgb, var(--btn-color), transparent 80%) !important;
+}
+
+.btn-ghost {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: var(--btn-color) !important;
+}
+
+.btn-ghost:hover {
+  background-color: color-mix(in srgb, var(--btn-color), transparent 90%) !important;
+}
+
+.btn-link {
+  @apply bg-transparent! border-transparent! hover:underline! px-0! py-0! h-auto! min-h-0! shadow-none! ring-0! active:scale-100!;
+  color: var(--btn-color) !important;
+}
+
+/* --- Rings --- */
+.ring-primary { --tw-ring-color: var(--primary); }
+.ring-secondary { --tw-ring-color: var(--secondary); }
+.ring-success { --tw-ring-color: var(--success); }
+.ring-info { --tw-ring-color: var(--info); }
+.ring-warn { --tw-ring-color: var(--warn); }
+.ring-help { --tw-ring-color: var(--help); }
+.ring-danger { --tw-ring-color: var(--danger); }
+.ring-contrast { --tw-ring-color: var(--contrast); }
