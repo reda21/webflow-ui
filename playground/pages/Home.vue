@@ -34,7 +34,7 @@
 
                 <!-- CTA Buttons -->
                 <div class="flex flex-wrap items-center justify-center gap-4 animate-fade-up delay-300">
-                    <router-link to="/components" class="btn-primary">
+                    <router-link to="/docs" class="btn-primary">
                         <span>🚀</span>
                         <span>Commencer</span>
                     </router-link>

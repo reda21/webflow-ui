@@ -18,10 +18,24 @@ export interface ButtonProps {
     as?: ButtonAs
     type?: 'button' | 'submit' | 'reset'
     loading?: boolean
+    loadingAuto?: boolean
     disabled?: boolean
+    block?: boolean
+    raised?: boolean
+    square?: boolean
     iconPos?: ButtonIconPos
     href?: string
     value?: string
+    icon?: string
+    label?: string
+    leadingIcon?: string
+    avatar?: string
+    to?: string | object
+    name?: string
+    autofocus?: boolean | string
+    referrerpolicy?: string
+    active?: boolean
+    trailingSlash?: 'remove' | 'append'
     // ARIA Props
     ariaExpanded?: boolean
     ariaPressed?: boolean | 'mixed'

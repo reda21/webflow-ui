@@ -23,3 +23,7 @@ export type { SocialProvider } from './components/social-button/types';
 
 export { default as ButtonGroup } from './components/button-group/ButtonGroup.vue';
 export type { ButtonGroupProps, ButtonGroupDirection } from './components/button-group/types';
+
+export { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from './components/avatar/index';
+export type { AvatarProps, AvatarSize, AvatarRounded } from './components/avatar/types';
+

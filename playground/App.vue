@@ -12,8 +12,7 @@ const showThemeToggle = ref(true)
 
 const navItems = computed<NavItem[]>(() => [
     { label: 'Accueil', href: '/', active: route.path === '/' },
-    { label: 'Composants', href: '/components', active: route.path === '/components' },
-    { label: 'Documentation', href: '/docs', active: route.path === '/docs' },
+    { label: 'Documentation', href: '/docs', active: route.path.startsWith('/docs') },
 ])
 
 const toggleDarkMode = () => {
