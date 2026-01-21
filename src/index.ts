@@ -30,3 +30,6 @@ export { default as SplitButton } from './components/split-button/SplitButton.vu
 export { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from './components/avatar/index';
 export type { AvatarProps, AvatarSize, AvatarRounded } from './components/avatar/types';
 
+export { default as Icon } from './components/icon/Icon.vue';
+
+
