@@ -181,149 +181,6 @@ const buttonCodeExample = computed(() => {
             </div>
         </div>
 
-        <!-- Props Table -->
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Props</h3>
-        <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-12">
-            <table class="w-full text-sm text-left">
-                <thead
-                    class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
-                    <tr>
-                        <th class="py-3 px-4">Propriété</th>
-                        <th class="py-3 px-4">Type</th>
-                        <th class="py-3 px-4">Par défaut</th>
-                        <th class="py-3 px-4">Description</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">severity
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'primary'</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Couleur d'accentuation (primary,
-                            secondary, success, info, warn, help, danger, contrast).</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">variant
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'soft'</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Style visuel du bouton (soft, outlined,
-                            subtle, ghost, link).</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">size</td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'md'</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Taille du bouton (xs, sm, md, lg, xl,
-                            2xl).</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">block
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">false</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche le bouton sur toute la largeur
-                            de son conteneur.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">icon</td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">''</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Nom de l'icône Iconify à afficher.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">iconPos
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'left'</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Position de l'icône (left, right, top,
-                            bottom).</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">loading
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">false</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche un indicateur de chargement et
-                            désactive le bouton.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
-                            loadingAuto</td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">false</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Gère automatiquement l'état de
-                            chargement basé sur la promesse du clic.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">disabled
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">false</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Désactive les interactions avec le
-                            bouton.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">to</td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string | object
-                        </td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">undefined</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Transforme le bouton en lien NuxtLink.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">as</td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'button'</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Élément HTML à utiliser (button, a,
-                            input).</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">type</td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'button'</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Type HTML du bouton (button, submit,
-                            reset).</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">autofocus
-                        </td>
-                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">false</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Donne le focus au bouton lors du
-                            chargement de la page.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Slots Table -->
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Slots</h3>
-        <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-12">
-            <table class="w-full text-sm text-left">
-                <thead
-                    class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
-                    <tr>
-                        <th class="py-3 px-4">Slot</th>
-                        <th class="py-3 px-4">Description</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">default
-                        </td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Contenu principal du bouton.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">icon</td>
-                        <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Permet de remplacer l'icône par défaut.
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
         <!-- Section Variantes -->
         <div class="mb-12">
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Variantes</h3>
@@ -402,6 +259,7 @@ const buttonCodeExample = computed(() => {
                 <Button ring="2" severity="info" variant="outlined">Outlined Ring</Button>
             </div>
         </div>
+
         <!-- Section Avatar et Label -->
         <div class="mb-12">
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Avatar et Label</h3>
@@ -442,6 +300,597 @@ const buttonCodeExample = computed(() => {
                 <Button as="button">HTML Button</Button>
                 <Button as="a" href="#">HTML Link (a)</Button>
                 <Button as="input" type="submit" value="HTML Input Submit" />
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+        <!-- API SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+        <div class="scroll-mt-24 mb-16" id="api">
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">API</h2>
+                <span
+                    class="px-2 py-0.5 text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full">ButtonProps</span>
+            </div>
+            <p class="text-slate-600 dark:text-slate-400 mb-8">
+                Définition des propriétés, événements et slots du composant Button.
+            </p>
+
+            <!-- Props Table -->
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                Props
+            </h3>
+            <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-12">
+                <table class="w-full text-sm text-left">
+                    <thead
+                        class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+                        <tr>
+                            <th class="py-3 px-4">Propriété</th>
+                            <th class="py-3 px-4">Type</th>
+                            <th class="py-3 px-4">Par défaut</th>
+                            <th class="py-3 px-4">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                        <!-- Apparence -->
+                        <tr class="bg-slate-50/50 dark:bg-slate-800/30">
+                            <td colspan="4"
+                                class="py-2 px-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-500">
+                                Apparence
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                severity</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'help' | 'danger' | 'contrast'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'primary'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Définit la couleur d'accentuation
+                                du bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                variant</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'soft' | 'outlined' | 'subtle' | 'ghost' | 'link'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'soft'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Style visuel du bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">size
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'md'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Taille du bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                rounded</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'md'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Rayon de bordure du bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                shadow</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'none'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Ombre portée colorée selon la
+                                severity.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">ring
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'none' | '1' | '2' | '4'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'none'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Anneau de focus coloré selon la
+                                severity.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                raised</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Ajoute un effet d'élévation au
+                                bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                square</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Force un ratio d'aspect carré
+                                (utile pour les boutons d'icône).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">block
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche le bouton sur toute la
+                                largeur de son conteneur.</td>
+                        </tr>
+
+                        <!-- Contenu -->
+                        <tr class="bg-slate-50/50 dark:bg-slate-800/30">
+                            <td colspan="4"
+                                class="py-2 px-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-500">
+                                Contenu
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">label
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Texte affiché dans le bouton
+                                (alternative au slot par défaut).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">icon
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Nom de l'icône Iconify à afficher.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                leadingIcon</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Icône toujours affichée au début du
+                                bouton (prioritaire sur <code>icon</code>).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                iconPos</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'left' | 'right' | 'top' | 'bottom'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'left'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Position de l'icône par rapport au
+                                label.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                avatar</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">URL d'une image avatar à afficher
+                                dans le bouton.</td>
+                        </tr>
+
+                        <!-- État -->
+                        <tr class="bg-slate-50/50 dark:bg-slate-800/30">
+                            <td colspan="4"
+                                class="py-2 px-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-500">
+                                État
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                loading</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche un spinner et désactive le
+                                bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                loadingAuto</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Gère automatiquement l'état de
+                                chargement lors d'un click retournant une Promise.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                disabled</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Désactive les interactions avec le
+                                bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                active</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Force l'état actif du bouton (pour
+                                les NuxtLinks).</td>
+                        </tr>
+
+                        <!-- Rendu HTML -->
+                        <tr class="bg-slate-50/50 dark:bg-slate-800/30">
+                            <td colspan="4"
+                                class="py-2 px-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-500">
+                                Rendu HTML
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">as
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'button' | 'a' | 'input'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'button'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Élément HTML à rendre.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">type
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'button' | 'submit' | 'reset'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'button'</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Type HTML du bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">to
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string |
+                                object</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Transforme le bouton en NuxtLink
+                                vers cette destination.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">href
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">URL de destination (quand
+                                <code>as="a"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">value
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Valeur du champ (quand
+                                <code>as="input"</code>).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">name
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Attribut name pour les formulaires.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                autofocus</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Donne le focus au bouton au
+                                chargement de la page.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                referrerpolicy</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Politique de référent pour les
+                                liens.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                trailingSlash</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'remove' | 'append'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Gestion du slash final pour les
+                                NuxtLinks.</td>
+                        </tr>
+
+                        <!-- Accessibilité ARIA -->
+                        <tr class="bg-slate-50/50 dark:bg-slate-800/30">
+                            <td colspan="4"
+                                class="py-2 px-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-500">
+                                Accessibilité (ARIA)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaLabel</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Libellé accessible pour les
+                                lecteurs d'écran.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaExpanded</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique si l'élément contrôlé est
+                                déployé.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaPressed</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean |
+                                'mixed'</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique l'état pressé d'un bouton à
+                                bascule.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaControls</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément contrôlé par ce
+                                bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaHaspopup</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique le type de popup déclenché.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaCurrent</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">boolean | 'page' | 'step' | 'location' | 'date' | 'time'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique l'élément courant dans un
+                                ensemble.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaDescribedby</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément décrivant ce
+                                bouton.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaLabelledby</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément servant de libellé.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaLive</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'off' | 'assertive' | 'polite'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Priorité des annonces pour les
+                                régions live.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ariaHidden</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Cache l'élément aux technologies
+                                d'assistance.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Events Table -->
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                Events
+            </h3>
+            <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-12">
+                <table class="w-full text-sm text-left">
+                    <thead
+                        class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+                        <tr>
+                            <th class="py-3 px-4">Événement</th>
+                            <th class="py-3 px-4">Paramètres</th>
+                            <th class="py-3 px-4">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">click
+                            </td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">event: MouseEvent</code>
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">
+                                Émis lors du clic sur le bouton. Avec <code>loadingAuto</code>, l'état de chargement est
+                                géré automatiquement si le handler retourne une Promise.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Slots Table -->
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                Slots
+            </h3>
+            <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-12">
+                <table class="w-full text-sm text-left">
+                    <thead
+                        class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+                        <tr>
+                            <th class="py-3 px-4">Slot</th>
+                            <th class="py-3 px-4">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                default</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">
+                                Contenu principal du bouton. Peut être du texte, des éléments HTML ou d'autres
+                                composants.
+                                Alternative à la prop <code>label</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">icon
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">
+                                Permet de personnaliser l'icône affichée. Remplace l'icône par défaut définie via les
+                                props <code>icon</code> ou <code>leadingIcon</code>.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+        <!-- ACCESSIBILITY SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════════════════════ -->
+        <div class="scroll-mt-24 mb-16" id="accessibility">
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Accessibilité</h2>
+                <span
+                    class="px-2 py-0.5 text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full">WCAG
+                    2.1</span>
+            </div>
+
+            <!-- Screen Reader -->
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Lecteur d'écran</h3>
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 mb-8">
+                <p class="text-slate-600 dark:text-slate-400 mb-4">
+                    Le composant Button rend un élément <code>&lt;button&gt;</code> natif qui inclut implicitement tous
+                    les attributs passés.
+                    Le texte pour décrire le bouton est défini avec la prop <code>aria-label</code>. Si elle n'est pas
+                    présente, la prop <code>label</code> ou le contenu du slot est utilisé.
+                </p>
+                <p class="text-slate-600 dark:text-slate-400 mb-4">
+                    Pour les <strong>boutons d'icône uniquement</strong> ou avec un contenu personnalisé, il est
+                    recommandé d'utiliser
+                    <code>aria-label</code> pour que les lecteurs d'écran puissent annoncer correctement l'élément.
+                </p>
+                <div class="bg-slate-50 dark:bg-slate-950 px-6 py-4 rounded-lg">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;!-- Bouton icône avec aria-label --&gt;
+&lt;Button icon="heroicons:check" aria-label="Valider" /&gt;
+
+&lt;!-- Bouton avec label (accessible automatiquement) --&gt;
+&lt;Button icon="heroicons:check" label="Valider" /&gt;
+
+&lt;!-- Bouton personnalisé avec aria-label --&gt;
+&lt;Button class="youtube" aria-label="Voir sur YouTube"&gt;
+  &lt;Icon name="logos:youtube" /&gt;
+  &lt;span&gt;YouTube&lt;/span&gt;
+&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Keyboard Support -->
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Support Clavier</h3>
+            <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-8">
+                <table class="w-full text-sm text-left">
+                    <thead
+                        class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+                        <tr>
+                            <th class="py-3 px-4">Touche</th>
+                            <th class="py-3 px-4">Fonction</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                        <tr>
+                            <td class="py-3 px-4">
+                                <kbd
+                                    class="px-2 py-1 text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded">Tab</kbd>
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Déplace le focus vers le bouton.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4">
+                                <kbd
+                                    class="px-2 py-1 text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded">Enter</kbd>
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Active le bouton (déclenche
+                                l'événement click).</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4">
+                                <kbd
+                                    class="px-2 py-1 text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded">Space</kbd>
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Active le bouton (déclenche
+                                l'événement click).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Best Practices -->
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Bonnes pratiques</h3>
+            <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50">
+                <ul class="space-y-3 text-slate-600 dark:text-slate-400">
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 mt-0.5">✓</span>
+                        <span>Utilisez toujours un texte descriptif ou <code>aria-label</code> pour les boutons
+                            d'icône.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 mt-0.5">✓</span>
+                        <span>Préférez <code>type="submit"</code> pour les boutons de soumission de formulaire.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 mt-0.5">✓</span>
+                        <span>Utilisez <code>aria-expanded</code> pour les boutons qui contrôlent des menus ou
+                            accordéons.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 mt-0.5">✓</span>
+                        <span>Utilisez <code>aria-pressed</code> pour les boutons à bascule (toggle buttons).</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-amber-500 mt-0.5">⚠</span>
+                        <span>Évitez d'utiliser <code>as="a"</code> pour des actions qui ne naviguent pas vers une
+                            URL.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-amber-500 mt-0.5">⚠</span>
+                        <span>N'utilisez pas <code>disabled</code> si vous pouvez plutôt fournir un feedback
+                            explicite.</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
