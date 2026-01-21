@@ -64,7 +64,13 @@ const routes = [
                 name: 'docs-avatar',
                 component: () => import('./pages/docs/components/Avatar.vue'),
             },
+            {
+                path: 'components/icon',
+                name: 'docs-icon',
+                component: () => import('./pages/docs/components/Icon.vue'),
+            },
         ],
+
     },
 ]
 

@@ -239,6 +239,7 @@ const buttonCodeExample = computed(() => {
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Icônes</h3>
             <div
                 class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap items-center gap-4">
+                <Button icon="heroicons:magnifying-glass">Button</Button>
                 <Button icon="heroicons:magnifying-glass" severity="primary">Suivant</Button>
                 <Button icon="heroicons:rocket-launch" severity="success" icon-pos="right">Lancer</Button>
                 <Button icon="heroicons:trash" severity="danger" />

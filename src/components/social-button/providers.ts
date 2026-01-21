@@ -15,25 +15,25 @@ export const PROVIDERS: Record<SocialProvider, ProviderInfo> = {
         textColor: '#374151'
     },
     facebook: {
-        icon: 'ri:facebook-fill',
+        icon: 'entypo-social:facebook',
         name: 'Facebook',
         color: '#1877f2',
         textColor: '#ffffff'
     },
     github: {
-        icon: 'ri:github-fill',
+        icon: 'entypo-social:github',
         name: 'GitHub',
         color: '#24292f',
         textColor: '#ffffff'
     },
     twitter: {
-        icon: 'ri:twitter-x-fill',
+        icon: 'entypo-social:twitter',
         name: 'Twitter',
         color: '#0f1419',
         textColor: '#ffffff'
     },
     linkedin: {
-        icon: 'ri:linkedin-fill',
+        icon: 'entypo-social:linkedin',
         name: 'LinkedIn',
         color: '#0a66c2',
         textColor: '#ffffff'
@@ -51,7 +51,7 @@ export const PROVIDERS: Record<SocialProvider, ProviderInfo> = {
         textColor: '#374151'
     },
     discord: {
-        icon: 'ri:discord-fill',
+        icon: 'entypo-social:discord',
         name: 'Discord',
         color: '#5865f2',
         textColor: '#ffffff'
@@ -75,7 +75,7 @@ export const PROVIDERS: Record<SocialProvider, ProviderInfo> = {
         textColor: '#ffffff'
     },
     pinterest: {
-        icon: 'ri:pinterest-fill',
+        icon: 'entypo-social:pinterest',
         name: 'Pinterest',
         color: '#bd081c',
         textColor: '#ffffff'
@@ -87,7 +87,7 @@ export const PROVIDERS: Record<SocialProvider, ProviderInfo> = {
         textColor: '#ffffff'
     },
     paypal: {
-        icon: 'ri:paypal-fill',
+        icon: 'entypo-social:paypal',
         name: 'PayPal',
         color: '#003087',
         textColor: '#ffffff'
@@ -99,13 +99,13 @@ export const PROVIDERS: Record<SocialProvider, ProviderInfo> = {
         textColor: '#ffffff'
     },
     instagram: {
-        icon: 'ri:instagram-fill',
+        icon: 'entypo-social:instagram',
         name: 'Instagram',
         color: 'linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888)',
         textColor: '#ffffff'
     },
     youtube: {
-        icon: 'ri:youtube-fill',
+        icon: 'entypo-social:youtube',
         name: 'YouTube',
         color: '#ff0000',
         textColor: '#ffffff'
@@ -129,7 +129,7 @@ export const PROVIDERS: Record<SocialProvider, ProviderInfo> = {
         textColor: '#ffffff'
     },
     dribbble: {
-        icon: 'ri:dribbble-fill',
+        icon: 'entypo-social:dribbble',
         name: 'Dribbble',
         color: '#ea4c89',
         textColor: '#ffffff'
