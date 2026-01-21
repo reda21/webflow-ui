@@ -1,0 +1,42 @@
+@reference "../../theme.css";
+
+/* --- Split Button Styles --- */
+.split-btn {
+  @apply inline-flex isolate;
+}
+
+.split-btn-main {
+  @apply flex-1;
+}
+
+.split-btn-trigger {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  @apply flex-none border-l border-white/20;
+}
+
+/* Specific rounding for split button parts */
+.split-btn > .split-btn-main {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.split-btn > .split-btn-trigger {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+/* Dark mode adjustments for the separator */
+@variant dark {
+  .split-btn-trigger {
+    border-left-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Severities separator colors */
+.btn-secondary + .split-btn-trigger { border-left-color: rgba(0, 0, 0, 0.1); }
+.btn-ghost + .split-btn-trigger { border-left-color: var(--border); }
+
+@variant dark {
+  .btn-ghost + .split-btn-trigger { border-left-color: var(--border); }
+}

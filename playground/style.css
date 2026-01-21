@@ -1,8 +1,6 @@
-@import "tailwindcss";
 @import "../src/style.css";
 
-/* Ensure dark mode works with the .dark class */
-@variant dark (&:where(.dark, .dark *));
+/* Les variables de base, le thème et le variant 'dark' sont hérités de ../src/style.css */
 
 /* Note: Les variables de base et le thème Tailwind (primary, backgrounds, etc.) 
    sont maintenant hérités directement de ../src/style.css. */

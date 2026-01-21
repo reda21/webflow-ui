@@ -37,7 +37,7 @@ watch(() => props.src, (newSrc) => {
 </template>
 
 <style scoped>
-@reference "../../style.css";
+@reference "../../theme.css";
 
 .avatar-img {
     @apply aspect-square h-full w-full;

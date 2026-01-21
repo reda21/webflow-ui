@@ -36,6 +36,24 @@ export interface ButtonProps {
     referrerpolicy?: string
     active?: boolean
     trailingSlash?: 'remove' | 'append'
+    // Fonctionnalités avancées
+    loadingText?: string
+    success?: boolean
+    error?: boolean
+    tooltip?: string
+    tooltipPosition?: 'top' | 'bottom' | 'left' | 'right'
+    badge?: string | number
+    badgeColor?: ButtonSeverity
+    countdown?: number
+    // Comportements avancés
+    doubleClickProtection?: boolean | number  // true = 1000ms, number = custom ms
+    longPressDelay?: number  // ms before triggering long press (default: 500)
+    shortcut?: string  // keyboard shortcut (e.g., 'ctrl+s', 'alt+n')
+    copyText?: string  // text to copy to clipboard on click
+    theme?: 'ocean' | 'forest' | 'sunset' | 'neon'
+    fab?: boolean
+    fabPosition?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'
+    colorblind?: boolean
     // ARIA Props
     ariaExpanded?: boolean
     ariaPressed?: boolean | 'mixed'

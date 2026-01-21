@@ -16,7 +16,7 @@ const shouldShow = computed(() => {
 </template>
 
 <style scoped>
-@reference "../../style.css";
+@reference "../../theme.css";
 
 .avatar-fallback {
     @apply flex h-full w-full items-center justify-center font-medium uppercase text-slate-600 dark:text-slate-300;

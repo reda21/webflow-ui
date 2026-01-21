@@ -34,19 +34,40 @@ export default defineConfig(({ command }) => ({
       name: 'WebMXUI',
       fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`,
     },
+    // Optimize bundle size
+    minify: 'esbuild',
+    target: 'esnext',
+    // Enable source maps for debugging
+    sourcemap: false,
+    // CSS code splitting
+    cssCodeSplit: true,
     rollupOptions: {
-      external: ['vue', 'primevue', 'radix-vue'],
+      external: ['vue', 'primevue', 'radix-vue', '@iconify/vue'],
       output: {
+        // Preserve module structure for better tree-shaking
+        preserveModules: false,
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'main.css';
-          return assetInfo.name;
+          return assetInfo.name!;
         },
         globals: {
           vue: 'Vue',
           primevue: 'PrimeVue',
           'radix-vue': 'RadixVue',
+          '@iconify/vue': 'IconifyVue',
         },
+        // Optimize chunk generation
+        manualChunks: undefined,
       },
     },
+    // Chunk size warning limit
+    chunkSizeWarningLimit: 500,
+  },
+  
+  // Optimizations
+  optimizeDeps: {
+    include: ['vue'],
+    exclude: ['@iconify/vue'],
   },
 }));
+

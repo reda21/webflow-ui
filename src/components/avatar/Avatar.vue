@@ -69,7 +69,7 @@ const initials = computed(() => {
 </template>
 
 <style scoped>
-@reference "../../style.css";
+@reference "../../theme.css";
 
 .avatar {
     @apply relative inline-flex shrink-0 items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700;

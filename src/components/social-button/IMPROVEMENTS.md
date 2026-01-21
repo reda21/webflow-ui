@@ -4,29 +4,29 @@
 
 ### Nouveaux Providers
 
-- [ ] **Apple** : Sign in with Apple
-- [ ] **Microsoft** : Microsoft Account
-- [ ] **Discord** : Discord OAuth
-- [ ] **Slack** : Slack Connect
-- [ ] **Spotify** : Spotify Login
-- [ ] **Amazon** : Login with Amazon
-- [ ] **Pinterest** : Pinterest Auth
-- [ ] **TikTok** : TikTok Login
-- [ ] **PayPal** : PayPal Login
-- [ ] **Twitch** : Twitch OAuth
+- [x] **Apple** : Sign in with Apple
+- [x] **Microsoft** : Microsoft Account
+- [x] **Discord** : Discord OAuth
+- [x] **Slack** : Slack Connect
+- [x] **Spotify** : Spotify Login
+- [x] **Amazon** : Login with Amazon
+- [x] **Pinterest** : Pinterest Auth
+- [x] **TikTok** : TikTok Login
+- [x] **PayPal** : PayPal Login
+- [x] **Twitch** : Twitch OAuth
 
 ### Styles Alternatifs
 
-- [ ] **Outlined** : Version bordure uniquement
-- [ ] **Soft** : Version pastel/légère
-- [ ] **Icon Only** : Bouton rond avec icône seulement
-- [ ] **Pill** : Version arrondie
+- [x] **Outlined** : Version bordure uniquement (supporté via Button)
+- [x] **Soft** : Version pastel/légère (supporté via Button)
+- [x] **Icon Only** : Bouton rond avec icône seulement
+- [x] **Pill** : Version arrondie
 - [ ] **With Divider** : Texte "ou continuer avec" intégré
 
 ### Améliorations Visuelles
 
-- [ ] Icônes officielles de chaque provider (SVG)
-- [ ] Hover effects personnalisés par provider
+- [x] Icônes officielles de chaque provider (SVG via Iconify)
+- [x] Hover effects personnalisés par provider
 - [ ] Animations d'entrée
 - [ ] Loading state avec spinner personnalisé
 
@@ -34,9 +34,9 @@
 
 ### Props Additionnelles
 
-- [ ] `icon-only` : Afficher uniquement l'icône
-- [ ] `show-icon` : Toggle l'affichage de l'icône
-- [ ] `custom-text` : Texte personnalisé
+- [x] `icon-only` : Afficher uniquement l'icône
+- [x] `show-icon` : Toggle l'affichage de l'icône
+- [ ] `custom-text` : Texte personnalisé (via slot par défaut)
 - [ ] `compact` : Version compacte
 
 ### Comportements
@@ -50,13 +50,13 @@
 
 ### Performance
 
-- [ ] Lazy loading des icônes SVG
+- [x] Lazy loading des icônes SVG (via Iconify)
 - [ ] Tree-shaking des providers non utilisés
 
 ### Accessibilité
 
-- [ ] Labels descriptifs automatiques
-- [ ] Annonces pour les lecteurs d'écran
+- [x] Labels descriptifs automatiques
+- [x] Annonces pour les lecteurs d'écran
 
 ### Intégrations
 
@@ -67,7 +67,7 @@
 
 ### Composants Dérivés
 
-- [ ] **SocialButtonGroup** : Groupe de boutons sociaux
+- [x] **SocialButtonGroup** : Groupe de boutons sociaux
 - [ ] **SocialLoginForm** : Formulaire de login complet
 - [ ] **SocialShare** : Boutons de partage
 
@@ -75,8 +75,10 @@
 
 ## ✅ Terminé
 
-- [x] Providers : Google, Facebook, GitHub, Twitter, LinkedIn
-- [x] Couleurs officielles par provider
-- [x] Hover states
+- [x] Providers : Google, Facebook, GitHub, Twitter, LinkedIn, etc (15+ providers)
+- [x] Couleurs officielles par provider (CSS Variables)
+- [x] Hover states (Brightness filters)
 - [x] Support des icônes via slot
 - [x] Extension de ButtonProps
+- [x] Génération automatique des labels "Continuer avec..."
+- [x] Support des variantes héritées (outlined, subtle, ghost)

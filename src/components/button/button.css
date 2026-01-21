@@ -1,7 +1,18 @@
 /* --- Base Button --- */
 .btn {
-  --btn-color: var(--primary);
+  /* Design Tokens (CSS Variables for easy theming) */
+  --btn-primary: var(--primary, #3b82f6);
+  --btn-secondary: var(--secondary, #64748b);
+  --btn-success: var(--success, #22c55e);
+  --btn-info: var(--info, #0ea5e9);
+  --btn-warn: var(--warn, #f59e0b);
+  --btn-help: var(--help, #a855f7);
+  --btn-danger: var(--danger, #ef4444);
+  --btn-contrast: var(--contrast, #0f172a);
+  
+  --btn-color: var(--btn-primary);
   --btn-text: white;
+  
   @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm min-h-10 font-semibold transition-all duration-300 active:scale-95 focus:outline-none cursor-pointer leading-none disabled:opacity-50 disabled:cursor-not-allowed bg-primary text-white hover:brightness-110;
   
   &.btn-disabled {
@@ -16,6 +27,37 @@
   }
 }
 
+.btn-selected {
+  @apply brightness-90 shadow-inner ring-2 ring-primary/30 z-10;
+}
+
+/* --- Presets Thèmes --- */
+
+/* Theme: Ocean */
+.btn-theme-ocean {
+  --btn-primary: #0891b2;
+  --btn-secondary: #0e7490;
+}
+
+/* Theme: Forest */
+.btn-theme-forest {
+  --btn-primary: #15803d;
+  --btn-secondary: #166534;
+}
+
+/* Theme: Sunset */
+.btn-theme-sunset {
+  --btn-primary: #ea580c;
+  --btn-secondary: #c2410c;
+}
+
+/* Theme: Neon */
+.btn-theme-neon {
+  --btn-primary: #00ff41;
+  --btn-secondary: #003b00;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
 .btn-block {
   @apply w-full flex;
 }
@@ -25,8 +67,33 @@
 }
 
 .btn-square {
-  @apply aspect-square px-0!;
+  @apply aspect-square !px-0;
 }
+
+/* --- Floating Action Button (FAB) --- */
+.btn-fab {
+  @apply fixed bottom-8 right-8 rounded-full w-14 h-14 shadow-2xl z-50 p-0 flex items-center justify-center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-fab:hover {
+  @apply -translate-y-1 scale-110 shadow-primary/40;
+}
+
+.btn-fab-bottom-left { @apply left-8 right-auto; }
+.btn-fab-top-right { @apply top-8 bottom-auto; }
+.btn-fab-top-left { @apply top-8 left-8 right-auto bottom-auto; }
+
+/* --- Mode Color-Blind (Accessibilité) --- */
+.btn-colorblind {
+  border-width: 2px !important;
+}
+
+.btn-colorblind.btn-success { border-style: solid !important; }
+.btn-colorblind.btn-warn { border-style: dashed !important; }
+.btn-colorblind.btn-danger { border-style: double !important; }
+.btn-colorblind.btn-info { border-style: dotted !important; }
+
 
 /* --- Severities --- */
 .btn-primary {
@@ -137,7 +204,7 @@
 
 /* Icon-Only Styles */
 .btn-icon-only {
-  @apply aspect-square p-0! px-0! justify-center items-center h-auto min-w-0! w-auto;
+  @apply aspect-square !p-0 !px-0 justify-center items-center h-auto !min-w-0 w-auto;
 }
 
 .btn-icon-only.btn-xs { @apply w-7 h-7 min-h-0; }
@@ -186,11 +253,11 @@
 
 /* --- Variants --- */
 .btn-outlined {
-  @apply bg-transparent! border-[var(--btn-color)]! text-[var(--btn-color)]!;
+  @apply !bg-transparent !border-[var(--btn-color)] !text-[var(--btn-color)];
 }
 
 .btn-outlined:hover {
-  @apply bg-[var(--btn-color)]! text-[var(--btn-text)]!;
+  @apply !bg-[var(--btn-color)] !text-[var(--btn-text)];
 }
 
 .btn-subtle {
@@ -246,8 +313,124 @@
 }
 
 .btn-link {
-  @apply bg-transparent! border-transparent! hover:underline! px-0! py-0! h-auto! min-h-0! shadow-none! ring-0! active:scale-100!;
+  @apply !bg-transparent !border-transparent hover:!underline !px-0 !py-0 !h-auto !min-h-0 !shadow-none !ring-0 active:!scale-100;
   color: var(--btn-color) !important;
+}
+
+/* --- Nouvelles Variantes Avancées --- */
+
+/* Gradient - Boutons avec dégradés colorés */
+.btn-gradient {
+  background: linear-gradient(135deg, var(--btn-color), color-mix(in srgb, var(--btn-color), var(--primary) 50%)) !important;
+  border-color: transparent !important;
+  color: white !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient:hover::before {
+  opacity: 1;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--btn-color), transparent 50%);
+}
+
+@variant dark {
+  .btn-gradient {
+    color: theme('colors.gray.900') !important;
+  }
+}
+
+/* Glass - Effet glassmorphism avec backdrop-blur */
+.btn-glass {
+  background: color-mix(in srgb, var(--btn-color), transparent 80%) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--btn-color), transparent 70%) !important;
+  color: var(--foreground) !important;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-glass:hover {
+  background: color-mix(in srgb, var(--btn-color), transparent 70%) !important;
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* 3D - Effet de profondeur avec ombres décalées */
+.btn-3d {
+  background: var(--btn-color) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 
+    0 4px 0 0 color-mix(in srgb, var(--btn-color), black 30%),
+    0 6px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  transition: all 0.15s ease;
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 0 0 color-mix(in srgb, var(--btn-color), black 30%),
+    0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+.btn-3d:active {
+  transform: translateY(2px) !important;
+  box-shadow: 
+    0 2px 0 0 color-mix(in srgb, var(--btn-color), black 30%),
+    0 3px 5px rgba(0, 0, 0, 0.15) !important;
+}
+
+@variant dark {
+  .btn-3d {
+    color: theme('colors.gray.900') !important;
+  }
+}
+
+/* Neon - Effet lumineux/glow autour du bouton */
+.btn-neon {
+  background: transparent !important;
+  border: 2px solid var(--btn-color) !important;
+  color: var(--btn-color) !important;
+  box-shadow: 
+    0 0 5px var(--btn-color),
+    0 0 10px var(--btn-color),
+    inset 0 0 5px color-mix(in srgb, var(--btn-color), transparent 80%);
+  text-shadow: 0 0 5px var(--btn-color);
+  transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+  background: color-mix(in srgb, var(--btn-color), transparent 90%) !important;
+  box-shadow: 
+    0 0 10px var(--btn-color),
+    0 0 20px var(--btn-color),
+    0 0 30px var(--btn-color),
+    inset 0 0 10px color-mix(in srgb, var(--btn-color), transparent 70%);
+}
+
+/* Pill - Variante avec bords arrondis maximum */
+.btn-pill {
+  border-radius: var(--radius-full) !important;
+  padding-left: 1.5em !important;
+  padding-right: 1.5em !important;
 }
 
 /* --- Rings --- */
@@ -270,7 +453,7 @@
 
 /* Ensure rings are still visible when mixed with link/ghost variants if needed */
 .btn-link[class*="btn-ring-"], .btn-ghost[class*="btn-ring-"] {
-  @apply ring-0!; /* Reset tailwind ring if any */
+  @apply !ring-0; /* Reset tailwind ring if any */
 }
 
 /* --- Vertical Layout Adjustments --- */
@@ -283,3 +466,576 @@
 .btn-vertical.btn-lg { @apply py-4 px-5 min-w-[4rem] gap-2; }
 .btn-vertical.btn-xl { @apply py-5 px-6 min-w-[5rem] gap-2.5; }
 .btn-vertical.btn-2xl { @apply py-6 px-8 min-w-[6rem] gap-3; }
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* AMÉLIORATIONS VISUELLES                                                      */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* --- Effet Ripple (Material Design) --- */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: translate(-50%, -50%) scale(10);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.8s ease-out;
+}
+
+.btn-ripple:active::after {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Variante ripple sombre pour boutons clairs */
+.btn-ripple-dark::after {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.2) 10%, transparent 10.01%);
+}
+
+/* --- Transitions Fluides Améliorées --- */
+.btn-smooth {
+  transition: 
+    all 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease-out;
+}
+
+.btn-smooth:hover {
+  transform: translateY(-2px);
+}
+
+.btn-smooth:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+.btn-smooth:focus-visible {
+  outline: 2px solid var(--btn-color);
+  outline-offset: 3px;
+  transition: outline-offset 0.2s ease;
+}
+
+/* --- Animations d'Icônes --- */
+
+/* Rotation continue */
+@keyframes btn-icon-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-icon-spin .btn-icon,
+.btn-icon-spin > svg,
+.btn-icon-spin > .iconify {
+  animation: btn-icon-spin 1s linear infinite;
+}
+
+.btn-icon-spin-slow .btn-icon,
+.btn-icon-spin-slow > svg,
+.btn-icon-spin-slow > .iconify {
+  animation: btn-icon-spin 2s linear infinite;
+}
+
+/* Pulse */
+@keyframes btn-icon-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.9); }
+}
+
+.btn-icon-pulse .btn-icon,
+.btn-icon-pulse > svg,
+.btn-icon-pulse > .iconify {
+  animation: btn-icon-pulse 1.5s ease-in-out infinite;
+}
+
+/* Bounce */
+@keyframes btn-icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.btn-icon-bounce .btn-icon,
+.btn-icon-bounce > svg,
+.btn-icon-bounce > .iconify {
+  animation: btn-icon-bounce 0.6s ease-in-out infinite;
+}
+
+/* Shake (pour attirer l'attention) */
+@keyframes btn-icon-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.btn-icon-shake .btn-icon,
+.btn-icon-shake > svg,
+.btn-icon-shake > .iconify {
+  animation: btn-icon-shake 0.6s ease-in-out;
+}
+
+.btn-icon-shake:hover .btn-icon,
+.btn-icon-shake:hover > svg,
+.btn-icon-shake:hover > .iconify {
+  animation: btn-icon-shake 0.6s ease-in-out infinite;
+}
+
+/* Animation au survol seulement */
+.btn-icon-hover-spin:hover .btn-icon,
+.btn-icon-hover-spin:hover > svg,
+.btn-icon-hover-spin:hover > .iconify {
+  animation: btn-icon-spin 0.5s ease-out;
+}
+
+.btn-icon-hover-bounce:hover .btn-icon,
+.btn-icon-hover-bounce:hover > svg,
+.btn-icon-hover-bounce:hover > .iconify {
+  animation: btn-icon-bounce 0.4s ease-out;
+}
+
+/* --- État Success (Checkmark animé) --- */
+@keyframes btn-success-check {
+  0% { 
+    stroke-dashoffset: 50;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% { 
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes btn-success-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.btn-success-state {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.btn-success-state.is-success {
+  background-color: var(--success) !important;
+  border-color: var(--success) !important;
+  color: white !important;
+  pointer-events: none;
+}
+
+.btn-success-state.is-success .btn-content {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.2s ease;
+}
+
+.btn-success-state .btn-success-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s ease;
+}
+
+.btn-success-state.is-success .btn-success-icon {
+  opacity: 1;
+  transform: scale(1);
+  animation: btn-success-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Checkmark SVG animé */
+.btn-success-state .btn-success-icon svg {
+  width: 1.5em;
+  height: 1.5em;
+  stroke: currentColor;
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn-success-state.is-success .btn-success-icon svg path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: btn-success-check 0.4s ease-out 0.1s forwards;
+}
+
+/* --- État Error (Shake + couleur) --- */
+@keyframes btn-error-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.btn-error-state.is-error {
+  animation: btn-error-shake 0.5s ease-in-out;
+  background-color: var(--danger) !important;
+  border-color: var(--danger) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* PROPS ADDITIONNELLES                                                        */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* --- Button Wrapper (pour tooltip + badge) --- */
+.btn-wrapper {
+  @apply relative inline-flex;
+}
+
+.btn-wrapper.btn-has-extras {
+  @apply relative;
+}
+
+/* --- Tooltip --- */
+.btn-tooltip {
+  @apply absolute z-50 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded-md shadow-lg;
+  @apply opacity-0 invisible transition-all duration-200 pointer-events-none whitespace-nowrap;
+}
+
+.btn-wrapper:hover .btn-tooltip {
+  @apply opacity-100 visible;
+}
+
+/* Tooltip positions */
+.btn-tooltip-top {
+  @apply bottom-full left-1/2 -translate-x-1/2 mb-2;
+}
+
+.btn-tooltip-bottom {
+  @apply top-full left-1/2 -translate-x-1/2 mt-2;
+}
+
+.btn-tooltip-left {
+  @apply right-full top-1/2 -translate-y-1/2 mr-2;
+}
+
+.btn-tooltip-right {
+  @apply left-full top-1/2 -translate-y-1/2 ml-2;
+}
+
+/* Tooltip arrows */
+.btn-tooltip-top::after {
+  content: '';
+  @apply absolute top-full left-1/2 -translate-x-1/2;
+  border: 4px solid transparent;
+  border-top-color: theme('colors.gray.900');
+}
+
+.btn-tooltip-bottom::after {
+  content: '';
+  @apply absolute bottom-full left-1/2 -translate-x-1/2;
+  border: 4px solid transparent;
+  border-bottom-color: theme('colors.gray.900');
+}
+
+.btn-tooltip-left::after {
+  content: '';
+  @apply absolute left-full top-1/2 -translate-y-1/2;
+  border: 4px solid transparent;
+  border-left-color: theme('colors.gray.900');
+}
+
+.btn-tooltip-right::after {
+  content: '';
+  @apply absolute right-full top-1/2 -translate-y-1/2;
+  border: 4px solid transparent;
+  border-right-color: theme('colors.gray.900');
+}
+
+@variant dark {
+  .btn-tooltip {
+    @apply bg-gray-100 text-gray-900;
+  }
+  .btn-tooltip-top::after { border-top-color: theme('colors.gray.100'); }
+  .btn-tooltip-bottom::after { border-bottom-color: theme('colors.gray.100'); }
+  .btn-tooltip-left::after { border-left-color: theme('colors.gray.100'); }
+  .btn-tooltip-right::after { border-right-color: theme('colors.gray.100'); }
+}
+
+/* --- Badge --- */
+.btn-badge {
+  @apply absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1.5 flex items-center justify-center;
+  @apply text-xs font-bold rounded-full text-white shadow-sm;
+  @apply animate-[badge-pop_0.3s_ease-out];
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Badge colors */
+.btn-badge-primary { @apply bg-primary; }
+.btn-badge-secondary { @apply bg-secondary text-secondary-foreground; }
+.btn-badge-success { @apply bg-success; }
+.btn-badge-info { @apply bg-info; }
+.btn-badge-warn { @apply bg-warn; }
+.btn-badge-help { @apply bg-help; }
+.btn-badge-danger { @apply bg-danger; }
+.btn-badge-contrast { @apply bg-contrast text-contrast-foreground; }
+
+/* --- État Success (via prop) --- */
+@keyframes success-checkmark {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.btn-is-success {
+  @apply bg-success! border-success! transition-all duration-300;
+}
+
+.btn-success-checkmark {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: success-checkmark 0.4s ease-out forwards;
+}
+
+/* --- État Error (via prop) --- */
+.btn-is-error {
+  @apply bg-danger! border-danger!;
+  animation: btn-error-shake 0.5s ease-in-out;
+}
+
+.btn-error-icon {
+  animation: btn-error-shake 0.3s ease-out;
+}
+
+/* --- Countdown --- */
+.btn-countdown {
+  @apply inline-flex items-center justify-center;
+}
+
+.btn-countdown-active {
+  @apply cursor-wait;
+}
+
+/* --- Loading Text --- */
+.btn-loading {
+  @apply cursor-wait;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE & TACTILE                                                        */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Zones de tap agrandies pour mobile (WCAG 2.1 Target Size) */
+@media (pointer: coarse) {
+  .btn {
+    @apply min-h-12 min-w-12; /* Minimum 48px height/width for touch targets */
+    padding-left: theme('spacing.6');
+    padding-right: theme('spacing.6');
+  }
+}
+
+/* Tailles adaptatives (optionnel - via classes utilitaires) */
+.btn-responsive {
+  @apply text-xs px-3 py-1.5 sm:text-sm sm:px-4 sm:py-2 md:text-base md:px-5 md:py-2.5;
+}
+
+/* Feedback haptique simule (via JS usually, mais ici on prépare le style) */
+.btn:active {
+  /* Le scale active est déjà défini sur .btn base */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* ACCESSIBILITÉ                                                               */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* --- Focus Visible Amélioré --- */
+.btn:focus-visible {
+  @apply outline-none;
+  box-shadow: 
+    0 0 0 2px var(--background, white),
+    0 0 0 4px var(--btn-color);
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation de focus pour attirer l'attention */
+@keyframes focus-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--background, white), 0 0 0 4px var(--btn-color); }
+  50% { box-shadow: 0 0 0 2px var(--background, white), 0 0 0 6px var(--btn-color); }
+}
+
+.btn:focus-visible.btn-focus-animated {
+  animation: focus-pulse 1.5s ease-in-out infinite;
+}
+
+/* Skip link pour la navigation clavier (optionnel) */
+.btn-skip-link {
+  @apply absolute -top-full left-0 bg-primary text-white px-4 py-2 z-50;
+  transition: top 0.2s ease;
+}
+
+.btn-skip-link:focus {
+  @apply top-0;
+}
+
+/* --- Mode High Contrast --- */
+@media (prefers-contrast: more) {
+  .btn {
+    @apply border-2 border-current;
+    --btn-text: CanvasText !important;
+    background-color: ButtonFace !important;
+    color: ButtonText !important;
+    forced-color-adjust: none;
+  }
+
+  .btn:hover {
+    background-color: Highlight !important;
+    color: HighlightText !important;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid Highlight !important;
+    outline-offset: 2px;
+  }
+
+  .btn-disabled,
+  .btn:disabled {
+    background-color: GrayText !important;
+    color: Canvas !important;
+    border-color: GrayText !important;
+  }
+
+  /* Variants en high contrast */
+  .btn-outlined {
+    background-color: Canvas !important;
+    border-color: ButtonText !important;
+    color: ButtonText !important;
+  }
+
+  .btn-outlined:hover {
+    background-color: ButtonText !important;
+    color: Canvas !important;
+  }
+
+  .btn-ghost,
+  .btn-link {
+    background-color: transparent !important;
+    text-decoration: underline;
+  }
+
+  /* Badge en high contrast */
+  .btn-badge {
+    background-color: Mark !important;
+    color: MarkText !important;
+  }
+
+  /* Tooltip en high contrast */
+  .btn-tooltip {
+    background-color: Canvas !important;
+    color: CanvasText !important;
+    border: 2px solid CanvasText !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    @apply transition-none;
+  }
+
+  .btn:active {
+    transform: none !important;
+  }
+
+  .btn-ripple::after {
+    display: none;
+  }
+
+  .btn-smooth:hover {
+    transform: none;
+  }
+
+  .btn-icon-spin,
+  .btn-icon-pulse,
+  .btn-icon-bounce,
+  .btn-icon-shake,
+  .btn-icon-spin-slow {
+    animation: none !important;
+  }
+
+  .btn-icon-spin .btn-icon,
+  .btn-icon-spin > svg,
+  .btn-icon-spin > .iconify,
+  .btn-icon-pulse .btn-icon,
+  .btn-icon-pulse > svg,
+  .btn-icon-pulse > .iconify,
+  .btn-icon-bounce .btn-icon,
+  .btn-icon-bounce > svg,
+  .btn-icon-bounce > .iconify {
+    animation: none !important;
+  }
+
+  .btn-success-checkmark,
+  .btn-error-icon {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+  }
+}
+
+/* --- Navigation Clavier Complète --- */
+
+/* Groupe de boutons navigable */
+.btn-group[role="group"] .btn {
+  position: relative;
+}
+
+.btn-group[role="group"] .btn:focus-visible {
+  z-index: 10;
+}
+
+/* Indicateur visuel pour la touche Tab */
+.btn[data-keyboard-focus="true"] {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* États pour les lecteurs d'écran */
+.btn[aria-busy="true"] {
+  cursor: wait;
+}
+
+.btn[aria-pressed="true"] {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn[aria-pressed="mixed"] {
+  background-image: linear-gradient(45deg, transparent 45%, currentColor 45%, currentColor 55%, transparent 55%);
+  background-size: 6px 6px;
+}
+
+.btn[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Screen reader only text */
+.btn .sr-only {
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* Live region for announcements */
+.btn-live-region {
+  @apply sr-only;
+}
+

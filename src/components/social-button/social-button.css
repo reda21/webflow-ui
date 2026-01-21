@@ -1,72 +1,62 @@
+@reference "../../theme.css";
+
 /* --- Social Button Styles --- */
 
 /* Provider-specific colors */
-.social-google {
-  @apply bg-[#DB4437] text-white border-transparent;
-}
-.social-google:hover {
-  @apply bg-[#C53929];
-}
-
-.social-facebook {
-  @apply bg-[#1877F2] text-white border-transparent;
-}
-.social-facebook:hover {
-  @apply bg-[#1565D8];
+.social-icon-only {
+  @apply rounded-full aspect-square !p-0 flex items-center justify-center overflow-hidden;
+  width: 2.75rem;
+  height: 2.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.social-github {
-  @apply bg-[#24292F] text-white border-transparent;
-}
-.social-github:hover {
-  @apply bg-[#1B1F23];
+.social-icon-only:hover {
+  @apply -translate-y-1 shadow-lg scale-105;
 }
 
-.social-twitter {
-  @apply bg-[#1DA1F2] text-white border-transparent;
-}
-.social-twitter:hover {
-  @apply bg-[#1A91DA];
-}
-
-.social-linkedin {
-  @apply bg-[#0077B5] text-white border-transparent;
-}
-.social-linkedin:hover {
-  @apply bg-[#006097];
+.social-provider {
+  @apply flex items-center justify-center !p-0;
+  background: var(--btn-color) !important;
+  color: var(--btn-text) !important;
+  border: none !important;
 }
 
-.social-apple {
-  @apply bg-[#000000] text-white border-transparent;
-}
-.social-apple:hover {
-  @apply bg-[#1a1a1a];
+.social-provider:hover {
+  filter: brightness(1.1) !important;
 }
 
-.social-microsoft {
-  @apply bg-[#00A4EF] text-white border-transparent;
-}
-.social-microsoft:hover {
-  @apply bg-[#0090D0];
-}
-
-.social-discord {
-  @apply bg-[#5865F2] text-white border-transparent;
-}
-.social-discord:hover {
-  @apply bg-[#4752C4];
+/* Ensure the icon container inside is also centered and takes proper space */
+.social-provider .shrink-0 {
+  @apply m-auto flex items-center justify-center;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
 }
 
-.social-slack {
-  @apply bg-[#4A154B] text-white border-transparent;
-}
-.social-slack:hover {
-  @apply bg-[#3E1140];
-}
+/* Specific Provider Styles */
+.social-google { --btn-color: #ffffff; --btn-text: #374151; border: 1px solid #e5e7eb !important; }
+.social-facebook { --btn-color: #1877F2; --btn-text: white; }
+.social-github { --btn-color: #24292F; --btn-text: white; }
+.social-twitter { --btn-color: #1DA1F2; --btn-text: white; }
+.social-linkedin { --btn-color: #0A66C2; --btn-text: white; }
+.social-apple { --btn-color: #000000; --btn-text: white; }
+.social-microsoft { --btn-color: #ffffff; --btn-text: #374151; border: 1px solid #e5e7eb !important; }
+.social-discord { --btn-color: #5865F2; --btn-text: white; }
+.social-slack { --btn-color: #ffffff; --btn-text: #374151; border: 1px solid #e5e7eb !important; }
+.social-spotify { --btn-color: #1DB954; --btn-text: white; }
+.social-amazon { --btn-color: #232F3E; --btn-text: white; }
+.social-pinterest { --btn-color: #E60023; --btn-text: white; }
+.social-tiktok { --btn-color: #000000; --btn-text: white; }
+.social-paypal { --btn-color: #003087; --btn-text: white; }
+.social-twitch { --btn-color: #9146FF; --btn-text: white; }
 
-.social-spotify {
-  @apply bg-[#1DB954] text-white border-transparent;
+/* New Providers */
+.social-instagram { 
+  --btn-color: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); 
+  --btn-text: white; 
 }
-.social-spotify:hover {
-  @apply bg-[#1AA34A];
-}
+.social-youtube { --btn-color: #FF0000; --btn-text: white; }
+.social-whatsapp { --btn-color: #25D366; --btn-text: white; }
+.social-snapchat { --btn-color: #FFFC00; --btn-text: #000000; }
+.social-behance { --btn-color: #0057FF; --btn-text: white; }
+.social-dribbble { --btn-color: #EA4C89; --btn-text: white; }

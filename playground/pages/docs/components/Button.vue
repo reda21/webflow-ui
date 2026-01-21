@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Button, SocialButton } from '../../../../src/index'
+import { Button, SocialButton, ButtonGroup, SplitButton } from '../../../../src/index'
 // Import Types
 import type { ButtonSeverity, ButtonVariant, ButtonSize, ButtonRounded, ButtonShadow, ButtonRing, ButtonIconPos } from '../../../../src/components/button/types'
 
@@ -34,6 +34,19 @@ const iconOptions = [
     { label: 'Supprimer', value: 'heroicons:trash' },
     { label: 'Plus', value: 'heroicons:plus' },
 ]
+
+// States for new examples
+const toggleValue = ref('bold')
+const multiToggleValue = ref(['bold'])
+const splitButtonLoading = ref(false)
+
+const handleSplitClick = () => {
+    splitButtonLoading.value = true
+    setTimeout(() => {
+        splitButtonLoading.value = false
+    }, 2000)
+}
+
 
 const buttonCodeExample = computed(() => {
     let props = ''
@@ -303,6 +316,843 @@ const buttonCodeExample = computed(() => {
             </div>
         </div>
 
+        <!-- Section Nouvelles Variantes Avancées -->
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Variantes Avancées</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Nouvelles variantes visuelles avec des effets modernes et dynamiques.
+            </p>
+
+            <!-- Gradient -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"></span>
+                    Gradient
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Boutons avec dégradés colorés dynamiques. L'effet s'intensifie au survol.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-gradient">Primary Gradient</button>
+                    <button class="btn btn-success btn-gradient">Success Gradient</button>
+                    <button class="btn btn-danger btn-gradient">Danger Gradient</button>
+                    <button class="btn btn-info btn-gradient">Info Gradient</button>
+                    <button class="btn btn-help btn-gradient">Help Gradient</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-gradient"&gt;Gradient&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Glass -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-white/50 backdrop-blur border border-white/30"></span>
+                    Glass (Glassmorphism)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Effet glassmorphism avec <code>backdrop-blur</code> pour un look moderne et translucide.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-glass">Primary Glass</button>
+                    <button class="btn btn-success btn-glass">Success Glass</button>
+                    <button class="btn btn-danger btn-glass">Danger Glass</button>
+                    <button class="btn btn-info btn-glass">Info Glass</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-glass"&gt;Glass&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- 3D -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded bg-indigo-500 shadow-[0_2px_0_0_theme(colors.indigo.700)]"></span>
+                    3D (Profondeur)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Effet de profondeur avec ombres décalées. Le bouton s'enfonce au clic pour un feedback tactile.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-3d">Primary 3D</button>
+                    <button class="btn btn-success btn-3d">Success 3D</button>
+                    <button class="btn btn-danger btn-3d">Danger 3D</button>
+                    <button class="btn btn-warn btn-3d">Warning 3D</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-3d"&gt;3D Button&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Neon -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span
+                        class="w-3 h-3 rounded-full bg-transparent border-2 border-cyan-400 shadow-[0_0_5px_theme(colors.cyan.400)]"></span>
+                    Neon (Glow)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Effet lumineux/glow autour du bouton. Particulièrement efficace sur fond sombre.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-neon">Primary Neon</button>
+                    <button class="btn btn-success btn-neon">Success Neon</button>
+                    <button class="btn btn-danger btn-neon">Danger Neon</button>
+                    <button class="btn btn-info btn-neon">Info Neon</button>
+                    <button class="btn btn-help btn-neon">Help Neon</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-neon"&gt;Neon&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Pill -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-4 h-2.5 rounded-full bg-indigo-500"></span>
+                    Pill
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Variante avec bords arrondis maximum (<code>rounded-full</code>) et padding horizontal augmenté.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-pill">Primary Pill</button>
+                    <button class="btn btn-success btn-pill">Success Pill</button>
+                    <button class="btn btn-danger btn-outlined btn-pill">Outlined Pill</button>
+                    <button class="btn btn-info btn-subtle btn-pill">Subtle Pill</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-pill"&gt;Pill&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Combinaisons -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-500"></span>
+                    Combinaisons
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Les variantes peuvent être combinées pour créer des effets uniques.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-gradient btn-pill">Gradient + Pill</button>
+                    <button class="btn btn-success btn-3d btn-pill">3D + Pill</button>
+                    <button class="btn btn-danger btn-neon btn-pill">Neon + Pill</button>
+                    <button class="btn btn-info btn-glass btn-pill">Glass + Pill</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Améliorations Visuelles -->
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Améliorations Visuelles</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Effets visuels avancés pour améliorer l'expérience utilisateur et le feedback interactif.
+            </p>
+
+            <!-- Effet Ripple -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-blue-500 animate-ping"></span>
+                    Effet Ripple (Material Design)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Animation d'ondulation au clic inspirée de Material Design. Cliquez sur les boutons pour voir
+                    l'effet.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-ripple">Ripple Primary</button>
+                    <button class="btn btn-success btn-ripple">Ripple Success</button>
+                    <button class="btn btn-danger btn-ripple">Ripple Danger</button>
+                    <button class="btn btn-secondary btn-ripple btn-ripple-dark">Ripple Dark</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-ripple"&gt;Ripple&lt;/button&gt;
+&lt;!-- Pour boutons clairs --&gt;
+&lt;button class="btn btn-secondary btn-ripple btn-ripple-dark"&gt;Ripple&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Transitions Fluides -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-purple-500"></span>
+                    Transitions Fluides
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Transitions avec courbes de Bézier pour un mouvement naturel. Survol = élévation, clic =
+                    compression.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-smooth">Smooth Primary</button>
+                    <button class="btn btn-success btn-smooth">Smooth Success</button>
+                    <button class="btn btn-info btn-smooth btn-ripple">Smooth + Ripple</button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-smooth"&gt;Smooth&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Animations d'Icônes -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                    Animations d'Icônes
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Animations pour attirer l'attention ou indiquer un état : rotation, pulse, bounce, shake.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-6">
+                    <div class="flex flex-col items-center gap-2">
+                        <button class="btn btn-primary btn-icon-spin">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            Spin
+                        </button>
+                        <span class="text-xs text-slate-500">btn-icon-spin</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <button class="btn btn-danger btn-icon-pulse">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                            Pulse
+                        </button>
+                        <span class="text-xs text-slate-500">btn-icon-pulse</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <button class="btn btn-success btn-icon-bounce">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            Bounce
+                        </button>
+                        <span class="text-xs text-slate-500">btn-icon-bounce</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <button class="btn btn-warn btn-icon-shake">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                            Shake
+                        </button>
+                        <span class="text-xs text-slate-500">btn-icon-shake</span>
+                    </div>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-icon-spin"&gt;...&lt;/button&gt;
+&lt;button class="btn btn-danger btn-icon-pulse"&gt;...&lt;/button&gt;
+&lt;button class="btn btn-success btn-icon-bounce"&gt;...&lt;/button&gt;
+&lt;button class="btn btn-warn btn-icon-shake"&gt;...&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Animations au survol -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-cyan-500"></span>
+                    Animations au Survol
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Animations déclenchées uniquement au survol pour un effet plus subtil.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-icon-hover-spin">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Hover Spin
+                    </button>
+                    <button class="btn btn-success btn-icon-hover-bounce">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                        </svg>
+                        Hover Bounce
+                    </button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-icon-hover-spin"&gt;...&lt;/button&gt;
+&lt;button class="btn btn-success btn-icon-hover-bounce"&gt;...&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- État Success -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                    État Success (Checkmark animé)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Feedback visuel après une action réussie avec checkmark animé. Cliquez pour tester !
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-success-state" @click="(e) => {
+                        e.target.classList.add('is-success');
+                        setTimeout(() => e.target.classList.remove('is-success'), 2000);
+                    }">
+                        <span class="btn-content">Sauvegarder</span>
+                        <span class="btn-success-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 13l4 4L19 7" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button class="btn btn-info btn-success-state" @click="(e) => {
+                        e.target.classList.add('is-success');
+                        setTimeout(() => e.target.classList.remove('is-success'), 2000);
+                    }">
+                        <span class="btn-content">Envoyer</span>
+                        <span class="btn-success-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 13l4 4L19 7" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button class="btn btn-contrast btn-success-state" @click="(e) => {
+                        e.target.classList.add('is-success');
+                        setTimeout(() => e.target.classList.remove('is-success'), 2000);
+                    }">
+                        <span class="btn-content">Confirmer</span>
+                        <span class="btn-success-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 13l4 4L19 7" />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;button class="btn btn-primary btn-success-state"&gt;
+  &lt;span class="btn-content"&gt;Sauvegarder&lt;/span&gt;
+  &lt;span class="btn-success-icon"&gt;
+    &lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M5 13l4 4L19 7" /&gt;&lt;/svg&gt;
+  &lt;/span&gt;
+&lt;/button&gt;
+
+// JavaScript pour activer l'état success
+button.classList.add('is-success');</code></pre>
+                </div>
+            </div>
+
+            <!-- Combinaisons avancées -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500"></span>
+                    Combinaisons Avancées
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Combinez les effets pour créer des interactions riches.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-900 flex flex-wrap items-center gap-4">
+                    <button class="btn btn-primary btn-gradient btn-ripple btn-smooth">Gradient + Ripple +
+                        Smooth</button>
+                    <button class="btn btn-success btn-3d btn-ripple btn-icon-hover-bounce">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        3D + Ripple + Bounce
+                    </button>
+                    <button class="btn btn-danger btn-neon btn-icon-pulse btn-pill">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                        Neon + Pulse + Pill
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Props Additionnelles -->
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Props Additionnelles</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Nouvelles fonctionnalités intégrées directement dans le composant Button via des props.
+            </p>
+
+            <!-- Loading Text -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Loading Text
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Affiche un texte personnalisé pendant l'état de chargement au lieu du label par défaut.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="primary" loading loading-text="Sauvegarde en cours...">Sauvegarder</Button>
+                    <Button severity="info" loading loading-text="Envoi...">Envoyer le message</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button loading loading-text="Sauvegarde en cours..."&gt;Sauvegarder&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Tooltip -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded bg-slate-700"></span>
+                    Tooltip
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Tooltip intégré au survol avec 4 positions possibles : top, bottom, left, right.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-6">
+                    <Button severity="primary" tooltip="Position par défaut (top)"
+                        icon="heroicons:information-circle" />
+                    <Button severity="success" tooltip="Info au survol" tooltip-position="bottom">Bottom</Button>
+                    <Button severity="info" tooltip="À gauche" tooltip-position="left">Left</Button>
+                    <Button severity="warn" tooltip="À droite" tooltip-position="right">Right</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button tooltip="Position par défaut (top)"&gt;...&lt;/Button&gt;
+&lt;Button tooltip="À droite" tooltip-position="right"&gt;Right&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Badge -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span
+                        class="w-5 h-5 rounded-full bg-danger text-white text-xs flex items-center justify-center font-bold">3</span>
+                    Badge
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Badge/compteur positionné sur le bouton. La couleur peut être personnalisée via
+                    <code>badge-color</code>.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-6">
+                    <Button severity="primary" icon="heroicons:bell" :badge="3" />
+                    <Button severity="secondary" icon="heroicons:envelope" :badge="12" badge-color="danger" />
+                    <Button severity="info" :badge="99">Notifications</Button>
+                    <Button severity="success" badge="NEW" badge-color="success">Fonctionnalité</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button icon="heroicons:bell" :badge="3" /&gt;
+&lt;Button :badge="99" badge-color="danger"&gt;Notifications&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Success / Error States -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Success / Error States
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Props <code>success</code> et <code>error</code> pour afficher un feedback visuel après une
+                    action.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="primary" :success="true">Succès !</Button>
+                    <Button severity="danger" :error="true">Erreur !</Button>
+                    <Button severity="info" variant="outlined">État normal</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button :success="isSuccess"&gt;Sauvegarder&lt;/Button&gt;
+&lt;Button :error="hasError"&gt;Soumettre&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="font-mono font-bold text-orange-500">5</span>
+                    Countdown
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Compte à rebours avant activation. Le bouton est désactivé pendant le countdown.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="danger" :countdown="5">Action dangereuse</Button>
+                    <Button severity="warn" :countdown="3" variant="outlined">Confirmation</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre
+                        class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button :countdown="5"&gt;Action dangereuse&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Combinaisons -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500"></span>
+                    Combinaisons
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Les props peuvent être combinées pour des interactions riches.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="primary" icon="heroicons:bell" :badge="5" tooltip="Vous avez 5 notifications">
+                        Notifications
+                    </Button>
+                    <Button severity="danger" icon="heroicons:trash" tooltip="Cette action est irréversible"
+                        tooltip-position="bottom">
+                        Supprimer
+                    </Button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Comportements Avancés -->
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Comportements Avancés</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Fonctionnalités de comportement pour améliorer l'UX et éviter les erreurs utilisateur.
+            </p>
+
+            <!-- Double-click Protection -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Double-click Protection
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Empêche les soumissions multiples accidentelles. Le bouton est temporairement désactivé après un
+                    clic.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="primary" double-click-protection>Protection par défaut (1s)</Button>
+                    <Button severity="danger" :double-click-protection="3000">Protection 3 secondes</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button double-click-protection&gt;Protection par défaut&lt;/Button&gt;
+&lt;Button :double-click-protection="3000"&gt;3 secondes&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Long Press -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                    </svg>
+                    Long Press
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Déclenche un événement <code>@long-press</code> après une pression longue. Utile pour des actions
+                    contextuelles.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="info" :long-press-delay="500" @long-press="() => alert('Long press détecté !')">
+                        Maintenez appuyé (500ms)
+                    </Button>
+                    <Button severity="warn" :long-press-delay="1000" @long-press="() => alert('Long press 1s !')">
+                        Maintenez 1 seconde
+                    </Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button :long-press-delay="500" @long-press="handleLongPress"&gt;
+  Maintenez appuyé
+&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Keyboard Shortcuts -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Keyboard Shortcuts
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Associe un raccourci clavier au bouton. Supporte les combinaisons Ctrl, Alt, Shift, Meta/Cmd.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="primary" shortcut="ctrl+s" @click="() => alert('Ctrl+S pressé !')">
+                        Sauvegarder
+                        <span class="ml-2 px-1.5 py-0.5 text-xs bg-white/20 rounded">Ctrl+S</span>
+                    </Button>
+                    <Button severity="danger" shortcut="alt+d" @click="() => alert('Alt+D pressé !')">
+                        Supprimer
+                        <span class="ml-2 px-1.5 py-0.5 text-xs bg-white/20 rounded">Alt+D</span>
+                    </Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button shortcut="ctrl+s" @click="save"&gt;Sauvegarder&lt;/Button&gt;
+&lt;Button shortcut="alt+shift+n" @click="createNew"&gt;Nouveau&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Copy to Clipboard -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Copy to Clipboard
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Copie automatiquement un texte dans le presse-papiers au clic. Émet <code>@copy</code> avec le texte
+                    copié.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="secondary" copy-text="npm install @webmx/ui" icon="heroicons:clipboard-document">
+                        Copier la commande
+                    </Button>
+                    <Button severity="info" copy-text="contact@example.com" variant="outlined">
+                        Copier l'email
+                    </Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button copy-text="npm install @webmx/ui" @copy="showToast"&gt;
+  Copier
+&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Thèmes & Responsive -->
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Thèmes & Responsive</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Personnalisation visuelle et adaptation aux différents appareils.
+            </p>
+
+            <!-- Presets Thèmes -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    </svg>
+                    Presets de Thèmes
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Utilisez la prop <code>theme</code> pour appliquer des presets de couleurs prédéfinis.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button theme="ocean">Thème Ocean</Button>
+                    <Button theme="forest">Thème Forest</Button>
+                    <Button theme="sunset">Thème Sunset</Button>
+                    <Button theme="neon">Thème Neon</Button>
+                </div>
+                <div
+                    class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                    <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;Button theme="ocean"&gt;Ocean&lt;/Button&gt;
+&lt;Button theme="neon"&gt;Neon&lt;/Button&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Responsive & Tactile -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Responsive & Tactile
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Le bouton s'adapte automatiquement aux appareils tactiles (zones de tap plus grandes) et supporte le
+                    feedback haptique.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="primary" class="btn-responsive">Bouton Responsive (Taille variable)</Button>
+                    <div class="text-xs text-slate-400 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        Testez sur mobile pour le feedback haptique !
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mode Daltonien -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    Mode Daltonien (Color-blind)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+                    Améliore l'accessibilité en utilisant des bordures distinctes (solide, pointillé, tireté) pour
+                    différencier les états sans se fier uniquement à la couleur.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap items-center gap-4">
+                    <Button severity="success" colorblind>Succès (Trait plein)</Button>
+                    <Button severity="warn" colorblind>Attention (Tirets)</Button>
+                    <Button severity="danger" colorblind>Danger (Double trait)</Button>
+                    <Button severity="info" colorblind>Info (Pointillés)</Button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Modèles Avancés -->
+        <div class="mb-20">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Modèles Avancés</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Composants combinés pour des interactions plus complexes.
+            </p>
+
+            <!-- Toggle Groups -->
+            <div class="mb-12">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                    Toggle Groups / Tabs
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+                    Utilisez <code>ButtonGroup</code> avec la prop <code>toggle</code> pour créer des sélections
+                    uniques ou multiples (tabs, filtres).
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Single Selection -->
+                    <div class="space-y-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Sélection
+                            Unique</span>
+                        <div
+                            class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900">
+                            <ButtonGroup v-model="toggleValue" toggle>
+                                <Button value="left" icon="heroicons:bars-3-bottom-left" square
+                                    aria-label="Align left" />
+                                <Button value="center" icon="heroicons:bars-3" square aria-label="Align center" />
+                                <Button value="right" icon="heroicons:bars-3-bottom-right" square
+                                    aria-label="Align right" />
+                            </ButtonGroup>
+                            <div class="mt-4 text-xs text-slate-500 italic">Valeur sélectionnée : {{ toggleValue }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multiple Selection -->
+                    <div class="space-y-4">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Sélection
+                            Multiple</span>
+                        <div
+                            class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900">
+                            <ButtonGroup v-model="multiToggleValue" toggle multiple>
+                                <Button value="bold" icon="heroicons:bold" square aria-label="Bold" />
+                                <Button value="italic" icon="heroicons:italic" square aria-label="Italic" />
+                                <Button value="underline" icon="heroicons:underline" square aria-label="Underline" />
+                            </ButtonGroup>
+                            <div class="mt-4 text-xs text-slate-500 italic">Valeurs : {{ multiToggleValue }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Split Button -->
+            <div class="mb-12">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                    Split Button
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+                    Sépare une action principale d'un menu d'actions secondaires.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap gap-4">
+                    <SplitButton @click="handleSplitClick" :loading="splitButtonLoading">
+                        Enregistrer
+                    </SplitButton>
+                    <SplitButton severity="secondary" variant="outlined">
+                        Exporter
+                    </SplitButton>
+                    <SplitButton severity="danger" icon="heroicons:trash">
+                        Supprimer définitivement
+                    </SplitButton>
+                </div>
+            </div>
+
+            <!-- FAB -->
+            <div class="mb-8">
+                <h4 class="text-md font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                    Floating Action Button (FAB)
+                </h4>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+                    Bouton flottant pour les actions globales de la page. Supporte plusieurs positions.
+                </p>
+                <div
+                    class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 flex flex-wrap gap-4">
+                    <Button fab icon="heroicons:plus" severity="primary" size="lg" shadow="xl" />
+                    <div class="text-xs text-slate-400 self-center">Regardez le coin inférieur droit ! (Simulé ici)
+                    </div>
+                </div>
+                <div
+                    class="bg-indigo-50 dark:bg-indigo-950/30 p-4 border border-indigo-100 dark:border-indigo-900 rounded-xl mt-4 text-xs text-indigo-700 dark:text-indigo-300">
+                    Propriétés disponibles : <code>fab</code>, <code>fab-position</code> (top-right, top-left,
+                    bottom-right, bottom-left).
+                </div>
+            </div>
+        </div>
+
         <!-- ═══════════════════════════════════════════════════════════════════════════ -->
         <!-- API SECTION -->
         <!-- ═══════════════════════════════════════════════════════════════════════════ -->
@@ -347,8 +1197,10 @@ const buttonCodeExample = computed(() => {
                                 <code
                                     class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'help' | 'danger' | 'contrast'</code>
                             </td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'primary'</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Définit la couleur d'accentuation
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'primary'
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Définit la couleur
+                                d'accentuation
                                 du bouton.</td>
                         </tr>
                         <tr>
@@ -362,7 +1214,8 @@ const buttonCodeExample = computed(() => {
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Style visuel du bouton.</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">size
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                size
                             </td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
                                 <code
@@ -379,7 +1232,8 @@ const buttonCodeExample = computed(() => {
                                     class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'</code>
                             </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'md'</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Rayon de bordure du bouton.</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Rayon de bordure du bouton.
+                            </td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
@@ -393,7 +1247,8 @@ const buttonCodeExample = computed(() => {
                                 severity.</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">ring
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                ring
                             </td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
                                 <code
@@ -406,7 +1261,8 @@ const buttonCodeExample = computed(() => {
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 raised</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Ajoute un effet d'élévation au
                                 bouton.</td>
@@ -414,18 +1270,52 @@ const buttonCodeExample = computed(() => {
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 square</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Force un ratio d'aspect carré
                                 (utile pour les boutons d'icône).</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">block
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                block
                             </td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche le bouton sur toute la
                                 largeur de son conteneur.</td>
+                        </tr>
+
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                fab</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Transforme le bouton en Floating
+                                Action Button flottant.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                fabPosition</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
+                                <code
+                                    class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'</code>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'bottom-right'
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Position du bouton flottant si
+                                <code>fab</code> est activé.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                colorblind</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Active le mode d'accessibilité
+                                visuelle pour les daltoniens.</td>
                         </tr>
 
                         <!-- Contenu -->
@@ -436,27 +1326,37 @@ const buttonCodeExample = computed(() => {
                             </td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">label
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                label
                             </td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Texte affiché dans le bouton
                                 (alternative au slot par défaut).</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">icon
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                icon
                             </td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Nom de l'icône Iconify à afficher.
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Nom de l'icône Iconify à
+                                afficher.
                             </td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 leadingIcon</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Icône toujours affichée au début du
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Icône toujours affichée au
+                                début du
                                 bouton (prioritaire sur <code>icon</code>).</td>
                         </tr>
                         <tr>
@@ -467,15 +1367,19 @@ const buttonCodeExample = computed(() => {
                                     class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'left' | 'right' | 'top' | 'bottom'</code>
                             </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">'left'</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Position de l'icône par rapport au
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Position de l'icône par rapport
+                                au
                                 label.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 avatar</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">URL d'une image avatar à afficher
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">URL d'une image avatar à
+                                afficher
                                 dans le bouton.</td>
                         </tr>
 
@@ -489,15 +1393,18 @@ const buttonCodeExample = computed(() => {
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 loading</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche un spinner et désactive le
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Affiche un spinner et désactive
+                                le
                                 bouton.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 loadingAuto</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Gère automatiquement l'état de
                                 chargement lors d'un click retournant une Promise.</td>
@@ -505,17 +1412,22 @@ const buttonCodeExample = computed(() => {
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 disabled</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Désactive les interactions avec le
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Désactive les interactions avec
+                                le
                                 bouton.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 active</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Force l'état actif du bouton (pour
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Force l'état actif du bouton
+                                (pour
                                 les NuxtLinks).</td>
                         </tr>
 
@@ -527,7 +1439,8 @@ const buttonCodeExample = computed(() => {
                             </td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">as
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                as
                             </td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
                                 <code
@@ -537,7 +1450,8 @@ const buttonCodeExample = computed(() => {
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Élément HTML à rendre.</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">type
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                type
                             </td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
                                 <code
@@ -547,44 +1461,58 @@ const buttonCodeExample = computed(() => {
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Type HTML du bouton.</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">to
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                to
                             </td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string |
                                 object</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Transforme le bouton en NuxtLink
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Transforme le bouton en
+                                NuxtLink
                                 vers cette destination.</td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">href
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                href
                             </td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">URL de destination (quand
                                 <code>as="a"</code>).
                             </td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">value
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                value
                             </td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Valeur du champ (quand
                                 <code>as="input"</code>).
                             </td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">name
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                name
                             </td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Attribut name pour les formulaires.
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Attribut name pour les
+                                formulaires.
                             </td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 autofocus</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
                             <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">false</td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Donne le focus au bouton au
                                 chargement de la page.</td>
@@ -592,8 +1520,10 @@ const buttonCodeExample = computed(() => {
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 referrerpolicy</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Politique de référent pour les
                                 liens.</td>
                         </tr>
@@ -603,7 +1533,8 @@ const buttonCodeExample = computed(() => {
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
                                 <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'remove' | 'append'</code>
                             </td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Gestion du slash final pour les
                                 NuxtLinks.</td>
                         </tr>
@@ -618,17 +1549,22 @@ const buttonCodeExample = computed(() => {
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 ariaLabel</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Libellé accessible pour les
                                 lecteurs d'écran.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 ariaExpanded</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique si l'élément contrôlé est
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique si l'élément contrôlé
+                                est
                                 déployé.</td>
                         </tr>
                         <tr>
@@ -636,15 +1572,19 @@ const buttonCodeExample = computed(() => {
                                 ariaPressed</td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean |
                                 'mixed'</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique l'état pressé d'un bouton à
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique l'état pressé d'un
+                                bouton à
                                 bascule.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 ariaControls</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément contrôlé par ce
                                 bouton.</td>
                         </tr>
@@ -655,8 +1595,10 @@ const buttonCodeExample = computed(() => {
                                 <code
                                     class="bg-slate-100 dark:bg-slate-800 px-1 rounded">boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog'</code>
                             </td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique le type de popup déclenché.
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique le type de popup
+                                déclenché.
                             </td>
                         </tr>
                         <tr>
@@ -666,24 +1608,31 @@ const buttonCodeExample = computed(() => {
                                 <code
                                     class="bg-slate-100 dark:bg-slate-800 px-1 rounded">boolean | 'page' | 'step' | 'location' | 'date' | 'time'</code>
                             </td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique l'élément courant dans un
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Indique l'élément courant dans
+                                un
                                 ensemble.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 ariaDescribedby</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément décrivant ce
                                 bouton.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 ariaLabelledby</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément servant de libellé.
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">ID de l'élément servant de
+                                libellé.
                             </td>
                         </tr>
                         <tr>
@@ -693,16 +1642,20 @@ const buttonCodeExample = computed(() => {
                                 <code
                                     class="bg-slate-100 dark:bg-slate-800 px-1 rounded">'off' | 'assertive' | 'polite'</code>
                             </td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Priorité des annonces pour les
                                 régions live.</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
                                 ariaHidden</td>
-                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined</td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Cache l'élément aux technologies
+                            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean
+                            </td>
+                            <td class="py-3 px-4 font-mono text-amber-600 dark:text-amber-400 text-xs">undefined
+                            </td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Cache l'élément aux
+                                technologies
                                 d'assistance.</td>
                         </tr>
                     </tbody>
@@ -726,13 +1679,15 @@ const buttonCodeExample = computed(() => {
                     </thead>
                     <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">click
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                click
                             </td>
                             <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">
                                 <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">event: MouseEvent</code>
                             </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">
-                                Émis lors du clic sur le bouton. Avec <code>loadingAuto</code>, l'état de chargement est
+                                Émis lors du clic sur le bouton. Avec <code>loadingAuto</code>, l'état de chargement
+                                est
                                 géré automatiquement si le handler retourne une Promise.
                             </td>
                         </tr>
@@ -765,10 +1720,12 @@ const buttonCodeExample = computed(() => {
                             </td>
                         </tr>
                         <tr>
-                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">icon
+                            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">
+                                icon
                             </td>
                             <td class="py-3 px-4 text-slate-600 dark:text-slate-400">
-                                Permet de personnaliser l'icône affichée. Remplace l'icône par défaut définie via les
+                                Permet de personnaliser l'icône affichée. Remplace l'icône par défaut définie via
+                                les
                                 props <code>icon</code> ou <code>leadingIcon</code>.
                             </td>
                         </tr>
@@ -793,9 +1750,11 @@ const buttonCodeExample = computed(() => {
             <div
                 class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 mb-8">
                 <p class="text-slate-600 dark:text-slate-400 mb-4">
-                    Le composant Button rend un élément <code>&lt;button&gt;</code> natif qui inclut implicitement tous
+                    Le composant Button rend un élément <code>&lt;button&gt;</code> natif qui inclut implicitement
+                    tous
                     les attributs passés.
-                    Le texte pour décrire le bouton est défini avec la prop <code>aria-label</code>. Si elle n'est pas
+                    Le texte pour décrire le bouton est défini avec la prop <code>aria-label</code>. Si elle n'est
+                    pas
                     présente, la prop <code>label</code> ou le contenu du slot est utilisé.
                 </p>
                 <p class="text-slate-600 dark:text-slate-400 mb-4">
@@ -835,7 +1794,8 @@ const buttonCodeExample = computed(() => {
                                 <kbd
                                     class="px-2 py-1 text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded">Tab</kbd>
                             </td>
-                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Déplace le focus vers le bouton.
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Déplace le focus vers le
+                                bouton.
                             </td>
                         </tr>
                         <tr>
@@ -869,7 +1829,8 @@ const buttonCodeExample = computed(() => {
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="text-emerald-500 mt-0.5">✓</span>
-                        <span>Préférez <code>type="submit"</code> pour les boutons de soumission de formulaire.</span>
+                        <span>Préférez <code>type="submit"</code> pour les boutons de soumission de
+                            formulaire.</span>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="text-emerald-500 mt-0.5">✓</span>

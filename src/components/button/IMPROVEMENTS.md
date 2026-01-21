@@ -4,85 +4,85 @@
 
 ### Nouvelles Variantes
 
-- [ ] **Gradient** : Boutons avec dégradés colorés (ex: `from-primary to-accent`)
-- [ ] **Glass** : Effet glassmorphism avec `backdrop-blur`
-- [ ] **3D** : Effet de profondeur avec ombres décalées
-- [ ] **Neon** : Effet lumineux/glow autour du bouton
-- [ ] **Pill** : Variante avec `rounded-full` par défaut
+- [x] **Gradient** : Boutons avec dégradés colorés (ex: `from-primary to-accent`)
+- [x] **Glass** : Effet glassmorphism avec `backdrop-blur`
+- [x] **3D** : Effet de profondeur avec ombres décalées
+- [x] **Neon** : Effet lumineux/glow autour du bouton
+- [x] **Pill** : Variante avec `rounded-full` par défaut
 
 ### Améliorations Visuelles
 
-- [ ] Animation de ripple au clic (material design)
-- [ ] Transitions plus fluides entre les états (hover, active, focus)
-- [ ] Support des icônes animées (rotation, pulse)
-- [ ] État "success" après une action (checkmark animé)
+- [x] Animation de ripple au clic (material design)
+- [x] Transitions plus fluides entre les états (hover, active, focus)
+- [x] Support des icônes animées (rotation, pulse)
+- [x] État "success" après une action (checkmark animé)
 
 ## ⚡ Fonctionnalités
 
 ### Props Additionnelles
 
-- [ ] `loading-text` : Texte affiché pendant le chargement
-- [ ] `success` : État de succès avec animation
-- [ ] `error` : État d'erreur avec feedback visuel
-- [ ] `tooltip` : Tooltip intégré au survol
-- [ ] `badge` : Badge/compteur sur le bouton
-- [ ] `countdown` : Compte à rebours avant activation
+- [x] `loading-text` : Texte affiché pendant le chargement
+- [x] `success` : État de succès avec animation
+- [x] `error` : État d'erreur avec feedback visuel
+- [x] `tooltip` : Tooltip intégré au survol
+- [x] `badge` : Badge/compteur sur le bouton
+- [x] `countdown` : Compte à rebours avant activation
 
 ### Comportements
 
-- [ ] Double-click protection (éviter les soumissions multiples)
-- [ ] Long press action (action différente sur pression longue)
-- [ ] Keyboard shortcuts (raccourcis clavier)
-- [ ] Copy to clipboard (avec feedback visuel)
+- [x] Double-click protection (éviter les soumissions multiples)
+- [x] Long press action (action différente sur pression longue)
+- [x] Keyboard shortcuts (raccourcis clavier)
+- [x] Copy to clipboard (avec feedback visuel)
 
 ## 🔧 Technique
 
 ### Performance
 
-- [ ] Lazy loading des icônes
-- [ ] Optimisation du CSS (purge des classes inutilisées)
-- [ ] Réduction du bundle size
+- [x] Lazy loading des icônes
+- [x] Optimisation du CSS (purge des classes inutilisées)
+- [x] Réduction du bundle size
 
 ### Accessibilité
 
-- [ ] Focus visible amélioré
-- [ ] Annonces pour les lecteurs d'écran (aria-live)
-- [ ] Support du mode high contrast
-- [ ] Navigation clavier complète
+- [x] Focus visible amélioré
+- [x] Annonces pour les lecteurs d'écran (aria-live)
+- [x] Support du mode high contrast
+- [x] Navigation clavier complète
 
 ### Tests
 
-- [ ] Tests unitaires complets
-- [ ] Tests d'accessibilité automatisés
-- [ ] Tests de performance
-- [ ] Documentation Storybook
+- [x] Tests unitaires complets
+- [x] Tests d'accessibilité automatisés
+- [x] Tests de performance
+- [ ] Documentation Storybook (nécessite installation séparée)
 
 ## 📱 Responsive
 
-- [ ] Tailles adaptatives selon le viewport
-- [ ] Touch-friendly pour mobile (zones de tap plus grandes)
-- [ ] Haptic feedback sur mobile
+- [x] Tailles adaptatives selon le viewport
+- [x] Touch-friendly pour mobile (zones de tap plus grandes)
+- [x] Haptic feedback sur mobile
 
 ## 🎭 Thèmes
 
-- [ ] Support des thèmes personnalisés via CSS variables
-- [ ] Presets de couleurs (ex: "ocean", "forest", "sunset")
-- [ ] Mode daltonien (couleurs accessibles)
+- [x] Support des thèmes personnalisés via CSS variables
+- [x] Presets de couleurs (ex: "ocean", "forest", "sunset")
+- [x] Mode daltonien (couleurs accessibles)
 
 ## 💡 Idées Avancées
 
 ### Button Groups Améliorés
 
-- [ ] Tabs intégrés
-- [ ] Toggle groups (radio/checkbox)
-- [ ] Split buttons (action principale + dropdown)
-- [ ] Floating action buttons (FAB)
+- [x] Tabs intégrés
+- [x] Toggle groups (radio/checkbox)
+- [x] Split buttons (action principale + dropdown)
+- [x] Floating action buttons (FAB)
 
 ### Intégrations
 
 - [ ] Support de vue-router (bouton comme lien)
-- [ ] Intégration avec des bibliothèques d'icônes (Heroicons, Lucide)
-- [ ] Composable `useButton` pour logique réutilisable
+- [x] Intégration avec des bibliothèques d'icônes (Heroicons, Lucide)
+- [x] Composable `useButton` pour logique réutilisable
 
 ---
 

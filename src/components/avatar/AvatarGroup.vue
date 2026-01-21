@@ -61,7 +61,7 @@ const remainingCount = computed(() => {
 </template>
 
 <style scoped>
-@reference "../../style.css";
+@reference "../../theme.css";
 
 .avatar-group {
     @apply inline-flex flex-row-reverse items-center justify-end;
