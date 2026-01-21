@@ -38,7 +38,7 @@ const sizeClasses = computed(() => {
 // Count total avatars from slot
 const totalAvatars = computed(() => {
     if (!slots.default) return 0
-    const children = slots.default()
+    const children = slots.default({})
     return children.length
 })
 

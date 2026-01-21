@@ -28,7 +28,7 @@
             <span v-else-if="$slots.icon || props.leadingIcon || props.icon" class="shrink-0 inline-flex"
                 aria-hidden="true">
                 <slot name="icon">
-                    <Iconify v-if="props.leadingIcon || props.icon" :icon="props.leadingIcon || props.icon"
+                    <Iconify v-if="props.leadingIcon || props.icon" :icon="(props.leadingIcon || props.icon)!"
                         :class="spinnerSizeClass" />
                 </slot>
             </span>
@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots, ref, useAttrs } from 'vue'
+import { computed, useSlots, ref, useAttrs, type Slots, type VNode, type VNodeArrayChildren } from 'vue'
 import { Icon as Iconify } from '@iconify/vue'
 import type {
     ButtonVariant,
@@ -120,7 +120,7 @@ const emit = defineEmits<{
     click: [event: MouseEvent]
 }>()
 
-const slots = useSlots()
+const slots: Slots = useSlots()
 const attrs = useAttrs()
 const internalLoading = ref(false)
 
@@ -129,8 +129,8 @@ const isCurrentlyLoading = computed(() => props.loading || internalLoading.value
 const hasChildren = computed(() => {
     if (props.label) return true
     if (!slots.default) return false
-    const content = slots.default()
-    return content.some(node => {
+    const content = slots.default({})
+    return content.some((node: VNode) => {
         if (!node) return false
         if (Array.isArray(node.children) && node.children.length > 0) return true
         if (typeof node.children === 'string' && node.children.trim() !== '') return true
@@ -148,21 +148,25 @@ const componentTag = computed(() => {
 })
 
 // Extract text from slot for input value
-const getSlotText = (nodes: any[]): string => {
+const getSlotText = (nodes: VNodeArrayChildren): string => {
     return nodes
         .map((node) => {
-            if (typeof node.children === 'string') return node.children
-            if (Array.isArray(node.children)) return getSlotText(node.children)
+            if (!node) return ''
+            if (typeof node === 'string' || typeof node === 'number') return String(node)
+            if (typeof node === 'object' && 'children' in node) {
+                if (typeof node.children === 'string') return node.children
+                if (Array.isArray(node.children)) return getSlotText(node.children)
+            }
             return ''
         })
         .join('')
 }
 
-const computedValue = computed(() => {
+const computedValue = computed<string>(() => {
     if (props.value) return props.value
     if (props.label) return props.label
     if (slots.default) {
-        return getSlotText(slots.default())
+        return getSlotText(slots.default({}))
     }
     return ''
 })
