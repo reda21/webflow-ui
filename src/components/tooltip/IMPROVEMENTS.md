@@ -61,16 +61,16 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### Fonctionnalités 🔲
 
-- [ ] **Smart Delay** - Délai réduit après premier affichage
-- [ ] **Group Tooltips** - Coordination entre plusieurs tooltips
-- [ ] **Ancestors Scroll** - Écouter scroll de tous les parents
-- [ ] **Mutation Observer** - Réagir aux changements DOM
+- [x] **Smart Delay** - Délai réduit après premier affichage
+- [x] **Group Tooltips** - Coordination entre plusieurs tooltips
+- [x] **Ancestors Scroll** - Écouter scroll de tous les parents
+- [x] **Mutation Observer** - Réagir aux changements DOM
 
 ### Hooks Additionnels 🔲
 
-- [ ] `useTooltipGroup` - Gérer un groupe de tooltips
-- [ ] `useTooltipSingleton` - Pattern singleton
-- [ ] `useTooltipPosition` - Logique de positionnement seule
+- [x] `useTooltipGroup` - Gérer un groupe de tooltips
+- [x] `useTooltipSingleton` - Pattern singleton
+- [x] `useTooltipPosition` - Logique de positionnement seule
 
 ---
 
@@ -78,12 +78,12 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### Améliorations A11y 🔲
 
-- [ ] **aria-live** - Régions live pour contenu dynamique
-- [ ] **Focus Management** - Gestion focus pour tooltips interactifs
-- [ ] **Screen Reader** - Meilleure annonce du contenu
-- [ ] **Touch Accessibility** - Accessibilité pour écrans tactiles
-- [ ] **High Contrast** - Support mode contraste élevé
-- [ ] **Reduced Motion** - Respect prefers-reduced-motion
+- [x] **aria-live** - Régions live pour contenu dynamique
+- [x] **Focus Management** - Gestion focus pour tooltips interactifs
+- [x] **Screen Reader** - Meilleure annonce du contenu
+- [x] **Touch Accessibility** - Accessibilité pour écrans tactiles
+- [x] **High Contrast** - Support mode contraste élevé
+- [x] **Reduced Motion** - Respect prefers-reduced-motion
 
 ---
 
@@ -103,12 +103,12 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### À Créer 🔲
 
-- [ ] **Playground Interactif** - ✅ Créé
-- [ ] **API Reference** - ✅ Créé
-- [ ] **Examples Copier/Coller** - Snippets prêts à l'emploi
-- [ ] **Figma Integration** - Lien vers design tokens
-- [ ] **Migration Guide** - Guide de migration depuis autres libs
-- [ ] **Best Practices** - Guide des bonnes pratiques
+- [x] **Playground Interactif** - ✅ Créé
+- [x] **API Reference** - ✅ Créé
+- [x] **Examples Copier/Coller** - Snippets prêts à l'emploi
+- [x] **Figma Integration** - Lien vers design tokens
+- [x] **Migration Guide** - Guide de migration depuis autres libs
+- [x] **Best Practices** - Guide des bonnes pratiques
 
 ---
 
@@ -116,7 +116,7 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### À Implémenter 🔲
 
-- [ ] **Directive v-tooltip** - Directive Vue simple pour usage rapide
+- [x] **Directive v-tooltip** - Directive Vue simple pour usage rapide
 - [ ] **Nuxt Module** - Auto-import pour Nuxt
 - [ ] **Headless Mode** - Version sans styles pour customisation totale
 - [ ] **Preset System** - Système de presets réutilisables
@@ -127,10 +127,10 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### Optimisations 🔲
 
-- [ ] **Lazy Mount** - Ne monter le contenu qu'à l'affichage
+- [x] **Lazy Mount** - Ne monter le contenu qu'à l'affichage
 - [ ] **Virtual DOM** - Optimiser les re-renders
 - [ ] **Event Delegation** - Délégation d'événements pour groupes
-- [ ] **Memory Leaks** - Audit et fixes des fuites mémoire
+- [x] **Memory Leaks** - Audit et fixes des fuites mémoire
 - [ ] **Bundle Size** - Réduire la taille du bundle (tree-shaking)
 
 ---

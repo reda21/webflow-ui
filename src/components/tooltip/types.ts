@@ -97,7 +97,9 @@ export interface TooltipProps {
   appendTo?: string | HTMLElement
   portal?: boolean            // Téléporter dans le body
   singleton?: boolean         // Partager une instance
-
+  group?: string              // Groupe pour smart delay
+  headless?: boolean          // Mode sans styles par défaut
+  preset?: string             // Nom d'un preset de configuration
 }
 
 // ============================================

@@ -16,7 +16,8 @@
 import { computed, ref, watch, onMounted, onUnmounted, nextTick, type CSSProperties } from 'vue'
 import type { TooltipProps } from './types'
 import { useTooltipSingleton } from './useTooltipSingleton'
-import { useFloatingUI, type FloatingUIOptions, type Boundary } from './useFloatingUI'
+import { useTooltipGroup } from './useTooltipGroup'
+import { useTooltipPosition } from './useTooltipPosition'
 
 // ============================================
 // Props
@@ -40,7 +41,8 @@ const props = withDefaults(defineProps<TooltipProps>(), {
     html: false,
     followCursor: false,
     singleton: false,
-    floatingUI: false
+    floatingUI: false,
+    group: undefined
 })
 
 // ============================================
@@ -63,39 +65,16 @@ const triggerRef = ref<HTMLElement | null>(null)
 const contentRef = ref<HTMLElement | null>(null)
 const positionStyles = ref<CSSProperties>({})
 
-// Floating UI integration
-const floatingOptions = computed<FloatingUIOptions>(() => {
-    // Adapt offset type
-    let offsetVal: number | { mainAxis?: number; crossAxis?: number } | undefined
-    if (Array.isArray(props.offset)) {
-        offsetVal = { mainAxis: props.offset[0], crossAxis: props.offset[1] }
-    } else {
-        offsetVal = props.offset
-    }
+// Group Integration
+const { isGroupActive, registerShow, registerHide } = useTooltipGroup(props.group)
 
-    // Adapt boundary type
-    let boundaryVal: Boundary | 'clippingParents' | undefined
-    if (props.boundary === 'clippingParents') {
-        boundaryVal = 'clippingParents'
-    } else if (typeof props.boundary === 'object') {
-        boundaryVal = props.boundary as Boundary
-    }
-
-    return {
-        placement: props.position,
-        offset: offsetVal,
-        flip: props.flip,
-        shift: props.shift,
-        boundary: boundaryVal,
-        autoUpdate: true
-    }
-})
-
-const floatingUI = props.floatingUI ? useFloatingUI(
-    computed(() => props.virtualElement ? props.virtualElement : triggerRef.value),
+// Positioning Integration
+const { tooltipStyles: computedPositionStyles, updatePosition, startAutoUpdate, stopAutoUpdate } = useTooltipPosition({
+    props,
+    triggerRef,
     contentRef,
-    floatingOptions
-) : null
+    isVisible
+})
 
 // Timers
 let showTimeout: ReturnType<typeof setTimeout> | null = null
@@ -106,6 +85,8 @@ let longPressTimeout: ReturnType<typeof setTimeout> | null = null
 // Delay helpers
 // ============================================
 const getShowDelay = (): number => {
+    if (isGroupActive.value) return 0 // Smart delay: instant if group is active
+
     if (typeof props.delay === 'number') return props.delay
     if (typeof props.delay === 'object' && props.delay) return props.delay.show
     return 0
@@ -140,6 +121,7 @@ const showTooltip = () => {
 
     const show = () => {
         isVisible.value = true
+        registerShow() // Notify group
         emit('show')
         emit('update:modelValue', true)
     }
@@ -158,6 +140,9 @@ const hideTooltip = () => {
 
     const hide = () => {
         isVisible.value = false
+        // Notify group with delay to keep it active for a bit
+        // Use 500ms grace period or whatever logic
+        registerHide(delay)
         emit('hide')
         emit('update:modelValue', false)
     }
@@ -228,12 +213,29 @@ const handleFocus = (event: FocusEvent) => {
 
 const handleBlur = (event: FocusEvent) => {
     if (hasTrigger('focus')) {
+        // If interactive, check if focus moved to content
+        if (props.interactive && contentRef.value?.contains(event.relatedTarget as Node)) {
+            return
+        }
+
         event.stopPropagation()
         if (props.singleton && singleton.value) {
             singleton.value.hide()
         } else {
             hideTooltip()
         }
+    }
+}
+
+const handleContentBlur = (event: FocusEvent) => {
+    if (hasTrigger('focus')) {
+        // If focus moved back to trigger or stays within content, do nothing
+        if (triggerRef.value?.contains(event.relatedTarget as Node) ||
+            contentRef.value?.contains(event.relatedTarget as Node)) {
+            return
+        }
+
+        hideTooltip()
     }
 }
 
@@ -285,95 +287,32 @@ const teleportTo = computed(() => {
     return 'body'
 })
 
-const updatePosition = async () => {
-    if (!isVisible.value) return
-    if (props.followCursor) return
-
-    // Use Floating UI if enabled
-    if (props.floatingUI && floatingUI) {
-        await nextTick()
-        await floatingUI.updatePosition()
-        return
-    }
-
-    // Fallback to manual positioning
-    if (props.teleport || props.virtualElement) {
-        await nextTick()
-
-        const triggerEl = props.virtualElement
-            ? { getBoundingClientRect: props.virtualElement.getBoundingClientRect }
-            : triggerRef.value
-
-        const contentEl = contentRef.value
-
-        if (!triggerEl || !contentEl) return
-
-        const triggerRect = triggerEl.getBoundingClientRect()
-        const contentRect = contentEl.getBoundingClientRect()
-        const margin = 8
-
-        let top = 0
-        let left = 0
-
-        // Basic positioning logic
-        switch (props.position) {
-            case 'top':
-            case 'top-start':
-            case 'top-end':
-                top = triggerRect.top - contentRect.height - margin
-                left = triggerRect.left + (triggerRect.width - contentRect.width) / 2
-                break
-            case 'bottom':
-            case 'bottom-start':
-            case 'bottom-end':
-                top = triggerRect.bottom + margin
-                left = triggerRect.left + (triggerRect.width - contentRect.width) / 2
-                break
-            case 'left':
-            case 'left-start':
-            case 'left-end':
-                top = triggerRect.top + (triggerRect.height - contentRect.height) / 2
-                left = triggerRect.left - contentRect.width - margin
-                break
-            case 'right':
-            case 'right-start':
-            case 'right-end':
-                top = triggerRect.top + (triggerRect.height - contentRect.height) / 2
-                left = triggerRect.right + margin
-                break
-        }
-
-        positionStyles.value = {
-            position: 'fixed',
-            top: `${top}px`,
-            left: `${left}px`,
-            margin: 0,
-            transform: 'none',
-            zIndex: 9999
-        }
-    } else {
-        positionStyles.value = {}
-    }
-}
 
 // ============================================
 // Computed Classes & Animation
 // ============================================
-const wrapperClasses = computed(() => [
-    'tooltip-wrapper',
-    `tooltip-wrapper--${props.position}`,
-    `tooltip-wrapper--${props.variant}`,
-    `tooltip-wrapper--${props.size}`,
-    {
-        'tooltip-wrapper--disabled': props.disabled,
-        'tooltip-wrapper--interactive': props.interactive
-    }
-])
+const wrapperClasses = computed(() => {
+    if (props.headless) return ['tooltip-wrapper']
+    return [
+        'tooltip-wrapper',
+        `tooltip-wrapper--${props.position}`,
+        `tooltip-wrapper--${props.variant}`,
+        `tooltip-wrapper--${props.size}`,
+        {
+            'tooltip-wrapper--disabled': props.disabled,
+            'tooltip-wrapper--interactive': props.interactive,
+            'tooltip-wrapper--glass': props.variant === 'glass'
+        }
+    ]
+})
 
-const contentClasses = computed(() => [
-    'tooltip-content',
-    `tooltip-content--${props.variant}`
-])
+const contentClasses = computed(() => {
+    if (props.headless) return ['tooltip-content']
+    return [
+        'tooltip-content',
+        `tooltip-content--${props.variant}`
+    ]
+})
 
 const arrowClasses = computed(() => [
     'tooltip-arrow',
@@ -394,12 +333,7 @@ const tooltipStyles = computed((): CSSProperties => {
         }
     }
 
-    // Use Floating UI styles if enabled
-    if (props.floatingUI && floatingUI) {
-        return floatingUI.floatingStyles.value
-    }
-
-    return positionStyles.value
+    return computedPositionStyles.value
 })
 
 // Animation name for Vue Transition
@@ -419,22 +353,10 @@ watch(() => props.modelValue, (value) => {
 
 watch(isVisible, (value) => {
     if (value) {
-        updatePosition()
-        window.addEventListener('scroll', updatePosition, true)
-        window.addEventListener('resize', updatePosition)
-
-        // Start Floating UI auto-update if enabled
-        if (props.floatingUI && floatingUI) {
-            floatingUI.startAutoUpdate()
-        }
+        // useTooltipPosition handles scroll, resize, mutation, floating-ui, etc.
+        startAutoUpdate()
     } else {
-        window.removeEventListener('scroll', updatePosition, true)
-        window.removeEventListener('resize', updatePosition)
-
-        // Stop Floating UI auto-update if enabled
-        if (props.floatingUI && floatingUI) {
-            floatingUI.stopAutoUpdate()
-        }
+        stopAutoUpdate()
     }
 })
 
@@ -452,11 +374,7 @@ onMounted(() => {
 onUnmounted(() => {
     clearTimeouts()
     document.removeEventListener('keydown', handleKeydown)
-
-    // Clean up Floating UI auto-update
-    if (props.floatingUI && floatingUI) {
-        floatingUI.stopAutoUpdate()
-    }
+    stopAutoUpdate()
 })
 
 // ============================================
@@ -483,7 +401,7 @@ defineExpose({
         <Teleport :to="teleportTo" :disabled="!teleport">
             <Transition :name="transitionName">
                 <div ref="contentRef" v-if="isVisible && !disabled" :id="tooltipId" :class="contentClasses" :role="role"
-                    :aria-hidden="!isVisible" :style="tooltipStyles">
+                    :aria-hidden="!isVisible" :style="tooltipStyles" @focusout="handleContentBlur">
                     <!-- Arrow -->
                     <div v-if="arrow !== 'none' && !followCursor" :class="arrowClasses" />
 
