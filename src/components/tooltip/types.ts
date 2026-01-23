@@ -23,6 +23,7 @@ export type TooltipArrow = 'none' | 'sm' | 'md' | 'lg' | 'rounded'
 
 // Animation
 export type TooltipAnimation = 
+  | 'fade'       // Alias for fade-in
   | 'fade-in'    // Subtle opacity transition
   | 'fade-out'   // Subtle opacity transition
   | 'scale'      // Zoom effect with spring

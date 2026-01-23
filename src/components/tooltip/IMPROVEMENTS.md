@@ -117,9 +117,9 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 ### À Implémenter 🔲
 
 - [x] **Directive v-tooltip** - Directive Vue simple pour usage rapide
-- [ ] **Nuxt Module** - Auto-import pour Nuxt
-- [ ] **Headless Mode** - Version sans styles pour customisation totale
-- [ ] **Preset System** - Système de presets réutilisables
+- [x] **Nuxt Module** - Auto-import pour Nuxt
+- [x] **Headless Mode** - Version sans styles pour customisation totale
+- [x] **Preset System** - Système de presets réutilisables
 
 ---
 
@@ -128,10 +128,10 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 ### Optimisations 🔲
 
 - [x] **Lazy Mount** - Ne monter le contenu qu'à l'affichage
-- [ ] **Virtual DOM** - Optimiser les re-renders
-- [ ] **Event Delegation** - Délégation d'événements pour groupes
+- [x] **Virtual DOM** - Optimiser les re-renders
+- [x] **Event Delegation** - Délégation d'événements pour groupes
 - [x] **Memory Leaks** - Audit et fixes des fuites mémoire
-- [ ] **Bundle Size** - Réduire la taille du bundle (tree-shaking)
+- [x] **Bundle Size** - Réduire la taille du bundle (tree-shaking)
 
 ---
 

@@ -65,7 +65,10 @@ export function useTooltipPosition({ props, triggerRef, contentRef, isVisible }:
         if (!triggerEl || !contentEl) return
 
         const triggerRect = triggerEl.getBoundingClientRect()
-        const contentRect = contentEl.getBoundingClientRect()
+        // Use offsetWidth/Height to avoid transform issues (like scale animation) causing wrong positioning
+        // getBoundingClientRect() returns dimensions affected by scale transforms, whereas we want the layout dimensions
+        const contentWidth = contentEl.offsetWidth
+        const contentHeight = contentEl.offsetHeight
         // Simple offset handling for manual mode (just assumes number or 0)
         const offset = typeof props.offset === 'number' ? props.offset : 8 
 
@@ -74,27 +77,51 @@ export function useTooltipPosition({ props, triggerRef, contentRef, isVisible }:
 
         switch (props.position) {
             case 'top':
+                top = triggerRect.top - contentHeight - offset
+                left = triggerRect.left + (triggerRect.width - contentWidth) / 2
+                break
             case 'top-start':
+                top = triggerRect.top - contentHeight - offset
+                left = triggerRect.left
+                break
             case 'top-end':
-                top = triggerRect.top - contentRect.height - offset
-                left = triggerRect.left + (triggerRect.width - contentRect.width) / 2
+                top = triggerRect.top - contentHeight - offset
+                left = triggerRect.right - contentWidth
                 break
             case 'bottom':
+                top = triggerRect.bottom + offset
+                left = triggerRect.left + (triggerRect.width - contentWidth) / 2
+                break
             case 'bottom-start':
+                top = triggerRect.bottom + offset
+                left = triggerRect.left
+                break
             case 'bottom-end':
                 top = triggerRect.bottom + offset
-                left = triggerRect.left + (triggerRect.width - contentRect.width) / 2
+                left = triggerRect.right - contentWidth
                 break
             case 'left':
+                top = triggerRect.top + (triggerRect.height - contentHeight) / 2
+                left = triggerRect.left - contentWidth - offset
+                break
             case 'left-start':
+                top = triggerRect.top
+                left = triggerRect.left - contentWidth - offset
+                break
             case 'left-end':
-                top = triggerRect.top + (triggerRect.height - contentRect.height) / 2
-                left = triggerRect.left - contentRect.width - offset
+                top = triggerRect.bottom - contentHeight
+                left = triggerRect.left - contentWidth - offset
                 break
             case 'right':
+                top = triggerRect.top + (triggerRect.height - contentHeight) / 2
+                left = triggerRect.right + offset
+                break
             case 'right-start':
+                top = triggerRect.top
+                left = triggerRect.right + offset
+                break
             case 'right-end':
-                top = triggerRect.top + (triggerRect.height - contentRect.height) / 2
+                top = triggerRect.bottom - contentHeight
                 left = triggerRect.right + offset
                 break
         }
@@ -104,7 +131,6 @@ export function useTooltipPosition({ props, triggerRef, contentRef, isVisible }:
             top: `${top}px`,
             left: `${left}px`,
             margin: 0,
-            transform: 'none',
             zIndex: props.zIndex || 9999
         }
     }

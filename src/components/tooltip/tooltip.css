@@ -53,10 +53,10 @@
 .tooltip-content {
   position: absolute;
   z-index: var(--tooltip-z-index);
-  padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+  padding: 0.625rem var(--tooltip-padding-x);
   max-width: var(--tooltip-max-width);
   font-size: 0.875rem;
-  line-height: 1.4;
+  line-height: 1.5;
   font-weight: 500;
   text-align: center;
   word-wrap: break-word;
@@ -77,6 +77,12 @@
   width: 0;
   height: 0;
   border-style: solid;
+  border-color: transparent;
+  /* Reset default positions */
+  top: auto;
+  bottom: auto;
+  left: auto;
+  right: auto;
 }
 
 .tooltip-title {
@@ -233,9 +239,102 @@
 }
 
 /* ----------------------------------------
+   Arrow Positions (for Teleport support)
+   ---------------------------------------- */
+
+/* Arrow pointing down (tooltip is above trigger) */
+.tooltip-arrow.tooltip-arrow--top,
+.tooltip-arrow.tooltip-arrow--top-start,
+.tooltip-arrow.tooltip-arrow--top-end {
+  bottom: calc(-1 * var(--tooltip-arrow-size-md));
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: var(--tooltip-arrow-size-md) var(--tooltip-arrow-size-md) 0 var(--tooltip-arrow-size-md);
+  border-color: var(--tooltip-bg) transparent transparent transparent;
+}
+
+.tooltip-arrow.tooltip-arrow--top-start {
+  left: 12px;
+  transform: none;
+}
+
+.tooltip-arrow.tooltip-arrow--top-end {
+  left: auto;
+  right: 12px;
+  transform: none;
+}
+
+/* Arrow pointing up (tooltip is below trigger) */
+.tooltip-arrow.tooltip-arrow--bottom,
+.tooltip-arrow.tooltip-arrow--bottom-start,
+.tooltip-arrow.tooltip-arrow--bottom-end {
+  top: calc(-1 * var(--tooltip-arrow-size-md));
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 var(--tooltip-arrow-size-md) var(--tooltip-arrow-size-md) var(--tooltip-arrow-size-md);
+  border-color: transparent transparent var(--tooltip-bg) transparent;
+}
+
+.tooltip-arrow.tooltip-arrow--bottom-start {
+  left: 12px;
+  transform: none;
+}
+
+.tooltip-arrow.tooltip-arrow--bottom-end {
+  left: auto;
+  right: 12px;
+  transform: none;
+}
+
+/* Arrow pointing right (tooltip is left of trigger) */
+.tooltip-arrow.tooltip-arrow--left,
+.tooltip-arrow.tooltip-arrow--left-start,
+.tooltip-arrow.tooltip-arrow--left-end {
+  right: calc(-1 * var(--tooltip-arrow-size-md));
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: var(--tooltip-arrow-size-md) 0 var(--tooltip-arrow-size-md) var(--tooltip-arrow-size-md);
+  border-color: transparent transparent transparent var(--tooltip-bg);
+}
+
+.tooltip-arrow.tooltip-arrow--left-start {
+  top: 12px;
+  transform: none;
+}
+
+.tooltip-arrow.tooltip-arrow--left-end {
+  top: auto;
+  bottom: 12px;
+  transform: none;
+}
+
+/* Arrow pointing left (tooltip is right of trigger) */
+.tooltip-arrow.tooltip-arrow--right,
+.tooltip-arrow.tooltip-arrow--right-start,
+.tooltip-arrow.tooltip-arrow--right-end {
+  left: calc(-1 * var(--tooltip-arrow-size-md));
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: var(--tooltip-arrow-size-md) var(--tooltip-arrow-size-md) var(--tooltip-arrow-size-md) 0;
+  border-color: transparent var(--tooltip-bg) transparent transparent;
+}
+
+.tooltip-arrow.tooltip-arrow--right-start {
+  top: 12px;
+  transform: none;
+}
+
+.tooltip-arrow.tooltip-arrow--right-end {
+  top: auto;
+  bottom: 12px;
+  transform: none;
+}
+
+/* ----------------------------------------
    Variants - Colors
    ---------------------------------------- */
 
+/* Legacy styles (for non-teleported tooltips) */
 /* Light */
 .tooltip-wrapper--light .tooltip-content {
   --tooltip-bg: var(--tooltip-light-bg);
@@ -273,9 +372,62 @@
   --tooltip-text: var(--color-white, #ffffff);
 }
 
+/* Teleport-compatible variant styles (direct class on content) */
+.tooltip-content--light {
+  --tooltip-bg: var(--tooltip-light-bg);
+  --tooltip-text: var(--tooltip-light-text);
+  --tooltip-border: var(--tooltip-light-border);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  border-color: var(--tooltip-border);
+}
+
+.tooltip-content--primary {
+  --tooltip-bg: var(--color-primary-600, #2563eb);
+  --tooltip-text: var(--color-white, #ffffff);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+.tooltip-content--success {
+  --tooltip-bg: var(--color-success-600, #16a34a);
+  --tooltip-text: var(--color-white, #ffffff);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+.tooltip-content--warning {
+  --tooltip-bg: var(--color-warning-500, #f59e0b);
+  --tooltip-text: var(--color-neutral-900, #1a1a1a);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+.tooltip-content--danger {
+  --tooltip-bg: var(--color-danger-600, #dc2626);
+  --tooltip-text: var(--color-white, #ffffff);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+.tooltip-content--info {
+  --tooltip-bg: var(--color-info-600, #0891b2);
+  --tooltip-text: var(--color-white, #ffffff);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+.tooltip-content--dark {
+  --tooltip-bg: var(--color-neutral-900, #1a1a1a);
+  --tooltip-text: var(--color-white, #ffffff);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
 /* ----------------------------------------
    Sizes
    ---------------------------------------- */
+/* Legacy styles (for non-teleported tooltips) */
 .tooltip-wrapper--xs .tooltip-content {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
@@ -297,6 +449,35 @@
   font-size: 0.9375rem;
   --tooltip-max-width: 400px;
   box-shadow: var(--tooltip-shadow-lg);
+}
+
+/* Teleport-compatible size styles (direct class on content) */
+.tooltip-content--xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  max-width: 200px;
+}
+
+.tooltip-content--sm {
+  padding: 0.375rem 0.625rem;
+  font-size: 0.8125rem;
+  max-width: 250px;
+}
+
+.tooltip-content--md {
+  /* Default size - uses root variables */
+}
+
+.tooltip-content--lg {
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  max-width: 400px;
+  box-shadow: var(--tooltip-shadow-lg);
+}
+
+/* Interactive state */
+.tooltip-content--interactive {
+  pointer-events: auto;
 }
 
 /* ----------------------------------------
@@ -328,14 +509,18 @@
 .tooltip--fade-in-enter-active,
 .tooltip--fade-in-leave-active,
 .tooltip--fade-out-enter-active,
-.tooltip--fade-out-leave-active {
+.tooltip--fade-out-leave-active,
+.tooltip--fade-enter-active,
+.tooltip--fade-leave-active {
   transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tooltip--fade-in-enter-from,
 .tooltip--fade-in-leave-to,
 .tooltip--fade-out-enter-from,
-.tooltip--fade-out-leave-to {
+.tooltip--fade-out-leave-to,
+.tooltip--fade-enter-from,
+.tooltip--fade-leave-to {
   opacity: 0;
 }
 
@@ -379,9 +564,44 @@
   transform-origin: right center;
 }
 
-.tooltip-wrapper--right .tooltip--scale-enter-from,
-.tooltip-wrapper--right .tooltip--scale-leave-to {
-  transform: translateY(-50%) scale(0.85);
+/* Teleport-compatible: use content position class */
+.tooltip-content--top.tooltip--scale-enter-from,
+.tooltip-content--top-start.tooltip--scale-enter-from,
+.tooltip-content--top-end.tooltip--scale-enter-from,
+.tooltip-content--top.tooltip--scale-leave-to,
+.tooltip-content--top-start.tooltip--scale-leave-to,
+.tooltip-content--top-end.tooltip--scale-leave-to {
+  transform: scale(0.85);
+  transform-origin: bottom center;
+}
+
+.tooltip-content--bottom.tooltip--scale-enter-from,
+.tooltip-content--bottom-start.tooltip--scale-enter-from,
+.tooltip-content--bottom-end.tooltip--scale-enter-from,
+.tooltip-content--bottom.tooltip--scale-leave-to,
+.tooltip-content--bottom-start.tooltip--scale-leave-to,
+.tooltip-content--bottom-end.tooltip--scale-leave-to {
+  transform: scale(0.85);
+  transform-origin: top center;
+}
+
+.tooltip-content--left.tooltip--scale-enter-from,
+.tooltip-content--left-start.tooltip--scale-enter-from,
+.tooltip-content--left-end.tooltip--scale-enter-from,
+.tooltip-content--left.tooltip--scale-leave-to,
+.tooltip-content--left-start.tooltip--scale-leave-to,
+.tooltip-content--left-end.tooltip--scale-leave-to {
+  transform: scale(0.85);
+  transform-origin: right center;
+}
+
+.tooltip-content--right.tooltip--scale-enter-from,
+.tooltip-content--right-start.tooltip--scale-enter-from,
+.tooltip-content--right-end.tooltip--scale-enter-from,
+.tooltip-content--right.tooltip--scale-leave-to,
+.tooltip-content--right-start.tooltip--scale-leave-to,
+.tooltip-content--right-end.tooltip--scale-leave-to {
+  transform: scale(0.85);
   transform-origin: left center;
 }
 
@@ -417,6 +637,47 @@
 .tooltip-wrapper--right .tooltip--slide-leave-to {
   opacity: 0;
   transform: translateY(-50%) translateX(-8px);
+}
+
+/* Teleport-compatible: use content position class */
+.tooltip-content--top.tooltip--slide-enter-from,
+.tooltip-content--top-start.tooltip--slide-enter-from,
+.tooltip-content--top-end.tooltip--slide-enter-from,
+.tooltip-content--top.tooltip--slide-leave-to,
+.tooltip-content--top-start.tooltip--slide-leave-to,
+.tooltip-content--top-end.tooltip--slide-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.tooltip-content--bottom.tooltip--slide-enter-from,
+.tooltip-content--bottom-start.tooltip--slide-enter-from,
+.tooltip-content--bottom-end.tooltip--slide-enter-from,
+.tooltip-content--bottom.tooltip--slide-leave-to,
+.tooltip-content--bottom-start.tooltip--slide-leave-to,
+.tooltip-content--bottom-end.tooltip--slide-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.tooltip-content--left.tooltip--slide-enter-from,
+.tooltip-content--left-start.tooltip--slide-enter-from,
+.tooltip-content--left-end.tooltip--slide-enter-from,
+.tooltip-content--left.tooltip--slide-leave-to,
+.tooltip-content--left-start.tooltip--slide-leave-to,
+.tooltip-content--left-end.tooltip--slide-leave-to {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.tooltip-content--right.tooltip--slide-enter-from,
+.tooltip-content--right-start.tooltip--slide-enter-from,
+.tooltip-content--right-end.tooltip--slide-enter-from,
+.tooltip-content--right.tooltip--slide-leave-to,
+.tooltip-content--right-start.tooltip--slide-leave-to,
+.tooltip-content--right-end.tooltip--slide-leave-to {
+  opacity: 0;
+  transform: translateX(-8px);
 }
 
 /* ----------------------------------------
@@ -459,6 +720,51 @@
   transform-origin: left center;
 }
 
+/* Teleport-compatible: use content position class */
+.tooltip-content--top.tooltip--flip-enter-from,
+.tooltip-content--top-start.tooltip--flip-enter-from,
+.tooltip-content--top-end.tooltip--flip-enter-from,
+.tooltip-content--top.tooltip--flip-leave-to,
+.tooltip-content--top-start.tooltip--flip-leave-to,
+.tooltip-content--top-end.tooltip--flip-leave-to {
+  opacity: 0;
+  transform: rotateX(90deg);
+  transform-origin: bottom center;
+}
+
+.tooltip-content--bottom.tooltip--flip-enter-from,
+.tooltip-content--bottom-start.tooltip--flip-enter-from,
+.tooltip-content--bottom-end.tooltip--flip-enter-from,
+.tooltip-content--bottom.tooltip--flip-leave-to,
+.tooltip-content--bottom-start.tooltip--flip-leave-to,
+.tooltip-content--bottom-end.tooltip--flip-leave-to {
+  opacity: 0;
+  transform: rotateX(-90deg);
+  transform-origin: top center;
+}
+
+.tooltip-content--left.tooltip--flip-enter-from,
+.tooltip-content--left-start.tooltip--flip-enter-from,
+.tooltip-content--left-end.tooltip--flip-enter-from,
+.tooltip-content--left.tooltip--flip-leave-to,
+.tooltip-content--left-start.tooltip--flip-leave-to,
+.tooltip-content--left-end.tooltip--flip-leave-to {
+  opacity: 0;
+  transform: rotateY(-90deg);
+  transform-origin: right center;
+}
+
+.tooltip-content--right.tooltip--flip-enter-from,
+.tooltip-content--right-start.tooltip--flip-enter-from,
+.tooltip-content--right-end.tooltip--flip-enter-from,
+.tooltip-content--right.tooltip--flip-leave-to,
+.tooltip-content--right-start.tooltip--flip-leave-to,
+.tooltip-content--right-end.tooltip--flip-leave-to {
+  opacity: 0;
+  transform: rotateY(90deg);
+  transform-origin: left center;
+}
+
 /* ----------------------------------------
    Animation 5: Zoom (scale with bounce)
    ---------------------------------------- */
@@ -475,6 +781,7 @@
   transform: scale(0.7);
 }
 
+/* Legacy (non-teleported) */
 .tooltip-wrapper--top .tooltip--zoom-enter-active,
 .tooltip-wrapper--bottom .tooltip--zoom-enter-active {
   animation-name: tooltip-zoom-in-x;
@@ -485,6 +792,75 @@
   animation-name: tooltip-zoom-in-y;
 }
 
+/* Teleport-compatible: use content position class */
+.tooltip-content--top .tooltip--zoom-enter-active,
+.tooltip-content--top-start .tooltip--zoom-enter-active,
+.tooltip-content--top-end .tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in;
+  transform-origin: bottom center;
+}
+
+.tooltip-content--bottom .tooltip--zoom-enter-active,
+.tooltip-content--bottom-start .tooltip--zoom-enter-active,
+.tooltip-content--bottom-end .tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in;
+  transform-origin: top center;
+}
+
+.tooltip-content--left .tooltip--zoom-enter-active,
+.tooltip-content--left-start .tooltip--zoom-enter-active,
+.tooltip-content--left-end .tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in;
+  transform-origin: right center;
+}
+
+.tooltip-content--right .tooltip--zoom-enter-active,
+.tooltip-content--right-start .tooltip--zoom-enter-active,
+.tooltip-content--right-end .tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in;
+  transform-origin: left center;
+}
+
+/* Alternative: Apply animation directly to content element with position class */
+.tooltip-content--top.tooltip--zoom-enter-active,
+.tooltip-content--top-start.tooltip--zoom-enter-active,
+.tooltip-content--top-end.tooltip--zoom-enter-active {
+  transform-origin: bottom center;
+}
+
+.tooltip-content--bottom.tooltip--zoom-enter-active,
+.tooltip-content--bottom-start.tooltip--zoom-enter-active,
+.tooltip-content--bottom-end.tooltip--zoom-enter-active {
+  transform-origin: top center;
+}
+
+.tooltip-content--left.tooltip--zoom-enter-active,
+.tooltip-content--left-start.tooltip--zoom-enter-active,
+.tooltip-content--left-end.tooltip--zoom-enter-active {
+  transform-origin: right center;
+}
+
+.tooltip-content--right.tooltip--zoom-enter-active,
+.tooltip-content--right-start.tooltip--zoom-enter-active,
+.tooltip-content--right-end.tooltip--zoom-enter-active {
+  transform-origin: left center;
+}
+
+.tooltip-content--top.tooltip--zoom-enter-active,
+.tooltip-content--top-start.tooltip--zoom-enter-active,
+.tooltip-content--top-end.tooltip--zoom-enter-active,
+.tooltip-content--bottom.tooltip--zoom-enter-active,
+.tooltip-content--bottom-start.tooltip--zoom-enter-active,
+.tooltip-content--bottom-end.tooltip--zoom-enter-active,
+.tooltip-content--left.tooltip--zoom-enter-active,
+.tooltip-content--left-start.tooltip--zoom-enter-active,
+.tooltip-content--left-end.tooltip--zoom-enter-active,
+.tooltip-content--right.tooltip--zoom-enter-active,
+.tooltip-content--right-start.tooltip--zoom-enter-active,
+.tooltip-content--right-end.tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in;
+}
+
 /* ----------------------------------------
    Animation 6: Bounce (playful movement)
    ---------------------------------------- */
@@ -493,6 +869,31 @@
 .tooltip-wrapper--bottom .tooltip--bounce-enter-active { animation-name: tooltip-bounce-down-in; }
 .tooltip-wrapper--left .tooltip--bounce-enter-active { animation-name: tooltip-bounce-left-in; }
 .tooltip-wrapper--right .tooltip--bounce-enter-active { animation-name: tooltip-bounce-right-in; }
+
+/* Teleport-compatible: use content position class */
+.tooltip-content--top.tooltip--bounce-enter-active,
+.tooltip-content--top-start.tooltip--bounce-enter-active,
+.tooltip-content--top-end.tooltip--bounce-enter-active {
+  animation-name: tooltip-bounce-up-in-fixed;
+}
+
+.tooltip-content--bottom.tooltip--bounce-enter-active,
+.tooltip-content--bottom-start.tooltip--bounce-enter-active,
+.tooltip-content--bottom-end.tooltip--bounce-enter-active {
+  animation-name: tooltip-bounce-down-in-fixed;
+}
+
+.tooltip-content--left.tooltip--bounce-enter-active,
+.tooltip-content--left-start.tooltip--bounce-enter-active,
+.tooltip-content--left-end.tooltip--bounce-enter-active {
+  animation-name: tooltip-bounce-left-in-fixed;
+}
+
+.tooltip-content--right.tooltip--bounce-enter-active,
+.tooltip-content--right-start.tooltip--bounce-enter-active,
+.tooltip-content--right-end.tooltip--bounce-enter-active {
+  animation-name: tooltip-bounce-right-in-fixed;
+}
 
 .tooltip--bounce-leave-active {
   transition: opacity 0.25s ease-in, transform 0.25s ease-in;
@@ -537,6 +938,47 @@
   transform: translateY(-50%) translateX(-4px);
 }
 
+/* Teleport-compatible: use content position class */
+.tooltip-content--top.tooltip--subtle-enter-from,
+.tooltip-content--top-start.tooltip--subtle-enter-from,
+.tooltip-content--top-end.tooltip--subtle-enter-from,
+.tooltip-content--top.tooltip--subtle-leave-to,
+.tooltip-content--top-start.tooltip--subtle-leave-to,
+.tooltip-content--top-end.tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.tooltip-content--bottom.tooltip--subtle-enter-from,
+.tooltip-content--bottom-start.tooltip--subtle-enter-from,
+.tooltip-content--bottom-end.tooltip--subtle-enter-from,
+.tooltip-content--bottom.tooltip--subtle-leave-to,
+.tooltip-content--bottom-start.tooltip--subtle-leave-to,
+.tooltip-content--bottom-end.tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.tooltip-content--left.tooltip--subtle-enter-from,
+.tooltip-content--left-start.tooltip--subtle-enter-from,
+.tooltip-content--left-end.tooltip--subtle-enter-from,
+.tooltip-content--left.tooltip--subtle-leave-to,
+.tooltip-content--left-start.tooltip--subtle-leave-to,
+.tooltip-content--left-end.tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateX(4px);
+}
+
+.tooltip-content--right.tooltip--subtle-enter-from,
+.tooltip-content--right-start.tooltip--subtle-enter-from,
+.tooltip-content--right-end.tooltip--subtle-enter-from,
+.tooltip-content--right.tooltip--subtle-leave-to,
+.tooltip-content--right-start.tooltip--subtle-leave-to,
+.tooltip-content--right-end.tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateX(-4px);
+}
+
 /* ----------------------------------------
    Animation 8: Expand (grow from point)
    ---------------------------------------- */
@@ -573,6 +1015,51 @@
 .tooltip-wrapper--right .tooltip--expand-leave-to {
   opacity: 0;
   transform: translateY(-50%) scaleX(0);
+  transform-origin: left center;
+}
+
+/* Teleport-compatible: use content position class */
+.tooltip-content--top.tooltip--expand-enter-from,
+.tooltip-content--top-start.tooltip--expand-enter-from,
+.tooltip-content--top-end.tooltip--expand-enter-from,
+.tooltip-content--top.tooltip--expand-leave-to,
+.tooltip-content--top-start.tooltip--expand-leave-to,
+.tooltip-content--top-end.tooltip--expand-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: bottom center;
+}
+
+.tooltip-content--bottom.tooltip--expand-enter-from,
+.tooltip-content--bottom-start.tooltip--expand-enter-from,
+.tooltip-content--bottom-end.tooltip--expand-enter-from,
+.tooltip-content--bottom.tooltip--expand-leave-to,
+.tooltip-content--bottom-start.tooltip--expand-leave-to,
+.tooltip-content--bottom-end.tooltip--expand-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.tooltip-content--left.tooltip--expand-enter-from,
+.tooltip-content--left-start.tooltip--expand-enter-from,
+.tooltip-content--left-end.tooltip--expand-enter-from,
+.tooltip-content--left.tooltip--expand-leave-to,
+.tooltip-content--left-start.tooltip--expand-leave-to,
+.tooltip-content--left-end.tooltip--expand-leave-to {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+.tooltip-content--right.tooltip--expand-enter-from,
+.tooltip-content--right-start.tooltip--expand-enter-from,
+.tooltip-content--right-end.tooltip--expand-enter-from,
+.tooltip-content--right.tooltip--expand-leave-to,
+.tooltip-content--right-start.tooltip--expand-leave-to,
+.tooltip-content--right-end.tooltip--expand-leave-to {
+  opacity: 0;
+  transform: scaleX(0);
   transform-origin: left center;
 }
 
@@ -628,6 +1115,34 @@
   50% { opacity: 1; transform: translateY(-50%) translateX(10px) scale(1.1); }
   70% { transform: translateY(-50%) translateX(-5px) scale(0.95); }
   100% { transform: translateY(-50%) translateX(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-up-in-fixed {
+  0% { opacity: 0; transform: translateY(20px) scale(0.3); }
+  50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+  70% { transform: translateY(5px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-down-in-fixed {
+  0% { opacity: 0; transform: translateY(-20px) scale(0.3); }
+  50% { opacity: 1; transform: translateY(10px) scale(1.1); }
+  70% { transform: translateY(-5px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-left-in-fixed {
+  0% { opacity: 0; transform: translateX(20px) scale(0.3); }
+  50% { opacity: 1; transform: translateX(-10px) scale(1.1); }
+  70% { transform: translateX(5px) scale(0.95); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-right-in-fixed {
+  0% { opacity: 0; transform: translateX(-20px) scale(0.3); }
+  50% { opacity: 1; transform: translateX(10px) scale(1.1); }
+  70% { transform: translateX(-5px) scale(0.95); }
+  100% { transform: translateX(0) scale(1); }
 }
 
 /* ----------------------------------------
@@ -777,6 +1292,8 @@
 
 /* Reduced motion - respect user preferences */
 @media (prefers-reduced-motion: reduce) {
+  .tooltip--fade-enter-active,
+  .tooltip--fade-leave-active,
   .tooltip--fade-in-enter-active,
   .tooltip--fade-in-leave-active,
   .tooltip--fade-out-enter-active,

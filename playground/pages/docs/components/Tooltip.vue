@@ -211,6 +211,16 @@ const tooltipCodeExample = computed(() => {
                         Bottom
                     </Button>
                 </Tooltip>
+                <Tooltip content="Position bottom-start" position="bottom-start">
+                    <Button severity="secondary" size="sm">
+                        Bottom Start
+                    </Button>
+                </Tooltip>
+                <Tooltip content="Position bottom-end" position="bottom-end">
+                    <Button severity="secondary" size="sm">
+                        Bottom End
+                    </Button>
+                </Tooltip>
                 <Tooltip content="Position left" position="left">
                     <Button severity="secondary" size="sm">
                         Left

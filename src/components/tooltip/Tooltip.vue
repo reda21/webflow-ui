@@ -42,7 +42,9 @@ const props = withDefaults(defineProps<TooltipProps>(), {
     followCursor: false,
     singleton: false,
     floatingUI: false,
-    group: undefined
+    group: undefined,
+    headless: false,
+    teleport: true
 })
 
 // ============================================
@@ -310,13 +312,19 @@ const contentClasses = computed(() => {
     if (props.headless) return ['tooltip-content']
     return [
         'tooltip-content',
-        `tooltip-content--${props.variant}`
+        `tooltip-content--${props.position}`,
+        `tooltip-content--${props.variant}`,
+        `tooltip-content--${props.size}`,
+        {
+            'tooltip-content--interactive': props.interactive
+        }
     ]
 })
 
 const arrowClasses = computed(() => [
     'tooltip-arrow',
-    `tooltip-arrow--${props.arrow}`
+    `tooltip-arrow--${props.arrow}`,
+    `tooltip-arrow--${props.position}`
 ])
 
 const tooltipStyles = computed((): CSSProperties => {
@@ -327,7 +335,6 @@ const tooltipStyles = computed((): CSSProperties => {
             top: `${mouseY.value + 10}px`,
             bottom: 'auto',
             right: 'auto',
-            transform: 'none',
             margin: 0,
             zIndex: 9999
         }
