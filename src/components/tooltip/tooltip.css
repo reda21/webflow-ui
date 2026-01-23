@@ -308,11 +308,25 @@
 }
 
 /* ----------------------------------------
-   Animations - Fade
+   Animations - Base Setup
+   ---------------------------------------- */
+   
+/* Animation timing variables */
+:root {
+  --tooltip-anim-fast: 150ms;
+  --tooltip-anim-normal: 200ms;
+  --tooltip-anim-slow: 300ms;
+  --tooltip-anim-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --tooltip-anim-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --tooltip-anim-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ----------------------------------------
+   Animation 1: Fade (subtle opacity transition)
    ---------------------------------------- */
 .tooltip--fade-enter-active,
 .tooltip--fade-leave-active {
-  transition: opacity var(--tooltip-animation-duration) var(--tooltip-animation-timing);
+  transition: opacity var(--tooltip-anim-normal) var(--tooltip-anim-ease);
 }
 
 .tooltip--fade-enter-from,
@@ -321,13 +335,18 @@
 }
 
 /* ----------------------------------------
-   Animations - Scale
+   Animation 2: Scale (zoom effect)
    ---------------------------------------- */
-.tooltip--scale-enter-active,
+.tooltip--scale-enter-active {
+  transition: 
+    opacity 0.2s var(--tooltip-anim-ease),
+    transform 0.3s var(--tooltip-anim-spring);
+}
+
 .tooltip--scale-leave-active {
   transition: 
-    opacity var(--tooltip-animation-duration) var(--tooltip-animation-timing),
-    transform var(--tooltip-animation-duration) var(--tooltip-animation-timing);
+    opacity 0.15s ease-in,
+    transform 0.15s ease-in;
 }
 
 .tooltip--scale-enter-from,
@@ -336,7 +355,7 @@
   transform: scale(0.85);
 }
 
-/* Adjust scale origin based on position */
+/* Scale origin based on position */
 .tooltip--top .tooltip--scale-enter-from,
 .tooltip--top .tooltip--scale-leave-to {
   transform: translateX(-50%) scale(0.85);
@@ -362,13 +381,13 @@
 }
 
 /* ----------------------------------------
-   Animations - Slide
+   Animation 3: Slide (directional movement)
    ---------------------------------------- */
 .tooltip--slide-enter-active,
 .tooltip--slide-leave-active {
   transition: 
-    opacity var(--tooltip-animation-duration) var(--tooltip-animation-timing),
-    transform var(--tooltip-animation-duration) var(--tooltip-animation-timing);
+    opacity var(--tooltip-anim-normal) var(--tooltip-anim-ease),
+    transform var(--tooltip-anim-normal) var(--tooltip-anim-ease);
 }
 
 .tooltip--top .tooltip--slide-enter-from,
@@ -396,11 +415,214 @@
 }
 
 /* ----------------------------------------
+   Animation 4: Flip (3D rotation)
+   ---------------------------------------- */
+.tooltip--flip-enter-active,
+.tooltip--flip-leave-active {
+  transition: 
+    opacity var(--tooltip-anim-slow) var(--tooltip-anim-ease),
+    transform var(--tooltip-anim-slow) var(--tooltip-anim-ease);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.tooltip--top .tooltip--flip-enter-from,
+.tooltip--top .tooltip--flip-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) rotateX(90deg);
+  transform-origin: bottom center;
+}
+
+.tooltip--bottom .tooltip--flip-enter-from,
+.tooltip--bottom .tooltip--flip-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) rotateX(-90deg);
+  transform-origin: top center;
+}
+
+.tooltip--left .tooltip--flip-enter-from,
+.tooltip--left .tooltip--flip-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) rotateY(-90deg);
+  transform-origin: right center;
+}
+
+.tooltip--right .tooltip--flip-enter-from,
+.tooltip--right .tooltip--flip-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) rotateY(90deg);
+  transform-origin: left center;
+}
+
+/* ----------------------------------------
+   Animation 5: Zoom (scale with bounce)
+   ---------------------------------------- */
+.tooltip--zoom-enter-active {
+  animation: tooltip-zoom-in 0.35s var(--tooltip-anim-spring);
+}
+
+.tooltip--zoom-leave-active {
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+.tooltip--zoom-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.tooltip--top .tooltip--zoom-enter-active,
+.tooltip--bottom .tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in-x;
+}
+
+.tooltip--left .tooltip--zoom-enter-active,
+.tooltip--right .tooltip--zoom-enter-active {
+  animation-name: tooltip-zoom-in-y;
+}
+
+/* ----------------------------------------
+   Animation 6: Bounce (playful movement)
+   ---------------------------------------- */
+.tooltip--bounce-enter-active { animation-duration: 0.5s; }
+.tooltip--top.tooltip--bounce-enter-active { animation-name: tooltip-bounce-up-in; }
+.tooltip--bottom.tooltip--bounce-enter-active { animation-name: tooltip-bounce-down-in; }
+.tooltip--left.tooltip--bounce-enter-active { animation-name: tooltip-bounce-left-in; }
+.tooltip--right.tooltip--bounce-enter-active { animation-name: tooltip-bounce-right-in; }
+
+.tooltip--bounce-leave-active {
+  transition: opacity 0.25s ease-in, transform 0.25s ease-in;
+}
+
+.tooltip--bounce-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* ----------------------------------------
+   Animation 7: Subtle (minimal, professional)
+   ---------------------------------------- */
+.tooltip--subtle-enter-active,
+.tooltip--subtle-leave-active {
+  transition: 
+    opacity var(--tooltip-anim-fast) var(--tooltip-anim-ease),
+    transform var(--tooltip-anim-fast) var(--tooltip-anim-ease);
+}
+
+.tooltip--top .tooltip--subtle-enter-from,
+.tooltip--top .tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.tooltip--bottom .tooltip--subtle-enter-from,
+.tooltip--bottom .tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.tooltip--left .tooltip--subtle-enter-from,
+.tooltip--left .tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.tooltip--right .tooltip--subtle-enter-from,
+.tooltip--right .tooltip--subtle-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+/* ----------------------------------------
+   Animation 8: Expand (grow from point)
+   ---------------------------------------- */
+.tooltip--expand-enter-active,
+.tooltip--expand-leave-active {
+  transition: 
+    opacity var(--tooltip-anim-normal) var(--tooltip-anim-ease),
+    transform var(--tooltip-anim-normal) var(--tooltip-anim-spring),
+    max-height var(--tooltip-anim-normal) var(--tooltip-anim-ease);
+}
+
+.tooltip--top .tooltip--expand-enter-from,
+.tooltip--top .tooltip--expand-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: bottom center;
+}
+
+.tooltip--bottom .tooltip--expand-enter-from,
+.tooltip--bottom .tooltip--expand-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+}
+
+.tooltip--left .tooltip--expand-enter-from,
+.tooltip--left .tooltip--expand-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: right center;
+}
+
+.tooltip--right .tooltip--expand-enter-from,
+.tooltip--right .tooltip--expand-leave-to {
+  opacity: 0;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left center;
+}
+
+/* ----------------------------------------
    No Animation
    ---------------------------------------- */
 .tooltip--none-enter-active,
 .tooltip--none-leave-active {
   transition: none;
+}
+
+/* ----------------------------------------
+   Keyframes
+   ---------------------------------------- */
+@keyframes tooltip-zoom-in {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tooltip-zoom-in-x {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+@keyframes tooltip-zoom-in-y {
+  0% { opacity: 0; transform: translateY(-50%) scale(0.5); }
+  100% { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+@keyframes tooltip-bounce-up-in {
+  0% { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.3); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(-10px) scale(1.1); }
+  70% { transform: translateX(-50%) translateY(5px) scale(0.95); }
+  100% { transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-down-in {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.3); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(10px) scale(1.1); }
+  70% { transform: translateX(-50%) translateY(-5px) scale(0.95); }
+  100% { transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-left-in {
+  0% { opacity: 0; transform: translateY(-50%) translateX(20px) scale(0.3); }
+  50% { opacity: 1; transform: translateY(-50%) translateX(-10px) scale(1.1); }
+  70% { transform: translateY(-50%) translateX(5px) scale(0.95); }
+  100% { transform: translateY(-50%) translateX(0) scale(1); }
+}
+
+@keyframes tooltip-bounce-right-in {
+  0% { opacity: 0; transform: translateY(-50%) translateX(-20px) scale(0.3); }
+  50% { opacity: 1; transform: translateY(-50%) translateX(10px) scale(1.1); }
+  70% { transform: translateY(-50%) translateX(-5px) scale(0.95); }
+  100% { transform: translateY(-50%) translateX(0) scale(1); }
 }
 
 /* ----------------------------------------
@@ -429,14 +651,24 @@
   }
 }
 
-/* Reduced motion */
+/* Reduced motion - respect user preferences */
 @media (prefers-reduced-motion: reduce) {
   .tooltip--fade-enter-active,
   .tooltip--fade-leave-active,
   .tooltip--scale-enter-active,
   .tooltip--scale-leave-active,
   .tooltip--slide-enter-active,
-  .tooltip--slide-leave-active {
+  .tooltip--slide-leave-active,
+  .tooltip--flip-enter-active,
+  .tooltip--flip-leave-active,
+  .tooltip--zoom-enter-active,
+  .tooltip--zoom-leave-active,
+  .tooltip--bounce-enter-active,
+  .tooltip--bounce-leave-active,
+  .tooltip--subtle-enter-active,
+  .tooltip--subtle-leave-active,
+  .tooltip--expand-enter-active,
+  .tooltip--expand-leave-active {
     transition: none;
   }
 }

@@ -1,0 +1,185 @@
+/* ============================================
+   Modal Component Styles
+   ============================================ */
+
+:root {
+  --modal-bg: var(--color-white, #ffffff);
+  --modal-overlay-bg: rgba(0, 0, 0, 0.4);
+  --modal-overlay-blur: 4px;
+  --modal-border-color: var(--color-neutral-200, #e5e5e5);
+  --modal-text-title: var(--color-neutral-900, #111827);
+  --modal-text-description: var(--color-neutral-500, #6b7280);
+  --modal-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --modal-z-index: 50;
+  --modal-radius: var(--radius-xl, 0.75rem);
+}
+
+.dark {
+  --modal-bg: var(--color-neutral-900, #111827);
+  --modal-border-color: var(--color-neutral-800, #1f2937);
+  --modal-text-title: var(--color-white, #ffffff);
+  --modal-text-description: var(--color-neutral-400, #9ca3af);
+  --modal-overlay-bg: rgba(0, 0, 0, 0.6);
+}
+
+/* ----------------------------------------
+   Overlay
+   ---------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--modal-z-index);
+  background-color: var(--modal-overlay-bg);
+  backdrop-filter: blur(var(--modal-overlay-blur));
+}
+
+/* ----------------------------------------
+   Content Container
+   ---------------------------------------- */
+.modal-content-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--modal-z-index) + 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 90vh;
+  background-color: var(--modal-bg);
+  border: 1px solid var(--modal-border-color);
+  border-radius: var(--modal-radius);
+  box-shadow: var(--modal-shadow);
+  overflow: hidden;
+  pointer-events: auto;
+  outline: none;
+}
+
+/* ----------------------------------------
+   Sizes
+   ---------------------------------------- */
+.modal--sm { max-width: 24rem; }
+.modal--md { max-width: 32rem; }
+.modal--lg { max-width: 48rem; }
+.modal--xl { max-width: 64rem; }
+.modal--full { 
+  max-width: calc(100vw - 2rem); 
+  height: calc(100vh - 2rem);
+}
+.modal--auto { width: auto; }
+
+/* ----------------------------------------
+   Variants
+   ---------------------------------------- */
+.modal--glass {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .modal--glass {
+  background-color: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal--clean {
+  border: none;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* ----------------------------------------
+   Header, Body, Footer
+   ---------------------------------------- */
+.modal-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid transparent;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--modal-text-title);
+  line-height: 1.2;
+}
+
+.modal-description {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--modal-text-description);
+}
+
+.modal-body {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background-color: var(--color-neutral-50, #f9fafb);
+  border-top: 1px solid var(--modal-border-color);
+}
+
+.dark .modal-footer {
+  background-color: var(--color-neutral-800, #1f2937);
+}
+
+/* ----------------------------------------
+   Close Button
+   ---------------------------------------- */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+/* ----------------------------------------
+   Animations: Premium Transitions
+   ---------------------------------------- */
+
+/* Overlay Fade */
+.modal-overlay-enter-active,
+.modal-overlay-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay-enter-from,
+.modal-overlay-leave-to {
+  opacity: 0;
+}
+
+/* Content Slide/Scale */
+.modal-content-enter-active {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-content-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Default Animation: Scale Up */
+.modal-content-enter-from,
+.modal-content-leave-to {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+}
+
+/* Glass Variant subtle animation */
+.modal--glass.modal-content-enter-from {
+  transform: scale(1.02) translateY(0);
+}

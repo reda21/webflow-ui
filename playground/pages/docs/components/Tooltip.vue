@@ -23,7 +23,7 @@ const positionOptions: TooltipPosition[] = [
 const variantOptions: TooltipVariant[] = ['dark', 'light', 'primary', 'success', 'warning', 'danger', 'info']
 const sizeOptions: TooltipSize[] = ['xs', 'sm', 'md', 'lg']
 const triggerOptions: TooltipTrigger[] = ['hover', 'click', 'focus', 'manual']
-const animationOptions: TooltipAnimation[] = ['fade', 'scale', 'slide', 'none']
+const animationOptions: TooltipAnimation[] = ['fade', 'scale', 'slide', 'flip', 'zoom', 'bounce', 'subtle', 'expand', 'none']
 
 // Manual control example
 const isManualOpen = ref(false)
@@ -315,20 +315,303 @@ const tooltipCodeExample = computed(() => {
         <!-- Section Animations -->
         <div class="mb-12">
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Animations</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                8 types d'animations disponibles pour personnaliser l'apparition et la disparition du tooltip.
+            </p>
+
+            <!-- Animation Grid -->
             <div
-                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-4">
-                <Tooltip content="Animation fade" animation="fade">
-                    <Button severity="secondary">Fade</Button>
-                </Tooltip>
-                <Tooltip content="Animation scale" animation="scale">
-                    <Button severity="secondary">Scale</Button>
-                </Tooltip>
-                <Tooltip content="Animation slide" animation="slide">
-                    <Button severity="secondary">Slide</Button>
-                </Tooltip>
-                <Tooltip content="Sans animation" animation="none">
-                    <Button severity="secondary">None</Button>
-                </Tooltip>
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                <!-- Fade -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Transition d'opacité subtile" animation="fade">
+                        <Button severity="secondary" class="w-full">Fade</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Subtil & élégant</span>
+                </div>
+
+                <!-- Scale -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Effet de zoom avec spring" animation="scale">
+                        <Button severity="secondary" class="w-full">Scale</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Dynamique</span>
+                </div>
+
+                <!-- Slide -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Mouvement directionnel" animation="slide">
+                        <Button severity="secondary" class="w-full">Slide</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Fluide & naturel</span>
+                </div>
+
+                <!-- Flip -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Rotation 3D élégante" animation="flip">
+                        <Button severity="primary" class="w-full">Flip</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Stylé & moderne</span>
+                </div>
+
+                <!-- Zoom -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Scale avec effet bounce" animation="zoom">
+                        <Button severity="info" class="w-full">Zoom</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Énergique</span>
+                </div>
+
+                <!-- Bounce -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Mouvement ludique avec rebond" animation="bounce">
+                        <Button severity="success" class="w-full">Bounce</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Playful & fun</span>
+                </div>
+
+                <!-- Subtle -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Animation minimale et professionnelle" animation="subtle">
+                        <Button severity="contrast" class="w-full">Subtle</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Minimal & pro</span>
+                </div>
+
+                <!-- Expand -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Croissance depuis un point" animation="expand">
+                        <Button severity="warn" class="w-full">Expand</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Expansion organique</span>
+                </div>
+
+                <!-- None -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Apparition instantanée" animation="none">
+                        <Button severity="secondary" variant="outlined" class="w-full">None</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Instantané</span>
+                </div>
+            </div>
+
+            <!-- Code Example -->
+            <div
+                class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;!-- Animations disponibles --&gt;
+&lt;Tooltip content="..." animation="fade"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="scale"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="slide"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="flip"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="zoom"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="bounce"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="subtle"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="expand"&gt;...&lt;/Tooltip&gt;
+&lt;Tooltip content="..." animation="none"&gt;...&lt;/Tooltip&gt;</code></pre>
+            </div>
+
+            <!-- Animation Description Table -->
+            <div class="mt-6 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-200 dark:border-slate-700">
+                            <th class="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">Animation</th>
+                            <th class="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">Description
+                            </th>
+                            <th class="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">Recommandé pour
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                        <tr>
+                            <td class="py-3 px-4"><code>fade</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Transition d'opacité (200ms)</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Usage général, non-distrayant</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>scale</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Zoom avec effet ressort</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Boutons, actions importantes</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>slide</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Glissement directionnel (8px)</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Menus, navigation</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>flip</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Rotation 3D (300ms)</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Effets marqués, gaming</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>zoom</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Scale depuis 50% avec bounce</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Pop-ups, notifications</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>bounce</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Mouvement + scale avec rebond</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Gamification, fun UX</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>subtle</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Micro-mouvement (4px, 150ms)</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Pro/enterprise, minimal</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>expand</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Croissance depuis le point
+                                d'origine</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Détails, expansion de contenu</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><code>none</code></td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Pas d'animation</td>
+                            <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Performance, prefers-reduced-motion
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section: Tooltips sur différents éléments -->
+        <div class="mb-12">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Sur différents éléments</h3>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">
+                Les tooltips peuvent être appliqués sur n'importe quel élément HTML, pas seulement les boutons.
+            </p>
+
+            <div class="p-8 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50">
+                <div class="flex flex-wrap items-center justify-center gap-8">
+
+                    <!-- Sur une icône -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Paramètres de l'application" animation="none">
+                            <span
+                                class="cursor-pointer p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="w-6 h-6 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </span>
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Icône</span>
+                    </div>
+
+                    <!-- Sur un texte -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Terme technique expliqué en détail ici" animation="fade">
+                            <span
+                                class="cursor-help border-b border-dashed border-slate-400 text-slate-700 dark:text-slate-300">
+                                API REST
+                            </span>
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Texte avec underline</span>
+                    </div>
+
+                    <!-- Sur un lien -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Ouvrir la documentation externe" animation="slide">
+                            <a href="#"
+                                class="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                                Documentation
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Lien</span>
+                    </div>
+
+                    <!-- Sur un badge -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Version stable actuelle" animation="zoom">
+                            <span
+                                class="px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 cursor-default">
+                                v2.1.0
+                            </span>
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Badge</span>
+                    </div>
+
+                    <!-- Sur un avatar -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Jean Dupont - Développeur Senior" animation="bounce">
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold cursor-pointer hover:ring-2 hover:ring-indigo-300 transition-all">
+                                JD
+                            </div>
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Avatar</span>
+                    </div>
+
+                    <!-- Sur une image -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Logo de l'entreprise - Cliquez pour agrandir" animation="flip">
+                            <img src="https://picsum.photos/seed/logo/48/48" alt="Logo"
+                                class="w-12 h-12 rounded-lg object-cover cursor-pointer hover:scale-105 transition-transform" />
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Image</span>
+                    </div>
+
+                    <!-- Sur un input -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Entrez votre adresse email professionnelle" trigger="focus"
+                            animation="subtle">
+                            <input type="email" placeholder="Email..."
+                                class="px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none w-32" />
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Input (focus)</span>
+                    </div>
+
+                    <!-- Sur un élément disabled -->
+                    <div class="flex flex-col items-center gap-2">
+                        <Tooltip content="Cette action nécessite des permissions admin" animation="expand">
+                            <span
+                                class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-400 bg-slate-100 dark:bg-slate-700 rounded-lg cursor-not-allowed">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                                Verrouillé
+                            </span>
+                        </Tooltip>
+                        <span class="text-xs text-slate-500">Élément disabled</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Example -->
+            <div
+                class="bg-slate-50 dark:bg-slate-950 px-6 py-4 border border-t-0 border-slate-200 dark:border-slate-800 rounded-b-xl">
+                <pre class="text-sm overflow-x-auto text-sky-400"><code>&lt;!-- Sur une icône --&gt;
+&lt;Tooltip content="Paramètres"&gt;
+  &lt;span class="cursor-pointer"&gt;⚙️&lt;/span&gt;
+&lt;/Tooltip&gt;
+
+&lt;!-- Sur du texte avec underline --&gt;
+&lt;Tooltip content="Explication du terme"&gt;
+  &lt;span class="cursor-help border-b border-dashed"&gt;API REST&lt;/span&gt;
+&lt;/Tooltip&gt;
+
+&lt;!-- Sur un input (au focus) --&gt;
+&lt;Tooltip content="Entrez votre email" trigger="focus"&gt;
+  &lt;input type="email" placeholder="Email..." /&gt;
+&lt;/Tooltip&gt;
+
+&lt;!-- Sur un élément disabled --&gt;
+&lt;Tooltip content="Action non disponible"&gt;
+  &lt;span class="cursor-not-allowed opacity-50"&gt;Verrouillé&lt;/span&gt;
+&lt;/Tooltip&gt;</code></pre>
             </div>
         </div>
 

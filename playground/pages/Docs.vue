@@ -16,6 +16,7 @@ const activeSection = computed(() => {
     if (route.path.includes('avatar')) return 'avatar'
     if (route.path.includes('icon')) return 'icon'
     if (route.path.includes('tooltip')) return 'tooltip'
+    if (route.path.includes('modal')) return 'modal'
     return ''
 })
 
@@ -113,6 +114,14 @@ const scrollToSection = (sectionId: string) => {
                                 class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                 Tooltip
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/docs/components/modal"
+                                :class="[activeSection === 'modal' ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800']"
+                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Modal
                             </router-link>
                         </li>
                         <li>

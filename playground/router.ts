@@ -73,6 +73,11 @@ const routes = [
                 path: 'components/tooltip',
                 name: 'docs-tooltip',
                 component: () => import('./pages/docs/components/Tooltip.vue'),
+            },
+            {
+                path: 'components/modal',
+                name: 'docs-modal',
+                component: () => import('./pages/docs/components/Modal.vue'),
             }
         ],
 

@@ -34,3 +34,6 @@ export { default as Icon } from './components/icon/Icon.vue';
 
 export { Tooltip } from './components/tooltip/index';
 export type { TooltipProps, TooltipPosition, TooltipVariant, TooltipSize } from './components/tooltip/types';
+
+export { Modal } from './components/modal/index';
+export type { ModalProps, ModalSize, ModalVariant } from './components/modal/types';

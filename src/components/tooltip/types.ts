@@ -22,7 +22,16 @@ export type TooltipSize = 'xs' | 'sm' | 'md' | 'lg'
 export type TooltipArrow = 'none' | 'sm' | 'md' | 'lg'
 
 // Animation
-export type TooltipAnimation = 'fade' | 'scale' | 'slide' | 'none'
+export type TooltipAnimation = 
+  | 'fade'    // Subtle opacity transition
+  | 'scale'   // Zoom effect with spring
+  | 'slide'   // Directional movement
+  | 'flip'    // 3D rotation
+  | 'zoom'    // Scale with bounce
+  | 'bounce'  // Playful movement
+  | 'subtle'  // Minimal, professional
+  | 'expand'  // Grow from point
+  | 'none'    // No animation
 
 // ============================================
 // Props Interfaces
