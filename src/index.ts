@@ -3,7 +3,7 @@ import './style.css';
 
 // Components
 export { default as Navbar } from './components/Navbar.vue';
-export type { NavItem } from './components/Navbar.vue';
+export type { NavItem } from './components/Navbar.types';
 
 export { default as Button } from './components/button/Button.vue';
 export type {
@@ -32,4 +32,5 @@ export type { AvatarProps, AvatarSize, AvatarRounded } from './components/avatar
 
 export { default as Icon } from './components/icon/Icon.vue';
 
-
+export { Tooltip } from './components/tooltip/index';
+export type { TooltipProps, TooltipPosition, TooltipVariant, TooltipSize } from './components/tooltip/types';

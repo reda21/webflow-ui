@@ -1,221 +1,289 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Icon, Button } from '../../../../src/index'
+
+// Interactive playground state
+const selectedSize = ref<any>('md')
+const selectedMode = ref<any>('svg')
+const iconName = ref('heroicons:star')
+const isSpinning = ref(false)
+const isPulsing = ref(false)
+const isLazy = ref(false)
+const showSkeleton = ref(false)
+const scaleValue = ref(1)
+
+// Copy to clipboard
+const copyCode = async (code: string) => {
+  await navigator.clipboard.writeText(code)
+}
 </script>
 
 <template>
-  <section id="icon" class="scroll-mt-24 mb-20">
+  <section id="icon" class="scroll-mt-24 mb-20 px-4 md:px-0">
     <div class="flex items-center gap-3 mb-2">
       <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Composant</span>
-      <span class="px-2 py-0.5 text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full">Disponible</span>
+      <span
+        class="px-2 py-0.5 text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full">Disponible</span>
     </div>
     <h1 class="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
       Icon
     </h1>
     <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">
-      Un composant puissant et flexible utilisant <a href="https://iconify.design/" target="_blank" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">@iconify/vue</a>, accédant à plus de 200,000 icônes provenant de plus de 150 jeux d'icônes populaires.
+      Un composant puissant avec 3 modes de rendu (SVG, CSS, Sprite), lazy loading, fallback, et plus de 200,000 icônes
+      via <a href="https://iconify.design/" target="_blank"
+        class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">@iconify/vue</a>.
     </p>
 
-    <!-- Usage Guide -->
-    <div class="mb-12 bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-900/30 rounded-xl p-6">
-      <h3 class="text-indigo-900 dark:text-indigo-300 font-bold mb-3 flex items-center gap-2">
-        <Icon name="heroicons:information-circle" class="w-5 h-5" />
-        Comment l'utiliser
-      </h3>
-      <p class="text-sm text-indigo-800 dark:text-indigo-400/80 mb-4">
-        Le composant charge les icônes à la demande. Vous n'avez pas besoin d'importer chaque icône manuellement. Il suffit d'utiliser le format <code>prefix:name</code> (ex: <code>mdi:home</code>, <code>lucide:user</code>, <code>heroicons:bolt</code>).
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="https://icon-sets.iconify.design/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
-          <span>Rechercher des icônes</span>
-          <Icon name="heroicons:arrow-top-right-on-square" />
-        </a>
-      </div>
-    </div>
-
-    <!-- Basic Examples -->
-    <div class="mb-12 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
-      <div class="bg-slate-50 dark:bg-slate-800 px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
-        <span class="text-xs font-medium text-slate-500">Aperçu</span>
-      </div>
-      <div class="bg-white dark:bg-slate-900 p-8 flex flex-col gap-8">
-        <div class="flex flex-wrap gap-10 items-center justify-center border-b border-slate-100 dark:border-slate-800 pb-8">
-          <Icon name="heroicons:home" size="2rem" />
-          <Icon name="heroicons:user-group" size="2rem" />
-          <Icon name="heroicons:cog-6-tooth" size="2rem" />
-          <Icon name="heroicons:bolt" size="2rem" class="text-yellow-500" />
-          <Icon name="heroicons:heart" size="2rem" class="text-rose-500" />
-        </div>
-        
-        <div class="flex flex-col items-center gap-4">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Iconify Set: Entypo Social</span>
-          <div class="flex flex-wrap gap-10 items-center justify-center">
-            <Icon name="entypo-social:facebook" size="2rem" class="text-[#1877f2]" />
-            <Icon name="entypo-social:twitter" size="2rem" class="text-[#1da1f2]" />
-            <Icon name="entypo-social:instagram" size="2rem" class="text-[#e4405f]" />
-            <Icon name="entypo-social:github" size="2rem" class="text-[#333]" />
-            <Icon name="entypo-social:linkedin" size="2rem" class="text-[#0077b5]" />
+    <!-- Interactive Playground -->
+    <div class="mb-12">
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Playground Interactif</h3>
+      <div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
+        <!-- Controls -->
+        <div
+          class="bg-slate-50 dark:bg-slate-800 px-4 py-3 border-b border-slate-200 dark:border-slate-700 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-slate-500 font-mono">name</span>
+            <input v-model="iconName" type="text"
+              class="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-xs dark:text-white" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-slate-500 font-mono">size</span>
+            <select v-model="selectedSize"
+              class="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-xs dark:text-white">
+              <option v-for="s in ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']" :key="s" :value="s">{{ s }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-slate-500 font-mono">mode</span>
+            <select v-model="selectedMode"
+              class="bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-xs dark:text-white">
+              <option value="svg">SVG</option>
+              <option value="css">CSS</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-slate-500 font-mono">scale</span>
+            <input v-model="scaleValue" type="range" min="0.5" max="2" step="0.1" class="w-full" />
+          </div>
+          <div class="flex items-center gap-4 col-span-2 md:col-span-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" v-model="isSpinning" class="w-4 h-4 rounded" />
+              <span class="text-xs text-slate-600 dark:text-slate-300">Spin</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" v-model="isPulsing" class="w-4 h-4 rounded" />
+              <span class="text-xs text-slate-600 dark:text-slate-300">Pulse</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" v-model="isLazy" class="w-4 h-4 rounded" />
+              <span class="text-xs text-slate-600 dark:text-slate-300">Lazy</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" v-model="showSkeleton" class="w-4 h-4 rounded" />
+              <span class="text-xs text-slate-600 dark:text-slate-300">Skeleton</span>
+            </label>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Sizes -->
-    <div class="mb-12">
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tailles</h3>
-      <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-8 items-end justify-center">
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:rocket-launch" size="1rem" />
-          <span class="text-[10px] text-slate-500">1rem</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:rocket-launch" size="1.5rem" />
-          <span class="text-[10px] text-slate-500">1.5rem</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:rocket-launch" size="2rem" />
-          <span class="text-[10px] text-slate-500">2rem</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:rocket-launch" size="3rem" />
-          <span class="text-[10px] text-slate-500">3rem</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:rocket-launch" size="4rem" />
-          <span class="text-[10px] text-slate-500">4rem</span>
+        <!-- Preview -->
+        <div class="bg-white dark:bg-slate-900 p-12 flex flex-col items-center justify-center min-h-[200px] gap-4">
+          <Icon :name="iconName" :size="selectedSize" :mode="selectedMode" :spin="isSpinning" :pulse="isPulsing"
+            :lazy="isLazy" :skeleton="showSkeleton" :scale="scaleValue" class="text-indigo-500" />
+          <span class="text-xs text-slate-400">{{ iconName }} · {{ selectedSize }} · scale {{ scaleValue }}</span>
         </div>
       </div>
     </div>
 
-    <!-- Colors & Styling -->
+    <!-- Mode Comparison -->
     <div class="mb-12">
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Couleurs & Styles</h3>
-      <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-8 items-center justify-center">
-        <Icon name="heroicons:check-badge" size="2.5rem" class="text-emerald-500" />
-        <Icon name="heroicons:exclamation-triangle" size="2.5rem" class="text-amber-500" />
-        <Icon name="heroicons:x-circle" size="2.5rem" class="text-rose-500" />
-        <Icon name="heroicons:information-circle" size="2.5rem" class="text-sky-500" />
-        <Icon name="heroicons:star" size="2.5rem" class="text-indigo-500" />
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Modes de Rendu</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <div class="flex items-center gap-2 mb-3">
+            <Icon name="heroicons:photo" size="lg" class="text-indigo-500" />
+            <h4 class="font-bold text-slate-900 dark:text-white">SVG Mode</h4>
+          </div>
+          <p class="text-xs text-slate-500 mb-4">Mode par défaut. SVG complet dans le DOM. Idéal pour gradients et
+            styling complexe.</p>
+          <pre
+            class="text-[10px] text-sky-400 bg-slate-100 dark:bg-slate-800 p-2 rounded"><code>&lt;Icon name="..." mode="svg" /&gt;</code></pre>
+        </div>
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <div class="flex items-center gap-2 mb-3">
+            <Icon name="heroicons:paint-brush" size="lg" class="text-emerald-500" />
+            <h4 class="font-bold text-slate-900 dark:text-white">CSS Mode</h4>
+          </div>
+          <p class="text-xs text-slate-500 mb-4">Utilise mask-image. DOM plus léger. Idéal pour beaucoup d'icônes
+            simples.</p>
+          <pre
+            class="text-[10px] text-sky-400 bg-slate-100 dark:bg-slate-800 p-2 rounded"><code>&lt;Icon name="..." mode="css" /&gt;</code></pre>
+        </div>
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <div class="flex items-center gap-2 mb-3">
+            <Icon name="heroicons:squares-2x2" size="lg" class="text-amber-500" />
+            <h4 class="font-bold text-slate-900 dark:text-white">Sprite Mode</h4>
+          </div>
+          <p class="text-xs text-slate-500 mb-4">Utilise SVG sprites. Performance maximale après chargement initial.</p>
+          <pre
+            class="text-[10px] text-sky-400 bg-slate-100 dark:bg-slate-800 p-2 rounded"><code>&lt;Icon sprite="/icons.svg" /&gt;</code></pre>
+        </div>
       </div>
     </div>
 
-    <!-- Transformations & Animations -->
+    <!-- Preset Sizes -->
     <div class="mb-12">
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Transformations & Animations</h3>
-      <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-8 items-center justify-center">
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:arrow-right" size="2rem" rotate="45" />
-          <span class="text-[10px] text-slate-500">Rotate 45°</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:hand-thumb-up" size="2rem" flip="horizontal" />
-          <span class="text-[10px] text-slate-500">Flip H</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="heroicons:arrow-path" size="2rem" spin />
-          <span class="text-[10px] text-slate-500">Spin</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <Icon name="lucide:loader-2" size="2rem" spin />
-          <span class="text-[10px] text-slate-500">Lucide Spin</span>
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Tailles Prédéfinies</h3>
+      <div
+        class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-8 items-end justify-center">
+        <div v-for="s in ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']" :key="s"
+          class="flex flex-col items-center gap-2">
+          <Icon name="heroicons:rocket-launch" :size="s" class="text-indigo-500" />
+          <span class="text-[10px] text-slate-500 font-mono">{{ s }}</span>
         </div>
       </div>
     </div>
 
-    <!-- Integration Examples -->
+    <!-- Animations -->
     <div class="mb-12">
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Intégration</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">
-        Les icônes peuvent être intégrées facilement dans d'autres composants comme les boutons via la prop <code>icon</code>.
-      </p>
-      <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-4 items-center justify-center">
-        <Button icon="heroicons:magnifying-glass">Button</Button>
-        <Button icon="heroicons:rocket-launch" severity="success">Lancer</Button>
-        <Button icon="heroicons:plus" severity="primary" rounded="full" />
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Animations</h3>
+      <div
+        class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-wrap gap-12 items-center justify-center">
+        <div class="flex flex-col items-center gap-3">
+          <Icon name="heroicons:arrow-path" size="xl" spin class="text-indigo-500" />
+          <span class="text-xs text-slate-500">spin</span>
+        </div>
+        <div class="flex flex-col items-center gap-3">
+          <Icon name="heroicons:bell" size="xl" pulse class="text-amber-500" />
+          <span class="text-xs text-slate-500">pulse</span>
+        </div>
+        <div class="flex flex-col items-center gap-3">
+          <Icon name="heroicons:arrow-right" size="xl" :rotate="45" class="text-emerald-500" />
+          <span class="text-xs text-slate-500">rotate 45°</span>
+        </div>
+        <div class="flex flex-col items-center gap-3">
+          <Icon name="heroicons:star" size="xl" :scale="1.5" class="text-rose-500" />
+          <span class="text-xs text-slate-500">scale 1.5</span>
+        </div>
       </div>
     </div>
+
+    <!-- Performance Features -->
+    <div class="mb-12">
+      <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Performance</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <h4 class="font-bold text-slate-900 dark:text-white mb-2">Lazy Loading</h4>
+          <p class="text-xs text-slate-500 mb-4">Chargement différé pour les icônes hors écran avec
+            IntersectionObserver.</p>
+          <pre class="text-[10px] text-sky-400"><code>&lt;Icon name="..." lazy /&gt;</code></pre>
+        </div>
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <h4 class="font-bold text-slate-900 dark:text-white mb-2">Fallback Icon</h4>
+          <p class="text-xs text-slate-500 mb-4">Icône de secours si le chargement échoue.</p>
+          <pre
+            class="text-[10px] text-sky-400"><code>&lt;Icon name="..." fallback="heroicons:question-mark-circle" /&gt;</code></pre>
+        </div>
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <h4 class="font-bold text-slate-900 dark:text-white mb-2">Skeleton Loading</h4>
+          <p class="text-xs text-slate-500 mb-4">Placeholder animé pendant le chargement.</p>
+          <pre class="text-[10px] text-sky-400"><code>&lt;Icon name="..." skeleton /&gt;</code></pre>
+        </div>
+        <div class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-900">
+          <h4 class="font-bold text-slate-900 dark:text-white mb-2">Icon Caching</h4>
+          <p class="text-xs text-slate-500 mb-4">Les icônes chargées sont mises en cache automatiquement.</p>
+          <pre class="text-[10px] text-sky-400"><code>// Automatique, pas de config nécessaire</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Reference -->
     <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">API du composant Icon</h3>
     <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-8">
       <table class="w-full text-sm text-left border-collapse">
-        <thead class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+        <thead
+          class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
           <tr>
-            <th class="py-4 px-4">Propriété</th>
+            <th class="py-4 px-4">Prop</th>
             <th class="py-4 px-4">Type</th>
-            <th class="py-4 px-4">Défaut</th>
+            <th class="py-4 px-4">Default</th>
             <th class="py-4 px-4">Description</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+        <tbody class="divide-y divide-slate-200 dark:divide-slate-700 bg-white dark:bg-slate-900/50">
           <tr>
-            <td class="py-4 px-4">
-              <span class="inline-flex font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 rounded">name</span>
-            </td>
-            <td class="py-4 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs text-nowrap">string</td>
-            <td class="py-4 px-4 font-mono text-slate-400 text-xs">-</td>
-            <td class="py-4 px-4 text-slate-600 dark:text-slate-400 leading-relaxed italic">
-              Requis. Identifiant de l'icône au format <code>collection:name</code>.
-            </td>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">name</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">-</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Identifiant (prefix:name)</td>
           </tr>
           <tr>
-            <td class="py-4 px-4">
-              <span class="inline-flex font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 rounded">size</span>
-            </td>
-            <td class="py-4 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string | number</td>
-            <td class="py-4 px-4 font-mono text-slate-500 text-xs">'1.25em'</td>
-            <td class="py-4 px-4 text-slate-600 dark:text-slate-400 leading-relaxed italic">
-              Définit la largeur et la hauteur. Accepte n'importe quelle unité CSS (px, rem, em, %).
-            </td>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">mode</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">'svg' | 'css'</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">'svg'</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Mode de rendu</td>
           </tr>
           <tr>
-            <td class="py-4 px-4">
-              <span class="inline-flex font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 rounded">color</span>
-            </td>
-            <td class="py-4 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-            <td class="py-4 px-4 font-mono text-slate-500 text-xs">-</td>
-            <td class="py-4 px-4 text-slate-600 dark:text-slate-400 leading-relaxed italic">
-              Couleur CSS directe (ex: <code>#ff0000</code>). Par défaut, il hérite de la couleur du texte parent.
-            </td>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">size</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">IconSize</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">'md'</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">xs, sm, md, lg, xl, 2xl, 3xl</td>
           </tr>
           <tr>
-            <td class="py-4 px-4">
-              <span class="inline-flex font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 rounded">rotate</span>
-            </td>
-            <td class="py-4 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">number | string</td>
-            <td class="py-4 px-4 font-mono text-slate-500 text-xs">0</td>
-            <td class="py-4 px-4 text-slate-600 dark:text-slate-400 leading-relaxed italic">
-              Rotation en degrés (90, 180, 270).
-            </td>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">scale</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">number | string</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">-</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Facteur d'échelle</td>
           </tr>
           <tr>
-            <td class="py-4 px-4">
-              <span class="inline-flex font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 rounded">flip</span>
-            </td>
-            <td class="py-4 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
-            <td class="py-4 px-4 font-mono text-slate-500 text-xs">-</td>
-            <td class="py-4 px-4 text-slate-600 dark:text-slate-400 leading-relaxed italic">
-              Miroir horizontal ou vertical. Valeurs possibles : <code>'horizontal'</code>, <code>'vertical'</code>, ou les deux.
-            </td>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">spin</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">false</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Animation de rotation</td>
           </tr>
           <tr>
-            <td class="py-4 px-4">
-              <span class="inline-flex font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 rounded">spin</span>
-            </td>
-            <td class="py-4 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
-            <td class="py-4 px-4 font-mono text-slate-500 text-xs">false</td>
-            <td class="py-4 px-4 text-slate-600 dark:text-slate-400 leading-relaxed italic">
-              Applique une classe Tailwind <code>animate-spin</code> pour les icônes de chargement.
-            </td>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">pulse</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">false</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Animation de pulsation</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">lazy</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">false</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Chargement différé</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">fallback</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">-</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Icône de secours</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">skeleton</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">false</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Placeholder de chargement</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs font-bold">ariaLabel</td>
+            <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+            <td class="py-3 px-4 font-mono text-slate-400 text-xs">-</td>
+            <td class="py-3 px-4 text-slate-600 dark:text-slate-400 text-xs">Label accessible</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-    <!-- Code Example -->
-    <div class="bg-slate-50 dark:bg-slate-950 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
-      <div class="flex items-center justify-between px-4 py-2 border-b border-slate-700">
-        <span class="text-xs font-medium text-slate-400">Exemple</span>
-      </div>
-      <pre class="p-4 text-sm overflow-x-auto"><code class="text-sky-400">&lt;Icon name="heroicons:home" size="2rem" class="text-indigo-500" /&gt;
-&lt;Icon name="lucide:loader" spin /&gt;</code></pre>
-    </div>
   </section>
 </template>
+
+<style scoped>
+@reference "../../../../src/theme.css";
+
+select,
+input[type="text"] {
+  @apply bg-transparent;
+}
+
+select option {
+  @apply bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white;
+}
+</style>

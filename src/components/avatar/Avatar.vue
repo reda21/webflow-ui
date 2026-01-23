@@ -1,34 +1,188 @@
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
-import type { AvatarSize, AvatarRounded } from './types'
+import { computed, provide, ref, onMounted } from 'vue'
+import type { AvatarSize, AvatarRounded, AvatarColor, ChipProps } from './types'
+import Icon from '../icon/Icon.vue'
+import './avatar.css'
+
+type FallbackType = 'initials' | 'icon' | 'placeholder'
 
 const props = withDefaults(defineProps<{
+    as?: any
     size?: AvatarSize
     rounded?: AvatarRounded
+    color?: AvatarColor | string
     src?: string
     alt?: string
+    icon?: string
+    text?: string
+    chip?: boolean | ChipProps
+    skeleton?: boolean
+    ring?: boolean | { color?: string; width?: 'sm' | 'md' | 'lg' }
+    hoverEffect?: 'none' | 'scale' | 'glow' | 'lift'
+    // New features
+    preload?: boolean
+    blurHash?: string
+    ariaLabel?: string
+    interactive?: boolean
+    fallbackPriority?: FallbackType[]
+    gradient?: boolean
+    // Image props
+    loading?: 'eager' | 'lazy'
+    referrerpolicy?: ReferrerPolicy
+    crossorigin?: '' | 'anonymous' | 'use-credentials'
+    decoding?: 'async' | 'auto' | 'sync'
+    height?: string | number
+    width?: string | number
+    sizes?: string
+    srcset?: string
+    usemap?: string
 }>(), {
+    as: 'span',
     size: 'md',
-    rounded: 'full'
+    rounded: 'full',
+    loading: 'lazy',
+    hoverEffect: 'none',
+    interactive: false,
+    gradient: false,
+    fallbackPriority: () => ['initials', 'icon', 'placeholder']
 })
 
-const imageSkipped = ref(false)
-const imageLoaded = ref(false)
 const imageError = ref(false)
+const imageLoaded = ref(false)
 
 provide('avatarContext', {
     size: props.size,
     rounded: props.rounded,
     imageLoaded,
-    imageSkipped,
+    imageError,
 })
 
+// Preload image if needed
+onMounted(() => {
+    if (props.preload && props.src) {
+        const img = new Image()
+        img.src = props.src
+        if (props.srcset) img.srcset = props.srcset
+    }
+})
+
+// Generate gradient from text/alt for consistent colors
+const generateGradient = (text: string): string => {
+    if (!text) return ''
+
+    // Simple hash function
+    let hash = 0
+    for (let i = 0; i < text.length; i++) {
+        const char = text.charCodeAt(i)
+        hash = ((hash << 5) - hash) + char
+        hash = hash & hash
+    }
+
+    // Generate two colors from hash
+    const hue1 = Math.abs(hash % 360)
+    const hue2 = (hue1 + 40) % 360
+
+    return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%) 0%, hsl(${hue2}, 70%, 50%) 100%)`
+}
+
+// Compute avatar classes
 const avatarClasses = computed(() => {
-    return [
+    const classes = [
         'avatar',
         `avatar-${props.size}`,
-        `round-${props.rounded}`
-    ].join(' ')
+        `round-${props.rounded}`,
+    ]
+
+    // Color variant (only if not using gradient)
+    if (!props.gradient && props.color && ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'neutral'].includes(props.color)) {
+        classes.push(`avatar-${props.color}`)
+    }
+
+    // Skeleton loading
+    if (props.skeleton) {
+        classes.push('avatar-skeleton')
+    }
+
+    // Ring
+    if (props.ring) {
+        classes.push('avatar-ring')
+        const ringWidth = typeof props.ring === 'object' ? props.ring.width : 'md'
+        classes.push(`avatar-ring-${ringWidth || 'md'}`)
+    }
+
+    // Hover effect
+    if (props.hoverEffect && props.hoverEffect !== 'none') {
+        classes.push(`avatar-hover-${props.hoverEffect}`)
+    }
+
+    // Interactive (focusable)
+    if (props.interactive) {
+        classes.push('avatar-interactive')
+    }
+
+    return classes.filter(Boolean).join(' ')
+})
+
+// Compute chip classes
+const chipClasses = computed(() => {
+    if (!props.chip) return ''
+
+    const chipConfig = typeof props.chip === 'object' ? props.chip : {}
+    const position = chipConfig.position || 'top-right'
+    const size = chipConfig.size || 'md'
+    const color = chipConfig.color || 'success'
+    const inset = chipConfig.inset || false
+    const pulse = chipConfig.pulse || false
+
+    const classes = [
+        'avatar-chip-indicator',
+        `avatar-chip-${position}`,
+        `avatar-chip-${size}`,
+    ]
+
+    // Color
+    if (['success', 'warning', 'danger', 'info', 'primary', 'neutral'].includes(color)) {
+        classes.push(`avatar-chip-${color}`)
+    }
+
+    if (inset) classes.push('avatar-chip-inset')
+    if (pulse) classes.push('avatar-chip-pulse')
+
+    return classes.join(' ')
+})
+
+// Custom style for custom colors and gradients
+const avatarStyle = computed(() => {
+    const style: Record<string, string> = {}
+
+    // Gradient background
+    if (props.gradient && !props.src) {
+        const gradientSource = props.text || props.alt || ''
+        if (gradientSource) {
+            style.background = generateGradient(gradientSource)
+            style.borderColor = 'transparent'
+        }
+    } else if (props.color && !['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'neutral'].includes(props.color)) {
+        style.backgroundColor = props.color
+        style.borderColor = props.color
+    }
+
+    if (typeof props.ring === 'object' && props.ring.color) {
+        style['--tw-ring-color'] = props.ring.color
+    }
+
+    return style
+})
+
+// Chip custom style
+const chipStyle = computed(() => {
+    if (!props.chip || typeof props.chip !== 'object') return {}
+
+    const chipConfig = props.chip as ChipProps
+    if (chipConfig.color && !['success', 'warning', 'danger', 'info', 'primary', 'neutral'].includes(chipConfig.color)) {
+        return { backgroundColor: chipConfig.color }
+    }
+    return {}
 })
 
 const handleLoad = () => {
@@ -40,8 +194,9 @@ const handleError = () => {
     imageLoaded.value = false
 }
 
-// Get initials from alt text
-const initials = computed(() => {
+// Get initials from alt or text prop
+const displayInitials = computed(() => {
+    if (props.text) return props.text
     if (!props.alt) return ''
     return props.alt
         .split(' ')
@@ -50,52 +205,87 @@ const initials = computed(() => {
         .join('')
         .toUpperCase()
 })
+
+// Determine fallback content based on priority
+const fallbackContent = computed(() => {
+    if (props.src && !imageError.value) return 'image'
+
+    for (const type of props.fallbackPriority) {
+        if (type === 'initials' && displayInitials.value) return 'initials'
+        if (type === 'icon' && props.icon) return 'icon'
+        if (type === 'placeholder') return 'placeholder'
+    }
+
+    return 'slot'
+})
+
+// Image classes with transition
+const imageClasses = computed(() => {
+    return [
+        'h-full w-full object-cover',
+        imageLoaded.value ? 'avatar-img-loaded' : 'avatar-img-enter'
+    ].join(' ')
+})
+
+// ARIA attributes
+const ariaAttributes = computed(() => {
+    const attrs: Record<string, string> = {}
+
+    if (props.ariaLabel) {
+        attrs['aria-label'] = props.ariaLabel
+    } else if (props.alt) {
+        attrs['aria-label'] = props.alt
+    }
+
+    if (props.interactive) {
+        attrs.role = 'button'
+        attrs.tabindex = '0'
+    }
+
+    return attrs
+})
 </script>
 
 <template>
-    <div :class="avatarClasses">
-        <!-- Simple mode: src prop provided -->
-        <template v-if="src">
-            <img v-if="!imageError" :src="src" :alt="alt" class="h-full w-full object-cover" @load="handleLoad"
-                @error="handleError" />
-            <span v-else
-                class="flex h-full w-full items-center justify-center font-medium uppercase text-slate-600 dark:text-slate-300">
-                {{ initials }}
-            </span>
-        </template>
-        <!-- Composable mode: use slots -->
-        <slot v-else />
-    </div>
+    <component :is="as" :class="avatarClasses" :style="avatarStyle" v-bind="ariaAttributes">
+        <div class="avatar-content">
+            <!-- Blur hash placeholder -->
+            <div v-if="blurHash && !imageLoaded && src" class="absolute inset-0 avatar-blurhash"
+                :style="{ backgroundImage: `url(${blurHash})` }" />
+
+            <!-- Image -->
+            <template v-if="fallbackContent === 'image'">
+                <img :src="src" :alt="alt" :loading="preload ? 'eager' : loading" :referrerpolicy="referrerpolicy"
+                    :crossorigin="crossorigin" :decoding="decoding" :height="height" :width="width" :sizes="sizes"
+                    :srcset="srcset" :usemap="usemap" :class="imageClasses" @load="handleLoad" @error="handleError" />
+            </template>
+
+            <!-- Fallback: Icon -->
+            <template v-else-if="fallbackContent === 'icon'">
+                <Icon :name="icon!" class="avatar-icon" />
+            </template>
+
+            <!-- Fallback: Initials -->
+            <template v-else-if="fallbackContent === 'initials'">
+                <span class="avatar-text uppercase font-medium" :class="{ 'text-white': gradient }">
+                    {{ displayInitials }}
+                </span>
+            </template>
+
+            <!-- Fallback: Placeholder icon -->
+            <template v-else-if="fallbackContent === 'placeholder'">
+                <Icon name="heroicons:user" class="avatar-icon" />
+            </template>
+
+            <!-- Slot fallback -->
+            <slot v-else />
+        </div>
+
+        <!-- Chip indicator -->
+        <span v-if="chip" :class="chipClasses" :style="chipStyle">
+            <template v-if="typeof chip === 'object' && chip.text">
+                {{ chip.text }}
+            </template>
+        </span>
+    </component>
 </template>
-
-<style scoped>
-@reference "../../theme.css";
-
-.avatar {
-    @apply relative inline-flex shrink-0 items-center justify-center overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700;
-}
-
-.avatar-xs {
-    @apply h-6 w-6 text-[10px];
-}
-
-.avatar-sm {
-    @apply h-8 w-8 text-xs;
-}
-
-.avatar-md {
-    @apply h-10 w-10 text-sm;
-}
-
-.avatar-lg {
-    @apply h-12 w-12 text-base;
-}
-
-.avatar-xl {
-    @apply h-14 w-14 text-lg;
-}
-
-.avatar-2xl {
-    @apply h-16 w-16 text-xl;
-}
-</style>

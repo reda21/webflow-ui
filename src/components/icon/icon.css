@@ -1,0 +1,97 @@
+@reference "../../theme.css";
+
+/* ============================================
+   Base Icon Styles
+   ============================================ */
+.icon {
+    @apply inline-block align-middle shrink-0;
+}
+
+/* ============================================
+   Size Variants
+   ============================================ */
+.icon-xs { @apply w-3 h-3; }
+.icon-sm { @apply w-4 h-4; }
+.icon-md { @apply w-5 h-5; }
+.icon-lg { @apply w-6 h-6; }
+.icon-xl { @apply w-8 h-8; }
+.icon-2xl { @apply w-10 h-10; }
+.icon-3xl { @apply w-12 h-12; }
+
+/* ============================================
+   Animations
+   ============================================ */
+.icon-spin {
+    animation: icon-spin 1s linear infinite;
+}
+
+.icon-pulse {
+    animation: icon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes icon-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes icon-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================
+   CSS Mode Styles (using mask-image)
+   ============================================ */
+.icon-css {
+    @apply bg-current;
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* ============================================
+   Flip Transformations
+   ============================================ */
+.icon-flip-horizontal {
+    transform: scaleX(-1);
+}
+
+.icon-flip-vertical {
+    transform: scaleY(-1);
+}
+
+.icon-flip-both {
+    transform: scale(-1);
+}
+
+/* ============================================
+   Rotate Utilities
+   ============================================ */
+.icon-rotate-90 { transform: rotate(90deg); }
+.icon-rotate-180 { transform: rotate(180deg); }
+.icon-rotate-270 { transform: rotate(270deg); }
+
+/* ============================================
+   Inline Mode
+   ============================================ */
+.icon-inline {
+    @apply inline align-baseline;
+    height: 1em;
+    width: 1em;
+}
+
+/* ============================================
+   Loading Skeleton
+   ============================================ */
+.icon-skeleton {
+    @apply bg-slate-200 dark:bg-slate-700 rounded;
+    animation: icon-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes icon-skeleton-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

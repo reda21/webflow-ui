@@ -1,0 +1,297 @@
+@reference "../../theme.css";
+
+/* ============================================
+   CSS Custom Properties for Theming
+   ============================================ */
+:root {
+    --avatar-bg: theme(colors.slate.100);
+    --avatar-bg-dark: theme(colors.slate.800);
+    --avatar-border: theme(colors.slate.200);
+    --avatar-border-dark: theme(colors.slate.700);
+    --avatar-text: theme(colors.slate.600);
+    --avatar-text-dark: theme(colors.slate.300);
+    --avatar-ring: theme(colors.white);
+    --avatar-ring-dark: theme(colors.slate.900);
+}
+
+/* ============================================
+   Base Avatar Styles
+   ============================================ */
+.avatar {
+    @apply relative inline-flex shrink-0 items-center justify-center;
+    background-color: var(--avatar-bg);
+    border: 1px solid var(--avatar-border);
+}
+
+.dark .avatar {
+    background-color: var(--avatar-bg-dark);
+    border-color: var(--avatar-border-dark);
+}
+
+.avatar-content {
+    @apply h-full w-full flex items-center justify-center overflow-hidden rounded-[inherit];
+}
+
+.avatar-text {
+    color: var(--avatar-text);
+}
+
+.dark .avatar-text {
+    color: var(--avatar-text-dark);
+}
+
+/* ============================================
+   Size Variants
+   ============================================ */
+.avatar-3xs { @apply h-4 w-4 text-[8px]; }
+.avatar-2xs { @apply h-5 w-5 text-[9px]; }
+.avatar-xs { @apply h-6 w-6 text-[10px]; }
+.avatar-sm { @apply h-8 w-8 text-xs; }
+.avatar-md { @apply h-10 w-10 text-sm; }
+.avatar-lg { @apply h-12 w-12 text-base; }
+.avatar-xl { @apply h-14 w-14 text-lg; }
+.avatar-2xl { @apply h-16 w-16 text-xl; }
+.avatar-3xl { @apply h-20 w-20 text-2xl; }
+
+/* ============================================
+   Rounding Variants
+   ============================================ */
+.round-none { @apply rounded-none; }
+.round-xs { @apply rounded-xs; }
+.round-sm { @apply rounded-sm; }
+.round-md { @apply rounded-md; }
+.round-lg { @apply rounded-lg; }
+.round-xl { @apply rounded-xl; }
+.round-2xl { @apply rounded-2xl; }
+.round-full { @apply rounded-full; }
+
+/* ============================================
+   Color Variants
+   ============================================ */
+.avatar-primary {
+    @apply bg-indigo-100 dark:bg-indigo-900/50 border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-300;
+}
+
+.avatar-secondary {
+    @apply bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300;
+}
+
+.avatar-success {
+    @apply bg-emerald-100 dark:bg-emerald-900/50 border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-300;
+}
+
+.avatar-info {
+    @apply bg-sky-100 dark:bg-sky-900/50 border-sky-200 dark:border-sky-800 text-sky-600 dark:text-sky-300;
+}
+
+.avatar-warning {
+    @apply bg-amber-100 dark:bg-amber-900/50 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-300;
+}
+
+.avatar-danger {
+    @apply bg-rose-100 dark:bg-rose-900/50 border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-300;
+}
+
+.avatar-neutral {
+    @apply bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300;
+}
+
+/* ============================================
+   Icon Styles
+   ============================================ */
+.avatar-icon {
+    @apply w-[60%] h-[60%] text-slate-500 dark:text-slate-400;
+}
+
+/* ============================================
+   Chip/Badge Indicator
+   ============================================ */
+.avatar-chip-indicator {
+    @apply absolute block rounded-full bg-emerald-500 ring-2 z-10;
+    ring-color: var(--avatar-ring);
+}
+
+.dark .avatar-chip-indicator {
+    ring-color: var(--avatar-ring-dark);
+}
+
+/* Chip Positions */
+.avatar-chip-top-right { @apply top-0 right-0 translate-x-1/4 -translate-y-1/4; }
+.avatar-chip-top-left { @apply top-0 left-0 -translate-x-1/4 -translate-y-1/4; }
+.avatar-chip-bottom-right { @apply bottom-0 right-0 translate-x-1/4 translate-y-1/4; }
+.avatar-chip-bottom-left { @apply bottom-0 left-0 -translate-x-1/4 translate-y-1/4; }
+
+/* Chip Sizes */
+.avatar-chip-sm { @apply h-[20%] w-[20%]; }
+.avatar-chip-md { @apply h-[30%] w-[30%]; }
+.avatar-chip-lg { @apply h-[35%] w-[35%]; }
+
+/* Chip Inset */
+.avatar-chip-inset.avatar-chip-top-right { @apply translate-x-[15%] -translate-y-[15%]; }
+.avatar-chip-inset.avatar-chip-top-left { @apply -translate-x-[15%] -translate-y-[15%]; }
+.avatar-chip-inset.avatar-chip-bottom-right { @apply translate-x-[15%] translate-y-[15%]; }
+.avatar-chip-inset.avatar-chip-bottom-left { @apply -translate-x-[15%] translate-y-[15%]; }
+
+/* Chip Colors */
+.avatar-chip-success { @apply bg-emerald-500; }
+.avatar-chip-warning { @apply bg-amber-500; }
+.avatar-chip-danger { @apply bg-rose-500; }
+.avatar-chip-info { @apply bg-sky-500; }
+.avatar-chip-primary { @apply bg-indigo-500; }
+.avatar-chip-neutral { @apply bg-slate-500; }
+
+/* Chip Pulse Animation */
+.avatar-chip-pulse {
+    animation: chip-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes chip-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================
+   Ring Styles
+   ============================================ */
+.avatar-ring {
+    @apply ring-white dark:ring-slate-900;
+}
+
+.avatar-ring-sm { @apply ring-1; }
+.avatar-ring-md { @apply ring-2; }
+.avatar-ring-lg { @apply ring-4; }
+
+/* ============================================
+   Hover Effects
+   ============================================ */
+.avatar-hover-scale {
+    @apply transition-transform duration-200 ease-out;
+}
+.avatar-hover-scale:hover {
+    @apply scale-110;
+}
+
+.avatar-hover-glow {
+    @apply transition-shadow duration-200 ease-out;
+}
+.avatar-hover-glow:hover {
+    @apply shadow-lg shadow-indigo-500/30;
+}
+
+.avatar-hover-lift {
+    @apply transition-all duration-200 ease-out;
+}
+.avatar-hover-lift:hover {
+    @apply -translate-y-1 shadow-md;
+}
+
+/* ============================================
+   Skeleton Loading State
+   ============================================ */
+.avatar-skeleton {
+    @apply animate-pulse bg-slate-200 dark:bg-slate-700 border-transparent;
+}
+
+.avatar-skeleton .avatar-content {
+    @apply invisible;
+}
+
+/* ============================================
+   Squircle Shape
+   ============================================ */
+.squircle {
+    mask-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0C20 0 0 20 0 100s20 100 100 100 100-20 100-100S180 0 100 0Z'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+}
+
+/* ============================================
+   Image Transition
+   ============================================ */
+.avatar-img-enter {
+    @apply opacity-0;
+}
+
+.avatar-img-loaded {
+    @apply opacity-100 transition-opacity duration-300 ease-out;
+}
+
+/* ============================================
+   AvatarGroup Styles
+   ============================================ */
+.avatar-group {
+    @apply inline-flex items-center;
+}
+
+.avatar-group-horizontal {
+    @apply flex-row-reverse justify-end;
+}
+
+.avatar-group-vertical {
+    @apply flex-col-reverse justify-end;
+}
+
+/* Spacing */
+.avatar-group-tight { @apply -space-x-3; }
+.avatar-group-normal { @apply -space-x-2; }
+.avatar-group-loose { @apply -space-x-1; }
+
+.avatar-group-vertical.avatar-group-tight { @apply -space-y-3 space-x-0; }
+.avatar-group-vertical.avatar-group-normal { @apply -space-y-2 space-x-0; }
+.avatar-group-vertical.avatar-group-loose { @apply -space-y-1 space-x-0; }
+
+.avatar-group :deep(.avatar) {
+    @apply ring-2 ring-white dark:ring-slate-900;
+}
+
+/* Animation for group items */
+.avatar-group-animated :deep(.avatar) {
+    animation: avatar-pop-in 0.3s ease-out backwards;
+}
+
+.avatar-group-animated :deep(.avatar:nth-child(1)) { animation-delay: 0.05s; }
+.avatar-group-animated :deep(.avatar:nth-child(2)) { animation-delay: 0.1s; }
+.avatar-group-animated :deep(.avatar:nth-child(3)) { animation-delay: 0.15s; }
+.avatar-group-animated :deep(.avatar:nth-child(4)) { animation-delay: 0.2s; }
+.avatar-group-animated :deep(.avatar:nth-child(5)) { animation-delay: 0.25s; }
+
+@keyframes avatar-pop-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Overflow indicator */
+.avatar-overflow {
+    @apply flex items-center justify-center bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-medium;
+}
+
+/* ============================================
+   Interactive/Focus States
+   ============================================ */
+.avatar-interactive {
+    @apply cursor-pointer;
+}
+
+.avatar-interactive:focus {
+    @apply outline-none ring-2 ring-offset-2 ring-indigo-500 dark:ring-indigo-400;
+}
+
+.avatar-interactive:focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-indigo-500 dark:ring-indigo-400;
+}
+
+/* ============================================
+   Blur Hash Placeholder
+   ============================================ */
+.avatar-blurhash {
+    @apply bg-cover bg-center bg-no-repeat rounded-[inherit];
+    filter: blur(10px);
+    transform: scale(1.1);
+}

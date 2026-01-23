@@ -125,12 +125,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-
-export interface NavItem {
-    label: string
-    href: string
-    active?: boolean
-}
+import type { NavItem } from './Navbar.types'
 
 const props = withDefaults(defineProps<{
     brandName?: string

@@ -1,17 +1,47 @@
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+import { inject, computed, ref, onMounted } from 'vue'
+import type { AvatarContext } from './types'
+import Icon from '../icon/Icon.vue'
 
-const context = inject<{ imageLoaded: { value: boolean }, imageSkipped: { value: boolean } }>('avatarContext')
+const props = withDefaults(defineProps<{
+    icon?: string
+    color?: string
+    bgColor?: string
+    delayMs?: number
+}>(), {
+    delayMs: 0
+})
+
+const context = inject<AvatarContext>('avatarContext')
+const showFallback = ref(props.delayMs === 0)
+
+// Delay showing fallback to prevent flash when image loads fast
+onMounted(() => {
+    if (props.delayMs > 0) {
+        setTimeout(() => {
+            showFallback.value = true
+        }, props.delayMs)
+    }
+})
 
 const shouldShow = computed(() => {
+    if (!showFallback.value) return false
     if (!context) return true
-    return context.imageSkipped.value || !context.imageLoaded.value
+    return context.imageError?.value || !context.imageLoaded?.value
+})
+
+const fallbackStyle = computed(() => {
+    const style: Record<string, string> = {}
+    if (props.color) style.color = props.color
+    if (props.bgColor) style.backgroundColor = props.bgColor
+    return style
 })
 </script>
 
 <template>
-    <span v-if="shouldShow" class="avatar-fallback">
-        <slot />
+    <span v-if="shouldShow" class="avatar-fallback" :style="fallbackStyle">
+        <Icon v-if="icon" :name="icon" class="avatar-icon" />
+        <slot v-else />
     </span>
 </template>
 

@@ -69,6 +69,11 @@ const routes = [
                 name: 'docs-icon',
                 component: () => import('./pages/docs/components/Icon.vue'),
             },
+            {
+                path: 'components/tooltip',
+                name: 'docs-tooltip',
+                component: () => import('./pages/docs/components/Tooltip.vue'),
+            }
         ],
 
     },
