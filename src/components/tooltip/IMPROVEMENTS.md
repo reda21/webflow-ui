@@ -20,22 +20,22 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### Fonctionnalités À Implémenter 🔲
 
-- [ ] **HTML Riche** - Support du contenu HTML via slot ou v-html
-- [ ] **Tooltips Imbriqués** - Gérer les tooltips dans des tooltips
-- [ ] **Follow Mouse** - Mode où le tooltip suit le curseur
-- [ ] **Touch Events** - Support des événements tactiles (long press sur mobile)
-- [ ] **Singleton** - Instance partagée pour performance
-- [ ] **Portal/Teleport** - Option pour téléporter dans le body
-- [ ] **Virtual Element** - Support d'un élément virtuel comme trigger
+- [x] **HTML Riche** - Support du contenu HTML via slot ou v-html
+- [x] **Tooltips Imbriqués** - Gérer les tooltips dans des tooltips
+- [x] **Follow Mouse** - Mode où le tooltip suit le curseur
+- [x] **Touch Events** - Support des événements tactiles (long press sur mobile)
+- [x] **Singleton** - Instance partagée pour performance
+- [x] **Portal/Teleport** - Option pour téléporter dans le body
+- [x] **Virtual Element** - Support d'un élément virtuel comme trigger
 
 ### Positionnement Avancé 🔲
 
-- [ ] **Floating UI** - Intégration @floating-ui/vue pour positionnement intelligent
-- [ ] **Auto Flip** - Changement automatique de position si pas d'espace
-- [ ] **Auto Shift** - Décalage automatique pour rester visible
-- [ ] **Boundary** - Prop pour définir les limites de positionnement
-- [ ] **Collision Detection** - Détection de collision avec scroll containers
-- [ ] **Offset** - Prop offset pour contrôler l'espacement
+- [x] **Floating UI** - Intégration @floating-ui/vue pour positionnement intelligent
+- [x] **Auto Flip** - Changement automatique de position si pas d'espace
+- [x] **Auto Shift** - Décalage automatique pour rester visible
+- [x] **Boundary** - Prop pour définir les limites de positionnement
+- [x] **Collision Detection** - Détection de collision avec scroll containers
+- [x] **Offset** - Prop offset pour contrôler l'espacement
 
 ---
 
@@ -43,17 +43,17 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### Améliorations Visuelles 🔲
 
-- [ ] **Animations** - Plus d'animations (bounce, elastic, etc.)
-- [ ] **Glass Effect** - Effet glassmorphism
-- [ ] **Gradients** - Support des backgrounds en gradient
-- [ ] **Custom Arrow** - Formes de flèche personnalisables (triangle, rounded)
-- [ ] **Thèmes Custom** - Système de thèmes personnalisables
-- [ ] **CSS Variables** - Exposition de variables CSS pour customisation
+- [x] **Animations** - Plus d'animations (bounce, elastic, etc.)
+- [x] **Glass Effect** - Effet glassmorphism
+- [x] **Gradients** - Support des backgrounds en gradient
+- [x] **Custom Arrow** - Formes de flèche personnalisables (triangle, rounded)
+- [x] **Thèmes Custom** - Système de thèmes personnalisables
+- [x] **CSS Variables** - Exposition de variables CSS pour customisation
 
 ### Mode Sombre 🔲
 
-- [ ] **Auto Dark Mode** - Détection automatique du thème
-- [ ] **Inversion intelligente** - Inversion des couleurs en dark mode
+- [x] **Auto Dark Mode** - Détection automatique du thème
+- [x] **Inversion intelligente** - Inversion des couleurs en dark mode
 
 ---
 

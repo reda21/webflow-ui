@@ -9,7 +9,7 @@ const selectedPosition = ref<TooltipPosition>('top')
 const selectedVariant = ref<TooltipVariant>('dark')
 const selectedSize = ref<TooltipSize>('md')
 const selectedTrigger = ref<TooltipTrigger>('hover')
-const selectedAnimation = ref<TooltipAnimation>('fade')
+const selectedAnimation = ref<TooltipAnimation>('fade-in')
 const showArrow = ref(true)
 const isInteractive = ref(false)
 const customContent = ref('Ceci est un tooltip')
@@ -23,7 +23,7 @@ const positionOptions: TooltipPosition[] = [
 const variantOptions: TooltipVariant[] = ['dark', 'light', 'primary', 'success', 'warning', 'danger', 'info']
 const sizeOptions: TooltipSize[] = ['xs', 'sm', 'md', 'lg']
 const triggerOptions: TooltipTrigger[] = ['hover', 'click', 'focus', 'manual']
-const animationOptions: TooltipAnimation[] = ['fade', 'scale', 'slide', 'flip', 'zoom', 'bounce', 'subtle', 'expand', 'none']
+const animationOptions: TooltipAnimation[] = ['fade-in', 'fade-out', 'scale', 'slide', 'flip', 'zoom', 'bounce', 'subtle', 'expand', 'none']
 
 // Manual control example
 const isManualOpen = ref(false)
@@ -43,7 +43,7 @@ const tooltipCodeExample = computed(() => {
     if (selectedTrigger.value !== 'hover') {
         props += ` trigger="${selectedTrigger.value}"`
     }
-    if (selectedAnimation.value !== 'fade') {
+    if (selectedAnimation.value !== 'fade-in') {
         props += ` animation="${selectedAnimation.value}"`
     }
     if (!showArrow.value) {
@@ -316,17 +316,25 @@ const tooltipCodeExample = computed(() => {
         <div class="mb-12">
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Animations</h3>
             <p class="text-slate-600 dark:text-slate-400 mb-6">
-                8 types d'animations disponibles pour personnaliser l'apparition et la disparition du tooltip.
+                10 types d'animations disponibles pour personnaliser l'apparition et la disparition du tooltip.
             </p>
 
             <!-- Animation Grid -->
             <div
                 class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-                <!-- Fade -->
+                <!-- Fade In -->
                 <div class="flex flex-col items-center gap-2">
-                    <Tooltip content="Transition d'opacité subtile" animation="fade">
-                        <Button severity="secondary" class="w-full">Fade</Button>
+                    <Tooltip content="Transition d'opacité subtile" animation="fade-in">
+                        <Button severity="secondary" class="w-full">Fade In</Button>
+                    </Tooltip>
+                    <span class="text-xs text-slate-500">Subtil & élégant</span>
+                </div>
+
+                <!-- Fade Out -->
+                <div class="flex flex-col items-center gap-2">
+                    <Tooltip content="Transition d'opacité subtile" animation="fade-out">
+                        <Button severity="secondary" class="w-full">Fade Out</Button>
                     </Tooltip>
                     <span class="text-xs text-slate-500">Subtil & élégant</span>
                 </div>
@@ -506,7 +514,7 @@ const tooltipCodeExample = computed(() => {
 
                     <!-- Sur un texte -->
                     <div class="flex flex-col items-center gap-2">
-                        <Tooltip content="Terme technique expliqué en détail ici" animation="fade">
+                        <Tooltip content="Terme technique expliqué en détail ici" animation="fade-in">
                             <span
                                 class="cursor-help border-b border-dashed border-slate-400 text-slate-700 dark:text-slate-300">
                                 API REST
@@ -739,7 +747,7 @@ const tooltipCodeExample = computed(() => {
                             <tr>
                                 <td class="py-3 px-4"><code>animation</code></td>
                                 <td class="py-3 px-4 text-slate-600 dark:text-slate-400">TooltipAnimation</td>
-                                <td class="py-3 px-4 text-slate-500">'fade'</td>
+                                <td class="py-3 px-4 text-slate-500">'fade-in'</td>
                                 <td class="py-3 px-4 text-slate-600 dark:text-slate-400">Type d'animation</td>
                             </tr>
                             <tr>

@@ -20,11 +20,23 @@ const simpleModal = ref(false)
 const formModal = ref(false)
 const glassModal = ref(false)
 const scrollModal = ref(false)
+const customIconModal = ref(false)
+const noTransitionModal = ref(false)
+const noOverlayModal = ref(false)
+const nonModalMode = ref(false)
+const controlledOpen = ref(false)
+const nonDismissibleModal = ref(false)
+const scrollableModal = ref(false)
+
 
 const handleConfirm = () => {
     alert('Confirmé !')
     isOpen.value = false
     formModal.value = false
+}
+
+const handlePrevent = () => {
+    // Emitted when close is prevented
 }
 
 // Code Preview
@@ -253,6 +265,178 @@ const modalCodeExample = computed(() => {
                     </template>
                 </Modal>
             </div>
+
+            <!-- Custom Icon Prop -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-lg">
+                        <Icon name="heroicons:star" />
+                    </div>
+                    <h3 class="font-bold">Icône Personnalisée (Prop)</h3>
+                </div>
+                <p class="text-sm text-slate-500">Utilisez simplement la prop <code>close-icon</code> pour changer
+                    l'icône.</p>
+                <Button severity="help" variant="outlined" @click="customIconModal = true">Custom Icon</Button>
+
+                <Modal v-model="customIconModal" title="Fermeture personnalisée" close-icon="heroicons:arrow-right">
+                    <p>Ce modal utilise la prop <code>close-icon="heroicons:arrow-right"</code>.</p>
+
+                    <template #footer>
+                        <Button severity="primary" @click="customIconModal = false">Fermer</Button>
+                    </template>
+                </Modal>
+            </div>
+
+
+            <!-- Transition Disabled -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400 rounded-lg">
+                        <Icon name="heroicons:bolt" />
+                    </div>
+                    <h3 class="font-bold">Sans Transition</h3>
+                </div>
+                <p class="text-sm text-slate-500">Désactivez les animations d'ouverture et de fermeture pour une
+                    apparition instantanée.</p>
+                <Button severity="secondary" variant="outlined" @click="noTransitionModal = true">Instant Open</Button>
+
+                <Modal v-model="noTransitionModal" title="Ouverture Instantanée" :transition="false">
+                    <p>Cette fenêtre modale s'ouvre et se ferme sans aucune animation.</p>
+
+                    <template #footer>
+                        <Button severity="primary" @click="noTransitionModal = false">Fermer</Button>
+                    </template>
+                </Modal>
+            </div>
+
+            <!-- No Overlay -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400 rounded-lg">
+                        <Icon name="heroicons:square-2-stack" />
+                    </div>
+                    <h3 class="font-bold">Sans Overlay</h3>
+                </div>
+                <p class="text-sm text-slate-500">Masquez l'arrière-plan sombre pour une apparence plus légère.</p>
+                <Button severity="secondary" variant="outlined" @click="noOverlayModal = true">Open without
+                    Overlay</Button>
+
+                <Modal v-model="noOverlayModal" title="Sans Overlay" :overlay="false">
+                    <p>Cette fenêtre modale n'a pas de fond sombre (overlay).</p>
+
+                    <template #footer>
+                        <Button severity="primary" @click="noOverlayModal = false">Fermer</Button>
+                    </template>
+                </Modal>
+            </div>
+
+            <!-- Non-Modal Mode -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400 rounded-lg">
+                        <Icon name="heroicons:cursor-arrow-rays" />
+                    </div>
+                    <h3 class="font-bold">Mode Non-Modal</h3>
+                </div>
+                <p class="text-sm text-slate-500">Permet l'interaction avec le reste de la page pendant que la fenêtre
+                    est
+                    ouverte.
+                </p>
+                <Button severity="secondary" variant="outlined" @click="nonModalMode = true">Open Non-Modal</Button>
+
+                <Modal v-model="nonModalMode" title="Fenêtre Interactive" :modal="false">
+                    <p>Vous pouvez toujours cliquer sur les boutons de la page en arrière-plan.</p>
+
+                    <template #footer>
+                        <Button severity="primary" @click="nonModalMode = false">Fermer</Button>
+                    </template>
+                </Modal>
+            </div>
+
+            <!-- Non-Dismissible -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400 rounded-lg">
+                        <Icon name="heroicons:lock-closed" />
+                    </div>
+                    <h3 class="font-bold">Non Fermable</h3>
+                </div>
+                <p class="text-sm text-slate-500">Empêche la fermeture via Echap ou le clic extérieur (utile pour les
+                    confirmations
+                    obligatoires).</p>
+                <Button severity="secondary" variant="outlined" @click="nonDismissibleModal = true">Open Modal</Button>
+
+                <Modal v-model="nonDismissibleModal" title="Action Requise" :dismissible="false"
+                    @close:prevent="handlePrevent">
+                    <p>Vous devez explicitement fermer cette fenêtre via le bouton de fermeture ou une action.</p>
+                    <p class="text-xs text-slate-400 mt-2">Essayez d'appuyer sur Echap ou de cliquer en dehors.</p>
+
+                    <template #footer>
+                        <Button severity="primary" @click="nonDismissibleModal = false">J'ai compris</Button>
+                    </template>
+                </Modal>
+            </div>
+            <!-- Scrollable Modal -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400 rounded-lg">
+                        <Icon name="heroicons:arrows-up-down" />
+                    </div>
+                    <h3 class="font-bold">Scrollable Overlay</h3>
+                </div>
+                <p class="text-sm text-slate-500">Le contenu de la modal défile avec la page (overlay) au lieu d'être
+                    confiné.</p>
+                <Button severity="secondary" variant="outlined" @click="scrollableModal = true">Open Scrollable</Button>
+
+                <Modal v-model="scrollableModal" title="Contenu Long" scrollable>
+                    <div class="space-y-4">
+                        <p>Cette modal utilise la prop <code>scrollable</code> pour permettre à la modal entière de
+                            défiler
+                            dans l'overlay.</p>
+                        <p v-for="i in 15" :key="i" class="text-slate-600 dark:text-slate-400">
+                            Paragraphe {{ i }} : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                    </div>
+
+                    <template #footer>
+                        <Button severity="primary" @click="scrollableModal = false">Fermer</Button>
+                    </template>
+                </Modal>
+            </div>
+            <!-- Controlled Open (v-model:open) -->
+            <div
+                class="p-6 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800/50 flex flex-col gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-400 rounded-lg">
+                        <Icon name="heroicons:command-line" />
+                    </div>
+                    <h3 class="font-bold">v-model:open</h3>
+                </div>
+                <p class="text-sm text-slate-500">Contrôlez l'état d'ouverture via la directive
+                    <code>v-model:open</code>.
+                </p>
+                <div class="flex items-center gap-2">
+                    <Button severity="secondary" variant="outlined" @click="controlledOpen = !controlledOpen">
+                        Toggle: {{ controlledOpen }}
+                    </Button>
+                </div>
+
+                <Modal v-model:open="controlledOpen" title="Contrôle Explicite">
+                    <p>Cette modal est contrôlée via <code>v-model:open="controlledOpen"</code>.</p>
+                    <p class="mt-2 text-sm text-slate-500">Valeur actuelle : {{ controlledOpen }}</p>
+
+                    <template #footer>
+                        <Button severity="primary" @click="controlledOpen = false">Fermer</Button>
+                    </template>
+                </Modal>
+            </div>
         </div>
 
         <!-- Section Documentation API -->
@@ -280,16 +464,48 @@ const modalCodeExample = computed(() => {
                                 <td class="px-4 py-3">Titre de la modal.</td>
                             </tr>
                             <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">open</td>
+                                <td class="px-4 py-3">boolean</td>
+                                <td class="px-4 py-3">-</td>
+                                <td class="px-4 py-3">État d'ouverture (pour v-model:open).</td>
+                            </tr>
+                            <tr>
                                 <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">description</td>
                                 <td class="px-4 py-3">string</td>
                                 <td class="px-4 py-3">-</td>
                                 <td class="px-4 py-3">Sous-titre ou description.</td>
                             </tr>
                             <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">overlay</td>
+                                <td class="px-4 py-3">boolean</td>
+                                <td class="px-4 py-3">true</td>
+                                <td class="px-4 py-3">Affiche ou masque l'arrière-plan sombre.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">modal</td>
+                                <td class="px-4 py-3">boolean</td>
+                                <td class="px-4 py-3">true</td>
+                                <td class="px-4 py-3">Active le mode modal (bloque les interactions extérieures).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">dismissible</td>
+                                <td class="px-4 py-3">boolean</td>
+                                <td class="px-4 py-3">true</td>
+                                <td class="px-4 py-3">Autorise la fermeture via Echap ou clic extérieur.</td>
+                            </tr>
+                            <tr>
                                 <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">size</td>
                                 <td class="px-4 py-3">'sm' | 'md' | 'lg' | 'xl' | 'full' | 'auto'</td>
                                 <td class="px-4 py-3">'md'</td>
                                 <td class="px-4 py-3">Largeur max de la modal.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">scrollable</td>
+                                <td class="px-4 py-3">boolean</td>
+                                <td class="px-4 py-3">false</td>
+                                <td class="px-4 py-3">Si true, la page entière (overlay) défile. Sinon, le corps du
+                                    modal
+                                    défile.</td>
                             </tr>
                             <tr>
                                 <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">variant</td>
@@ -304,6 +520,18 @@ const modalCodeExample = computed(() => {
                                 <td class="px-4 py-3">Masque (false) ou personnalise le bouton de fermeture via les
                                     props du
                                     composant Button.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">close-icon</td>
+                                <td class="px-4 py-3">string</td>
+                                <td class="px-4 py-3">'heroicons:x-mark'</td>
+                                <td class="px-4 py-3">Nom de l'icône du bouton fermer.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">transition</td>
+                                <td class="px-4 py-3">boolean</td>
+                                <td class="px-4 py-3">true</td>
+                                <td class="px-4 py-3">Active ou désactive les animations d'entrée/sortie.</td>
                             </tr>
                             <tr>
                                 <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">
@@ -344,6 +572,44 @@ const modalCodeExample = computed(() => {
                             <tr>
                                 <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">close-icon</td>
                                 <td class="px-4 py-3">Icône personnalisée pour le bouton fermer.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Events -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Events</h3>
+                <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
+                            <tr>
+                                <th class="px-4 py-3 font-semibold">Nom</th>
+                                <th class="px-4 py-3 font-semibold">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">update:modelValue
+                                </td>
+                                <td class="px-4 py-3">Emis lors du changement d'état (v-model standard).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">update:open</td>
+                                <td class="px-4 py-3">Emis lors du changement d'état (v-model:open).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">close:prevent</td>
+                                <td class="px-4 py-3">Emis lorsque l'utilisateur tente de fermer une modal
+                                    non-dismissible.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">open</td>
+                                <td class="px-4 py-3">Emis à l'ouverture.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-mono text-indigo-600 dark:text-indigo-400">close</td>
+                                <td class="px-4 py-3">Emis à la fermeture.</td>
                             </tr>
                         </tbody>
                     </table>

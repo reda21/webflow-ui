@@ -37,3 +37,6 @@ export type { TooltipProps, TooltipPosition, TooltipVariant, TooltipSize } from 
 
 export { Modal } from './components/modal/index';
 export type { ModalProps, ModalSize, ModalVariant } from './components/modal/types';
+
+export { default as OverlayProvider } from './components/overlay/OverlayProvider.vue';
+export { useOverlay } from './composables/useOverlay';

@@ -40,7 +40,7 @@
 /* ----------------------------------------
    Base Structure
    ---------------------------------------- */
-.tooltip {
+.tooltip-wrapper {
   position: relative;
   display: inline-flex;
 }
@@ -68,7 +68,7 @@
   pointer-events: none;
 }
 
-.tooltip--interactive .tooltip-content {
+.tooltip-wrapper--interactive .tooltip-content {
   pointer-events: auto;
 }
 
@@ -92,20 +92,20 @@
 /* ----------------------------------------
    Positions - Top
    ---------------------------------------- */
-.tooltip--top .tooltip-content {
+.tooltip-wrapper--top .tooltip-content {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--top-start .tooltip-content {
+.tooltip-wrapper--top-start .tooltip-content {
   bottom: 100%;
   left: 0;
   margin-bottom: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--top-end .tooltip-content {
+.tooltip-wrapper--top-end .tooltip-content {
   bottom: 100%;
   right: 0;
   margin-bottom: calc(var(--tooltip-arrow-size-md) + 4px);
@@ -114,20 +114,20 @@
 /* ----------------------------------------
    Positions - Bottom
    ---------------------------------------- */
-.tooltip--bottom .tooltip-content {
+.tooltip-wrapper--bottom .tooltip-content {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
   margin-top: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--bottom-start .tooltip-content {
+.tooltip-wrapper--bottom-start .tooltip-content {
   top: 100%;
   left: 0;
   margin-top: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--bottom-end .tooltip-content {
+.tooltip-wrapper--bottom-end .tooltip-content {
   top: 100%;
   right: 0;
   margin-top: calc(var(--tooltip-arrow-size-md) + 4px);
@@ -136,20 +136,20 @@
 /* ----------------------------------------
    Positions - Left
    ---------------------------------------- */
-.tooltip--left .tooltip-content {
+.tooltip-wrapper--left .tooltip-content {
   right: 100%;
   top: 50%;
   transform: translateY(-50%);
   margin-right: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--left-start .tooltip-content {
+.tooltip-wrapper--left-start .tooltip-content {
   right: 100%;
   top: 0;
   margin-right: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--left-end .tooltip-content {
+.tooltip-wrapper--left-end .tooltip-content {
   right: 100%;
   bottom: 0;
   margin-right: calc(var(--tooltip-arrow-size-md) + 4px);
@@ -158,20 +158,20 @@
 /* ----------------------------------------
    Positions - Right
    ---------------------------------------- */
-.tooltip--right .tooltip-content {
+.tooltip-wrapper--right .tooltip-content {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
   margin-left: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--right-start .tooltip-content {
+.tooltip-wrapper--right-start .tooltip-content {
   left: 100%;
   top: 0;
   margin-left: calc(var(--tooltip-arrow-size-md) + 4px);
 }
 
-.tooltip--right-end .tooltip-content {
+.tooltip-wrapper--right-end .tooltip-content {
   left: 100%;
   bottom: 0;
   margin-left: calc(var(--tooltip-arrow-size-md) + 4px);
@@ -182,7 +182,7 @@
    ---------------------------------------- */
 
 /* Arrow Top (tooltip is below trigger) */
-.tooltip--bottom .tooltip-arrow {
+.tooltip-wrapper--bottom .tooltip-arrow {
   top: calc(-1 * var(--tooltip-arrow-size-md));
   left: 50%;
   transform: translateX(-50%);
@@ -191,7 +191,7 @@
 }
 
 /* Arrow Bottom (tooltip is above trigger) */
-.tooltip--top .tooltip-arrow {
+.tooltip-wrapper--top .tooltip-arrow {
   bottom: calc(-1 * var(--tooltip-arrow-size-md));
   left: 50%;
   transform: translateX(-50%);
@@ -200,7 +200,7 @@
 }
 
 /* Arrow Left (tooltip is right of trigger) */
-.tooltip--right .tooltip-arrow {
+.tooltip-wrapper--right .tooltip-arrow {
   left: calc(-1 * var(--tooltip-arrow-size-md));
   top: 50%;
   transform: translateY(-50%);
@@ -209,7 +209,7 @@
 }
 
 /* Arrow Right (tooltip is left of trigger) */
-.tooltip--left .tooltip-arrow {
+.tooltip-wrapper--left .tooltip-arrow {
   right: calc(-1 * var(--tooltip-arrow-size-md));
   top: 50%;
   transform: translateY(-50%);
@@ -237,38 +237,38 @@
    ---------------------------------------- */
 
 /* Light */
-.tooltip--light .tooltip-content {
+.tooltip-wrapper--light .tooltip-content {
   --tooltip-bg: var(--tooltip-light-bg);
   --tooltip-text: var(--tooltip-light-text);
   --tooltip-border: var(--tooltip-light-border);
 }
 
 /* Primary */
-.tooltip--primary .tooltip-content {
+.tooltip-wrapper--primary .tooltip-content {
   --tooltip-bg: var(--color-primary-600, #2563eb);
   --tooltip-text: var(--color-white, #ffffff);
 }
 
 /* Success */
-.tooltip--success .tooltip-content {
+.tooltip-wrapper--success .tooltip-content {
   --tooltip-bg: var(--color-success-600, #16a34a);
   --tooltip-text: var(--color-white, #ffffff);
 }
 
 /* Warning */
-.tooltip--warning .tooltip-content {
+.tooltip-wrapper--warning .tooltip-content {
   --tooltip-bg: var(--color-warning-500, #f59e0b);
   --tooltip-text: var(--color-neutral-900, #1a1a1a);
 }
 
 /* Danger */
-.tooltip--danger .tooltip-content {
+.tooltip-wrapper--danger .tooltip-content {
   --tooltip-bg: var(--color-danger-600, #dc2626);
   --tooltip-text: var(--color-white, #ffffff);
 }
 
 /* Info */
-.tooltip--info .tooltip-content {
+.tooltip-wrapper--info .tooltip-content {
   --tooltip-bg: var(--color-info-600, #0891b2);
   --tooltip-text: var(--color-white, #ffffff);
 }
@@ -276,23 +276,23 @@
 /* ----------------------------------------
    Sizes
    ---------------------------------------- */
-.tooltip--xs .tooltip-content {
+.tooltip-wrapper--xs .tooltip-content {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
   --tooltip-max-width: 200px;
 }
 
-.tooltip--sm .tooltip-content {
+.tooltip-wrapper--sm .tooltip-content {
   padding: 0.375rem 0.625rem;
   font-size: 0.8125rem;
   --tooltip-max-width: 250px;
 }
 
-.tooltip--md .tooltip-content {
+.tooltip-wrapper--md .tooltip-content {
   /* Default size - uses root variables */
 }
 
-.tooltip--lg .tooltip-content {
+.tooltip-wrapper--lg .tooltip-content {
   padding: 0.75rem 1rem;
   font-size: 0.9375rem;
   --tooltip-max-width: 400px;
@@ -302,7 +302,7 @@
 /* ----------------------------------------
    States
    ---------------------------------------- */
-.tooltip--disabled {
+.tooltip-wrapper--disabled {
   pointer-events: none;
   opacity: 0.5;
 }
@@ -324,13 +324,18 @@
 /* ----------------------------------------
    Animation 1: Fade (subtle opacity transition)
    ---------------------------------------- */
-.tooltip--fade-enter-active,
-.tooltip--fade-leave-active {
-  transition: opacity var(--tooltip-anim-normal) var(--tooltip-anim-ease);
+/* Fade In & Out Base */
+.tooltip--fade-in-enter-active,
+.tooltip--fade-in-leave-active,
+.tooltip--fade-out-enter-active,
+.tooltip--fade-out-leave-active {
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tooltip--fade-enter-from,
-.tooltip--fade-leave-to {
+.tooltip--fade-in-enter-from,
+.tooltip--fade-in-leave-to,
+.tooltip--fade-out-enter-from,
+.tooltip--fade-out-leave-to {
   opacity: 0;
 }
 
@@ -356,26 +361,26 @@
 }
 
 /* Scale origin based on position */
-.tooltip--top .tooltip--scale-enter-from,
-.tooltip--top .tooltip--scale-leave-to {
+.tooltip-wrapper--top .tooltip--scale-enter-from,
+.tooltip-wrapper--top .tooltip--scale-leave-to {
   transform: translateX(-50%) scale(0.85);
   transform-origin: bottom center;
 }
 
-.tooltip--bottom .tooltip--scale-enter-from,
-.tooltip--bottom .tooltip--scale-leave-to {
+.tooltip-wrapper--bottom .tooltip--scale-enter-from,
+.tooltip-wrapper--bottom .tooltip--scale-leave-to {
   transform: translateX(-50%) scale(0.85);
   transform-origin: top center;
 }
 
-.tooltip--left .tooltip--scale-enter-from,
-.tooltip--left .tooltip--scale-leave-to {
+.tooltip-wrapper--left .tooltip--scale-enter-from,
+.tooltip-wrapper--left .tooltip--scale-leave-to {
   transform: translateY(-50%) scale(0.85);
   transform-origin: right center;
 }
 
-.tooltip--right .tooltip--scale-enter-from,
-.tooltip--right .tooltip--scale-leave-to {
+.tooltip-wrapper--right .tooltip--scale-enter-from,
+.tooltip-wrapper--right .tooltip--scale-leave-to {
   transform: translateY(-50%) scale(0.85);
   transform-origin: left center;
 }
@@ -390,26 +395,26 @@
     transform var(--tooltip-anim-normal) var(--tooltip-anim-ease);
 }
 
-.tooltip--top .tooltip--slide-enter-from,
-.tooltip--top .tooltip--slide-leave-to {
+.tooltip-wrapper--top .tooltip--slide-enter-from,
+.tooltip-wrapper--top .tooltip--slide-leave-to {
   opacity: 0;
   transform: translateX(-50%) translateY(8px);
 }
 
-.tooltip--bottom .tooltip--slide-enter-from,
-.tooltip--bottom .tooltip--slide-leave-to {
+.tooltip-wrapper--bottom .tooltip--slide-enter-from,
+.tooltip-wrapper--bottom .tooltip--slide-leave-to {
   opacity: 0;
   transform: translateX(-50%) translateY(-8px);
 }
 
-.tooltip--left .tooltip--slide-enter-from,
-.tooltip--left .tooltip--slide-leave-to {
+.tooltip-wrapper--left .tooltip--slide-enter-from,
+.tooltip-wrapper--left .tooltip--slide-leave-to {
   opacity: 0;
   transform: translateY(-50%) translateX(8px);
 }
 
-.tooltip--right .tooltip--slide-enter-from,
-.tooltip--right .tooltip--slide-leave-to {
+.tooltip-wrapper--right .tooltip--slide-enter-from,
+.tooltip-wrapper--right .tooltip--slide-leave-to {
   opacity: 0;
   transform: translateY(-50%) translateX(-8px);
 }
@@ -426,29 +431,29 @@
   perspective: 1000px;
 }
 
-.tooltip--top .tooltip--flip-enter-from,
-.tooltip--top .tooltip--flip-leave-to {
+.tooltip-wrapper--top .tooltip--flip-enter-from,
+.tooltip-wrapper--top .tooltip--flip-leave-to {
   opacity: 0;
   transform: translateX(-50%) rotateX(90deg);
   transform-origin: bottom center;
 }
 
-.tooltip--bottom .tooltip--flip-enter-from,
-.tooltip--bottom .tooltip--flip-leave-to {
+.tooltip-wrapper--bottom .tooltip--flip-enter-from,
+.tooltip-wrapper--bottom .tooltip--flip-leave-to {
   opacity: 0;
   transform: translateX(-50%) rotateX(-90deg);
   transform-origin: top center;
 }
 
-.tooltip--left .tooltip--flip-enter-from,
-.tooltip--left .tooltip--flip-leave-to {
+.tooltip-wrapper--left .tooltip--flip-enter-from,
+.tooltip-wrapper--left .tooltip--flip-leave-to {
   opacity: 0;
   transform: translateY(-50%) rotateY(-90deg);
   transform-origin: right center;
 }
 
-.tooltip--right .tooltip--flip-enter-from,
-.tooltip--right .tooltip--flip-leave-to {
+.tooltip-wrapper--right .tooltip--flip-enter-from,
+.tooltip-wrapper--right .tooltip--flip-leave-to {
   opacity: 0;
   transform: translateY(-50%) rotateY(90deg);
   transform-origin: left center;
@@ -470,13 +475,13 @@
   transform: scale(0.7);
 }
 
-.tooltip--top .tooltip--zoom-enter-active,
-.tooltip--bottom .tooltip--zoom-enter-active {
+.tooltip-wrapper--top .tooltip--zoom-enter-active,
+.tooltip-wrapper--bottom .tooltip--zoom-enter-active {
   animation-name: tooltip-zoom-in-x;
 }
 
-.tooltip--left .tooltip--zoom-enter-active,
-.tooltip--right .tooltip--zoom-enter-active {
+.tooltip-wrapper--left .tooltip--zoom-enter-active,
+.tooltip-wrapper--right .tooltip--zoom-enter-active {
   animation-name: tooltip-zoom-in-y;
 }
 
@@ -484,10 +489,10 @@
    Animation 6: Bounce (playful movement)
    ---------------------------------------- */
 .tooltip--bounce-enter-active { animation-duration: 0.5s; }
-.tooltip--top.tooltip--bounce-enter-active { animation-name: tooltip-bounce-up-in; }
-.tooltip--bottom.tooltip--bounce-enter-active { animation-name: tooltip-bounce-down-in; }
-.tooltip--left.tooltip--bounce-enter-active { animation-name: tooltip-bounce-left-in; }
-.tooltip--right.tooltip--bounce-enter-active { animation-name: tooltip-bounce-right-in; }
+.tooltip-wrapper--top .tooltip--bounce-enter-active { animation-name: tooltip-bounce-up-in; }
+.tooltip-wrapper--bottom .tooltip--bounce-enter-active { animation-name: tooltip-bounce-down-in; }
+.tooltip-wrapper--left .tooltip--bounce-enter-active { animation-name: tooltip-bounce-left-in; }
+.tooltip-wrapper--right .tooltip--bounce-enter-active { animation-name: tooltip-bounce-right-in; }
 
 .tooltip--bounce-leave-active {
   transition: opacity 0.25s ease-in, transform 0.25s ease-in;
@@ -508,26 +513,26 @@
     transform var(--tooltip-anim-fast) var(--tooltip-anim-ease);
 }
 
-.tooltip--top .tooltip--subtle-enter-from,
-.tooltip--top .tooltip--subtle-leave-to {
+.tooltip-wrapper--top .tooltip--subtle-enter-from,
+.tooltip-wrapper--top .tooltip--subtle-leave-to {
   opacity: 0;
   transform: translateX(-50%) translateY(4px);
 }
 
-.tooltip--bottom .tooltip--subtle-enter-from,
-.tooltip--bottom .tooltip--subtle-leave-to {
+.tooltip-wrapper--bottom .tooltip--subtle-enter-from,
+.tooltip-wrapper--bottom .tooltip--subtle-leave-to {
   opacity: 0;
   transform: translateX(-50%) translateY(-4px);
 }
 
-.tooltip--left .tooltip--subtle-enter-from,
-.tooltip--left .tooltip--subtle-leave-to {
+.tooltip-wrapper--left .tooltip--subtle-enter-from,
+.tooltip-wrapper--left .tooltip--subtle-leave-to {
   opacity: 0;
   transform: translateY(-50%) translateX(4px);
 }
 
-.tooltip--right .tooltip--subtle-enter-from,
-.tooltip--right .tooltip--subtle-leave-to {
+.tooltip-wrapper--right .tooltip--subtle-enter-from,
+.tooltip-wrapper--right .tooltip--subtle-leave-to {
   opacity: 0;
   transform: translateY(-50%) translateX(-4px);
 }
@@ -543,29 +548,29 @@
     max-height var(--tooltip-anim-normal) var(--tooltip-anim-ease);
 }
 
-.tooltip--top .tooltip--expand-enter-from,
-.tooltip--top .tooltip--expand-leave-to {
+.tooltip-wrapper--top .tooltip--expand-enter-from,
+.tooltip-wrapper--top .tooltip--expand-leave-to {
   opacity: 0;
   transform: translateX(-50%) scaleY(0);
   transform-origin: bottom center;
 }
 
-.tooltip--bottom .tooltip--expand-enter-from,
-.tooltip--bottom .tooltip--expand-leave-to {
+.tooltip-wrapper--bottom .tooltip--expand-enter-from,
+.tooltip-wrapper--bottom .tooltip--expand-leave-to {
   opacity: 0;
   transform: translateX(-50%) scaleY(0);
   transform-origin: top center;
 }
 
-.tooltip--left .tooltip--expand-enter-from,
-.tooltip--left .tooltip--expand-leave-to {
+.tooltip-wrapper--left .tooltip--expand-enter-from,
+.tooltip-wrapper--left .tooltip--expand-leave-to {
   opacity: 0;
   transform: translateY(-50%) scaleX(0);
   transform-origin: right center;
 }
 
-.tooltip--right .tooltip--expand-enter-from,
-.tooltip--right .tooltip--expand-leave-to {
+.tooltip-wrapper--right .tooltip--expand-enter-from,
+.tooltip-wrapper--right .tooltip--expand-leave-to {
   opacity: 0;
   transform: translateY(-50%) scaleX(0);
   transform-origin: left center;
@@ -626,10 +631,129 @@
 }
 
 /* ----------------------------------------
+   Styles: Glassmorphism
+   ---------------------------------------- */
+.tooltip-wrapper--glass .tooltip-content {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-neutral-900, #1a1a1a);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.dark .tooltip-wrapper--glass .tooltip-content,
+[data-theme="dark"] .tooltip-wrapper--glass .tooltip-content {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-white, #ffffff);
+}
+
+/* Glass Arrow adaptation */
+.tooltip-wrapper--glass.tooltip-wrapper--top .tooltip-arrow {
+  border-top-color: rgba(255, 255, 255, 0.7);
+}
+.dark .tooltip-wrapper--glass.tooltip-wrapper--top .tooltip-arrow {
+  border-top-color: rgba(0, 0, 0, 0.7);
+}
+
+.tooltip-wrapper--glass.tooltip-wrapper--bottom .tooltip-arrow {
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+.dark .tooltip-wrapper--glass.tooltip-wrapper--bottom .tooltip-arrow {
+  border-bottom-color: rgba(0, 0, 0, 0.7);
+}
+
+.tooltip-wrapper--glass.tooltip-wrapper--left .tooltip-arrow {
+  border-left-color: rgba(255, 255, 255, 0.7);
+}
+.dark .tooltip-wrapper--glass.tooltip-wrapper--left .tooltip-arrow {
+  border-left-color: rgba(0, 0, 0, 0.7);
+}
+
+.tooltip-wrapper--glass.tooltip-wrapper--right .tooltip-arrow {
+  border-right-color: rgba(255, 255, 255, 0.7);
+}
+.dark .tooltip-wrapper--glass.tooltip-wrapper--right .tooltip-arrow {
+  border-right-color: rgba(0, 0, 0, 0.7);
+}
+
+
+/* ----------------------------------------
+   Styles: Gradients
+   ---------------------------------------- */
+.tooltip-wrapper--gradient-primary .tooltip-content {
+  background: linear-gradient(135deg, var(--color-primary-600, #2563eb), var(--color-primary-800, #1e40af));
+  color: white;
+  border: none;
+}
+.tooltip-wrapper--gradient-primary.tooltip-wrapper--top .tooltip-arrow { border-top-color: var(--color-primary-800, #1e40af); }
+.tooltip-wrapper--gradient-primary.tooltip-wrapper--bottom .tooltip-arrow { border-bottom-color: var(--color-primary-600, #2563eb); }
+.tooltip-wrapper--gradient-primary.tooltip-wrapper--left .tooltip-arrow { border-left-color: var(--color-primary-800, #1e40af); }
+.tooltip-wrapper--gradient-primary.tooltip-wrapper--right .tooltip-arrow { border-right-color: var(--color-primary-600, #2563eb); }
+
+.tooltip-wrapper--gradient-sunset .tooltip-content {
+  background: linear-gradient(135deg, #f59e0b, #dc2626);
+  color: white;
+  border: none;
+}
+.tooltip-wrapper--gradient-sunset.tooltip-wrapper--top .tooltip-arrow { border-top-color: #dc2626; }
+.tooltip-wrapper--gradient-sunset.tooltip-wrapper--bottom .tooltip-arrow { border-bottom-color: #f59e0b; }
+.tooltip-wrapper--gradient-sunset.tooltip-wrapper--left .tooltip-arrow { border-left-color: #dc2626; }
+.tooltip-wrapper--gradient-sunset.tooltip-wrapper--right .tooltip-arrow { border-right-color: #f59e0b; }
+
+
+/* ----------------------------------------
+   Styles: Custom Arrows
+   ---------------------------------------- */
+/* Rounded Arrow */
+.tooltip-arrow--rounded.tooltip-arrow {
+  border-radius: 2px;
+}
+
+
+/* ----------------------------------------
+   Styles: Custom & Auto
+   ---------------------------------------- */
+.tooltip-wrapper--custom .tooltip-content {
+  background-color: var(--tooltip-custom-bg, var(--tooltip-bg));
+  color: var(--tooltip-custom-text, var(--tooltip-text));
+  border: 1px solid var(--tooltip-custom-border, transparent);
+  box-shadow: var(--tooltip-custom-shadow, var(--tooltip-shadow));
+}
+
+.tooltip-wrapper--auto .tooltip-content {
+  /* Auto behaves like default (dark) but responds to system preferences via media query below */
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+/* ----------------------------------------
+   System Dark Mode (Smart Inversion)
+   ---------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* In dark mode, the default 'dark' tooltip becomes lighter to stand out */
+    --tooltip-bg: var(--color-neutral-800, #262626);
+    --tooltip-border: var(--color-neutral-700, #404040);
+    /* Light tooltip overrides for system dark mode */
+    --tooltip-light-bg: var(--color-neutral-900, #171717);
+    --tooltip-light-text: var(--color-white, #ffffff);
+    --tooltip-light-border: var(--color-neutral-700, #404040);
+  }
+
+  /* Ensure standard dark variant has a border in dark mode for contrast */
+  .tooltip-wrapper--dark .tooltip-content,
+  .tooltip-wrapper--auto .tooltip-content {
+    border: 1px solid var(--tooltip-border);
+  }
+}
+
+/* ----------------------------------------
    Dark Mode Overrides
    ---------------------------------------- */
-.dark .tooltip--light .tooltip-content,
-[data-theme="dark"] .tooltip--light .tooltip-content {
+.dark .tooltip-wrapper--light .tooltip-content,
+[data-theme="dark"] .tooltip-wrapper--light .tooltip-content {
   --tooltip-bg: var(--color-neutral-800, #262626);
   --tooltip-text: var(--color-neutral-100, #f5f5f5);
   --tooltip-border: var(--color-neutral-700, #404040);
@@ -653,8 +777,10 @@
 
 /* Reduced motion - respect user preferences */
 @media (prefers-reduced-motion: reduce) {
-  .tooltip--fade-enter-active,
-  .tooltip--fade-leave-active,
+  .tooltip--fade-in-enter-active,
+  .tooltip--fade-in-leave-active,
+  .tooltip--fade-out-enter-active,
+  .tooltip--fade-out-leave-active,
   .tooltip--scale-enter-active,
   .tooltip--scale-leave-active,
   .tooltip--slide-enter-active,

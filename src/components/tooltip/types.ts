@@ -13,25 +13,26 @@ export type TooltipPosition =
 export type TooltipTrigger = 'hover' | 'click' | 'focus' | 'manual'
 
 // Thème/variante
-export type TooltipVariant = 'dark' | 'light' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
+export type TooltipVariant = 'dark' | 'light' | 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'glass' | 'gradient-primary' | 'gradient-sunset' | 'auto' | 'custom'
 
 // Taille
 export type TooltipSize = 'xs' | 'sm' | 'md' | 'lg'
 
 // Forme de la flèche
-export type TooltipArrow = 'none' | 'sm' | 'md' | 'lg'
+export type TooltipArrow = 'none' | 'sm' | 'md' | 'lg' | 'rounded'
 
 // Animation
 export type TooltipAnimation = 
-  | 'fade'    // Subtle opacity transition
-  | 'scale'   // Zoom effect with spring
-  | 'slide'   // Directional movement
-  | 'flip'    // 3D rotation
-  | 'zoom'    // Scale with bounce
-  | 'bounce'  // Playful movement
-  | 'subtle'  // Minimal, professional
-  | 'expand'  // Grow from point
-  | 'none'    // No animation
+  | 'fade-in'    // Subtle opacity transition
+  | 'fade-out'   // Subtle opacity transition
+  | 'scale'      // Zoom effect with spring
+  | 'slide'      // Directional movement
+  | 'flip'       // 3D rotation
+  | 'zoom'       // Scale with bounce
+  | 'bounce'     // Playful movement
+  | 'subtle'     // Minimal, professional
+  | 'expand'     // Grow from point
+  | 'none'       // No animation
 
 // ============================================
 // Props Interfaces
@@ -47,11 +48,16 @@ export interface TooltipProps {
   content?: string
   title?: string
 
-  // Positionnement
+  // Positionnement avancé
   position?: TooltipPosition
   offset?: number | [number, number]
   flip?: boolean              // Auto-flip si pas assez d'espace
   shift?: boolean             // Auto-shift pour rester visible
+  boundary?: string | HTMLElement // Limites de positionnement
+  floatingUI?: boolean        // Utiliser Floating UI pour le positionnement
+  
+  // Positionnement basique (déprécié)
+
 
   // Apparence
   variant?: TooltipVariant
@@ -67,6 +73,11 @@ export interface TooltipProps {
   interactive?: boolean       // Peut-on interagir avec le tooltip?
   hideOnClick?: boolean
   closeOnEscape?: boolean
+  followCursor?: boolean      // Le tooltip suit le curseur
+    html?: boolean              // Autoriser le contenu HTML dans 'content'
+    virtualElement?: { getBoundingClientRect: () => DOMRect } // Élément virtuel pour le positionnement
+    teleport?: boolean | string // Sélecteur ou boolean pour téléporter le contenu
+
 
   // Animation
   animation?: TooltipAnimation
@@ -86,6 +97,7 @@ export interface TooltipProps {
   appendTo?: string | HTMLElement
   portal?: boolean            // Téléporter dans le body
   singleton?: boolean         // Partager une instance
+
 }
 
 // ============================================
