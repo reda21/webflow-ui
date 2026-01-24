@@ -34,8 +34,12 @@ export interface ToastProps {
   avatar?: string;
   /** Auto-close duration in MS. Set to 0 to disable. */
   duration?: number;
+  /** Whether to show the progress bar (default: true when duration > 0) */
+  showProgress?: boolean;
   /** Whether the toast can be closed manually */
   closable?: boolean;
+  /** Prevents the toast from being closed (both auto and manual) */
+  preventClose?: boolean;
   /** Optional action button config */
   action?: {
     label: string;

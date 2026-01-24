@@ -15,20 +15,21 @@ const configSeverity = ref<ToastSeverity>('contrast')
 const configPosition = ref<ToastPosition>('top-right')
 const configDuration = ref(5000)
 const configClosable = ref(true)
+const configShowProgress = ref(true)
+const configPreventClose = ref(false)
 const mediaType = ref<'none' | 'icon' | 'avatar'>('avatar')
 const configCustomIcon = ref('heroicons:bell-solid')
 const configAvatar = ref('https://github.com/benjamincanac.png')
-const isPersistent = ref(false)
 
 import { watch } from 'vue'
 
-watch(isPersistent, (val) => {
+watch(configPreventClose, (val) => {
     if (val) {
         configDuration.value = 0
-        configClosable.value = false
+        configShowProgress.value = false
     } else {
         configDuration.value = 5000
-        configClosable.value = true
+        configShowProgress.value = true
     }
 })
 
@@ -40,6 +41,8 @@ const triggerToast = () => {
         position: configPosition.value,
         duration: configDuration.value,
         closable: configClosable.value,
+        showProgress: configShowProgress.value,
+        preventClose: configPreventClose.value,
         icon: mediaType.value === 'icon' ? configCustomIcon.value : (mediaType.value === 'none' ? false : true),
         avatar: mediaType.value === 'avatar' ? configAvatar.value : undefined
     })
@@ -54,6 +57,8 @@ const generatedCode = computed(() => {
     if (configPosition.value !== 'top-right') code += `  position: '${configPosition.value}',\n`
     if (configDuration.value !== 5000) code += `  duration: ${configDuration.value},\n`
     if (!configClosable.value) code += `  closable: false,\n`
+    if (!configShowProgress.value) code += `  showProgress: false,\n`
+    if (configPreventClose.value) code += `  preventClose: true,\n`
 
     if (mediaType.value === 'avatar') {
         code += `  avatar: '${configAvatar.value}',\n`
@@ -225,7 +230,8 @@ function addToCalendar() {
                                 <div class="space-y-2">
                                     <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Durée
                                         (ms)</label>
-                                    <input v-model.number="configDuration" type="number" step="500" :disabled="isPersistent"
+                                    <input v-model.number="configDuration" type="number" step="500"
+                                        :disabled="configPreventClose"
                                         class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed" />
                                 </div>
                             </div>
@@ -278,21 +284,33 @@ function addToCalendar() {
                                     </div>
                                 </div>
 
-                                <label class="flex items-center gap-2 cursor-pointer group pt-2">
-                                    <input v-model="configClosable" type="checkbox" :disabled="isPersistent"
-                                        class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed" />
-                                    <span
-                                        class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-tighter" :class="{ 'opacity-50': isPersistent }">Bouton
-                                        de fermeture</span>
-                                </label>
+                                <!-- Options checkboxes -->
+                                <div class="space-y-3 pt-2">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input v-model="configClosable" type="checkbox"
+                                            class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                                        <span
+                                            class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-tighter">Bouton
+                                            de fermeture</span>
+                                    </label>
 
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input v-model="isPersistent" type="checkbox"
-                                        class="w-4 h-4 rounded border-slate-300 text-rose-600 focus:ring-rose-500" />
-                                    <span
-                                        class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-tighter">Mode
-                                        Persistant (Bloquant)</span>
-                                </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input v-model="configShowProgress" type="checkbox"
+                                            :disabled="configPreventClose"
+                                            class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed" />
+                                        <span
+                                            class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-tighter"
+                                            :class="{ 'opacity-50': configPreventClose }">Afficher la progression</span>
+                                    </label>
+
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input v-model="configPreventClose" type="checkbox"
+                                            class="w-4 h-4 rounded border-slate-300 text-rose-600 focus:ring-rose-500" />
+                                        <span
+                                            class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-tighter">Mode
+                                            Persistant (Bloquant)</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -470,6 +488,16 @@ toast.add({
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">closable</td>
                                 <td class="px-6 py-4 text-slate-500 italic">boolean</td>
                                 <td class="px-6 py-4 text-slate-500">true</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">showProgress</td>
+                                <td class="px-6 py-4 text-slate-500 italic">boolean</td>
+                                <td class="px-6 py-4 text-slate-500">true</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">preventClose</td>
+                                <td class="px-6 py-4 text-slate-500 italic">boolean</td>
+                                <td class="px-6 py-4 text-slate-500">false</td>
                             </tr>
                         </tbody>
                     </table>
