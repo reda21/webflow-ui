@@ -35,7 +35,10 @@ const props = withDefaults(defineProps<ModalProps>(), {
     closeOnOutsideClick: true,
     closeOnEscape: true,
     preventScroll: true,
-    role: 'dialog'
+    role: 'dialog',
+    fullscreen: false,
+    portal: true,
+    content: undefined
 })
 
 const emit = defineEmits<ModalEmits>()
@@ -61,17 +64,21 @@ const contentClasses = computed(() => [
     `modal--${props.size}`,
     `modal--${props.variant}`,
     props.scrollable ? 'modal-content--scrollable' : '',
-    props.contentClass
+    props.fullscreen ? 'modal-content--fullscreen' : '',
+    props.contentClass,
+    props.ui?.content
 ])
 
 const overlayClasses = computed(() => [
     'modal-overlay',
-    props.overlayClass
+    props.overlayClass,
+    props.ui?.overlay
 ])
 
 const wrapperClasses = computed(() => [
     'modal-content-wrapper',
-    props.scrollable ? 'modal-wrapper--scrollable' : ''
+    props.scrollable ? 'modal-wrapper--scrollable' : '',
+    props.ui?.wrapper
 ])
 
 // Close button normalized props
@@ -99,11 +106,21 @@ const closeButtonProps = computed(() => {
 
 // Animation names for Vue Transition
 // We use Vue's Transition for smooth entry/exit
+
+const close = (result?: any) => {
+    isOpen.value = false
+    emit('close', result)
+}
+
+defineExpose({
+    close
+})
 </script>
 
 <template>
     <DialogRoot :open="isOpen" :modal="modal" @update:open="handleOpenChange">
-        <DialogPortal>
+        <DialogPortal :to="typeof portal === 'string' || portal instanceof HTMLElement ? portal : undefined"
+            :disabled="portal === false">
             <!-- Overlay transition -->
             <Transition :name="transition ? 'modal-overlay' : ''" :css="transition">
                 <DialogOverlay v-if="isOpen && overlay && modal" :class="overlayClasses" />
@@ -112,61 +129,71 @@ const closeButtonProps = computed(() => {
             <div v-if="isOpen" :class="wrapperClasses">
                 <!-- Content transition -->
                 <Transition :name="transition ? 'modal-content' : ''" :css="transition" appear
-                    @after-leave="emit('after-leave')">
+                    @after-leave="emit('after-leave')" @after-enter="emit('after-enter')">
                     <DialogContent v-if="isOpen" :class="contentClasses" :aria-label="ariaLabel" @interact-outside="(event) => {
                         if (!dismissible) {
                             event.preventDefault()
-                            emit('close:prevent')
+                            emit('close-prevent')
                             return
                         }
                         if (!closeOnOutsideClick) event.preventDefault()
                     }" @escape-key-down="(event) => {
                         if (!dismissible) {
                             event.preventDefault()
-                            emit('close:prevent')
+                            emit('close-prevent')
                             return
                         }
                         if (!closeOnEscape) event.preventDefault()
                     }">
-                        <!-- Header Section -->
-                        <header v-if="title || description || $slots.header" :class="['modal-header', headerClass]">
-                            <slot name="header">
-                                <div>
-                                    <DialogTitle v-if="title" class="modal-title">
-                                        {{ title }}
-                                    </DialogTitle>
-                                    <DialogDescription v-if="description" class="modal-description">
-                                        {{ description }}
-                                    </DialogDescription>
-                                </div>
-                            </slot>
-                        </header>
+                        <slot name="content" :close="close">
+                            <!-- Header Section -->
+                            <header v-if="title || description || $slots.header || $slots.title || $slots.description"
+                                :class="['modal-header', headerClass, ui?.header]">
+                                <slot name="header" :close="close">
+                                    <div class="flex flex-col gap-1.5 overflow-hidden">
+                                        <DialogTitle v-if="title || $slots.title" :class="['modal-title', ui?.title]">
+                                            <slot name="title">{{ title }}</slot>
+                                        </DialogTitle>
+                                        <DialogDescription v-if="description || $slots.description"
+                                            :class="['modal-description', ui?.description]">
+                                            <slot name="description">{{ description }}</slot>
+                                        </DialogDescription>
+                                    </div>
 
-                        <!-- Accessibility: Ensure DialogDescription is present if not provided via props -->
-                        <VisuallyHidden v-if="!description" as-child>
-                            <DialogDescription class="sr-only">Modal Content</DialogDescription>
-                        </VisuallyHidden>
+                                    <div v-if="$slots.actions" class="flex items-center gap-1.5 ml-auto">
+                                        <slot name="actions" />
+                                    </div>
+                                </slot>
+                            </header>
 
-                        <!-- Close Button -->
-                        <DialogClose v-if="close !== false" :as-child="true">
-                            <slot name="close">
-                                <Button v-bind="closeButtonProps" aria-label="Close">
-                                    <template #icon v-if="$slots['close-icon']">
-                                        <slot name="close-icon" />
-                                    </template>
-                                </Button>
-                            </slot>
-                        </DialogClose>
+                            <!-- Accessibility: Ensure DialogDescription is present if not provided via props -->
+                            <VisuallyHidden v-if="!description" as-child>
+                                <DialogDescription class="sr-only">Modal Content</DialogDescription>
+                            </VisuallyHidden>
 
-                        <!-- Body Section -->
-                        <div :class="['modal-body', bodyClass]">
-                            <slot />
-                        </div>
+                            <!-- Close Button -->
+                            <DialogClose v-if="close !== false" :as-child="true">
+                                <slot name="close" :ui="ui">
+                                    <Button v-bind="closeButtonProps" aria-label="Close">
+                                        <template #icon v-if="$slots['close-icon']">
+                                            <slot name="close-icon" />
+                                        </template>
+                                    </Button>
+                                </slot>
+                            </DialogClose>
 
-                        <!-- Footer Section -->
-                        <footer v-if="$slots.footer" :class="['modal-footer', footerClass]">
-                            <slot name="footer" />
-                        </footer>
+                            <!-- Body Section -->
+                            <div :class="['modal-body', bodyClass, ui?.body]">
+                                <slot name="body" :close="close">
+                                    <slot :open="isOpen" />
+                                </slot>
+                            </div>
+
+                            <!-- Footer Section -->
+                            <footer v-if="$slots.footer" :class="['modal-footer', footerClass, ui?.footer]">
+                                <slot name="footer" :close="close" />
+                            </footer>
+                        </slot>
                     </DialogContent>
                 </Transition>
             </div>
