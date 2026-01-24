@@ -1,0 +1,92 @@
+@reference "../../theme.css";
+
+/* ============================================
+   Skeleton Component Styles
+   ============================================ */
+
+.skeleton {
+  @apply relative overflow-hidden bg-slate-200 dark:bg-slate-800;
+  @apply pointer-events-none select-none;
+}
+
+/* --- Variants --- */
+.skeleton--rectangle {
+  @apply rounded-none;
+}
+
+.skeleton--circle {
+  @apply rounded-full;
+}
+
+.skeleton--rounded {
+  @apply rounded-lg;
+}
+
+.skeleton--line {
+  @apply rounded h-3;
+}
+
+/* --- Animations --- */
+
+/* Pulse Animation (Default) */
+.skeleton--pulse {
+  @apply animate-pulse;
+}
+
+/* Wave Animation (Premium) */
+.skeleton--wave {
+  @apply after:absolute after:inset-0 after:-translate-x-full after:animate-[skeleton-wave_2s_infinite] after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent;
+  background-image: var(--skeleton-gradient, none);
+}
+
+.skeleton--wave::after {
+  will-change: transform;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--skeleton-shine, rgba(255, 255, 255, 0.2)) 50%,
+    transparent 100%
+  );
+}
+
+.dark .skeleton--wave::after {
+  --skeleton-shine: rgba(255, 255, 255, 0.05);
+}
+
+.skeleton--glow {
+  box-shadow: 0 0 15px -3px var(--skeleton-glow-color, rgba(99, 102, 241, 0.3));
+}
+
+.skeleton--gradient {
+  background: var(--skeleton-gradient);
+}
+
+/* --- Inferred Size (Has Content) --- */
+.skeleton--has-content {
+  @apply w-fit h-fit min-w-4 min-h-4;
+}
+
+.skeleton--has-content .skeleton-content {
+  @apply opacity-0 pointer-events-none;
+}
+
+@keyframes skeleton-wave {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton--pulse,
+  .skeleton--wave,
+  .skeleton--wave::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- Utilities --- */
+.skeleton-container {
+  @apply flex flex-col gap-2;
+}

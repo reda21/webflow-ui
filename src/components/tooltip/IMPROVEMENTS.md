@@ -91,11 +91,11 @@ Ce document liste les améliorations potentielles pour le composant Tooltip.
 
 ### À Implémenter 🔲
 
-- [ ] **Tooltip.test.ts** - Tests unitaires complets
-- [ ] **Tooltip.a11y.test.ts** - Tests d'accessibilité
-- [ ] **Tooltip.perf.test.ts** - Tests de performance
-- [ ] **Snapshot Tests** - Tests visuels pour chaque variant
-- [ ] **E2E Tests** - Tests end-to-end avec Playwright
+- [x] **Tooltip.test.ts** - Tests unitaires complets
+- [x] **Tooltip.a11y.test.ts** - Tests d'accessibilité
+- [x] **Tooltip.perf.test.ts** - Tests de performance
+- [x] **Snapshot Tests** - Tests visuels pour chaque variant
+- [ ] **E2E Tests** - Tests end-to-end avec Playwright (À configurer)
 
 ---
 

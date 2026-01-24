@@ -1,0 +1,193 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tooltip Snapshots > matches snapshot for position: bottom 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--bottom tooltip-wrapper--dark tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--bottom tooltip-content--dark tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--bottom"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Position bottom</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for position: left 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--left tooltip-wrapper--dark tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--left tooltip-content--dark tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--left"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Position left</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for position: right 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--right tooltip-wrapper--dark tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--right tooltip-content--dark tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--right"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Position right</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for position: top 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--dark tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--dark tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Position top</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: danger 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--danger tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--danger tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant danger</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: dark 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--dark tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--dark tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant dark</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: glass 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--glass tooltip-wrapper--md tooltip-wrapper--glass">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--glass tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant glass</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: info 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--info tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--info tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant info</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: light 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--light tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--light tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant light</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: primary 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--primary tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--primary tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant primary</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: success 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--success tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--success tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant success</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`Tooltip Snapshots > matches snapshot for variant: warning 1`] = `
+"<div class="tooltip-wrapper tooltip-wrapper--top tooltip-wrapper--warning tooltip-wrapper--md">
+  <!-- Trigger Element -->
+  <div class="tooltip-trigger" aria-describedby="tooltip-test"><button>Trigger</button></div><!-- Tooltip Content with Transition -->
+  <!--teleport start-->
+  <div id="tooltip-test" class="tooltip-content tooltip-content--top tooltip-content--warning tooltip-content--md" role="tooltip" aria-hidden="false">
+    <!-- Arrow -->
+    <div class="tooltip-arrow tooltip-arrow--md tooltip-arrow--top"></div><!-- Title (optional) -->
+    <!--v-if-->
+    <!-- Body -->
+    <div class="tooltip-body"><span>Variant warning</span></div>
+  </div>
+  <!--teleport end-->
+</div>"
+`;

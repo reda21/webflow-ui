@@ -42,7 +42,7 @@ const demoNavItems = ref<NavItem[]>([
 
         <!-- Props Table -->
         <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Props</h3>
-        <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl">
+        <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-8">
             <table class="w-full text-sm">
                 <thead class="bg-slate-50 dark:bg-slate-800">
                     <tr>
@@ -56,6 +56,100 @@ const demoNavItems = ref<NavItem[]>([
                         <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">brandName</td>
                         <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
                         <td class="py-3 px-4 font-mono text-slate-500 text-xs">'WebFlow'</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">logoHref</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">'/'</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">navItems</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">NavItem[]</td>
+                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">[]</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">showSearch</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">true</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">showThemeToggle</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">true</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">isDark</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">boolean</td>
+                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">false</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">ctaText</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">string</td>
+                        <td class="py-3 px-4 font-mono text-slate-500 text-xs">''</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Events Table -->
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Événements</h3>
+        <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl mb-8">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 dark:bg-slate-800">
+                    <tr>
+                        <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-400">Événement</th>
+                        <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-400">Arguments</th>
+                        <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-400">Description</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">logo-click</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">event: MouseEvent</td>
+                        <td class="py-3 px-4 text-slate-500">Déclenché lors du clic sur le logo</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">nav-click</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">item: NavItem, event: MouseEvent</td>
+                        <td class="py-3 px-4 text-slate-500">Déclenché lors du clic sur un lien de navigation</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">search-click</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">event: MouseEvent</td>
+                        <td class="py-3 px-4 text-slate-500">Déclenché lors du clic sur le bouton de recherche</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">theme-toggle</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">event: MouseEvent</td>
+                        <td class="py-3 px-4 text-slate-500">Déclenché lors du basculement du thème</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">cta-click</td>
+                        <td class="py-3 px-4 font-mono text-emerald-600 dark:text-emerald-400 text-xs">event: MouseEvent</td>
+                        <td class="py-3 px-4 text-slate-500">Déclenché lors du clic sur le bouton d'appel à l'action (CTA)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slots Table -->
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Slots</h3>
+        <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-xl">
+            <table class="w-full text-sm">
+                <thead class="bg-slate-50 dark:bg-slate-800">
+                    <tr>
+                        <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-400">Nom</th>
+                        <th class="text-left py-3 px-4 font-semibold text-slate-600 dark:text-slate-400">Description</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">logo-icon</td>
+                        <td class="py-3 px-4 text-slate-500">Icône personnalisée pour le logo</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 font-mono text-indigo-600 dark:text-indigo-400 text-xs">theme-icon</td>
+                        <td class="py-3 px-4 text-slate-500">Icône personnalisée pour le bouton de thème</td>
                     </tr>
                 </tbody>
             </table>

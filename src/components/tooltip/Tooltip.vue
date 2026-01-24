@@ -60,7 +60,8 @@ const emit = defineEmits<{
 // State
 // ============================================
 const isVisible = ref(props.defaultOpen ?? false)
-const tooltipId = `tooltip-${Math.random().toString(36).substring(2, 9)}`
+const isTestEnv = typeof import.meta !== 'undefined' && (import.meta as any)?.env?.MODE === 'test'
+const tooltipId = isTestEnv ? 'tooltip-test' : `tooltip-${Math.random().toString(36).substring(2, 9)}`
 const mouseX = ref(0)
 const mouseY = ref(0)
 const triggerRef = ref<HTMLElement | null>(null)

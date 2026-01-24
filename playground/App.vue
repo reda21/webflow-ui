@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { Navbar, type NavItem } from '../src/index'
+import { Navbar, ModalRenderer, ToastProvider, type NavItem } from '../src/index'
 
 const route = useRoute()
 const isDark = ref(false)
@@ -77,7 +77,10 @@ onMounted(() => {
 
         <!-- Main Content -->
         <main class="relative z-10">
-            <router-view />
+            <ToastProvider>
+                <router-view />
+                <ModalRenderer />
+            </ToastProvider>
         </main>
 
         <!-- Footer -->

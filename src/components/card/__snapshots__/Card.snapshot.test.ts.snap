@@ -1,0 +1,244 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card Snapshot Tests > matches snapshot with basic variants > default-variant 1`] = `
+"<div class="card card--default card--shadow-md" aria-label="Snapshot Title" role="article" tabindex="-1">
+  <div class="card-inner">
+    <!-- Front Face -->
+    <div class="card-face card-face--front">
+      <div class="card-content-wrapper">
+        <!-- Loading Skeleton (Dynamic) -->
+        <!-- Standard Content -->
+        <!-- Progress Bar -->
+        <div class="card-progress">
+          <div class="card-progress-bar"></div>
+        </div><!-- Badge -->
+        <!--v-if-->
+        <!-- Rating -->
+        <!--v-if-->
+        <!-- Price -->
+        <!--v-if-->
+        <!-- Like Indicator -->
+        <!--v-if-->
+        <!-- Selectable Checkbox -->
+        <!--v-if-->
+        <!-- Carousel (Dynamic) -->
+        <!--v-if-->
+        <!-- Header -->
+        <header class="card-header">
+          <div class="card-title">Snapshot Title</div>
+          <div class="card-subtitle">Snapshot Subtitle</div>
+        </header><!-- Body -->
+        <div class="card-body card-body--p-md">
+          <!--v-if-->
+        </div><!-- Expanded Content -->
+        <!--v-if-->
+        <!-- Footer -->
+        <!--v-if-->
+      </div>
+    </div><!-- Back Face -->
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Card Snapshot Tests > matches snapshot with basic variants > glass-variant 1`] = `
+"<div class="card card--glass card--shadow-md" aria-label="Snapshot Title" role="article" tabindex="-1">
+  <div class="card-inner">
+    <!-- Front Face -->
+    <div class="card-face card-face--front">
+      <div class="card-content-wrapper">
+        <!-- Loading Skeleton (Dynamic) -->
+        <!-- Standard Content -->
+        <!-- Progress Bar -->
+        <div class="card-progress">
+          <div class="card-progress-bar"></div>
+        </div><!-- Badge -->
+        <!--v-if-->
+        <!-- Rating -->
+        <!--v-if-->
+        <!-- Price -->
+        <!--v-if-->
+        <!-- Like Indicator -->
+        <!--v-if-->
+        <!-- Selectable Checkbox -->
+        <!--v-if-->
+        <!-- Carousel (Dynamic) -->
+        <!--v-if-->
+        <!-- Header -->
+        <header class="card-header">
+          <div class="card-title">Snapshot Title</div>
+          <div class="card-subtitle">Snapshot Subtitle</div>
+        </header><!-- Body -->
+        <div class="card-body card-body--p-md">
+          <!--v-if-->
+        </div><!-- Expanded Content -->
+        <!--v-if-->
+        <!-- Footer -->
+        <!--v-if-->
+      </div>
+    </div><!-- Back Face -->
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Card Snapshot Tests > matches snapshot with basic variants > neumorphism-variant 1`] = `
+"<div class="card card--neumorphism card--shadow-md" aria-label="Snapshot Title" role="article" tabindex="-1">
+  <div class="card-inner">
+    <!-- Front Face -->
+    <div class="card-face card-face--front">
+      <div class="card-content-wrapper">
+        <!-- Loading Skeleton (Dynamic) -->
+        <!-- Standard Content -->
+        <!-- Progress Bar -->
+        <div class="card-progress">
+          <div class="card-progress-bar"></div>
+        </div><!-- Badge -->
+        <!--v-if-->
+        <!-- Rating -->
+        <!--v-if-->
+        <!-- Price -->
+        <!--v-if-->
+        <!-- Like Indicator -->
+        <!--v-if-->
+        <!-- Selectable Checkbox -->
+        <!--v-if-->
+        <!-- Carousel (Dynamic) -->
+        <!--v-if-->
+        <!-- Header -->
+        <header class="card-header">
+          <div class="card-title">Snapshot Title</div>
+          <div class="card-subtitle">Snapshot Subtitle</div>
+        </header><!-- Body -->
+        <div class="card-body card-body--p-md">
+          <!--v-if-->
+        </div><!-- Expanded Content -->
+        <!--v-if-->
+        <!-- Footer -->
+        <!--v-if-->
+      </div>
+    </div><!-- Back Face -->
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Card Snapshot Tests > matches snapshot with basic variants > outlined-variant 1`] = `
+"<div class="card card--outlined card--shadow-md" aria-label="Snapshot Title" role="article" tabindex="-1">
+  <div class="card-inner">
+    <!-- Front Face -->
+    <div class="card-face card-face--front">
+      <div class="card-content-wrapper">
+        <!-- Loading Skeleton (Dynamic) -->
+        <!-- Standard Content -->
+        <!-- Progress Bar -->
+        <div class="card-progress">
+          <div class="card-progress-bar"></div>
+        </div><!-- Badge -->
+        <!--v-if-->
+        <!-- Rating -->
+        <!--v-if-->
+        <!-- Price -->
+        <!--v-if-->
+        <!-- Like Indicator -->
+        <!--v-if-->
+        <!-- Selectable Checkbox -->
+        <!--v-if-->
+        <!-- Carousel (Dynamic) -->
+        <!--v-if-->
+        <!-- Header -->
+        <header class="card-header">
+          <div class="card-title">Snapshot Title</div>
+          <div class="card-subtitle">Snapshot Subtitle</div>
+        </header><!-- Body -->
+        <div class="card-body card-body--p-md">
+          <!--v-if-->
+        </div><!-- Expanded Content -->
+        <!--v-if-->
+        <!-- Footer -->
+        <!--v-if-->
+      </div>
+    </div><!-- Back Face -->
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Card Snapshot Tests > matches snapshot with basic variants > soft-variant 1`] = `
+"<div class="card card--soft card--shadow-md" aria-label="Snapshot Title" role="article" tabindex="-1">
+  <div class="card-inner">
+    <!-- Front Face -->
+    <div class="card-face card-face--front">
+      <div class="card-content-wrapper">
+        <!-- Loading Skeleton (Dynamic) -->
+        <!-- Standard Content -->
+        <!-- Progress Bar -->
+        <div class="card-progress">
+          <div class="card-progress-bar"></div>
+        </div><!-- Badge -->
+        <!--v-if-->
+        <!-- Rating -->
+        <!--v-if-->
+        <!-- Price -->
+        <!--v-if-->
+        <!-- Like Indicator -->
+        <!--v-if-->
+        <!-- Selectable Checkbox -->
+        <!--v-if-->
+        <!-- Carousel (Dynamic) -->
+        <!--v-if-->
+        <!-- Header -->
+        <header class="card-header">
+          <div class="card-title">Snapshot Title</div>
+          <div class="card-subtitle">Snapshot Subtitle</div>
+        </header><!-- Body -->
+        <div class="card-body card-body--p-md">
+          <!--v-if-->
+        </div><!-- Expanded Content -->
+        <!--v-if-->
+        <!-- Footer -->
+        <!--v-if-->
+      </div>
+    </div><!-- Back Face -->
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Card Snapshot Tests > matches snapshot with premium features > premium-features 1`] = `
+"<div class="card card--default card--shadow-md card--hover-glow" aria-label="Premium Card" role="article" tabindex="-1">
+  <div class="card-inner">
+    <!-- Front Face -->
+    <div class="card-face card-face--front">
+      <div class="card-content-wrapper">
+        <!-- Loading Skeleton (Dynamic) -->
+        <!-- Standard Content -->
+        <!-- Progress Bar -->
+        <div class="card-progress">
+          <div class="card-progress-bar" style="width: 65%;"></div>
+        </div><!-- Badge -->
+        <div class="card-badge">New</div><!-- Rating -->
+        <div class="card-rating"><span class="card-rating-star card-rating-star--filled"> ★ </span><span class="card-rating-star card-rating-star--filled"> ★ </span><span class="card-rating-star card-rating-star--filled"> ★ </span><span class="card-rating-star card-rating-star--filled"> ★ </span><span class="card-rating-star"> ★ </span></div><!-- Price -->
+        <div class="card-price">99,99&nbsp;$US</div><!-- Like Indicator -->
+        <!--v-if-->
+        <!-- Selectable Checkbox -->
+        <!--v-if-->
+        <!-- Carousel (Dynamic) -->
+        <!--v-if-->
+        <!-- Header -->
+        <header class="card-header">
+          <div class="card-title">Premium Card</div>
+          <!--v-if-->
+        </header><!-- Body -->
+        <div class="card-body card-body--p-md">
+          <!--v-if-->
+        </div><!-- Expanded Content -->
+        <!--v-if-->
+        <!-- Footer -->
+        <!--v-if-->
+      </div>
+    </div><!-- Back Face -->
+    <!--v-if-->
+  </div>
+</div>"
+`;

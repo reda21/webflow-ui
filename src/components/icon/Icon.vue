@@ -44,6 +44,9 @@ const isVisible = ref(!props.lazy)
 const iconRef = ref<HTMLElement | null>(null)
 let observer: IntersectionObserver | null = null
 
+// Test environment detection to avoid network icon loading in Vitest
+const isTestEnv = typeof import.meta !== 'undefined' && (import.meta as any)?.env?.MODE === 'test'
+
 // Check if icon is cached
 const isCached = (iconName: string): boolean => {
   return iconCache.has(iconName)
@@ -51,6 +54,11 @@ const isCached = (iconName: string): boolean => {
 
 // Load and cache icon
 const loadAndCacheIcon = async (iconName: string) => {
+  if (isTestEnv) {
+    iconCache.set(iconName, true)
+    isLoading.value = false
+    return
+  }
   if (isCached(iconName)) {
     isLoading.value = false
     return
@@ -96,6 +104,7 @@ const setupLazyLoading = () => {
 
 // Initialize
 onMounted(async () => {
+  if (isTestEnv) return
   setupLazyLoading()
 
   if (iconRef.value && observer) {
@@ -264,22 +273,24 @@ const isClient = typeof window !== 'undefined'
 </script>
 
 <template>
-  <!-- Lazy loading placeholder -->
-  <span v-if="lazy && !isVisible" ref="iconRef" :class="iconClasses" :style="iconStyles" />
+  <span v-bind="ariaAttrs">
+    <!-- Lazy loading placeholder -->
+    <span v-if="lazy && !isVisible" ref="iconRef" :class="iconClasses" :style="iconStyles" />
 
-  <!-- Loading Skeleton -->
-  <span v-else-if="(isLoading || loading) && skeleton && mode === 'svg'" :class="iconClasses" :style="iconStyles"
-    v-bind="ariaAttrs" />
+    <!-- Loading Skeleton -->
+    <span v-else-if="(isLoading || loading) && skeleton && mode === 'svg'" :class="iconClasses" :style="iconStyles" />
 
-  <!-- Sprite Mode -->
-  <svg v-else-if="sprite" :class="iconClasses" :style="iconStyles" v-bind="ariaAttrs">
-    <use :href="spriteIcon!" />
-  </svg>
+    <!-- Sprite Mode -->
+    <svg v-else-if="sprite" :class="iconClasses" :style="iconStyles">
+      <use :href="spriteIcon!" />
+    </svg>
 
-  <!-- SVG Mode (default) - uses Iconify -->
-  <IconifyIcon v-else-if="mode === 'svg' && isClient" :icon="displayIcon" :width="iconifySize" :height="iconifySize"
-    :rotate="rotate" :flip="flip" :class="iconClasses" :style="iconStyles" v-bind="ariaAttrs" />
+    <!-- SVG Mode (default) - uses Iconify -->
+    <IconifyIcon v-else-if="!isTestEnv && mode === 'svg' && isClient" :icon="displayIcon" :width="iconifySize"
+      :height="iconifySize" :class="iconClasses" :style="iconStyles" />
+    <span v-else-if="mode === 'svg'" :class="iconClasses" :style="iconStyles" />
 
-  <!-- CSS Mode - uses mask-image -->
-  <span v-else :class="iconClasses" :style="iconStyles" v-bind="ariaAttrs" />
+    <!-- CSS Mode - uses mask-image -->
+    <span v-else :class="iconClasses" :style="iconStyles" />
+  </span>
 </template>

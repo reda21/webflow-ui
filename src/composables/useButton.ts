@@ -20,7 +20,7 @@ export interface UseButtonEmits {
 
 export function useButton(props: UseButtonProps, emit: UseButtonEmits) {
     const internalLoading = ref(false)
-    const countdownValue = ref(0)
+    const countdownValue = ref(props.countdown && props.countdown > 0 ? props.countdown : 0)
     const isDoubleClickBlocked = ref(false)
     const isLongPressing = ref(false)
     const hasCopied = ref(false)

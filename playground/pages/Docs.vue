@@ -17,6 +17,9 @@ const activeSection = computed(() => {
     if (route.path.includes('icon')) return 'icon'
     if (route.path.includes('tooltip')) return 'tooltip'
     if (route.path.includes('modal')) return 'modal'
+    if (route.path.includes('card')) return 'card'
+    if (route.path.includes('skeleton')) return 'skeleton'
+    if (route.path.includes('toast')) return 'toast'
     return ''
 })
 
@@ -125,13 +128,28 @@ const scrollToSection = (sectionId: string) => {
                             </router-link>
                         </li>
                         <li>
-                            <span
-                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-400 dark:text-slate-600 cursor-not-allowed">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                            <router-link to="/docs/components/card"
+                                :class="[activeSection === 'card' ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800']"
+                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                 Card
-                                <span
-                                    class="ml-auto text-xs px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">Soon</span>
-                            </span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/docs/components/skeleton"
+                                :class="[activeSection === 'skeleton' ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800']"
+                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Skeleton
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/docs/components/toast"
+                                :class="[activeSection === 'toast' ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800']"
+                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Toast
+                            </router-link>
                         </li>
                         <li>
                             <span

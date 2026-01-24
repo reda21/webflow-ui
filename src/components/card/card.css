@@ -1,0 +1,444 @@
+@reference "../../theme.css";
+
+/* ============================================
+   Card Component Styles
+   ============================================ */
+
+.card {
+  @apply relative flex flex-col overflow-hidden transition-all duration-300;
+  @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800;
+  @apply rounded-xl;
+}
+
+/* ----------------------------------------
+   Variants
+   ---------------------------------------- */
+.card--outlined {
+  @apply border-2;
+}
+
+.card--ghost {
+  @apply bg-transparent border-transparent shadow-none;
+}
+
+.card--soft {
+  @apply bg-slate-50 dark:bg-slate-800/50 border-none;
+}
+
+.card--glass {
+  @apply bg-white/70 dark:bg-slate-900/70 border-white/20;
+  @apply backdrop-blur-xl saturate-150;
+}
+
+.card--gradient {
+  @apply border-none text-white;
+  background: linear-gradient(
+    135deg,
+    var(--color-indigo-600) 0%,
+    var(--color-violet-600) 100%
+  );
+}
+
+.dark .card--gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-indigo-500) 0%,
+    var(--color-violet-500) 100%
+  );
+}
+
+/* Neumorphism */
+.card--neumorphism {
+  @apply bg-slate-100 dark:bg-slate-800;
+  @apply shadow-[inset_2px_2px_5px_rgba(0,0,0,0.1),inset_-2px_-2px_5px_rgba(255,255,255,0.7)];
+  @apply dark:shadow-[inset_2px_2px_5px_rgba(0,0,0,0.3),inset_-2px_-2px_5px_rgba(255,255,255,0.05)];
+  border: none;
+}
+
+/* Bordered */
+.card--bordered {
+  @apply border-4 border-solid;
+  border-color: var(--color-primary-500, #6366f1);
+}
+
+/* Elevated */
+.card--elevated {
+  @apply shadow-xl hover:shadow-2xl;
+  @apply transform hover:-translate-y-1;
+}
+
+/* Minimal */
+.card--minimal {
+  @apply bg-transparent border-none shadow-none;
+  @apply p-0;
+}
+
+/* ----------------------------------------
+   Shadows
+   ---------------------------------------- */
+.card--shadow-none {
+  @apply shadow-none;
+}
+.card--shadow-sm {
+  @apply shadow-sm;
+}
+.card--shadow-md {
+  @apply shadow-md;
+}
+.card--shadow-lg {
+  @apply shadow-lg;
+}
+.card--shadow-xl {
+  @apply shadow-xl;
+}
+.card--shadow-2xl {
+  @apply shadow-2xl;
+}
+.card--shadow-inner {
+  @apply shadow-inner;
+}
+
+/* ----------------------------------------
+   Padding
+   ---------------------------------------- */
+.card-body--p-none {
+  @apply p-0;
+}
+.card-body--p-xs {
+  @apply p-2;
+}
+.card-body--p-sm {
+  @apply p-4;
+}
+.card-body--p-md {
+  @apply p-6;
+}
+.card-body--p-lg {
+  @apply p-8;
+}
+.card-body--p-xl {
+  @apply p-12;
+}
+
+/* ----------------------------------------
+   Hover Effects
+   ---------------------------------------- */
+.card--hover-scale:hover {
+  @apply scale-[1.02] z-10;
+}
+
+.card--hover-raise:hover {
+  @apply -translate-y-1 shadow-xl;
+}
+
+.card--hover-glow:hover {
+  @apply border-indigo-500/50;
+  box-shadow: 0 0 20px -5px var(--color-indigo-500/30);
+}
+
+/* ----------------------------------------
+   Sections
+   ---------------------------------------- */
+.card-header {
+  @apply px-6 py-4 flex flex-col gap-1;
+}
+
+.card-title {
+  @apply text-xl font-bold text-slate-900 dark:text-white leading-tight;
+}
+
+.card-subtitle {
+  @apply text-sm text-slate-500 dark:text-slate-400;
+}
+
+.card--gradient .card-title,
+.card--gradient .card-subtitle {
+  @apply text-white opacity-90;
+}
+
+.card-image-wrapper {
+  @apply relative w-full overflow-hidden;
+}
+
+.card-image {
+  @apply w-full h-full object-cover transition-transform duration-500;
+}
+
+.card:hover .card-image {
+  @apply scale-110;
+}
+
+.card-body {
+  @apply flex-1;
+}
+
+.card-body--scrollable {
+  @apply overflow-y-auto max-h-[400px];
+}
+
+.card-footer {
+  @apply px-6 py-4 mt-auto border-t border-slate-100 dark:border-slate-800 flex items-center;
+}
+
+.card--soft .card-footer,
+.card--gradient .card-footer {
+  @apply border-black/5 dark:border-white/5;
+}
+
+/* ----------------------------------------
+   New Features
+   ---------------------------------------- */
+
+/* Loading Skeleton */
+.card-skeleton {
+  @apply animate-pulse;
+}
+
+.card-skeleton-image {
+  @apply w-full h-48 bg-slate-200 dark:bg-slate-700 rounded-t-xl;
+}
+
+.card-skeleton-header {
+  @apply p-6 space-y-2;
+}
+
+.card-skeleton-title {
+  @apply h-4 bg-slate-200 dark:bg-slate-700 rounded w-3/4;
+}
+
+.card-skeleton-subtitle {
+  @apply h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/2;
+}
+
+.card-skeleton-body {
+  @apply px-6 pb-6 space-y-2;
+}
+
+.card-skeleton-line {
+  @apply h-3 bg-slate-200 dark:bg-slate-700 rounded;
+}
+
+.card-skeleton-line:nth-child(2) {
+  @apply w-5/6;
+}
+
+.card-skeleton-line:nth-child(3) {
+  @apply w-4/6;
+}
+
+/* Progress Bar */
+.card-progress {
+  @apply absolute top-0 left-0 right-0 h-1 bg-slate-200 dark:bg-slate-700 z-10;
+}
+
+.card-progress-bar {
+  @apply h-full bg-primary-500 transition-all duration-300;
+}
+
+/* Badge */
+.card-badge {
+  @apply absolute top-2 right-2 bg-primary-500 text-white text-xs px-2 py-1 rounded-full z-10;
+}
+
+/* Rating */
+.card-rating {
+  @apply absolute top-2 left-2 flex gap-1 z-10;
+}
+
+.card-rating-star {
+  @apply text-slate-300 dark:text-slate-600 text-lg;
+}
+
+.card-rating-star--filled {
+  @apply text-yellow-400;
+}
+
+/* Price */
+.card-price {
+  @apply absolute bottom-2 right-2 bg-black/80 text-white px-3 py-1 rounded-lg text-lg font-bold z-10;
+}
+
+/* Selectable Checkbox */
+.card-checkbox {
+  @apply absolute top-2 left-2 z-10;
+}
+
+.card-checkbox-input {
+  @apply w-4 h-4 text-primary-500 bg-white border-slate-300 rounded focus:ring-primary-500;
+}
+
+/* Expandable */
+.card-expand-indicator {
+  @apply text-center text-slate-400 mt-2 cursor-pointer;
+}
+
+.card-expanded-content {
+  @apply px-6 pb-4 border-t border-slate-100 dark:border-slate-800;
+}
+
+/* Interactive States */
+.card--interactive {
+  @apply cursor-pointer hover:shadow-lg;
+}
+
+.card--selectable {
+  @apply hover:border-primary-500;
+}
+
+.card--draggable {
+  @apply cursor-move;
+}
+
+.card--loading {
+  @apply pointer-events-none opacity-75;
+}
+
+/* Flip Card Styles */
+.card-inner {
+  @apply relative w-full h-full transition-transform duration-700;
+  transform-style: preserve-3d;
+}
+
+.card--flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  @apply absolute inset-0 w-full h-full;
+  backface-visibility: hidden;
+}
+
+.card-face--front {
+  @apply relative z-[1];
+}
+
+.card-face--back {
+  @apply bg-white dark:bg-slate-900 rounded-xl overflow-hidden;
+  transform: rotateY(180deg);
+  z-index: 0;
+}
+
+/* Carousel Styles */
+.card-carousel {
+  @apply relative w-full overflow-hidden;
+}
+
+.card-carousel-container {
+  @apply flex transition-transform duration-500 ease-in-out;
+  transform: translateX(calc(-100% * var(--current-index, 0)));
+}
+
+.card-carousel-image {
+  @apply w-full h-full object-cover flex-shrink-0;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+
+.card-carousel-image--active {
+  opacity: 1;
+}
+
+.card-carousel-btn {
+  @apply absolute top-1/2 transform -translate-y-1/2 bg-black/50 text-white w-8 h-8 flex items-center justify-center rounded-full;
+  @apply hover:bg-black/70 transition-colors;
+  z-index: 10;
+}
+
+.card-carousel-prev {
+  @apply left-2;
+}
+.card-carousel-next {
+  @apply right-2;
+}
+
+.card-carousel-dots {
+  @apply absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1.5;
+}
+
+.card-carousel-dot {
+  @apply w-1.5 h-1.5 rounded-full bg-white/40 transition-all duration-300;
+}
+
+.card-carousel-dot--active {
+  @apply bg-white w-4;
+}
+
+/* Like Indicator */
+.card-like-indicator {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply text-6xl animate-ping;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Accordion Styles */
+.card-accordion {
+  @apply w-full;
+}
+
+/* High Contrast Mode */
+.card--high-contrast {
+  @apply border-4 border-black;
+  @apply dark:border-white;
+}
+
+.card--high-contrast .card-title {
+  @apply font-black;
+}
+
+.card--high-contrast .card-subtitle {
+  @apply font-bold;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .card-carousel-btn {
+    @apply p-1 text-sm;
+  }
+
+  .card-carousel-dot {
+    @apply w-1.5 h-1.5;
+  }
+
+  .card-price {
+    @apply text-sm px-2 py-1;
+  }
+
+  .card-badge {
+    @apply text-xs px-1.5 py-0.5;
+  }
+}
+
+/* GPU Optimizations */
+.card--gpu-optimized * {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.card--gpu-optimized .card-image,
+.card--gpu-optimized .card-carousel-image {
+  transform: translateZ(0);
+}
+
+/* Accessibility Improvements */
+.card:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-500;
+}
+
+.card--selectable:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-flip-container {
+    transition: none;
+  }
+
+  .card-carousel-container {
+    transition: none;
+  }
+
+  .card-like-indicator {
+    animation: none;
+  }
+}

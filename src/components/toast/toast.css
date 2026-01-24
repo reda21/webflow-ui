@@ -1,0 +1,183 @@
+@reference "../../theme.css";
+
+/* ============================================
+   Toast Component Styles
+   ============================================ */
+
+.toast-viewport {
+  @apply fixed z-[100] flex flex-col gap-3 p-6 pointer-events-none;
+  @apply w-full max-w-sm;
+}
+
+/* Positions */
+.toast-viewport--top-right {
+  @apply top-0 right-0;
+}
+.toast-viewport--top-left {
+  @apply top-0 left-0;
+}
+.toast-viewport--bottom-right {
+  @apply bottom-0 right-0 flex-col-reverse;
+}
+.toast-viewport--bottom-left {
+  @apply bottom-0 left-0 flex-col-reverse;
+}
+.toast-viewport--top-center {
+  @apply top-0 left-1/2 -translate-x-1/2 items-center;
+}
+.toast-viewport--bottom-center {
+  @apply bottom-0 left-1/2 -translate-x-1/2 items-center flex-col-reverse;
+}
+
+.toast-root {
+  @apply relative pointer-events-auto w-full overflow-hidden;
+  @apply rounded-xl shadow-2xl;
+  @apply transform transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)];
+  /* Soft Style (Default) */
+  @apply bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800;
+}
+
+/* --- Severities --- */
+
+/* Primary (Default) */
+.toast--primary .toast-icon-wrapper {
+  @apply text-indigo-500;
+}
+.toast--primary .toast-progress-bar {
+  @apply text-indigo-500;
+}
+
+/* Secondary */
+.toast--secondary .toast-icon-wrapper {
+  @apply text-slate-500;
+}
+.toast--secondary .toast-progress-bar {
+  @apply text-slate-500;
+}
+
+/* Success */
+.toast--success .toast-icon-wrapper {
+  @apply text-emerald-500;
+}
+.toast--success .toast-progress-bar {
+  @apply text-emerald-500;
+}
+
+/* Info */
+.toast--info .toast-icon-wrapper {
+  @apply text-sky-500;
+}
+.toast--info .toast-progress-bar {
+  @apply text-sky-500;
+}
+
+/* Warn */
+.toast--warn .toast-icon-wrapper,
+.toast--warning .toast-icon-wrapper {
+  @apply text-amber-500;
+}
+.toast--warn .toast-progress-bar,
+.toast--warning .toast-progress-bar {
+  @apply text-amber-500;
+}
+
+/* Help */
+.toast--help .toast-icon-wrapper {
+  @apply text-violet-500;
+}
+.toast--help .toast-progress-bar {
+  @apply text-violet-500;
+}
+
+/* Danger */
+.toast--danger .toast-icon-wrapper {
+  @apply text-rose-500;
+}
+.toast--danger .toast-progress-bar {
+  @apply text-rose-500;
+}
+
+/* Contrast (Adaptive High Contrast) */
+.toast-root.toast--contrast {
+  @apply bg-slate-950 text-white border-slate-800;
+  @apply dark:bg-white dark:text-slate-950 dark:border-white;
+}
+.toast--contrast .toast-title {
+  @apply text-white dark:text-slate-950;
+}
+.toast--contrast .toast-description {
+  @apply text-slate-300 dark:text-slate-600;
+}
+.toast--contrast .toast-icon-wrapper {
+  @apply text-white dark:text-slate-950;
+}
+.toast--contrast .toast-close {
+  @apply text-slate-400 hover:text-white dark:text-slate-500 dark:hover:text-slate-900;
+}
+.toast--contrast .toast-progress-bar {
+  @apply text-white/20 dark:text-slate-900/10;
+}
+
+.toast-content {
+  @apply p-4 flex gap-4 items-start;
+}
+
+.toast-icon-wrapper {
+  @apply shrink-0 mt-0.5;
+}
+
+.toast-body {
+  @apply flex-1 flex flex-col gap-1 min-w-0;
+}
+
+.toast-title {
+  @apply text-sm font-bold text-slate-900 dark:text-white leading-tight;
+}
+
+.toast-description {
+  @apply text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2;
+}
+
+.toast-actions {
+  @apply flex gap-2 items-center;
+}
+
+.toast-close {
+  @apply shrink-0 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1;
+}
+
+/* Progress Bar */
+.toast-progress {
+  @apply absolute bottom-0 left-0 h-1 bg-slate-200 dark:bg-slate-700/50 w-full;
+}
+
+.toast-progress-bar {
+  @apply h-full w-full;
+  transition-property: width;
+  transition-timing-function: linear;
+  background-color: currentColor;
+}
+
+/* Animations */
+.toast-enter-from {
+  opacity: 0;
+  transform: translate(0, 100%) scale(0.9);
+}
+.toast-viewport--top-right .toast-enter-from,
+.toast-viewport--bottom-right .toast-enter-from {
+  transform: translate(100%, 0) scale(0.9);
+}
+.toast-viewport--top-left .toast-enter-from,
+.toast-viewport--bottom-left .toast-enter-from {
+  transform: translate(-100%, 0) scale(0.9);
+}
+
+.toast-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Hover effect */
+.toast-root:hover {
+  @apply shadow-indigo-500/10 border-indigo-500/30;
+}

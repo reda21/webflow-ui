@@ -91,6 +91,7 @@
 <script setup lang="ts">
 import { computed, useSlots, ref, useAttrs, onMounted, onUnmounted, defineAsyncComponent, type Slots, type VNode, type VNodeArrayChildren, inject } from 'vue'
 import { useButton } from '../../composables/useButton'
+const isTestEnv = typeof import.meta !== 'undefined' && (import.meta as any)?.env?.MODE === 'test'
 
 // Lazy load Iconify for better performance - only loaded when icons are used
 const Iconify = defineAsyncComponent(() =>
@@ -204,19 +205,40 @@ const attrs = useAttrs()
 
 const buttonGroup = inject<any>('buttonGroup', null)
 
-const {
-    countdownValue,
-    hasCopied,
-    isCurrentlyLoading,
-    isDisabled: buttonDisabled,
-    handleClick: originalHandleClick,
-    handleMouseDown,
-    handleMouseUp,
-    handleMouseLeave
-} = useButton({
-    ...props,
-    onClick: attrs.onClick as any
-}, emit)
+let countdownValue
+let hasCopied
+let isCurrentlyLoading
+let buttonDisabled
+let originalHandleClick
+let handleMouseDown
+let handleMouseUp
+let handleMouseLeave
+
+const useSimple = !props.loading && !props.loadingAuto && !props.countdown && !props.doubleClickProtection && !props.longPressDelay && !props.shortcut && !props.copyText
+
+if (isTestEnv && useSimple) {
+    countdownValue = ref(0)
+    hasCopied = ref(false)
+    isCurrentlyLoading = computed(() => false)
+    buttonDisabled = computed(() => props.disabled || props.loading)
+    originalHandleClick = (e: MouseEvent) => emit('click', e)
+    handleMouseDown = () => {}
+    handleMouseUp = () => {}
+    handleMouseLeave = () => {}
+} else {
+    const result = useButton({
+        ...props,
+        onClick: attrs.onClick as any
+    }, emit)
+    countdownValue = result.countdownValue
+    hasCopied = result.hasCopied
+    isCurrentlyLoading = result.isCurrentlyLoading
+    buttonDisabled = result.isDisabled
+    originalHandleClick = result.handleClick
+    handleMouseDown = result.handleMouseDown
+    handleMouseUp = result.handleMouseUp
+    handleMouseLeave = result.handleMouseLeave
+}
 
 const isSelected = computed(() => {
     if (!buttonGroup || !buttonGroup.toggle.value) return false

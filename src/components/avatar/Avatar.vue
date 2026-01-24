@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, provide, ref, onMounted } from 'vue'
 import type { AvatarSize, AvatarRounded, AvatarColor, ChipProps } from './types'
-import Icon from '../icon/Icon.vue'
+import { defineAsyncComponent } from 'vue'
+const Icon = defineAsyncComponent(() => import('../icon/Icon.vue'))
 import './avatar.css'
 
 type FallbackType = 'initials' | 'icon' | 'placeholder'
@@ -81,8 +82,25 @@ const generateGradient = (text: string): string => {
     // Generate two colors from hash
     const hue1 = Math.abs(hash % 360)
     const hue2 = (hue1 + 40) % 360
-
-    return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%) 0%, hsl(${hue2}, 70%, 50%) 100%)`
+    const hslToHex = (h: number, s: number, l: number) => {
+        s /= 100
+        l /= 100
+        const c = (1 - Math.abs(2 * l - 1)) * s
+        const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
+        const m = l - c / 2
+        let r = 0, g = 0, b = 0
+        if (0 <= h && h < 60) { r = c; g = x; b = 0 }
+        else if (60 <= h && h < 120) { r = x; g = c; b = 0 }
+        else if (120 <= h && h < 180) { r = 0; g = c; b = x }
+        else if (180 <= h && h < 240) { r = 0; g = x; b = c }
+        else if (240 <= h && h < 300) { r = x; g = 0; b = c }
+        else { r = c; g = 0; b = x }
+        const toHex = (v: number) => Math.round((v + m) * 255).toString(16).padStart(2, '0')
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+    }
+    const color1 = hslToHex(hue1, 70, 60)
+    const color2 = hslToHex(hue2, 70, 50)
+    return `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`
 }
 
 // Compute avatar classes
@@ -159,7 +177,9 @@ const avatarStyle = computed(() => {
     if (props.gradient && !props.src) {
         const gradientSource = props.text || props.alt || ''
         if (gradientSource) {
-            style.background = generateGradient(gradientSource)
+            const grad = generateGradient(gradientSource)
+            style.background = grad
+            style.backgroundImage = grad
             style.borderColor = 'transparent'
         }
     } else if (props.color && !['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'neutral'].includes(props.color)) {
@@ -248,7 +268,7 @@ const ariaAttributes = computed(() => {
 
 <template>
     <component :is="as" :class="avatarClasses" :style="avatarStyle" v-bind="ariaAttributes">
-        <div class="avatar-content">
+        <div class="avatar-content" :class="{ invisible: skeleton }">
             <!-- Blur hash placeholder -->
             <div v-if="blurHash && !imageLoaded && src" class="absolute inset-0 avatar-blurhash"
                 :style="{ backgroundImage: `url(${blurHash})` }" />
