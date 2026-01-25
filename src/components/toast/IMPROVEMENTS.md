@@ -90,7 +90,7 @@ toast.undo("Email supprimé", () => restoreEmail());
 - [x] Méthode `toast.update(id, options)` pour modifier un toast existant
 - [x] Méthode `toast.dismiss(id)` alias de `remove`
 - [x] Méthode `toast.isActive(id)` pour vérifier si un toast est visible
-- [ ] Événement global `onToastAdd` / `onToastRemove`
+- [x] Événement global `onAdd` / `onRemove` (via Provider)
 
 ### State Management [DONE]
 

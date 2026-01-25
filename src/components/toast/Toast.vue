@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { Icon, Button, Avatar } from '@/index'
-import type { ToastProps } from './types'
+import type { ToastProps, SwipeEvent, ToastId, SwipeDirection } from './types'
 
 const props = withDefaults(defineProps<ToastProps>(), {
     severity: 'contrast',
@@ -17,15 +17,9 @@ const props = withDefaults(defineProps<ToastProps>(), {
     width: undefined
 })
 
-export interface SwipeEvent {
-    direction: 'up' | 'down' | 'left' | 'right'
-    distanceX: number
-    distanceY: number
-}
-
 const emit = defineEmits<{
-    'close': [id: string | number],
-    'close:prevent': [id: string | number],
+    'close': [id: ToastId],
+    'close:prevent': [id: ToastId],
     'pause': [],
     'resume': [],
     'escapeKeyDown': [event: KeyboardEvent],
@@ -40,6 +34,9 @@ const isVisible = ref(true)
 const progress = ref(100)
 const isPaused = ref(false)
 const isShaking = ref(false)
+const el = ref<HTMLElement | null>(null)
+const height = ref(0)
+let resizeObserver: ResizeObserver | null = null
 
 const shake = () => {
     isShaking.value = true
@@ -55,6 +52,9 @@ let remainingTime = props.duration
 // Swipe tracking
 let touchStartX = 0
 let touchStartY = 0
+const dragX = ref(0)
+const dragY = ref(0)
+const isDragging = ref(false)
 
 const normalizedSeverity = computed(() => props.severity === 'warning' ? 'warn' : props.severity)
 
@@ -96,7 +96,6 @@ const close = () => {
     emit('close', props.id)
 }
 
-// Force close - pour fermeture manuelle, bypass preventClose
 const forceClose = () => {
     isVisible.value = false
     emit('update:open', false)
@@ -147,9 +146,30 @@ const handleKeyDown = (event: KeyboardEvent) => {
     }
 }
 
-const dragX = ref(0)
-const dragY = ref(0)
-const isDragging = ref(false)
+const handleTab = (e: KeyboardEvent) => {
+    if (!props.preventClose) return
+
+    // Focus Trap logic for persistent toasts
+    const focusableElements = el.value?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    if (!focusableElements || focusableElements.length === 0) return
+
+    const firstElement = focusableElements[0] as HTMLElement
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+    if (e.shiftKey) { // Shift + Tab
+        if (document.activeElement === firstElement) {
+            lastElement.focus()
+            e.preventDefault()
+        }
+    } else { // Tab
+        if (document.activeElement === lastElement) {
+            firstElement.focus()
+            e.preventDefault()
+        }
+    }
+}
 
 const dragStyle = computed(() => {
     if (!isDragging.value) return {}
@@ -176,24 +196,14 @@ const onTouchMove = (event: TouchEvent) => {
     emit('swipeMove', event)
 }
 
-const el = ref<HTMLElement | null>(null)
-const height = ref(0)
-let resizeObserver: ResizeObserver | null = null
-
-defineExpose({
-    height,
-    shake
-})
-
 const onTouchEnd = (event: TouchEvent) => {
     isDragging.value = false
     const diffX = dragX.value
     const diffY = dragY.value
 
-    // Threshold for dismissal
     const threshold = 50
     if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
-        let direction: 'up' | 'down' | 'left' | 'right' = 'right'
+        let direction: SwipeDirection = 'right'
         if (Math.abs(diffX) > Math.abs(diffY)) {
             direction = diffX > 0 ? 'right' : 'left'
         } else {
@@ -253,7 +263,6 @@ const handleAction = async (action: any, index: number | string) => {
         }
     } catch (err) {
         console.error('[Toast Action Error]', err)
-        // Optionally update toast state to error
     } finally {
         loadingStates.value[index] = false
     }
@@ -296,6 +305,11 @@ onUnmounted(() => {
     if (timer) clearTimeout(timer)
     if (progressInterval) clearInterval(progressInterval)
 })
+
+defineExpose({
+    height,
+    shake
+})
 </script>
 
 <template>
@@ -304,12 +318,13 @@ onUnmounted(() => {
         `toast--${orientation}`,
         `toast-variant-${variant}`,
         `toast-animation-${animation}`,
-        width ? `toast-width-${width}` : '',
-        props.class,
+        props.width ? `toast-width-${props.width}` : '',
+        props['class'],
         { 'toast-prevent-close': preventClose, 'toast-shake': isShaking }
     ]" :style="dragStyle" :role="type === 'foreground' ? 'alert' : 'status'"
         :aria-live="type === 'foreground' ? 'assertive' : 'polite'" @mouseenter="pauseTimer" @mouseleave="resumeTimer"
-        @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+        @focusin="pauseTimer" @focusout="resumeTimer" @keydown.tab="handleTab" @touchstart="onTouchStart"
+        @touchmove="onTouchMove" @touchend="onTouchEnd">
         <div class="toast-content" :class="{ 'flex-col': orientation === 'vertical' }">
             <div class="flex items-start gap-4">
                 <slot name="leading" :ui="{ severity: normalizedSeverity }">
@@ -323,10 +338,10 @@ onUnmounted(() => {
 
                 <div class="toast-body">
                     <slot name="title">
-                        <h4 v-if="title" class="toast-title">{{ title }}</h4>
+                        <h4 v-if="title" class="toast-title text-sm font-bold">{{ title }}</h4>
                     </slot>
                     <slot name="description">
-                        <p v-if="description" class="toast-description" v-html="description"></p>
+                        <p v-if="description" class="toast-description text-xs" v-html="description"></p>
                     </slot>
 
                     <!-- Inline Image -->
@@ -338,14 +353,12 @@ onUnmounted(() => {
 
                     <!-- Link & Preview -->
                     <div v-if="link" class="toast-link-section mt-3 space-y-2">
-                        <!-- Simple Link -->
                         <a v-if="link.label || !link.preview" :href="link.url" :target="link.target || '_blank'"
                             class="text-xs font-bold underline decoration-indigo-500/30 hover:decoration-indigo-500 transition-all flex items-center gap-1">
                             <Icon name="heroicons:link" size="xs" class="shrink-0" />
                             {{ link.label || link.url }}
                         </a>
 
-                        <!-- Preview Card -->
                         <a v-if="link.preview" :href="link.url" :target="link.target || '_blank'"
                             class="toast-preview-card block bg-slate-50/50 dark:bg-slate-950/30 rounded-lg p-2 border border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-colors group">
                             <div class="flex gap-3 items-center">
@@ -366,7 +379,6 @@ onUnmounted(() => {
             </div>
 
             <slot name="actions">
-                <!-- Single Action (Legacy Support) -->
                 <div v-if="action && !actions" class="toast-actions"
                     :class="orientation === 'vertical' ? 'mt-4' : 'mt-2'">
                     <Button size="xs" variant="soft" :severity="actionSeverity"
@@ -376,7 +388,6 @@ onUnmounted(() => {
                     </Button>
                 </div>
 
-                <!-- Multiple Actions -->
                 <div v-if="actions && actions.length" class="toast-actions"
                     :class="orientation === 'vertical' ? 'mt-4 w-full flex-col' : 'mt-2'">
                     <Button v-for="(btn, index) in actions" :key="index" size="xs" :variant="btn.variant || 'soft'"
@@ -395,8 +406,6 @@ onUnmounted(() => {
             </slot>
         </div>
 
-
-        <!-- Progress Bar -->
         <div v-if="shouldShowProgress" class="toast-progress">
             <div class="toast-progress-bar" :style="{ width: `${progress}%`, backgroundColor: progressColor }"></div>
         </div>

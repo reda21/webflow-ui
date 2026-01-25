@@ -140,13 +140,14 @@ provide('toast', {
 <template>
     <div v-if="isClient" class="toast-containers">
         <template v-for="(list, position) in toasts" :key="position">
-            <div v-if="list.length > 0" class="toast-viewport" :class="[
-                `toast-viewport--${position}`,
-                {
-                    'toast-viewport--stacked': props.stacked,
-                    'toast-viewport--expanded': isExpanded && props.stacked
-                }
-            ]" @mouseenter="isExpanded = true" @mouseleave="isExpanded = false">
+            <div v-if="list.length > 0" class="toast-viewport" role="region" :aria-label="`Notifications ${position}`"
+                :class="[
+                    `toast-viewport--${position}`,
+                    {
+                        'toast-viewport--stacked': props.stacked,
+                        'toast-viewport--expanded': isExpanded && props.stacked
+                    }
+                ]" @mouseenter="isExpanded = true" @mouseleave="isExpanded = false">
                 <TransitionGroup name="toast">
                     <ToastItem v-for="toast in list" :key="toast.id" v-bind="toast" @close="removeToast(toast.id)" />
                 </TransitionGroup>
