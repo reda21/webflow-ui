@@ -33,6 +33,9 @@ watch(configPreventClose, (val) => {
     }
 })
 
+const configOrientation = ref<'horizontal' | 'vertical'>('horizontal')
+const configProgressColor = ref('')
+
 const triggerToast = () => {
     toast.add({
         title: configTitle.value,
@@ -41,7 +44,8 @@ const triggerToast = () => {
         position: configPosition.value,
         duration: configDuration.value,
         closable: configClosable.value,
-        showProgress: configShowProgress.value,
+        orientation: configOrientation.value,
+        progress: configProgressColor.value ? { color: configProgressColor.value } : configShowProgress.value,
         preventClose: configPreventClose.value,
         icon: mediaType.value === 'icon' ? configCustomIcon.value : (mediaType.value === 'none' ? false : true),
         avatar: mediaType.value === 'avatar' ? configAvatar.value : undefined
@@ -55,9 +59,16 @@ const generatedCode = computed(() => {
     if (configDesc.value) code += `  description: '${configDesc.value}',\n`
     if (configSeverity.value !== 'contrast') code += `  severity: '${configSeverity.value}',\n`
     if (configPosition.value !== 'top-right') code += `  position: '${configPosition.value}',\n`
+    if (configOrientation.value !== 'horizontal') code += `  orientation: '${configOrientation.value}',\n`
     if (configDuration.value !== 5000) code += `  duration: ${configDuration.value},\n`
     if (!configClosable.value) code += `  closable: false,\n`
-    if (!configShowProgress.value) code += `  showProgress: false,\n`
+
+    if (configProgressColor.value) {
+        code += `  progress: { color: '${configProgressColor.value}' },\n`
+    } else if (!configShowProgress.value) {
+        code += `  progress: false,\n`
+    }
+
     if (configPreventClose.value) code += `  preventClose: true,\n`
 
     if (mediaType.value === 'avatar') {
@@ -206,7 +217,7 @@ function addToCalendar() {
                         <div class="space-y-4">
                             <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                                 <span class="w-1 h-4 bg-indigo-500 rounded-full"></span>
-                                Style
+                                Layout & Style
                             </h3>
                             <div class="space-y-4">
                                 <div class="grid grid-cols-2 gap-4">
@@ -220,19 +231,31 @@ function addToCalendar() {
                                     </div>
                                     <div class="space-y-2">
                                         <label
+                                            class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Orientation</label>
+                                        <select v-model="configOrientation"
+                                            class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all">
+                                            <option value="horizontal">Horizontal</option>
+                                            <option value="vertical">Vertical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label
                                             class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Sévérité</label>
                                         <select v-model="configSeverity"
                                             class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all">
                                             <option v-for="s in severities" :key="s" :value="s">{{ s }}</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Durée
-                                        (ms)</label>
-                                    <input v-model.number="configDuration" type="number" step="500"
-                                        :disabled="configPreventClose"
-                                        class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed" />
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Durée
+                                            (ms)</label>
+                                        <input v-model.number="configDuration" type="number" step="500"
+                                            :disabled="configPreventClose"
+                                            class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -286,21 +309,28 @@ function addToCalendar() {
 
                                 <!-- Options checkboxes -->
                                 <div class="space-y-3 pt-2">
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center gap-2 cursor-pointer group">
+                                            <input v-model="configShowProgress" type="checkbox"
+                                                :disabled="configPreventClose"
+                                                class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed" />
+                                            <span
+                                                class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-tighter"
+                                                :class="{ 'opacity-50': configPreventClose }">Auto-progression</span>
+                                        </label>
+                                        <div v-if="configShowProgress" class="flex items-center gap-2">
+                                            <Icon name="heroicons:swatch" size="xs" class="text-slate-400" />
+                                            <input v-model="configProgressColor" type="color"
+                                                class="w-6 h-6 p-0 border-none bg-transparent cursor-pointer" />
+                                        </div>
+                                    </div>
+
                                     <label class="flex items-center gap-2 cursor-pointer group">
                                         <input v-model="configClosable" type="checkbox"
                                             class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
                                         <span
                                             class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-tighter">Bouton
                                             de fermeture</span>
-                                    </label>
-
-                                    <label class="flex items-center gap-2 cursor-pointer group">
-                                        <input v-model="configShowProgress" type="checkbox"
-                                            :disabled="configPreventClose"
-                                            class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed" />
-                                        <span
-                                            class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-tighter"
-                                            :class="{ 'opacity-50': configPreventClose }">Afficher la progression</span>
                                     </label>
 
                                     <label class="flex items-center gap-2 cursor-pointer group">
@@ -418,7 +448,31 @@ toast.add({
                 </div>
 
                 <div>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Exemple complexe (Logique d'application)
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Exemple complexe (Orientation & Actions) :
+                        </p>
+                        <div class="flex gap-2">
+                            <Button size="xs" severity="secondary" @click="toast.add({
+                                title: 'Uh oh! Something went wrong.',
+                                description: 'There was a problem with your request.',
+                                actions: [{ label: 'Retry', onClick: () => console.log('Retry') }],
+                                orientation: 'horizontal'
+                            })">Horizontal</Button>
+                            <Button size="xs" severity="secondary" @click="toast.add({
+                                title: 'Uh oh! Something went wrong.',
+                                description: 'There was a problem with your request.',
+                                actions: [
+                                    { label: 'Retry', icon: 'heroicons:arrow-path', onClick: () => console.log('Retry') },
+                                    { label: 'Cancel', variant: 'ghost', color: 'neutral', onClick: () => console.log('Cancel') }
+                                ],
+                                orientation: 'vertical'
+                            })">Vertical</Button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Planification d'événement (Usage Lucide)
                         :</p>
                     <div
                         class="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-between gap-8">
@@ -490,9 +544,24 @@ toast.add({
                                 <td class="px-6 py-4 text-slate-500">true</td>
                             </tr>
                             <tr>
-                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">showProgress</td>
-                                <td class="px-6 py-4 text-slate-500 italic">boolean</td>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">progress</td>
+                                <td class="px-6 py-4 text-slate-500 italic">boolean | { color?: string }</td>
                                 <td class="px-6 py-4 text-slate-500">true</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">orientation</td>
+                                <td class="px-6 py-4 text-slate-500 italic">'horizontal' | 'vertical'</td>
+                                <td class="px-6 py-4 text-slate-500">'horizontal'</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">actions</td>
+                                <td class="px-6 py-4 text-slate-500 italic">Array&lt;Action&gt;</td>
+                                <td class="px-6 py-4 text-slate-500">-</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">type</td>
+                                <td class="px-6 py-4 text-slate-500 italic">'foreground' | 'background'</td>
+                                <td class="px-6 py-4 text-slate-500">'foreground'</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">preventClose</td>
@@ -501,6 +570,194 @@ toast.add({
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slots -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <Icon name="heroicons:square-3-stack-3d" class="text-indigo-500" />
+                    Slots
+                </h3>
+                <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-2xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 dark:bg-slate-800/10 border-b border-inherit">
+                            <tr>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Nom</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Scope</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">leading</td>
+                                <td class="px-6 py-4 text-slate-500 italic">{ ui: { severity: string } }</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">title</td>
+                                <td class="px-6 py-4 text-slate-500 italic">{}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">description</td>
+                                <td class="px-6 py-4 text-slate-500 italic">{}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">actions</td>
+                                <td class="px-6 py-4 text-slate-500 italic">{}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">close</td>
+                                <td class="px-6 py-4 text-slate-500 italic">{ ui: { closable: boolean, forceClose:
+                                    Function } }</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emits -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <Icon name="heroicons:bolt" class="text-indigo-500" />
+                    Événements (Emits)
+                </h3>
+                <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-2xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 dark:bg-slate-800/10 border-b border-inherit">
+                            <tr>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Événement</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Type / Arguments</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">pause</td>
+                                <td class="px-6 py-4 text-slate-500">[]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">resume</td>
+                                <td class="px-6 py-4 text-slate-500">[]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">escapeKeyDown</td>
+                                <td class="px-6 py-4 text-slate-500">[event: KeyboardEvent]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">swipeStart</td>
+                                <td class="px-6 py-4 text-slate-500">[event: TouchEvent]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">swipeMove</td>
+                                <td class="px-6 py-4 text-slate-500">[event: TouchEvent]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">swipeCancel</td>
+                                <td class="px-6 py-4 text-slate-500">[event: TouchEvent]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">swipeEnd</td>
+                                <td class="px-6 py-4 text-slate-500">[event: SwipeEvent]</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">update:open</td>
+                                <td class="px-6 py-4 text-slate-500">[value: boolean]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expose -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <Icon name="heroicons:eye" class="text-indigo-500" />
+                    Expose
+                </h3>
+                <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-2xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 dark:bg-slate-800/10 border-b border-inherit">
+                            <tr>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Propriété</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Type</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                            <tr>
+                                <td class="px-6 py-4 font-mono text-indigo-500 font-bold">height</td>
+                                <td class="px-6 py-4 text-slate-500 italic">Ref&lt;number&gt;</td>
+                                <td class="px-6 py-4 text-slate-500">Hauteur réelle du toast calculée dynamiquement
+                                    (px).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configuration Globale -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <h2 class="text-3xl font-black">Configuration Globale</h2>
+            <p class="text-slate-600 dark:text-slate-400">Configurez les défauts de vos Toasts au niveau de
+                l'application.</p>
+
+            <div class="space-y-10">
+                <!-- NuxtJS -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        <Icon name="logos:nuxt-icon" size="sm" />
+                        Usage avec NuxtJS
+                    </h3>
+                    <div
+                        class="bg-slate-950 rounded-2xl p-6 border border-white/5 shadow-2xl relative group overflow-hidden">
+                        <div
+                            class="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 blur-[80px] pointer-events-none">
+                        </div>
+                        <pre class="text-xs leading-relaxed font-mono"><code class="text-emerald-300">// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@webmx/ui'],
+  webflowUi: {
+    toaster: {
+      max: 5
+    },
+    toast: {
+      duration: 3000,
+      position: 'bottom-right'
+    }
+  }
+})</code></pre>
+                    </div>
+                </div>
+
+                <!-- ViteJS -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        <Icon name="logos:vitejs" size="sm" />
+                        Usage avec Vite / Vue
+                    </h3>
+                    <div
+                        class="bg-slate-950 rounded-2xl p-6 border border-white/5 shadow-2xl relative group overflow-hidden">
+                        <div
+                            class="absolute -top-24 -right-24 w-48 h-48 bg-amber-500/10 blur-[80px] pointer-events-none">
+                        </div>
+                        <pre class="text-xs leading-relaxed font-mono"><code class="text-amber-300">// main.ts
+import { createApp } from 'vue'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.provide('webmx-config', {
+  toaster: { max: 10 },
+  toast: { severity: 'primary' }
+})
+
+app.mount('#app')</code></pre>
+                    </div>
                 </div>
             </div>
         </section>

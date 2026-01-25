@@ -34,17 +34,29 @@ export interface ToastProps {
   avatar?: string;
   /** Auto-close duration in MS. Set to 0 to disable. */
   duration?: number;
-  /** Whether to show the progress bar (default: true when duration > 0) */
-  showProgress?: boolean;
+  /** Progress bar configuration. Set to false to hide. */
+  progress?: boolean | { color?: string };
   /** Whether the toast can be closed manually */
   closable?: boolean;
+  /** Orientation of the toast content (default: horizontal) */
+  orientation?: "horizontal" | "vertical";
   /** Prevents the toast from being closed (both auto and manual) */
   preventClose?: boolean;
   /** Optional action button config */
   action?: {
     label: string;
-    onClick: () => void;
+    onClick: (event?: MouseEvent) => void;
   };
+  /** Optional array of action buttons */
+  actions?: Array<{
+    label: string;
+    onClick: (event?: MouseEvent) => void;
+    icon?: string;
+    color?: any;
+    variant?: any;
+  }>;
+  /** Control the sensitivity for accessibility. foreground (user action) or background (system task) */
+  type?: "foreground" | "background";
   /** Custom classes */
   class?: any;
 }

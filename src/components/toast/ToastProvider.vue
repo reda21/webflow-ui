@@ -4,6 +4,13 @@ import ToastItem from './Toast.vue'
 import type { ToastOptions, ToastPosition, ToastProps } from './types'
 import './toast.css'
 
+import { provide, inject } from 'vue'
+import { useWebmxConfig } from '../../lib/config'
+
+const props = defineProps<{
+    max?: number
+}>()
+
 // Global state for toasts
 const toasts = ref<Record<ToastPosition, ToastProps[]>>({
     'top-right': [],
@@ -14,20 +21,36 @@ const toasts = ref<Record<ToastPosition, ToastProps[]>>({
     'bottom-center': []
 })
 
+const globalConfig = useWebmxConfig()
+
 const addToast = (options: ToastOptions) => {
-    const position = options.position || 'top-right'
+    const defaults = globalConfig?.toast || {}
+    const toasterDefaults = globalConfig?.toaster || {}
+    const maxLimit = props.max ?? toasterDefaults.max ?? 5
+
+    const position = options.position || defaults.position || 'top-right'
+
+    // Respect max limit
+    if (toasts.value[position].length >= maxLimit) {
+        toasts.value[position].shift()
+    }
+
     const id = options.id || Math.random().toString(36).substring(2, 9)
 
     const newToast: ToastProps = {
         id,
         title: options.title,
         description: options.description,
-        severity: options.severity || 'contrast',
-        duration: options.duration !== undefined ? options.duration : 5000,
-        closable: options.closable !== undefined ? options.closable : true,
+        severity: options.severity || defaults.severity || 'contrast',
+        duration: options.duration !== undefined ? options.duration : (defaults.duration !== undefined ? defaults.duration : 5000),
+        closable: options.closable !== undefined ? options.closable : (defaults.closable !== undefined ? defaults.closable : true),
         icon: options.icon !== undefined ? options.icon : true,
         action: options.action,
+        actions: options.actions,
         avatar: options.avatar,
+        orientation: options.orientation || defaults.orientation || 'horizontal',
+        type: options.type || 'foreground',
+        progress: options.progress !== undefined ? options.progress : (defaults.progress !== undefined ? defaults.progress : true),
         class: options.class
     }
 

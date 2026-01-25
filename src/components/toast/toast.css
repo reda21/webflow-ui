@@ -39,101 +39,195 @@
 
 /* --- Severities --- */
 
-/* Primary (Default) */
+/* Primary */
 .toast-root.toast-primary {
-  @apply bg-primary-foreground text-gray-300;
+  @apply bg-indigo-600 dark:bg-indigo-500 border-indigo-700 dark:border-indigo-400;
 }
-
 .toast-primary .toast-icon-wrapper {
   @apply text-white;
 }
-
 .toast-primary .toast-title {
   @apply text-white;
 }
-
+.toast-primary .toast-description {
+  @apply text-indigo-100;
+}
+.toast-primary .toast-close {
+  @apply text-indigo-200 hover:text-white;
+}
+.toast-primary .toast-progress {
+  @apply bg-indigo-700/50 dark:bg-indigo-400/30;
+}
 .toast-primary .toast-progress-bar {
-  @apply text-primary;
+  @apply text-white;
 }
 
 /* Secondary */
 .toast-root.toast-secondary {
-  @apply bg-secondary text-secondary-foreground;
+  @apply bg-slate-600 dark:bg-slate-500 border-slate-700 dark:border-slate-400;
 }
 .toast-secondary .toast-icon-wrapper {
-  @apply text-secondary-foreground;
+  @apply text-white;
 }
 .toast-secondary .toast-title {
-  @apply text-secondary-foreground;
+  @apply text-white;
 }
 .toast-secondary .toast-description {
-  @apply text-secondary-foreground/80;
+  @apply text-slate-200;
+}
+.toast-secondary .toast-close {
+  @apply text-slate-300 hover:text-white;
+}
+.toast-secondary .toast-progress {
+  @apply bg-slate-700/50 dark:bg-slate-400/30;
 }
 .toast-secondary .toast-progress-bar {
-  @apply text-secondary-foreground/20;
+  @apply text-white;
 }
 
 /* Success */
+.toast-root.toast-success {
+  @apply bg-emerald-600 dark:bg-emerald-500 border-emerald-700 dark:border-emerald-400;
+}
 .toast-success .toast-icon-wrapper {
-  @apply text-emerald-500;
+  @apply text-white;
+}
+.toast-success .toast-title {
+  @apply text-white;
+}
+.toast-success .toast-description {
+  @apply text-emerald-100;
+}
+.toast-success .toast-close {
+  @apply text-emerald-200 hover:text-white;
+}
+.toast-success .toast-progress {
+  @apply bg-emerald-700/50 dark:bg-emerald-400/30;
 }
 .toast-success .toast-progress-bar {
-  @apply text-emerald-500;
+  @apply text-white;
 }
 
 /* Info */
+.toast-root.toast-info {
+  @apply bg-sky-600 dark:bg-sky-500 border-sky-700 dark:border-sky-400;
+}
 .toast-info .toast-icon-wrapper {
-  @apply text-sky-500;
+  @apply text-white;
+}
+.toast-info .toast-title {
+  @apply text-white;
+}
+.toast-info .toast-description {
+  @apply text-sky-100;
+}
+.toast-info .toast-close {
+  @apply text-sky-200 hover:text-white;
+}
+.toast-info .toast-progress {
+  @apply bg-sky-700/50 dark:bg-sky-400/30;
 }
 .toast-info .toast-progress-bar {
-  @apply text-sky-500;
+  @apply text-white;
 }
 
-/* Warn */
+/* Warn / Warning */
+.toast-root.toast-warn,
+.toast-root.toast-warning {
+  @apply bg-amber-500 dark:bg-amber-400 border-amber-600 dark:border-amber-300;
+}
 .toast-warn .toast-icon-wrapper,
 .toast-warning .toast-icon-wrapper {
-  @apply text-amber-500;
+  @apply text-amber-900;
+}
+.toast-warn .toast-title,
+.toast-warning .toast-title {
+  @apply text-amber-900;
+}
+.toast-warn .toast-description,
+.toast-warning .toast-description {
+  @apply text-amber-800;
+}
+.toast-warn .toast-close,
+.toast-warning .toast-close {
+  @apply text-amber-700 hover:text-amber-900;
+}
+.toast-warn .toast-progress,
+.toast-warning .toast-progress {
+  @apply bg-amber-600/50 dark:bg-amber-300/30;
 }
 .toast-warn .toast-progress-bar,
 .toast-warning .toast-progress-bar {
-  @apply text-amber-500;
+  @apply text-amber-900;
 }
 
 /* Help */
+.toast-root.toast-help {
+  @apply bg-violet-600 dark:bg-violet-500 border-violet-700 dark:border-violet-400;
+}
 .toast-help .toast-icon-wrapper {
-  @apply text-violet-500;
+  @apply text-white;
+}
+.toast-help .toast-title {
+  @apply text-white;
+}
+.toast-help .toast-description {
+  @apply text-violet-100;
+}
+.toast-help .toast-close {
+  @apply text-violet-200 hover:text-white;
+}
+.toast-help .toast-progress {
+  @apply bg-violet-700/50 dark:bg-violet-400/30;
 }
 .toast-help .toast-progress-bar {
-  @apply text-violet-500;
+  @apply text-white;
 }
 
 /* Danger */
+.toast-root.toast-danger {
+  @apply bg-rose-600 dark:bg-rose-500 border-rose-700 dark:border-rose-400;
+}
 .toast-danger .toast-icon-wrapper {
-  @apply text-rose-500;
+  @apply text-white;
+}
+.toast-danger .toast-title {
+  @apply text-white;
+}
+.toast-danger .toast-description {
+  @apply text-rose-100;
+}
+.toast-danger .toast-close {
+  @apply text-rose-200 hover:text-white;
+}
+.toast-danger .toast-progress {
+  @apply bg-rose-700/50 dark:bg-rose-400/30;
 }
 .toast-danger .toast-progress-bar {
-  @apply text-rose-500;
+  @apply text-white;
 }
 
 /* Contrast (Adaptive High Contrast) */
 .toast-root.toast-contrast {
-  @apply bg-contrast text-contrast-foreground border-slate-100;
-
-  @variant dark {
-    @apply bg-contrast-foreground text-foreground border-slate-800;
-  }
+  @apply bg-neutral-900 dark:bg-white border-neutral-800 dark:border-neutral-200;
 }
-
+.toast-contrast .toast-icon-wrapper {
+  @apply text-white dark:text-neutral-900;
+}
 .toast-contrast .toast-title {
-  @apply text-gray-700;
+  @apply text-white dark:text-neutral-900;
 }
-
-.dark .toast-contrast .toast-title {
-  @apply text-white;
+.toast-contrast .toast-description {
+  @apply text-neutral-300 dark:text-neutral-600;
 }
-
+.toast-contrast .toast-close {
+  @apply text-neutral-400 hover:text-white dark:text-neutral-500 dark:hover:text-neutral-900;
+}
+.toast-contrast .toast-progress {
+  @apply bg-neutral-700/50 dark:bg-neutral-300/50;
+}
 .toast-contrast .toast-progress-bar {
-  @apply text-white/20;
+  @apply text-white dark:text-neutral-900;
 }
 
 .toast-content {
@@ -158,6 +252,14 @@
 
 .toast-actions {
   @apply flex gap-2 items-center;
+}
+
+.toast--vertical .toast-actions {
+  @apply mt-auto flex-col items-stretch pt-2;
+}
+
+.toast--vertical .toast-content {
+  @apply items-stretch;
 }
 
 .toast-close {
