@@ -11,16 +11,16 @@
 
 /* Positions */
 .toast-viewport--top-right {
-  @apply top-0 right-0;
+  @apply top-0 right-0 items-end;
 }
 .toast-viewport--top-left {
-  @apply top-0 left-0;
+  @apply top-0 left-0 items-start;
 }
 .toast-viewport--bottom-right {
-  @apply bottom-0 right-0 flex-col-reverse;
+  @apply bottom-0 right-0 flex-col-reverse items-end;
 }
 .toast-viewport--bottom-left {
-  @apply bottom-0 left-0 flex-col-reverse;
+  @apply bottom-0 left-0 flex-col-reverse items-start;
 }
 .toast-viewport--top-center {
   @apply top-0 left-1/2 -translate-x-1/2 items-center;
@@ -484,13 +484,13 @@
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
   .toast-root {
-    @apply transition-none !important;
+    @apply !transition-none;
     animation: none !important;
   }
 
   .toast-enter-from,
   .toast-leave-to {
-    @apply opacity-0 !important;
+    @apply !opacity-0;
     transform: none !important;
   }
 }

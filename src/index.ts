@@ -89,3 +89,26 @@ export type {
   ToastSeverity,
   ToastPosition,
 } from "./components/toast/types";
+
+export {
+  Progress,
+  UProgress,
+  CircularProgress,
+} from "./components/progress/index";
+export type {
+  ProgressProps,
+  CircularProgressProps,
+  ProgressSize,
+  ProgressSeverity,
+  ProgressVariant,
+  ProgressAnimation,
+} from "./components/progress/types";
+
+export { Separator, USeparator } from "./components/separator/index";
+export type {
+  SeparatorProps,
+  SeparatorOrientation,
+  SeparatorVariant,
+  SeparatorSize,
+  SeparatorSeverity,
+} from "./components/separator/types";

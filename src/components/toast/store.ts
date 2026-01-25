@@ -3,7 +3,7 @@ import type { ToastId, ToastPosition, ToastProps, ToastOptions } from "./types";
 
 const STORAGE_KEY = "@webmx/toasts-persistence";
 
-export const toastsState = reactive<Record<ToastPosition, ToastProps[]>>({
+export const toastsState = ref<Record<ToastPosition, ToastProps[]>>({
   "top-right": [],
   "top-left": [],
   "bottom-right": [],
@@ -20,10 +20,7 @@ export const initPersistence = () => {
   if (stored) {
     try {
       const parsed = JSON.parse(stored);
-      // Only restore toasts that have a specific flag or are marked for persistence
-      // For now, let's allow general persistence if needed, but usually it's for specific toasts
-      // We'll just load them all for now if they exist
-      Object.assign(toastsState, parsed);
+      Object.assign(toastsState.value, parsed);
     } catch (e) {
       console.error("Failed to restore persisted toasts", e);
     }
@@ -32,7 +29,6 @@ export const initPersistence = () => {
   watch(
     toastsState,
     (newState) => {
-      // We might want to filter only "important" toasts for persistence
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
     },
     { deep: true },

@@ -94,6 +94,16 @@ const routes = [
         name: "docs-toast",
         component: () => import("./pages/docs/components/Toast.vue"),
       },
+      {
+        path: "components/progress",
+        name: "docs-progress",
+        component: () => import("./pages/docs/components/Progress.vue"),
+      },
+      {
+        path: "components/separator",
+        name: "docs-separator",
+        component: () => import("./pages/docs/components/Separator.vue"),
+      },
     ],
   },
 ];

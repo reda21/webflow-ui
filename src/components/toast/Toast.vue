@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { Icon, Button, Avatar } from '@/index'
-import type { ToastProps, SwipeEvent, ToastId, SwipeDirection } from './types'
+import type { ToastProps, SwipeEvent, ToastId, SwipeDirection, ToastEmits } from './types'
 
 const props = withDefaults(defineProps<ToastProps>(), {
     severity: 'contrast',
@@ -17,18 +17,7 @@ const props = withDefaults(defineProps<ToastProps>(), {
     width: undefined
 })
 
-const emit = defineEmits<{
-    'close': [id: ToastId],
-    'close:prevent': [id: ToastId],
-    'pause': [],
-    'resume': [],
-    'escapeKeyDown': [event: KeyboardEvent],
-    'swipeStart': [event: TouchEvent],
-    'swipeMove': [event: TouchEvent],
-    'swipeCancel': [event: TouchEvent],
-    'swipeEnd': [event: SwipeEvent],
-    'update:open': [value: boolean]
-}>()
+const emit = defineEmits<ToastEmits>()
 
 const isVisible = ref(true)
 const progress = ref(100)
@@ -74,9 +63,22 @@ const severityIcon = computed(() => {
 
 const actionSeverity = computed(() => normalizedSeverity.value === 'contrast' ? 'secondary' : normalizedSeverity.value)
 
+const normalizeColor = (value: string) => {
+    const color = value.trim()
+    const hexMatch = color.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/)
+    if (!hexMatch) return color
+    const hex = hexMatch[1].length === 3
+        ? hexMatch[1].split('').map((ch) => ch + ch).join('')
+        : hexMatch[1]
+    const r = parseInt(hex.slice(0, 2), 16)
+    const g = parseInt(hex.slice(2, 4), 16)
+    const b = parseInt(hex.slice(4, 6), 16)
+    return `rgb(${r}, ${g}, ${b})`
+}
+
 const progressColor = computed(() => {
     if (typeof props.progress === 'object' && props.progress.color) {
-        return props.progress.color
+        return normalizeColor(props.progress.color)
     }
     return undefined
 })

@@ -34,7 +34,7 @@ watch(configPreventClose, (val) => {
 })
 
 const configOrientation = ref<'horizontal' | 'vertical'>('horizontal')
-const configProgressColor = ref('')
+const configProgressColor = ref('#6366f1')
 const configVariant = ref<'soft' | 'minimal' | 'outlined' | 'glass'>('soft')
 const configAnimation = ref<'slide' | 'fade' | 'scale' | 'bounce'>('slide')
 
@@ -817,6 +817,417 @@ app.provide('webmx-config', {
 })
 
 app.mount('#app')</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Migration Guide -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <h2 class="text-3xl font-black flex items-center gap-3">
+                <Icon name="heroicons:arrows-right-left" class="text-indigo-500" />
+                Guide de Migration
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400">Migrez facilement depuis les librairies populaires.</p>
+
+            <div class="space-y-8">
+                <!-- From vue-toastification -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        Depuis vue-toastification
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card variant="outlined" padding="sm" class="space-y-3">
+                            <p class="text-xs font-bold text-rose-500 uppercase tracking-tight">Avant
+                                (vue-toastification)</p>
+                            <pre class="text-[10px] leading-tight text-slate-400"><code>import { useToast } from 'vue-toastification'
+const toast = useToast()
+
+toast.success('Message', {
+  timeout: 3000,
+  position: 'top-right'
+})</code></pre>
+                        </Card>
+                        <Card variant="outlined" padding="sm" class="space-y-3">
+                            <p class="text-xs font-bold text-emerald-500 uppercase tracking-tight">Après (webmx/ui)</p>
+                            <pre class="text-[10px] leading-tight text-indigo-400"><code>import { useToast } from '@webmx/ui'
+const toast = useToast()
+
+toast.success('Message', 'Description', {
+  duration: 3000,
+  position: 'top-right'
+})</code></pre>
+                        </Card>
+                    </div>
+
+                    <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-2xl">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-50 dark:bg-slate-800/10 border-b border-inherit">
+                                <tr>
+                                    <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">vue-toastification
+                                    </th>
+                                    <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">webmx/ui</th>
+                                    <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                                <tr>
+                                    <td class="px-6 py-4 font-mono text-rose-500">timeout</td>
+                                    <td class="px-6 py-4 font-mono text-indigo-500">duration</td>
+                                    <td class="px-6 py-4 text-slate-500">Même fonctionnalité, nom différent</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-mono text-rose-500">type: 'error'</td>
+                                    <td class="px-6 py-4 font-mono text-indigo-500">severity: 'danger'</td>
+                                    <td class="px-6 py-4 text-slate-500">'error' devient 'danger'</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-mono text-rose-500">closeOnClick</td>
+                                    <td class="px-6 py-4 font-mono text-indigo-500">closable</td>
+                                    <td class="px-6 py-4 text-slate-500">Bouton de fermeture explicite</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-mono text-rose-500">hideProgressBar</td>
+                                    <td class="px-6 py-4 font-mono text-indigo-500">progress: false</td>
+                                    <td class="px-6 py-4 text-slate-500">Logique inversée + couleur custom</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- From PrimeVue -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        Depuis PrimeVue Toast
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card variant="outlined" padding="sm" class="space-y-3">
+                            <p class="text-xs font-bold text-rose-500 uppercase tracking-tight">Avant (PrimeVue)</p>
+                            <pre class="text-[10px] leading-tight text-slate-400"><code>import { useToast } from 'primevue/usetoast'
+const toast = useToast()
+
+toast.add({
+  severity: 'success',
+  summary: 'Titre',
+  detail: 'Message',
+  life: 3000
+})</code></pre>
+                        </Card>
+                        <Card variant="outlined" padding="sm" class="space-y-3">
+                            <p class="text-xs font-bold text-emerald-500 uppercase tracking-tight">Après (webmx/ui)</p>
+                            <pre class="text-[10px] leading-tight text-indigo-400"><code>import { useToast } from '@webmx/ui'
+const toast = useToast()
+
+toast.add({
+  severity: 'success',
+  title: 'Titre',
+  description: 'Message',
+  duration: 3000
+})</code></pre>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices UX -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <h2 class="text-3xl font-black flex items-center gap-3">
+                <Icon name="heroicons:light-bulb" class="text-amber-500" />
+                Best Practices UX
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card variant="soft" padding="md" class="space-y-4 border-l-4 border-emerald-500">
+                    <div class="flex items-center gap-2">
+                        <Icon name="heroicons:check-circle" class="text-emerald-500" />
+                        <h4 class="font-bold text-emerald-600 dark:text-emerald-400">À Faire</h4>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:check" size="xs" class="text-emerald-500 mt-0.5 shrink-0" />
+                            <span>Utilisez des messages clairs et concis (max 2 lignes)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:check" size="xs" class="text-emerald-500 mt-0.5 shrink-0" />
+                            <span>Proposez une action d'annulation pour les opérations destructives</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:check" size="xs" class="text-emerald-500 mt-0.5 shrink-0" />
+                            <span>Limitez à 3-5 toasts visibles simultanément</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:check" size="xs" class="text-emerald-500 mt-0.5 shrink-0" />
+                            <span>Choisissez la sévérité appropriée au contexte</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:check" size="xs" class="text-emerald-500 mt-0.5 shrink-0" />
+                            <span>Utilisez duration: 0 pour les confirmations importantes</span>
+                        </li>
+                    </ul>
+                </Card>
+
+                <Card variant="soft" padding="md" class="space-y-4 border-l-4 border-rose-500">
+                    <div class="flex items-center gap-2">
+                        <Icon name="heroicons:x-circle" class="text-rose-500" />
+                        <h4 class="font-bold text-rose-600 dark:text-rose-400">À Éviter</h4>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:x-mark" size="xs" class="text-rose-500 mt-0.5 shrink-0" />
+                            <span>Messages trop longs ou techniques</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:x-mark" size="xs" class="text-rose-500 mt-0.5 shrink-0" />
+                            <span>Spam de notifications identiques</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:x-mark" size="xs" class="text-rose-500 mt-0.5 shrink-0" />
+                            <span>Utiliser preventClose sans raison valable</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:x-mark" size="xs" class="text-rose-500 mt-0.5 shrink-0" />
+                            <span>Toasts pour des informations non-critiques</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <Icon name="heroicons:x-mark" size="xs" class="text-rose-500 mt-0.5 shrink-0" />
+                            <span>Durées trop courtes (&lt;2s) ou trop longues (&gt;10s)</span>
+                        </li>
+                    </ul>
+                </Card>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold">Recommandations par Scénario</h3>
+                <div class="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-2xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-50 dark:bg-slate-800/10 border-b border-inherit">
+                            <tr>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Scénario</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Severity</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Duration</th>
+                                <th class="px-6 py-4 font-bold text-slate-900 dark:text-white">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                            <tr>
+                                <td class="px-6 py-4">Sauvegarde réussie</td>
+                                <td class="px-6 py-4"><span
+                                        class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-bold">success</span>
+                                </td>
+                                <td class="px-6 py-4">3000ms</td>
+                                <td class="px-6 py-4 text-slate-500">Aucune</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">Élément supprimé</td>
+                                <td class="px-6 py-4"><span
+                                        class="px-2 py-1 bg-slate-100 text-slate-700 rounded text-xs font-bold">contrast</span>
+                                </td>
+                                <td class="px-6 py-4">8000ms</td>
+                                <td class="px-6 py-4 text-slate-500">Annuler (undo)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">Erreur de validation</td>
+                                <td class="px-6 py-4"><span
+                                        class="px-2 py-1 bg-rose-100 text-rose-700 rounded text-xs font-bold">danger</span>
+                                </td>
+                                <td class="px-6 py-4">5000ms</td>
+                                <td class="px-6 py-4 text-slate-500">Aucune / Réessayer</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">Action requise</td>
+                                <td class="px-6 py-4"><span
+                                        class="px-2 py-1 bg-amber-100 text-amber-700 rounded text-xs font-bold">warn</span>
+                                </td>
+                                <td class="px-6 py-4">0 (persistant)</td>
+                                <td class="px-6 py-4 text-slate-500">Confirmer / Annuler</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">Nouvelle fonctionnalité</td>
+                                <td class="px-6 py-4"><span
+                                        class="px-2 py-1 bg-sky-100 text-sky-700 rounded text-xs font-bold">info</span>
+                                </td>
+                                <td class="px-6 py-4">5000ms</td>
+                                <td class="px-6 py-4 text-slate-500">En savoir plus</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+            <h2 class="text-3xl font-black flex items-center gap-3">
+                <Icon name="heroicons:question-mark-circle" class="text-violet-500" />
+                FAQ - Questions Fréquentes
+            </h2>
+
+            <div class="space-y-4">
+                <details
+                    class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <span class="font-bold text-slate-900 dark:text-white">Comment afficher un toast sans le
+                            ToastProvider ?</span>
+                        <Icon name="heroicons:chevron-down"
+                            class="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                        <p>Ce n'est pas possible. Le <code
+                                class="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded">ToastProvider</code> est
+                            obligatoire car il gère l'état global des toasts et fournit le contexte via provide/inject.
+                        </p>
+                        <p>Placez le ToastProvider à la racine de votre application (App.vue ou main layout).</p>
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <span class="font-bold text-slate-900 dark:text-white">Comment personnaliser le contenu d'un
+                            toast ?</span>
+                        <Icon name="heroicons:chevron-down"
+                            class="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                        <p>Le composant Toast expose plusieurs slots : <code>leading</code>, <code>title</code>,
+                            <code>description</code>, <code>actions</code> et <code>close</code>.
+                        </p>
+                        <p>Pour un contenu totalement custom, créez votre propre composant de toast et passez-le via le
+                            slot.</p>
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <span class="font-bold text-slate-900 dark:text-white">Comment empêcher les doublons ?</span>
+                        <Icon name="heroicons:chevron-down"
+                            class="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                        <p>Le système gère automatiquement les doublons de deux façons :</p>
+                        <ul class="list-disc list-inside space-y-1 ml-2">
+                            <li><strong>Par ID</strong> : Si vous passez un ID personnalisé, le toast existant sera mis
+                                à jour</li>
+                            <li><strong>Par contenu</strong> : Les toasts identiques (même titre + description) sont
+                                dédupliqués dans les 500ms</li>
+                        </ul>
+                        <pre class="bg-slate-950 rounded-lg p-4 text-xs text-indigo-300"><code>// Utiliser un ID fixe pour éviter les doublons
+toast.add({ id: 'network-error', title: 'Erreur réseau' })</code></pre>
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <span class="font-bold text-slate-900 dark:text-white">Comment gérer les actions asynchrones
+                            ?</span>
+                        <Icon name="heroicons:chevron-down"
+                            class="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                        <p>Utilisez <code>toast.promise()</code> pour les opérations async avec feedback automatique :
+                        </p>
+                        <pre class="bg-slate-950 rounded-lg p-4 text-xs text-indigo-300"><code>toast.promise(fetchData(), {
+  loading: 'Chargement en cours...',
+  success: (data) => `${data.count} éléments chargés`,
+  error: (err) => `Erreur: ${err.message}`
+})</code></pre>
+                        <p>Le toast affiche automatiquement l'état loading puis success/error.</p>
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <span class="font-bold text-slate-900 dark:text-white">Le toast ne s'affiche pas, que
+                            faire ?</span>
+                        <Icon name="heroicons:chevron-down"
+                            class="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                        <p>Vérifiez les points suivants :</p>
+                        <ul class="list-decimal list-inside space-y-2 ml-2">
+                            <li>Le <code>ToastProvider</code> est bien présent et wrappant votre app</li>
+                            <li>Vous utilisez <code>useToast()</code> dans un composant enfant du Provider</li>
+                            <li>Le CSS est bien importé (<code>import 'webflow-ui/style.css'</code>)</li>
+                            <li>Pas d'erreur dans la console concernant l'injection</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <span class="font-bold text-slate-900 dark:text-white">Comment tester les toasts dans mes
+                            tests ?</span>
+                        <Icon name="heroicons:chevron-down"
+                            class="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                        <p>Mockez le provider dans vos tests :</p>
+                        <pre class="bg-slate-950 rounded-lg p-4 text-xs text-indigo-300"><code>const mockToast = {
+  add: vi.fn(),
+  remove: vi.fn(),
+  clear: vi.fn()
+}
+
+mount(MyComponent, {
+  global: {
+    provide: { toast: mockToast }
+  }
+})
+
+// Vérifier l'appel
+expect(mockToast.add).toHaveBeenCalledWith({
+  title: 'Expected title'
+})</code></pre>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Changelog -->
+        <section class="space-y-8 border-t border-slate-200 dark:border-slate-800 pt-12 pb-12">
+            <h2 class="text-3xl font-black flex items-center gap-3">
+                <Icon name="heroicons:document-text" class="text-cyan-500" />
+                Changelog
+            </h2>
+
+            <div class="space-y-6">
+                <div class="relative pl-8 border-l-2 border-indigo-500">
+                    <div class="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full"></div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-slate-900 dark:text-white">v1.0.0</span>
+                            <span
+                                class="px-2 py-0.5 text-xs font-bold bg-emerald-100 text-emerald-700 rounded-full">Latest</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Janvier 2026</p>
+                        <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                            <li>✨ Release initiale du composant Toast</li>
+                            <li>✨ Support des 8 sévérités (primary, secondary, success, info, warn, help, danger,
+                                contrast)</li>
+                            <li>✨ 6 positions de viewport</li>
+                            <li>✨ 4 variantes visuelles (soft, outlined, minimal, glass)</li>
+                            <li>✨ 4 animations d'entrée (slide, fade, scale, bounce)</li>
+                            <li>✨ Mode stacked avec expansion au hover</li>
+                            <li>✨ Prevention de fermeture avec shake animation</li>
+                            <li>✨ Actions avec retry et états de chargement</li>
+                            <li>✨ Support image et link preview</li>
+                            <li>✨ Composable useToast avec raccourcis</li>
+                            <li>✨ Promise API pour opérations async</li>
+                            <li>✨ Accessibilité ARIA complète</li>
+                            <li>✨ Support gestuel (swipe to dismiss)</li>
+                        </ul>
                     </div>
                 </div>
             </div>

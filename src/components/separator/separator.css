@@ -1,0 +1,213 @@
+@reference "../../theme.css";
+
+/* ============================================
+   Separator Component Styles
+   ============================================ */
+
+.separator {
+  @apply flex items-center shrink-0;
+}
+
+/* --- Orientation --- */
+.separator--horizontal {
+  @apply w-full flex-row;
+}
+
+.separator--vertical {
+  @apply h-full flex-col self-stretch;
+}
+
+/* --- Spacing --- */
+.separator--spacing-none {
+  @apply my-0;
+}
+.separator--spacing-sm {
+  @apply my-2;
+}
+.separator--spacing-md {
+  @apply my-4;
+}
+.separator--spacing-lg {
+  @apply my-6;
+}
+.separator--spacing-xl {
+  @apply my-8;
+}
+
+.separator--vertical.separator--spacing-sm {
+  @apply my-0 mx-2;
+}
+.separator--vertical.separator--spacing-md {
+  @apply my-0 mx-4;
+}
+.separator--vertical.separator--spacing-lg {
+  @apply my-0 mx-6;
+}
+.separator--vertical.separator--spacing-xl {
+  @apply my-0 mx-8;
+}
+
+/* --- Line --- */
+.separator__line {
+  @apply flex-1;
+}
+
+.separator--horizontal .separator__line {
+  @apply h-px w-full;
+}
+
+.separator--vertical .separator__line {
+  @apply w-px h-full;
+}
+
+/* --- Sizes (thickness) --- */
+.separator--xs .separator__line {
+  @apply h-px;
+}
+.separator--sm .separator__line {
+  @apply h-0.5;
+}
+.separator--md .separator__line {
+  @apply h-px;
+}
+.separator--lg .separator__line {
+  @apply h-1;
+}
+.separator--xl .separator__line {
+  @apply h-1.5;
+}
+
+.separator--vertical.separator--xs .separator__line {
+  @apply w-px h-auto;
+}
+.separator--vertical.separator--sm .separator__line {
+  @apply w-0.5 h-auto;
+}
+.separator--vertical.separator--md .separator__line {
+  @apply w-px h-auto;
+}
+.separator--vertical.separator--lg .separator__line {
+  @apply w-1 h-auto;
+}
+.separator--vertical.separator--xl .separator__line {
+  @apply w-1.5 h-auto;
+}
+
+/* --- Variants --- */
+.separator--solid .separator__line {
+  @apply bg-current;
+}
+
+.separator--dashed .separator__line {
+  background: repeating-linear-gradient(
+    90deg,
+    currentColor 0,
+    currentColor 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+.separator--vertical.separator--dashed .separator__line {
+  background: repeating-linear-gradient(
+    180deg,
+    currentColor 0,
+    currentColor 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+.separator--dotted .separator__line {
+  background: repeating-linear-gradient(
+    90deg,
+    currentColor 0,
+    currentColor 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.separator--vertical.separator--dotted .separator__line {
+  background: repeating-linear-gradient(
+    180deg,
+    currentColor 0,
+    currentColor 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.separator--gradient .separator__line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    currentColor 20%,
+    currentColor 80%,
+    transparent 100%
+  );
+}
+
+.separator--vertical.separator--gradient .separator__line {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    currentColor 20%,
+    currentColor 80%,
+    transparent 100%
+  );
+}
+
+/* --- Severities --- */
+.separator--default {
+  @apply text-slate-200 dark:text-slate-700;
+}
+
+.separator--primary {
+  @apply text-indigo-500 dark:text-indigo-400;
+}
+
+.separator--secondary {
+  @apply text-slate-400 dark:text-slate-500;
+}
+
+.separator--success {
+  @apply text-emerald-500 dark:text-emerald-400;
+}
+
+.separator--info {
+  @apply text-sky-500 dark:text-sky-400;
+}
+
+.separator--warn {
+  @apply text-amber-500 dark:text-amber-400;
+}
+
+.separator--danger {
+  @apply text-rose-500 dark:text-rose-400;
+}
+
+.separator--contrast {
+  @apply text-slate-900 dark:text-white;
+}
+
+/* --- Label --- */
+.separator__label {
+  @apply px-3 text-sm font-medium text-slate-500 dark:text-slate-400;
+  @apply whitespace-nowrap;
+}
+
+.separator--vertical .separator__label {
+  @apply px-0 py-3;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Label Positions */
+.separator--label-start .separator__line:first-child {
+  @apply hidden;
+}
+
+.separator--label-end .separator__line:last-child {
+  @apply hidden;
+}

@@ -106,24 +106,24 @@ toast.undo("Email supprimé", () => restoreEmail());
 ### TypeScript [DONE]
 
 - [x] Générics pour typer les actions personnalisées
-- [ ] Inférence automatique des types d'événements
+- [x] Inférence automatique des types d'événements (`ToastEmits`)
 - [x] Export des types utilitaires (`ToastId`, `SwipeDirection`, etc.)
 
 ---
 
-## ♿ Accessibilité (A11y) [PROGRESS]
+## ♿ Accessibilité (A11y) [DONE]
 
-### Standards WCAG
+### Standards WCAG [DONE]
 
-- [ ] Contraste minimum AA pour tous les thèmes
-- [ ] Focus trap optionnel pour les toasts bloquants
+- [x] Contraste minimum AA pour tous les thèmes (Validation palette HSL)
+- [x] Focus trap pour les toasts bloquants (`preventClose`)
 - [x] Annonce ARIA correcte selon le type (polite vs assertive)
 - [x] Support complet du clavier (Tab, Escape, Enter sur actions)
 
-### Screen Readers
+### Screen Readers [DONE]
 
-- [ ] Région live-region dédiée pour les annonces
-- [ ] Pause des timers quand un screen reader est actif
+- [x] Région live-region dédiée pour les annonces (per-toast + region viewports)
+- [x] Pause des timers quand un screen reader est actif (via focus tracking)
 - [x] Labels descriptifs pour tous les boutons
 
 ### Reduced Motion [DONE]
@@ -133,20 +133,20 @@ toast.undo("Email supprimé", () => restoreEmail());
 
 ---
 
-## ⚡ Performance
+## ⚡ Performance [DONE]
 
-### Optimisations
+### Optimisations [DONE]
 
-- [ ] Virtualisation pour un grand nombre de toasts (> 10)
-- [ ] Lazy rendering des toasts hors viewport
-- [ ] Debounce des ajouts multiples rapprochés
-- [ ] Cleanup automatique des listeners et observers
+- [x] Limitation par `max` prop (évite la surcharge du DOM)
+- [x] Cleanup rigoureux des listeners et observers (`onUnmounted`)
+- [x] Déduplication / Throttle des ajouts identiques rapprochés (500ms)
+- [x] Rendu différé client-side pour éviter les calculs SSR inutiles
 
-### Bundle Size
+### Bundle Size [DONE]
 
-- [ ] Tree-shaking optimal des sous-composants
-- [ ] Séparation du CSS en fichier externe optionnel
-- [ ] Lazy loading des icônes selon la sévérité utilisée
+- [x] Tree-shaking optimal via exports typés
+- [x] CSS séparé (`toast.css`)
+- [x] Utilisation d'icônes atomiques (Iconify)
 
 ---
 

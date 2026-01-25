@@ -20,6 +20,8 @@ const activeSection = computed(() => {
     if (route.path.includes('card')) return 'card'
     if (route.path.includes('skeleton')) return 'skeleton'
     if (route.path.includes('toast')) return 'toast'
+    if (route.path.includes('progress')) return 'progress'
+    if (route.path.includes('separator')) return 'separator'
     return ''
 })
 
@@ -149,6 +151,22 @@ const scrollToSection = (sectionId: string) => {
                                 class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                 Toast
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/docs/components/progress"
+                                :class="[activeSection === 'progress' ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800']"
+                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Progress
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/docs/components/separator"
+                                :class="[activeSection === 'separator' ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800']"
+                                class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                Separator
                             </router-link>
                         </li>
                         <li>

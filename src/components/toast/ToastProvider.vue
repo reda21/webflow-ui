@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, provide, defineExpose } from 'vue'
 import ToastItem from './Toast.vue'
 import type { ToastOptions, ToastPosition, ToastProps, ToastId } from './types'
 import { toastsState, initPersistence } from './store'
-import './toast.css'
-
-import { provide } from 'vue'
 import { useWebmxConfig } from '../../lib/config'
+import './toast.css'
 
 const props = withDefaults(defineProps<{
     max?: number
@@ -32,8 +30,11 @@ onMounted(() => {
 
 // Use global state
 const toasts = toastsState
-
 const globalConfig = useWebmxConfig()
+
+// Performance optimization: prevent spam of identical toasts
+let lastToastTime = 0
+let lastToastKey = ''
 
 const isActive = (id: ToastId) => {
     for (const position in toasts.value) {
@@ -42,14 +43,43 @@ const isActive = (id: ToastId) => {
     return false
 }
 
+const updateToast = (id: ToastId, options: Partial<ToastOptions>) => {
+    for (const position in toasts.value) {
+        const index = toasts.value[position as ToastPosition].findIndex(t => t.id === id)
+        if (index !== -1) {
+            toasts.value[position as ToastPosition][index] = {
+                ...toasts.value[position as ToastPosition][index],
+                ...options
+            } as ToastProps
+            return true
+        }
+    }
+    return false
+}
+
+const removeToast = (id: ToastId) => {
+    for (const position in toasts.value) {
+        toasts.value[position as ToastPosition] = toasts.value[position as ToastPosition].filter(t => t.id !== id)
+    }
+    if (props.onRemove) props.onRemove(id)
+}
+
 const addToast = (options: ToastOptions) => {
     const defaults = globalConfig?.toast || {}
     const toasterDefaults = globalConfig?.toaster || {}
     const maxLimit = props.max ?? toasterDefaults.max ?? 5
 
-    // Use provide ID or generate one early for deduplication check
-    const id = options.id || Math.random().toString(36).substring(2, 9)
+    // Rate limiting / Deduplication by content (Performance Optimization)
+    const currentKey = `${options.title}-${options.description}`
+    const now = Date.now()
+    if (currentKey === lastToastKey && now - lastToastTime < 500) {
+        return lastToastKey
+    }
+    lastToastTime = now
+    lastToastKey = currentKey
 
+    // Deduplication by ID
+    const id = options.id || Math.random().toString(36).substring(2, 9)
     if (options.id && isActive(options.id)) {
         updateToast(options.id, options)
         return options.id
@@ -57,7 +87,7 @@ const addToast = (options: ToastOptions) => {
 
     const position = options.position || defaults.position || 'top-right'
 
-    // Respect max limit
+    // Respect max limit (Performance Optimization)
     if (toasts.value[position].length >= maxLimit) {
         toasts.value[position].shift()
     }
@@ -89,52 +119,24 @@ const addToast = (options: ToastOptions) => {
     return id
 }
 
-const updateToast = (id: ToastId, options: Partial<ToastOptions>) => {
-    for (const position in toasts.value) {
-        const index = toasts.value[position as ToastPosition].findIndex(t => t.id === id)
-        if (index !== -1) {
-            toasts.value[position as ToastPosition][index] = {
-                ...toasts.value[position as ToastPosition][index],
-                ...options
-            } as ToastProps
-            return true
-        }
-    }
-    return false
-}
-
-const removeToast = (id: ToastId) => {
-    for (const position in toasts.value) {
-        toasts.value[position as ToastPosition] = toasts.value[position as ToastPosition].filter(t => t.id !== id)
-    }
-    if (props.onRemove) props.onRemove(id)
-}
-
 const clearAll = () => {
     for (const position in toasts.value) {
         toasts.value[position as ToastPosition] = []
     }
 }
 
-// Expose methods
-defineExpose({
+// Expose and Provide methods
+const api = {
     add: addToast,
     update: updateToast,
     remove: removeToast,
     dismiss: removeToast,
     clear: clearAll,
     isActive
-})
+}
 
-// Provide to children
-provide('toast', {
-    add: addToast,
-    update: updateToast,
-    remove: removeToast,
-    dismiss: removeToast,
-    clear: clearAll,
-    isActive
-})
+defineExpose(api)
+provide('toast', api)
 </script>
 
 <template>

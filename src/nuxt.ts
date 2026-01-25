@@ -1,4 +1,9 @@
-import { defineNuxtModule, addComponentsDir, createResolver } from "@nuxt/kit";
+import {
+  defineNuxtModule,
+  addComponentsDir,
+  createResolver,
+  addPlugin,
+} from "@nuxt/kit";
 import type { NuxtModule } from "@nuxt/schema";
 
 const module: NuxtModule<any> = defineNuxtModule({

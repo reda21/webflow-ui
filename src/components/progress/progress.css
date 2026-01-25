@@ -1,0 +1,704 @@
+@reference "../../theme.css";
+
+/* ============================================
+   Progress Component Styles
+   ============================================ */
+
+.progress-wrapper {
+  @apply w-full;
+}
+
+.progress-wrapper--top-label {
+  @apply flex flex-col gap-2;
+}
+
+.progress-label-top {
+  @apply flex justify-between items-center text-sm;
+}
+
+.progress-label-text {
+  @apply font-medium text-slate-700 dark:text-slate-300;
+}
+
+.progress-label-value {
+  @apply font-bold text-slate-900 dark:text-white tabular-nums;
+}
+
+/* Track (Background) */
+.progress-track {
+  @apply relative overflow-hidden flex;
+  @apply bg-slate-200 dark:bg-slate-700;
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500 dark:focus-visible:ring-indigo-400 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900;
+}
+
+.progress-track--horizontal {
+  @apply w-full;
+}
+
+.progress-track--vertical {
+  @apply h-48 inline-flex flex-col justify-end;
+}
+
+/* Vertical Widths matches Horizontal Heights */
+.progress-track--vertical.progress-track--xs {
+  @apply w-1;
+}
+.progress-track--vertical.progress-track--sm {
+  @apply w-2;
+}
+.progress-track--vertical.progress-track--md {
+  @apply w-3;
+}
+.progress-track--vertical.progress-track--lg {
+  @apply w-4;
+}
+.progress-track--vertical.progress-track--xl {
+  @apply w-6;
+}
+
+/* Inverted Direction */
+.progress-track--horizontal.progress-track--inverted {
+  @apply flex-row-reverse;
+}
+
+.progress-track--vertical.progress-track--inverted {
+  @apply justify-start;
+}
+
+/* --- Sizes --- */
+.progress-track--xs {
+  @apply h-1;
+}
+.progress-track--sm {
+  @apply h-2;
+}
+.progress-track--md {
+  @apply h-3;
+}
+.progress-track--lg {
+  @apply h-4;
+}
+.progress-track--xl {
+  @apply h-6;
+}
+
+/* --- Rounded --- */
+.progress-track--rounded-none {
+  @apply rounded-none;
+}
+.progress-track--rounded-sm {
+  @apply rounded-sm;
+}
+.progress-track--rounded-md {
+  @apply rounded-md;
+}
+.progress-track--rounded-lg {
+  @apply rounded-lg;
+}
+.progress-track--rounded-full {
+  @apply rounded-full;
+}
+
+/* Progress Bar */
+.progress-bar {
+  @apply transition-all duration-500 ease-out;
+  @apply flex items-center justify-center;
+}
+
+.progress-bar--optimised {
+  will-change: width, transform;
+}
+
+.progress-track--horizontal .progress-bar {
+  @apply h-full;
+}
+
+.progress-track--vertical .progress-bar {
+  @apply w-full;
+}
+
+/* Inherit rounded from track */
+.progress-track--rounded-none .progress-bar {
+  @apply rounded-none;
+}
+.progress-track--rounded-sm .progress-bar {
+  @apply rounded-sm;
+}
+.progress-track--rounded-md .progress-bar {
+  @apply rounded-md;
+}
+.progress-track--rounded-lg .progress-bar {
+  @apply rounded-lg;
+}
+.progress-track--rounded-full .progress-bar {
+  @apply rounded-full;
+}
+
+/* --- Severities --- */
+.progress-bar--primary {
+  @apply bg-indigo-600 dark:bg-indigo-500;
+}
+.progress-bar--secondary {
+  @apply bg-slate-600 dark:bg-slate-400;
+}
+.progress-bar--success {
+  @apply bg-emerald-600 dark:bg-emerald-500;
+}
+.progress-bar--info {
+  @apply bg-sky-600 dark:bg-sky-500;
+}
+.progress-bar--warn {
+  @apply bg-amber-500 dark:bg-amber-400;
+}
+.progress-bar--danger {
+  @apply bg-rose-600 dark:bg-rose-500;
+}
+.progress-bar--contrast {
+  @apply bg-slate-900 dark:bg-white;
+}
+
+/* --- Variants --- */
+
+/* Striped */
+.progress-bar--striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+/* Gradient */
+.progress-bar--gradient.progress-bar--primary {
+  @apply bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-600;
+  background-size: 200% 100%;
+}
+.progress-bar--gradient.progress-bar--secondary {
+  @apply bg-gradient-to-r from-slate-600 via-slate-400 to-slate-600;
+  background-size: 200% 100%;
+}
+.progress-bar--gradient.progress-bar--success {
+  @apply bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-600;
+  background-size: 200% 100%;
+}
+.progress-bar--gradient.progress-bar--info {
+  @apply bg-gradient-to-r from-sky-600 via-cyan-500 to-sky-600;
+  background-size: 200% 100%;
+}
+.progress-bar--gradient.progress-bar--warn {
+  @apply bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500;
+  background-size: 200% 100%;
+}
+.progress-bar--gradient.progress-bar--danger {
+  @apply bg-gradient-to-r from-rose-600 via-pink-500 to-rose-600;
+  background-size: 200% 100%;
+}
+
+/* --- Animations --- */
+
+/* Pulse */
+@keyframes progress-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.progress-bar--animate-pulse {
+  animation: progress-pulse 2s ease-in-out infinite;
+}
+
+/* Striped Animation */
+@keyframes progress-stripes {
+  0% {
+    background-position: 1rem 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.progress-bar--animate-striped {
+  animation: progress-stripes 1s linear infinite;
+}
+
+/* Carousel (Material Style - 2 bars) */
+@keyframes progress-carousel {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes progress-carousel-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+
+/* Carousel Inverse (Right to Left) */
+@keyframes progress-carousel-inverse {
+  0% {
+    right: -35%;
+    left: 100%;
+  }
+  60% {
+    right: 100%;
+    left: -90%;
+  }
+  100% {
+    right: 100%;
+    left: -90%;
+  }
+}
+
+@keyframes progress-carousel-inverse-short {
+  0% {
+    right: -200%;
+    left: 100%;
+  }
+  60% {
+    right: 107%;
+    left: -8%;
+  }
+  100% {
+    right: 107%;
+    left: -8%;
+  }
+}
+
+.progress-bar--animate-carousel {
+  @apply absolute;
+  animation: progress-carousel 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+    infinite;
+}
+
+.progress-bar--animate-carousel-short {
+  @apply absolute;
+  animation: progress-carousel-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+    1.15s infinite;
+}
+
+.progress-bar--animate-carousel-inverse {
+  @apply absolute;
+  animation: progress-carousel-inverse 2.1s
+    cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.progress-bar--animate-carousel-inverse-short {
+  @apply absolute;
+  animation: progress-carousel-inverse-short 2.1s
+    cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+}
+
+/* Swing (Single bar sliding) */
+@keyframes progress-swing {
+  0% {
+    left: -30%;
+    width: 30%;
+  }
+  50% {
+    left: 100%;
+    width: 30%;
+  }
+  100% {
+    left: -30%;
+    width: 30%;
+  }
+}
+
+.progress-bar--animate-swing {
+  @apply absolute;
+  animation: progress-swing 2s ease-in-out infinite;
+}
+
+/* Elastic (Single bar stretching) */
+@keyframes progress-elastic {
+  0% {
+    left: 50%;
+    width: 0;
+  }
+  50% {
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    left: 50%;
+    width: 0;
+  }
+}
+
+.progress-bar--animate-elastic {
+  @apply absolute;
+  animation: progress-elastic 1.5s cubic-bezier(0.445, 0.05, 0.55, 0.95)
+    infinite;
+}
+
+/* Legacy Alias for backward compatibility */
+.progress-bar--indeterminate {
+  @apply absolute;
+  animation: progress-carousel 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)
+    infinite;
+}
+.progress-bar--indeterminate-short {
+  @apply absolute;
+  animation: progress-carousel-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)
+    1.15s infinite;
+}
+
+/* Bounce Animation (Transition effect) */
+.progress-bar--animate-bounce {
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Gradient Flow Animation */
+@keyframes progress-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.progress-bar--animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: progress-gradient-flow 3s ease infinite;
+}
+/* Force gradient if not set */
+.progress-bar--animate-gradient-flow:not(.progress-bar--gradient) {
+  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500;
+}
+/* Adapt gradient flow for severities if normal gradient is not present */
+.progress-bar--animate-gradient-flow.progress-bar--success:not(
+    .progress-bar--gradient
+  ) {
+  @apply bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500;
+}
+.progress-bar--animate-gradient-flow.progress-bar--info:not(
+    .progress-bar--gradient
+  ) {
+  @apply bg-gradient-to-r from-sky-500 via-cyan-500 to-sky-500;
+}
+.progress-bar--animate-gradient-flow.progress-bar--warn:not(
+    .progress-bar--gradient
+  ) {
+  @apply bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500;
+}
+.progress-bar--animate-gradient-flow.progress-bar--danger:not(
+    .progress-bar--gradient
+  ) {
+  @apply bg-gradient-to-r from-rose-500 via-pink-500 to-rose-500;
+}
+.progress-bar--animate-gradient-flow.progress-bar--secondary:not(
+    .progress-bar--gradient
+  ) {
+  @apply bg-gradient-to-r from-slate-500 via-slate-400 to-slate-500;
+}
+
+/* Flash Animation */
+@keyframes progress-flash {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.5;
+  }
+}
+
+.progress-bar--animate-flash {
+  animation: progress-flash 2s ease-in-out infinite;
+}
+
+/* Scan Animation (Scanner effect overlay) */
+@keyframes progress-scan {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 300% 0;
+  }
+}
+
+.progress-bar--animate-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar--animate-scan::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: progress-scan 2s linear infinite;
+  z-index: 20;
+}
+
+/* Dark mode adjustment for scan */
+:is(.dark .progress-bar--animate-scan)::after {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+}
+
+/* Glow Animation */
+@keyframes progress-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor;
+    opacity: 1;
+  }
+  50% {
+    box-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+    opacity: 0.8;
+  }
+}
+
+.progress-bar--animate-glow {
+  animation: progress-glow 2s ease-in-out infinite;
+  /* Ensure overflow visible on track so shadow can be seen? 
+     Default track has overflow-hidden, so glow inside track might be cut off.
+     We might need to apply glow to an inner element or rely on internal glow.
+     If overflow-hidden is strict, box-shadow outside won't show.
+     Let's try inset shadow or just opacity pulse if overflow is hidden. 
+     Actually, let's keep it simple, it will glow 'inside' the track or typically glow effects need overflow visible. 
+     For now, standard box-shadow but it might be clipped. 
+  */
+}
+
+/* Inside Label */
+.progress-label-inside {
+  @apply text-[10px] font-bold text-white leading-none px-2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar--warn .progress-label-inside,
+.progress-bar--contrast .progress-label-inside {
+  @apply text-slate-900 dark:text-slate-900;
+  text-shadow: none;
+}
+
+/* Outside Label */
+.progress-label-outside {
+  @apply mt-1 text-xs font-medium text-slate-600 dark:text-slate-400 text-right;
+}
+
+/* Buffer (for video-like buffered progress) */
+.progress-buffer {
+  @apply absolute inset-0 opacity-30;
+  @apply transition-all ease-out;
+}
+
+/* Secondary Value */
+.progress-secondary {
+  @apply absolute inset-0 opacity-60;
+  @apply transition-all ease-out;
+  @apply mix-blend-overlay;
+}
+
+/* Step Marker */
+.progress-step-marker {
+  @apply absolute bg-white/30 dark:bg-black/30 w-px h-full z-10;
+}
+.progress-track--vertical .progress-step-marker {
+  @apply w-full h-px;
+}
+
+/* ============================================
+   Circular Progress
+   ============================================ */
+
+.circular-progress {
+  @apply relative inline-flex items-center justify-center;
+}
+
+.circular-progress__svg {
+  @apply transform -rotate-90;
+}
+
+.circular-progress__track {
+  @apply stroke-slate-200 dark:stroke-slate-700;
+  fill: none;
+}
+
+.circular-progress__bar {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease-out;
+}
+
+/* Circular Severities */
+.circular-progress--primary .circular-progress__bar {
+  @apply stroke-indigo-600 dark:stroke-indigo-500;
+}
+.circular-progress--secondary .circular-progress__bar {
+  @apply stroke-slate-600 dark:stroke-slate-400;
+}
+.circular-progress--success .circular-progress__bar {
+  @apply stroke-emerald-600 dark:stroke-emerald-500;
+}
+.circular-progress--info .circular-progress__bar {
+  @apply stroke-sky-600 dark:stroke-sky-500;
+}
+.circular-progress--warn .circular-progress__bar {
+  @apply stroke-amber-500 dark:stroke-amber-400;
+}
+.circular-progress--danger .circular-progress__bar {
+  @apply stroke-rose-600 dark:stroke-rose-500;
+}
+.circular-progress--contrast .circular-progress__bar {
+  @apply stroke-slate-900 dark:stroke-white;
+}
+
+.circular-progress__center {
+  @apply absolute inset-0 flex items-center justify-center;
+  @apply text-sm font-bold text-slate-900 dark:text-white tabular-nums;
+}
+
+/* Circular Indeterminate */
+@keyframes circular-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes circular-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124;
+  }
+}
+
+.circular-progress--indeterminate .circular-progress__svg {
+  animation: circular-rotate 2s linear infinite;
+  transform-origin: center center;
+}
+
+.circular-progress--indeterminate .circular-progress__bar {
+  animation: circular-dash 1.5s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+/* Circular Sizes */
+.circular-progress--xs {
+  @apply w-6 h-6;
+}
+.circular-progress--xs .circular-progress__center {
+  @apply text-[8px];
+}
+
+.circular-progress--sm {
+  @apply w-10 h-10;
+}
+.circular-progress--sm .circular-progress__center {
+  @apply text-xs;
+}
+
+.circular-progress--md {
+  @apply w-16 h-16;
+}
+
+.circular-progress--lg {
+  @apply w-24 h-24;
+}
+.circular-progress--lg .circular-progress__center {
+  @apply text-lg;
+}
+
+.circular-progress--xl {
+  @apply w-32 h-32;
+}
+.circular-progress--xl .circular-progress__center {
+  @apply text-xl;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar,
+  .circular-progress__bar {
+    transition: none;
+  }
+
+  .progress-bar--animate-pulse,
+  .progress-bar--animate-striped,
+  .progress-bar--indeterminate,
+  .progress-bar--indeterminate-short,
+  .circular-progress--indeterminate .circular-progress__svg,
+  .circular-progress--indeterminate .circular-progress__bar {
+    animation: none;
+  }
+  .circular-progress--animate-spin {
+    animation: none;
+  }
+}
+
+/* Spin Animation */
+@keyframes circular-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.circular-progress--animate-spin .circular-progress__svg {
+  animation: circular-spin 2s linear infinite;
+  transform-origin: center center;
+}
