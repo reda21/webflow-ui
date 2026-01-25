@@ -6,7 +6,7 @@
 
 .toast-viewport {
   @apply fixed z-[100] flex flex-col gap-3 p-6 pointer-events-none;
-  @apply w-full max-w-sm;
+  @apply w-full transition-all duration-300;
 }
 
 /* Positions */
@@ -35,6 +35,31 @@
   @apply transform transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)];
   /* Soft Style (Default) */
   @apply bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800;
+}
+
+/* --- Widths --- */
+.toast-root.toast-width-xs {
+  @apply max-w-xs;
+}
+.toast-root.toast-width-sm {
+  @apply max-w-sm;
+}
+.toast-root.toast-width-md {
+  @apply max-w-md;
+}
+.toast-root.toast-width-lg {
+  @apply max-w-lg;
+}
+.toast-root.toast-width-xl {
+  @apply max-w-xl;
+}
+.toast-root.toast-width-full {
+  @apply max-w-full;
+}
+
+/* Default width if not specified */
+.toast-root:not([class*="toast-width-"]) {
+  @apply max-w-sm;
 }
 
 /* --- Severities --- */
@@ -278,26 +303,194 @@
   background-color: currentColor;
 }
 
-/* Animations */
-.toast-enter-from {
-  opacity: 0;
-  transform: translate(0, 100%) scale(0.9);
-}
-.toast-viewport--top-right .toast-enter-from,
-.toast-viewport--bottom-right .toast-enter-from {
-  transform: translate(100%, 0) scale(0.9);
-}
-.toast-viewport--top-left .toast-enter-from,
-.toast-viewport--bottom-left .toast-enter-from {
-  transform: translate(-100%, 0) scale(0.9);
+/* --- Variants --- */
+
+/* Soft (Default) - subtle bg, matches severity */
+.toast-variant-soft {
+  @apply bg-white/95 dark:bg-slate-900/95 border-slate-200 dark:border-slate-800;
 }
 
+/* Outlined - border only, very soft bg */
+.toast-variant-outlined {
+  @apply bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border-2;
+}
+
+/* Minimal - no border, subtle shadow */
+.toast-variant-minimal {
+  @apply bg-white dark:bg-slate-900 border-none shadow-lg;
+}
+
+/* Glass - heavy blur, translucent */
+.toast-variant-glass {
+  @apply bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border-white/20 dark:border-white/10;
+}
+
+/* Adjust colors for minimal/outlined serverities */
+.toast-variant-minimal.toast-primary,
+.toast-variant-outlined.toast-primary {
+  @apply bg-white dark:bg-slate-900 border-indigo-500/50;
+}
+.toast-variant-minimal.toast-primary .toast-title,
+.toast-variant-outlined.toast-primary .toast-title {
+  @apply text-indigo-600 dark:text-indigo-400;
+}
+
+/* Match same pattern for other severities if needed, 
+   but keeping it clean for now by adjusting the root severity mapping */
+
+/* Animations Layering */
+.toast-root {
+  @apply relative pointer-events-auto w-full overflow-hidden;
+  @apply rounded-2xl shadow-2xl;
+  @apply transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)];
+}
+
+/* --- Entrance Animations --- */
+
+/* Slide (Default) */
+.toast-animation-slide.toast-enter-from {
+  opacity: 0;
+}
+.toast-viewport--top-right .toast-animation-slide.toast-enter-from,
+.toast-viewport--bottom-right .toast-animation-slide.toast-enter-from {
+  transform: translateX(100%);
+}
+.toast-viewport--top-left .toast-animation-slide.toast-enter-from,
+.toast-viewport--bottom-left .toast-animation-slide.toast-enter-from {
+  transform: translateX(-100%);
+}
+.toast-viewport--top-center .toast-animation-slide.toast-enter-from {
+  transform: translateY(-100%);
+}
+.toast-viewport--bottom-center .toast-animation-slide.toast-enter-from {
+  transform: translateY(100%);
+}
+
+/* Fade */
+.toast-animation-fade.toast-enter-from {
+  opacity: 0;
+}
+
+/* Scale */
+.toast-animation-scale.toast-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Bounce */
+.toast-animation-bounce.toast-enter-from {
+  opacity: 0;
+}
+.toast-viewport--top-right .toast-animation-bounce.toast-enter-from,
+.toast-viewport--bottom-right .toast-animation-bounce.toast-enter-from {
+  transform: translateX(120%) scale(0.7);
+}
+.toast-viewport--top-left .toast-animation-bounce.toast-enter-from,
+.toast-viewport--bottom-left .toast-animation-bounce.toast-enter-from {
+  transform: translateX(-120%) scale(0.7);
+}
+
+/* Exit is always a subtle fade scale */
 .toast-leave-to {
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.9) translateY(10px);
+  filter: blur(4px);
 }
 
-/* Hover effect */
-.toast-root:hover {
-  @apply shadow-indigo-500/10 border-indigo-500/30;
+/* Shake Animation */
+@keyframes toast-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.toast-shake {
+  animation: toast-shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Stacked state (collapsed) */
+.toast-viewport--stacked:not(.toast-viewport--expanded) {
+  @apply gap-0;
+}
+
+.toast-viewport--stacked:not(.toast-viewport--expanded) .toast-root {
+  @apply absolute bottom-0 left-6 right-6 transition-all duration-500;
+}
+
+.toast-viewport--bottom-center.toast-viewport--stacked:not(
+    .toast-viewport--expanded
+  )
+  .toast-root,
+.toast-viewport--top-center.toast-viewport--stacked:not(
+    .toast-viewport--expanded
+  )
+  .toast-root {
+  @apply left-1/2 -translate-x-1/2;
+}
+
+/* Position based stacking logic */
+.toast-viewport--stacked:not(.toast-viewport--expanded)
+  .toast-root:nth-last-child(1) {
+  @apply z-[50] opacity-100 transform-none;
+}
+
+.toast-viewport--stacked:not(.toast-viewport--expanded)
+  .toast-root:nth-last-child(2) {
+  @apply z-[40] opacity-80;
+  transform: translateY(calc(var(--index-offset, -1) * 8px)) scale(0.95);
+}
+
+.toast-viewport--stacked:not(.toast-viewport--expanded)
+  .toast-root:nth-last-child(3) {
+  @apply z-[30] opacity-60;
+  transform: translateY(calc(var(--index-offset, -1) * 16px)) scale(0.9);
+}
+
+.toast-viewport--stacked:not(.toast-viewport--expanded)
+  .toast-root:nth-last-child(n + 4) {
+  @apply opacity-0 pointer-events-none;
+  transform: translateY(calc(var(--index-offset, -1) * 24px)) scale(0.85);
+}
+
+/* Reverse directions for top positions */
+.toast-viewport--top-right.toast-viewport--stacked,
+.toast-viewport--top-left.toast-viewport--stacked,
+.toast-viewport--top-center.toast-viewport--stacked {
+  --index-offset: 1;
+}
+
+.toast-viewport--bottom-right.toast-viewport--stacked,
+.toast-viewport--bottom-left.toast-viewport--stacked,
+.toast-viewport--bottom-center.toast-viewport--stacked {
+  --index-offset: -1;
+}
+
+/* Expanded state */
+.toast-viewport--expanded.toast-viewport--stacked {
+  @apply gap-3 pointer-events-auto;
+}
+
+.toast-viewport--expanded.toast-viewport--stacked .toast-root {
+  @apply relative translate-y-0 scale-100 opacity-100 z-10;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .toast-root {
+    @apply transition-none !important;
+    animation: none !important;
+  }
+
+  .toast-enter-from,
+  .toast-leave-to {
+    @apply opacity-0 !important;
+    transform: none !important;
+  }
 }

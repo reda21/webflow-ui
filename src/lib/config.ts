@@ -23,6 +23,8 @@ export interface WebmxConfig {
     closable?: boolean;
     progress?: boolean | { color?: string };
     orientation?: "horizontal" | "vertical";
+    variant?: "soft" | "minimal" | "outlined" | "glass";
+    animation?: "slide" | "fade" | "scale" | "bounce";
   };
   toaster?: {
     max?: number;

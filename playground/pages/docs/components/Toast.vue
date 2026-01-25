@@ -35,6 +35,8 @@ watch(configPreventClose, (val) => {
 
 const configOrientation = ref<'horizontal' | 'vertical'>('horizontal')
 const configProgressColor = ref('')
+const configVariant = ref<'soft' | 'minimal' | 'outlined' | 'glass'>('soft')
+const configAnimation = ref<'slide' | 'fade' | 'scale' | 'bounce'>('slide')
 
 const triggerToast = () => {
     toast.add({
@@ -45,6 +47,8 @@ const triggerToast = () => {
         duration: configDuration.value,
         closable: configClosable.value,
         orientation: configOrientation.value,
+        variant: configVariant.value,
+        animation: configAnimation.value,
         progress: configProgressColor.value ? { color: configProgressColor.value } : configShowProgress.value,
         preventClose: configPreventClose.value,
         icon: mediaType.value === 'icon' ? configCustomIcon.value : (mediaType.value === 'none' ? false : true),
@@ -60,6 +64,8 @@ const generatedCode = computed(() => {
     if (configSeverity.value !== 'contrast') code += `  severity: '${configSeverity.value}',\n`
     if (configPosition.value !== 'top-right') code += `  position: '${configPosition.value}',\n`
     if (configOrientation.value !== 'horizontal') code += `  orientation: '${configOrientation.value}',\n`
+    if (configVariant.value !== 'soft') code += `  variant: '${configVariant.value}',\n`
+    if (configAnimation.value !== 'slide') code += `  animation: '${configAnimation.value}',\n`
     if (configDuration.value !== 5000) code += `  duration: ${configDuration.value},\n`
     if (!configClosable.value) code += `  closable: false,\n`
 
@@ -255,6 +261,30 @@ function addToCalendar() {
                                         <input v-model.number="configDuration" type="number" step="500"
                                             :disabled="configPreventClose"
                                             class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed" />
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Variante</label>
+                                        <select v-model="configVariant"
+                                            class="w-full bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all">
+                                            <option value="soft">Soft (Par défaut)</option>
+                                            <option value="outlined">Outlined</option>
+                                            <option value="minimal">Minimal</option>
+                                            <option value="glass">Glassmorphism</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Animation</label>
+                                        <select v-model="configAnimation"
+                                            class="w-full bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none transition-all">
+                                            <option value="slide">Slide (Par défaut)</option>
+                                            <option value="fade">Fade</option>
+                                            <option value="scale">Scale</option>
+                                            <option value="bounce">Bounce</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -468,6 +498,36 @@ toast.add({
                                 orientation: 'vertical'
                             })">Vertical</Button>
                         </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">3. Patterns Avancés
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card variant="soft" padding="sm" class="space-y-4">
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-tight">Promise API</p>
+                            <pre class="text-[10px] leading-tight text-indigo-400"><code>toast.promise(fetchData(), {
+  loading: 'Chargement...',
+  success: 'Données prêtes !',
+  error: 'Échec du chargement'
+})</code></pre>
+                            <Button size="xs" block @click="toast.promise(new Promise(res => setTimeout(res, 2000)), {
+                                loading: 'Récupération des données...',
+                                success: 'Données synchronisées !',
+                                error: 'Erreur réseau'
+                            })">Tester Promise</Button>
+                        </Card>
+
+                        <Card variant="soft" padding="sm" class="space-y-4">
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-tight">Undo Pattern</p>
+                            <pre class="text-[10px] leading-tight text-indigo-400"><code>toast.undo('Email supprimé', 
+  () => restoreEmail()
+)</code></pre>
+                            <Button size="xs" block severity="danger"
+                                @click="toast.undo('Message supprimé', () => toast.success('Message restauré'))">Tester
+                                Undo</Button>
+                        </Card>
                     </div>
                 </div>
 
