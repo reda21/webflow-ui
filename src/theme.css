@@ -8,42 +8,42 @@
   --background: #ffffff;
   --background-secondary: #f8fafc;
   --background-tertiary: #f1f5f9;
-  
+
   /* --- Foreground / Text --- */
   --foreground: #0f172a;
   --foreground-secondary: #475569;
   --foreground-muted: #94a3b8;
-  
+
   /* --- Borders --- */
   --border: #e2e8f0;
   --border-hover: #cbd5e1;
-  
+
   /* --- Theme Colors (Base) --- */
-  --primary: #6366f1;           /* indigo-500 */
-  --primary-foreground: #ffffff;
-  
-  --secondary: #94a3b8;         /* slate-400 */
-  --secondary-soft: #f3f4f6;    /* gray-100 */
+  --primary: #4f46e5; /* indigo-500 */
+  --primary-foreground: #6058e7;
+
+  --secondary: #94a3b8; /* slate-400 */
+  --secondary-soft: #f3f4f6; /* gray-100 */
   --secondary-foreground: #1f2937; /* gray-800 */
-  
-  --success: #10b981;           /* emerald-500 */
+
+  --success: #10b981; /* emerald-500 */
   --success-foreground: #ffffff;
-  
-  --info: #0ea5e9;              /* sky-500 */
+
+  --info: #0ea5e9; /* sky-500 */
   --info-foreground: #ffffff;
-  
-  --warn: #f59e0b;              /* amber-500 */
+
+  --warn: #f59e0b; /* amber-500 */
   --warn-foreground: #ffffff;
-  
-  --help: #8b5cf6;              /* violet-500 */
+
+  --help: #8b5cf6; /* violet-500 */
   --help-foreground: #ffffff;
-  
-  --danger: #f43f5e;            /* rose-500 */
+
+  --danger: #f43f5e; /* rose-500 */
   --danger-foreground: #ffffff;
-  
-  --contrast: #171717;          /* neutral-900 */
+
+  --contrast: #171717; /* neutral-900 */
   --contrast-foreground: #ffffff;
-  
+
   --accent: #764ba2;
   --accent-foreground: #ffffff;
 
@@ -65,35 +65,36 @@
   --background: #0f172a;
   --background-secondary: #1e293b;
   --background-tertiary: #334155;
-  
+
   /* --- Foreground / Text --- */
   --foreground: #f1f5f9;
   --foreground-secondary: #94a3b8;
   --foreground-muted: #64748b;
-  
+
   /* --- Borders --- */
   --border: #334155;
   --border-hover: #475569;
-  
+
   /* --- Theme Colors (Overrides) --- */
-  --primary: #818cf8;           /* indigo-400 */
-  
-  --secondary-soft: #1e293b;    /* slate-800 */
+  --primary: #818cf8; /* indigo-400 */
+
+  --secondary-soft: #1e293b; /* slate-800 */
   --secondary-foreground: #f1f5f9;
-  
-  --success: #34d399;           /* emerald-400 */
-  --info: #38bdf8;              /* sky-400 */
-  --warn: #fbbf24;              /* amber-400 */
-  --help: #a78bfa;              /* violet-400 */
-  --danger: #fb7185;            /* rose-400 */
-  
+
+  --success: #34d399; /* emerald-400 */
+  --info: #38bdf8; /* sky-400 */
+  --warn: #fbbf24; /* amber-400 */
+  --help: #a78bfa; /* violet-400 */
+  --danger: #fb7185; /* rose-400 */
+
   --contrast: #ffffff;
   --contrast-foreground: #000000;
 }
 
 @theme {
   --variant-dark: .dark &;
-  
+
+  --color-txt: oklch(0.704 0.04 256.788);
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
   --color-background-tertiary: var(--background-tertiary);
