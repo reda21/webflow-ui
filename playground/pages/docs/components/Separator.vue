@@ -74,7 +74,7 @@ const copyCode = () => {
                         <!-- Orientation -->
                         <div class="space-y-2">
                             <label
-                                class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Orientation</label>
+                                class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Orientation</label>
                             <select v-model="configOrientation"
                                 class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none">
                                 <option v-for="o in orientations" :key="o" :value="o">{{ o }}</option>
@@ -84,7 +84,7 @@ const copyCode = () => {
                         <!-- Variant -->
                         <div class="space-y-2">
                             <label
-                                class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Variante</label>
+                                class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Variante</label>
                             <select v-model="configVariant"
                                 class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none">
                                 <option v-for="v in variants" :key="v" :value="v">{{ v }}</option>
@@ -94,7 +94,7 @@ const copyCode = () => {
                         <!-- Size -->
                         <div class="space-y-2">
                             <label
-                                class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Épaisseur</label>
+                                class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Épaisseur</label>
                             <select v-model="configSize"
                                 class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none">
                                 <option v-for="s in sizes" :key="s" :value="s">{{ s }}</option>
@@ -104,7 +104,7 @@ const copyCode = () => {
                         <!-- Severity -->
                         <div class="space-y-2">
                             <label
-                                class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Couleur</label>
+                                class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Couleur</label>
                             <select v-model="configSeverity"
                                 class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none">
                                 <option v-for="s in severities" :key="s" :value="s">{{ s }}</option>
@@ -114,7 +114,7 @@ const copyCode = () => {
                         <!-- Spacing -->
                         <div class="space-y-2">
                             <label
-                                class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Espacement</label>
+                                class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Espacement</label>
                             <select v-model="configSpacing"
                                 class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none">
                                 <option v-for="sp in spacings" :key="sp" :value="sp">{{ sp }}</option>
@@ -123,7 +123,7 @@ const copyCode = () => {
 
                         <!-- Label Position -->
                         <div class="space-y-2">
-                            <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Position
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Position
                                 Label</label>
                             <select v-model="configLabelPosition"
                                 class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none">
@@ -134,7 +134,7 @@ const copyCode = () => {
 
                     <!-- Label Input -->
                     <div class="space-y-2">
-                        <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Label
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Label
                             (optionnel)</label>
                         <input v-model="configLabel" type="text" placeholder="Ex: OU, Section, etc."
                             class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2 text-sm focus:border-indigo-500 outline-none" />
@@ -175,7 +175,7 @@ const copyCode = () => {
             <!-- Generated Code -->
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <h3 class="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest flex items-center gap-2">
                         <Icon name="heroicons:code-bracket" size="xs" />
                         Code généré
                     </h3>
@@ -197,7 +197,7 @@ const copyCode = () => {
             <h2 class="text-2xl font-bold">Variantes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card v-for="variant in variants" :key="variant" variant="soft" padding="md" class="space-y-3">
-                    <p class="text-xs font-bold text-slate-500 uppercase">{{ variant }}</p>
+                    <p class="text-xs font-bold text-slate-700 dark:text-slate-200 uppercase">{{ variant }}</p>
                     <Separator :variant="variant" severity="primary" />
                 </Card>
             </div>
@@ -208,7 +208,7 @@ const copyCode = () => {
             <h2 class="text-2xl font-bold">Couleurs</h2>
             <Card variant="soft" padding="lg" class="space-y-4">
                 <div v-for="severity in severities" :key="severity" class="space-y-1">
-                    <p class="text-xs font-bold text-slate-400 uppercase">{{ severity }}</p>
+                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">{{ severity }}</p>
                     <Separator :severity="severity" size="sm" />
                 </div>
             </Card>
@@ -219,7 +219,7 @@ const copyCode = () => {
             <h2 class="text-2xl font-bold">Épaisseurs</h2>
             <Card variant="soft" padding="lg" class="space-y-6">
                 <div v-for="size in sizes" :key="size" class="space-y-2">
-                    <p class="text-xs font-bold text-slate-400 uppercase">{{ size }}</p>
+                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">{{ size }}</p>
                     <Separator :size="size" severity="primary" />
                 </div>
             </Card>
@@ -233,15 +233,15 @@ const copyCode = () => {
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card variant="soft" padding="md" class="space-y-3">
-                    <p class="text-xs font-bold text-slate-500 uppercase">Start</p>
+                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">Start</p>
                     <Separator label="OU" label-position="start" severity="primary" />
                 </Card>
                 <Card variant="soft" padding="md" class="space-y-3">
-                    <p class="text-xs font-bold text-slate-500 uppercase">Center</p>
+                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">Center</p>
                     <Separator label="OU" label-position="center" severity="primary" />
                 </Card>
                 <Card variant="soft" padding="md" class="space-y-3">
-                    <p class="text-xs font-bold text-slate-500 uppercase">End</p>
+                    <p class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">End</p>
                     <Separator label="OU" label-position="end" severity="primary" />
                 </Card>
             </div>
@@ -311,58 +311,58 @@ const copyCode = () => {
                         <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">orientation</td>
-                                <td class="px-6 py-4 text-slate-500 italic">'horizontal' | 'vertical'</td>
-                                <td class="px-6 py-4 text-slate-500">'horizontal'</td>
-                                <td class="px-6 py-4 text-slate-500">Orientation du séparateur</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">'horizontal' | 'vertical'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">'horizontal'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Orientation du séparateur</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">variant</td>
-                                <td class="px-6 py-4 text-slate-500 italic">'solid' | 'dashed' | 'dotted' | 'gradient'
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">'solid' | 'dashed' | 'dotted' | 'gradient'
                                 </td>
-                                <td class="px-6 py-4 text-slate-500">'solid'</td>
-                                <td class="px-6 py-4 text-slate-500">Style visuel de la ligne</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">'solid'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Style visuel de la ligne</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">size</td>
-                                <td class="px-6 py-4 text-slate-500 italic">'xs' | 'sm' | 'md' | 'lg' | 'xl'</td>
-                                <td class="px-6 py-4 text-slate-500">'md'</td>
-                                <td class="px-6 py-4 text-slate-500">Épaisseur de la ligne</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">'xs' | 'sm' | 'md' | 'lg' | 'xl'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">'md'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Épaisseur de la ligne</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">severity</td>
-                                <td class="px-6 py-4 text-slate-500 italic">SeparatorSeverity</td>
-                                <td class="px-6 py-4 text-slate-500">'default'</td>
-                                <td class="px-6 py-4 text-slate-500">Couleur du séparateur</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">SeparatorSeverity</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">'default'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Couleur du séparateur</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">label</td>
-                                <td class="px-6 py-4 text-slate-500 italic">string</td>
-                                <td class="px-6 py-4 text-slate-500">-</td>
-                                <td class="px-6 py-4 text-slate-500">Texte au centre du séparateur</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">string</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">-</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Texte au centre du séparateur</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">labelPosition</td>
-                                <td class="px-6 py-4 text-slate-500 italic">'start' | 'center' | 'end'</td>
-                                <td class="px-6 py-4 text-slate-500">'center'</td>
-                                <td class="px-6 py-4 text-slate-500">Position du label</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">'start' | 'center' | 'end'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">'center'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Position du label</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">spacing</td>
-                                <td class="px-6 py-4 text-slate-500 italic">'none' | 'sm' | 'md' | 'lg' | 'xl'</td>
-                                <td class="px-6 py-4 text-slate-500">'md'</td>
-                                <td class="px-6 py-4 text-slate-500">Espacement autour du séparateur</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">'none' | 'sm' | 'md' | 'lg' | 'xl'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">'md'</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Espacement autour du séparateur</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">decorative</td>
-                                <td class="px-6 py-4 text-slate-500 italic">boolean</td>
-                                <td class="px-6 py-4 text-slate-500">true</td>
-                                <td class="px-6 py-4 text-slate-500">Si true, caché des lecteurs d'écran</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">boolean</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">true</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Si true, caché des lecteurs d'écran</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">color</td>
-                                <td class="px-6 py-4 text-slate-500 italic">string</td>
-                                <td class="px-6 py-4 text-slate-500">-</td>
-                                <td class="px-6 py-4 text-slate-500">Couleur personnalisée (override severity)</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300 italic">string</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">-</td>
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Couleur personnalisée (override severity)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -386,7 +386,7 @@ const copyCode = () => {
                         <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
                             <tr>
                                 <td class="px-6 py-4 font-mono text-indigo-500 font-bold">default</td>
-                                <td class="px-6 py-4 text-slate-500">Contenu personnalisé pour le label (remplace la
+                                <td class="px-6 py-4 text-slate-600 dark:text-slate-300">Contenu personnalisé pour le label (remplace la
                                     prop label)</td>
                             </tr>
                         </tbody>

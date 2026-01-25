@@ -290,7 +290,7 @@ const copyCode = () => {
             <h2 class="text-2xl font-bold">Variantes</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card v-for="variant in variants" :key="variant" variant="soft" padding="md" class="space-y-3">
-                    <p class="text-xs font-bold text-slate-500 uppercase">{{ variant }}</p>
+                    <p class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase">{{ variant }}</p>
                     <Progress :value="60" :variant="variant" severity="primary" size="lg" />
                 </Card>
             </div>

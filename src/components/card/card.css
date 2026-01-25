@@ -22,7 +22,8 @@
 }
 
 .card--soft {
-  @apply bg-slate-50 dark:bg-slate-800/50 border-none;
+  @apply bg-slate-100 dark:bg-slate-800/50 border-none;
+  @apply text-slate-900 dark:text-white;
 }
 
 .card--glass {
