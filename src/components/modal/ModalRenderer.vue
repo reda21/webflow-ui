@@ -8,7 +8,7 @@ const { modals, close } = useModal()
 <template>
     <div class="modal-renderer">
         <Modal v-for="modal in modals" :key="modal.id" v-bind="modal" @close="modal.onClose"
-            @update:modelValue="(val) => !val && close(modal.id)">
+            @update:modelValue="(val: boolean) => !val && close(modal.id)">
             <!-- Render dynamic component if provided -->
             <component :is="modal.component" v-if="modal.component" v-bind="modal.props" />
 

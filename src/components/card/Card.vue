@@ -100,14 +100,18 @@ const toggleLike = () => {
 // Touch handlers
 const handleTouchStart = (event: TouchEvent) => {
     if (!props.swipeable && !props.swipeToDismiss) return
-    touchStartX.value = event.touches[0].clientX
-    touchStartY.value = event.touches[0].clientY
+    const touch = event.touches[0]
+    if (!touch) return
+    touchStartX.value = touch.clientX
+    touchStartY.value = touch.clientY
 }
 
 const handleTouchMove = (event: TouchEvent) => {
     if (!props.swipeable && !props.swipeToDismiss) return
-    const touchEndX = event.touches[0].clientX
-    const touchEndY = event.touches[0].clientY
+    const touch = event.touches[0]
+    if (!touch) return
+    const touchEndX = touch.clientX
+    const touchEndY = touch.clientY
     const deltaX = touchEndX - touchStartX.value
     const deltaY = touchEndY - touchStartY.value
     if (props.swipeToDismiss && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 100) {
@@ -117,8 +121,10 @@ const handleTouchMove = (event: TouchEvent) => {
 
 const handleTouchEnd = (event: TouchEvent) => {
     if (!props.doubleTapToLike) return
-    const touchEndX = event.changedTouches[0].clientX
-    const touchEndY = event.changedTouches[0].clientY
+    const touch = event.changedTouches[0]
+    if (!touch) return
+    const touchEndX = touch.clientX
+    const touchEndY = touch.clientY
     const deltaX = touchEndX - touchStartX.value
     const deltaY = touchEndY - touchStartY.value
     if (Math.abs(deltaX) < 10 && Math.abs(deltaY) < 10) {

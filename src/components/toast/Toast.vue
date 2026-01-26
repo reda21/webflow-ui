@@ -68,10 +68,11 @@ const actionSeverity = computed(() => normalizedSeverity.value === 'contrast' ? 
 const normalizeColor = (value: string) => {
     const color = value.trim()
     const hexMatch = color.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/)
-    if (!hexMatch) return color
-    const hex = hexMatch[1].length === 3
-        ? hexMatch[1].split('').map((ch) => ch + ch).join('')
-        : hexMatch[1]
+    if (!hexMatch || !hexMatch[1]) return color
+    const rawHex = hexMatch[1]
+    const hex = rawHex.length === 3
+        ? rawHex.split('').map((ch) => ch + ch).join('')
+        : rawHex
     const r = parseInt(hex.slice(0, 2), 16)
     const g = parseInt(hex.slice(2, 4), 16)
     const b = parseInt(hex.slice(4, 6), 16)
@@ -185,16 +186,20 @@ const dragStyle = computed(() => {
 })
 
 const onTouchStart = (event: TouchEvent) => {
-    touchStartX = event.touches[0].clientX
-    touchStartY = event.touches[0].clientY
+    const touch = event.touches[0]
+    if (!touch) return
+    touchStartX = touch.clientX
+    touchStartY = touch.clientY
     isDragging.value = true
     emit('swipeStart', event)
 }
 
 const onTouchMove = (event: TouchEvent) => {
     if (!isDragging.value) return
-    const currentX = event.touches[0].clientX
-    const currentY = event.touches[0].clientY
+    const touch = event.touches[0]
+    if (!touch) return
+    const currentX = touch.clientX
+    const currentY = touch.clientY
     dragX.value = currentX - touchStartX
     dragY.value = currentY - touchStartY
     emit('swipeMove', event)

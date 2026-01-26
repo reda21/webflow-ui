@@ -41,6 +41,7 @@ const isLoading = ref(true)
 const hasError = ref(false)
 const cssIconUrl = ref<string | null>(null)
 const isVisible = ref(!props.lazy)
+const isMounted = ref(false)
 const iconRef = ref<HTMLElement | null>(null)
 let observer: IntersectionObserver | null = null
 
@@ -104,6 +105,7 @@ const setupLazyLoading = () => {
 
 // Initialize
 onMounted(async () => {
+  isMounted.value = true
   if (isTestEnv) return
   setupLazyLoading()
 
@@ -286,7 +288,7 @@ const isClient = typeof window !== 'undefined'
     </svg>
 
     <!-- SVG Mode (default) - uses Iconify -->
-    <IconifyIcon v-else-if="!isTestEnv && mode === 'svg' && isClient" :icon="displayIcon" :width="iconifySize"
+    <IconifyIcon v-else-if="!isTestEnv && mode === 'svg' && isMounted" :icon="displayIcon" :width="iconifySize"
       :height="iconifySize" :class="iconClasses" :style="iconStyles" />
     <span v-else-if="mode === 'svg'" :class="iconClasses" :style="iconStyles" />
 

@@ -7,11 +7,9 @@ export type {
   NavItem,
   NavbarProps,
   NavbarEmits,
-} from "./components/navbar/types";
-export type {
   NavLogoMode,
   NavLogoProps,
-} from "./components/navbar/NavLogo.vue";
+} from "./components/navbar/types";
 
 export { default as Button } from "./components/button/Button.vue";
 export type {

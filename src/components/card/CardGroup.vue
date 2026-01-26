@@ -39,8 +39,9 @@ const setupObserver = () => {
 
     const children = containerRef.value.children
     for (let i = 0; i < children.length; i++) {
-        if (children[i].classList.contains('card-group-item')) {
-            observer.observe(children[i])
+        const child = children[i]
+        if (child && child.classList.contains('card-group-item')) {
+            observer.observe(child)
         }
     }
 }

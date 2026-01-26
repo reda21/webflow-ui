@@ -3,8 +3,9 @@ import type { ModalProps } from "./types";
 import Modal from "./Modal.vue";
 
 export interface ProgrammaticModal extends ModalProps {
-  id?: string;
+  id: string;
   component?: any;
+  props?: any;
   slots?: any;
   onClose?: (result?: any) => void;
 }
@@ -14,7 +15,7 @@ const state = reactive({
 });
 
 export const useModal = () => {
-  const open = (options: ProgrammaticModal) => {
+  const open = (options: Omit<ProgrammaticModal, "id"> & { id?: string }) => {
     const id = options.id || `modal-${Math.random().toString(36).slice(2, 9)}`;
     const modal: ProgrammaticModal = {
       ...options,
@@ -33,7 +34,8 @@ export const useModal = () => {
   const close = (id: string) => {
     const index = state.modals.findIndex((m) => m.id === id);
     if (index !== -1) {
-      state.modals[index].modelValue = false;
+      const modal = state.modals[index];
+      if (modal) modal.modelValue = false;
       // Emit close result if needed or handle cleanup
       // Delay removal for transition
       setTimeout(() => {

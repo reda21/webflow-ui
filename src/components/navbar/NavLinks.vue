@@ -33,7 +33,7 @@ const handleNavClick = (item: NavItem, event: MouseEvent) => {
             <a v-for="item in navItems" :key="item.label" :href="item.href" class="navbar-nav-item"
                 :class="{ 'navbar-nav-item--active': item.active }" :target="item.external ? '_blank' : undefined"
                 :rel="item.external ? 'noopener noreferrer' : undefined" @click="handleNavClick(item, $event)">
-                <Icon v-if="item.icon" :name="item.icon" size="sm" class="mr-1.5" />
+                <Icon v-if="item.icon" :name="item.icon" size="sm" />
                 {{ item.label }}
                 <span v-if="item.badge" class="navbar-nav-item-badge">{{ item.badge }}</span>
                 <svg v-if="item.external" class="navbar-nav-item-external" fill="none" viewBox="0 0 24 24"
@@ -41,7 +41,6 @@ const handleNavClick = (item: NavItem, event: MouseEvent) => {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                <span v-if="item.active" class="navbar-nav-item-indicator" />
             </a>
         </slot>
     </div>

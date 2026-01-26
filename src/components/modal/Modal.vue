@@ -279,13 +279,17 @@ const isSwiping = ref(false)
 
 const handleTouchStart = (e: TouchEvent) => {
     if (props.variant !== 'bottom-sheet' || !props.swipeToDismiss) return
-    touchY.value = e.touches[0].clientY
+    const touch = e.touches[0]
+    if (!touch) return
+    touchY.value = touch.clientY
     isSwiping.value = true
 }
 
 const handleTouchMove = (e: TouchEvent) => {
     if (!isSwiping.value) return
-    const currentY = e.touches[0].clientY
+    const touch = e.touches[0]
+    if (!touch) return
+    const currentY = touch.clientY
     const delta = currentY - touchY.value
     if (delta > 0) {
         translateY.value = delta
@@ -403,14 +407,14 @@ defineExpose({
                 <Transition :name="transition ? 'modal-content' : ''" :css="transition" appear
                     @after-leave="emit('after-leave')" @after-enter="emit('after-enter')">
                     <DialogContent v-if="isOpen || !unmountOnClose" ref="modalRef" :class="contentClasses"
-                        :style="modalStyles" :aria-label="ariaLabel" :role="role" @interact-outside="(event) => {
+                        :style="modalStyles" :aria-label="ariaLabel" :role="role" @interact-outside="(event: Event) => {
                             if (!dismissible) {
                                 event.preventDefault()
                                 emit('close-prevent')
                                 return
                             }
                             if (!closeOnOutsideClick) event.preventDefault()
-                        }" @escape-key-down="(event) => {
+                        }" @escape-key-down="(event: KeyboardEvent) => {
                             if (!dismissible) {
                                 event.preventDefault()
                                 emit('close-prevent')

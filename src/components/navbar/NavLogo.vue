@@ -7,36 +7,8 @@
  */
 import { computed } from 'vue'
 import Icon from '../icon/Icon.vue'
+import type { NavLogoMode, NavLogoProps } from './types'
 import './navlogo.css'
-
-export type NavLogoMode = 'icon' | 'text' | 'both'
-
-export interface NavLogoProps {
-    /** Display mode: 'icon', 'text', or 'both' */
-    mode?: NavLogoMode
-    /** Brand/company name */
-    text?: string
-    /** Icon name (iconify format) or URL for image */
-    icon?: string
-    /** Whether the icon is an image URL */
-    isImage?: boolean
-    /** Alt text for image */
-    alt?: string
-    /** URL the logo links to */
-    href?: string
-    /** Size variant */
-    size?: 'sm' | 'md' | 'lg'
-    /** Custom gradient colors for icon background */
-    gradientFrom?: string
-    /** Custom gradient colors for icon background */
-    gradientTo?: string
-    /** Whether to show gradient background on icon */
-    showIconBg?: boolean
-    /** Icon background variant */
-    iconVariant?: 'gradient' | 'solid' | 'soft' | 'none'
-    /** Icon background color (for solid/soft variants) */
-    iconColor?: string
-}
 
 const props = withDefaults(defineProps<NavLogoProps>(), {
     mode: 'both',

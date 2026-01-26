@@ -37,13 +37,14 @@ const handleLoad = () => {
 
 const handleError = () => {
     // Retry logic with exponential backoff
-    if (retryCount.value < props.retryAttempts && props.src) {
+    const handleSrc = props.src
+    if (retryCount.value < props.retryAttempts && handleSrc) {
         retryCount.value++
         const delay = props.retryDelay * Math.pow(2, retryCount.value - 1)
 
         retryTimeout = setTimeout(() => {
             // Force reload by appending timestamp
-            currentSrc.value = `${props.src}${props.src.includes('?') ? '&' : '?'}_retry=${Date.now()}`
+            currentSrc.value = `${handleSrc}${handleSrc.includes('?') ? '&' : '?'}_retry=${Date.now()}`
         }, delay)
     } else {
         error.value = true
