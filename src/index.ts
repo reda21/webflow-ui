@@ -2,8 +2,16 @@
 import "./style.css";
 
 // Components
-export { default as Navbar } from "./components/Navbar.vue";
-export type { NavItem } from "./components/Navbar.types";
+export { Navbar, NavLogo, NavLinks } from "./components/navbar/index";
+export type {
+  NavItem,
+  NavbarProps,
+  NavbarEmits,
+} from "./components/navbar/types";
+export type {
+  NavLogoMode,
+  NavLogoProps,
+} from "./components/navbar/NavLogo.vue";
 
 export { default as Button } from "./components/button/Button.vue";
 export type {

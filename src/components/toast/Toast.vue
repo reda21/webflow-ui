@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
-import { Icon, Button, Avatar } from '@/index'
+import Icon from '../icon/Icon.vue'
+import Button from '../button/Button.vue'
+import { Avatar } from '../avatar/index'
 import type { ToastProps, SwipeEvent, ToastId, SwipeDirection, ToastEmits } from './types'
 
 const props = withDefaults(defineProps<ToastProps>(), {

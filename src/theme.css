@@ -26,19 +26,19 @@
   --secondary-soft: #f3f4f6; /* gray-100 */
   --secondary-foreground: #1f2937; /* gray-800 */
 
-  --success: #10b981; /* emerald-500 */
+  --success: #047857; /* emerald-700 for better contrast */
   --success-foreground: #ffffff;
 
   --info: #0ea5e9; /* sky-500 */
   --info-foreground: #ffffff;
 
-  --warn: #f59e0b; /* amber-500 */
+  --warn: #b45309; /* amber-700 for better contrast */
   --warn-foreground: #ffffff;
 
   --help: #8b5cf6; /* violet-500 */
   --help-foreground: #ffffff;
 
-  --danger: #f43f5e; /* rose-500 */
+  --danger: #be123c; /* rose-700 for better contrast */
   --danger-foreground: #ffffff;
 
   --contrast: #171717; /* neutral-900 */

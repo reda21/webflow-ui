@@ -1,0 +1,248 @@
+@reference "../../theme.css";
+
+/**
+ * NavLogo Component Styles
+ */
+
+/* ============================================
+   Base
+   ============================================ */
+.navlogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navlogo:hover .navlogo-icon {
+  transform: scale(1.05) rotate(2deg);
+}
+
+/* ============================================
+   Sizes
+   ============================================ */
+.navlogo--sm {
+  gap: 0.5rem;
+}
+
+.navlogo--sm .navlogo-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+
+.navlogo--sm .navlogo-icon-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.navlogo--sm .navlogo-img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.navlogo--sm .navlogo-text {
+  font-size: 1rem;
+}
+
+/* MD (default) */
+.navlogo--md .navlogo-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+}
+
+.navlogo--md .navlogo-icon-svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.navlogo--md .navlogo-img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.navlogo--md .navlogo-text {
+  font-size: 1.25rem;
+}
+
+/* LG */
+.navlogo--lg {
+  gap: 1rem;
+}
+
+.navlogo--lg .navlogo-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+}
+
+.navlogo--lg .navlogo-icon-svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.navlogo--lg .navlogo-img {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.navlogo--lg .navlogo-text {
+  font-size: 1.5rem;
+}
+
+/* ============================================
+   Icon Wrapper
+   ============================================ */
+.navlogo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navlogo-icon-svg {
+  @apply text-white;
+}
+
+.navlogo-img {
+  object-fit: contain;
+}
+
+/* Gradient variant (default) */
+.navlogo-icon--gradient {
+  @apply bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/25;
+}
+
+.navlogo:hover .navlogo-icon--gradient {
+  @apply shadow-xl shadow-indigo-500/35;
+}
+
+/* Solid variants */
+.navlogo-icon--solid {
+  @apply shadow-lg;
+}
+
+.navlogo-icon--solid.navlogo-icon--indigo {
+  @apply bg-indigo-500 shadow-indigo-500/25;
+}
+
+.navlogo-icon--solid.navlogo-icon--purple {
+  @apply bg-purple-500 shadow-purple-500/25;
+}
+
+.navlogo-icon--solid.navlogo-icon--blue {
+  @apply bg-blue-500 shadow-blue-500/25;
+}
+
+.navlogo-icon--solid.navlogo-icon--emerald {
+  @apply bg-emerald-500 shadow-emerald-500/25;
+}
+
+.navlogo-icon--solid.navlogo-icon--rose {
+  @apply bg-rose-500 shadow-rose-500/25;
+}
+
+.navlogo-icon--solid.navlogo-icon--orange {
+  @apply bg-orange-500 shadow-orange-500/25;
+}
+
+.navlogo-icon--solid.navlogo-icon--slate {
+  @apply bg-slate-700 shadow-slate-700/25;
+}
+
+/* Soft variants */
+.navlogo-icon--soft {
+  @apply shadow-sm;
+}
+
+.navlogo-icon--soft.navlogo-icon--indigo {
+  @apply bg-indigo-100 dark:bg-indigo-900/40;
+}
+
+.navlogo-icon--soft.navlogo-icon--indigo .navlogo-icon-svg {
+  @apply text-indigo-600 dark:text-indigo-400;
+}
+
+.navlogo-icon--soft.navlogo-icon--purple {
+  @apply bg-purple-100 dark:bg-purple-900/40;
+}
+
+.navlogo-icon--soft.navlogo-icon--purple .navlogo-icon-svg {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+.navlogo-icon--soft.navlogo-icon--blue {
+  @apply bg-blue-100 dark:bg-blue-900/40;
+}
+
+.navlogo-icon--soft.navlogo-icon--blue .navlogo-icon-svg {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.navlogo-icon--soft.navlogo-icon--emerald {
+  @apply bg-emerald-100 dark:bg-emerald-900/40;
+}
+
+.navlogo-icon--soft.navlogo-icon--emerald .navlogo-icon-svg {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+
+.navlogo-icon--soft.navlogo-icon--rose {
+  @apply bg-rose-100 dark:bg-rose-900/40;
+}
+
+.navlogo-icon--soft.navlogo-icon--rose .navlogo-icon-svg {
+  @apply text-rose-600 dark:text-rose-400;
+}
+
+.navlogo-icon--soft.navlogo-icon--orange {
+  @apply bg-orange-100 dark:bg-orange-900/40;
+}
+
+.navlogo-icon--soft.navlogo-icon--orange .navlogo-icon-svg {
+  @apply text-orange-600 dark:text-orange-400;
+}
+
+.navlogo-icon--soft.navlogo-icon--slate {
+  @apply bg-slate-100 dark:bg-slate-800;
+}
+
+.navlogo-icon--soft.navlogo-icon--slate .navlogo-icon-svg {
+  @apply text-slate-600 dark:text-slate-400;
+}
+
+/* None variant */
+.navlogo-icon--none {
+  background: transparent;
+  box-shadow: none;
+}
+
+.navlogo-icon--none .navlogo-icon-svg {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+/* ============================================
+   Text
+   ============================================ */
+.navlogo-text {
+  font-weight: 700;
+  @apply bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent;
+}
+
+:is(.dark .navlogo-text) {
+  @apply from-white to-slate-300;
+}
+
+/* Icon only mode */
+.navlogo--icon .navlogo-text {
+  display: none;
+}
+
+/* Text only mode */
+.navlogo--text .navlogo-icon {
+  display: none;
+}

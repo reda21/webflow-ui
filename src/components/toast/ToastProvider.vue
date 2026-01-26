@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, provide, defineExpose } from 'vue'
+import { ref, onMounted, provide } from 'vue'
 import ToastItem from './Toast.vue'
 import type { ToastOptions, ToastPosition, ToastProps, ToastId } from './types'
 import { toastsState, initPersistence } from './store'
