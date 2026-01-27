@@ -222,9 +222,9 @@ if (isTestEnv && useSimple) {
     isCurrentlyLoading = computed(() => false)
     buttonDisabled = computed(() => props.disabled || props.loading)
     originalHandleClick = (e: MouseEvent) => emit('click', e)
-    handleMouseDown = () => {}
-    handleMouseUp = () => {}
-    handleMouseLeave = () => {}
+    handleMouseDown = () => { }
+    handleMouseUp = () => { }
+    handleMouseLeave = () => { }
 } else {
     const result = useButton({
         ...props,
@@ -311,7 +311,7 @@ const getSeverityClasses = computed(() => {
     else if (variant === 'subtle') classes.push('btn-subtle')
     else if (variant === 'ghost') classes.push('btn-ghost')
     else if (variant === 'link') classes.push('btn-link')
-    else if (variant !== 'soft') classes.push(`btn-${variant}`)
+    else classes.push(`btn-${variant}`)
 
     return classes.join(' ')
 })

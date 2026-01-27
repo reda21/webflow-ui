@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, Button, Icon, Avatar } from '@/index'
+import { Card, Button, Icon, Avatar } from '../../../index'
 import { ref } from 'vue'
 
 const props = defineProps<{

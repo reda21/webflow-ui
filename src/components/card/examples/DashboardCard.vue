@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, Icon, Button } from '@/index'
+import { Card, Icon, Button } from '../../../index'
 
 const props = defineProps<{
     metric: {

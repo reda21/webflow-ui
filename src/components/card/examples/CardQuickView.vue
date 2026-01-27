@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Modal, Button, Icon, Slider, Badge } from '@/index'
+import { Modal, Button, Icon, Slider, Badge } from '../../../index'
 
 const props = defineProps<{
     item: {

@@ -9,12 +9,12 @@
   --btn-help: var(--help, #a855f7);
   --btn-danger: var(--danger, #ef4444);
   --btn-contrast: var(--contrast, #0f172a);
-  
+
   --btn-color: var(--btn-primary);
   --btn-text: white;
-  
+
   @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm min-h-10 font-semibold transition-all duration-300 active:scale-95 focus:outline-none cursor-pointer leading-none disabled:opacity-50 disabled:cursor-not-allowed bg-primary text-white hover:brightness-110;
-  
+
   &.btn-disabled {
     @apply opacity-50 cursor-not-allowed pointer-events-none;
   }
@@ -22,7 +22,7 @@
   border-radius: var(--radius-lg);
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -80,20 +80,33 @@
   @apply -translate-y-1 scale-110 shadow-primary/40;
 }
 
-.btn-fab-bottom-left { @apply left-8 right-auto; }
-.btn-fab-top-right { @apply top-8 bottom-auto; }
-.btn-fab-top-left { @apply top-8 left-8 right-auto bottom-auto; }
+.btn-fab-bottom-left {
+  @apply left-8 right-auto;
+}
+.btn-fab-top-right {
+  @apply top-8 bottom-auto;
+}
+.btn-fab-top-left {
+  @apply top-8 left-8 right-auto bottom-auto;
+}
 
 /* --- Mode Color-Blind (Accessibilité) --- */
 .btn-colorblind {
   border-width: 2px !important;
 }
 
-.btn-colorblind.btn-success { border-style: solid !important; }
-.btn-colorblind.btn-warn { border-style: dashed !important; }
-.btn-colorblind.btn-danger { border-style: double !important; }
-.btn-colorblind.btn-info { border-style: dotted !important; }
-
+.btn-colorblind.btn-success {
+  border-style: solid !important;
+}
+.btn-colorblind.btn-warn {
+  border-style: dashed !important;
+}
+.btn-colorblind.btn-danger {
+  border-style: double !important;
+}
+.btn-colorblind.btn-info {
+  border-style: dotted !important;
+}
 
 /* --- Severities --- */
 .btn-primary {
@@ -117,7 +130,7 @@
   @apply bg-success text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -128,7 +141,7 @@
   @apply bg-info text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -139,7 +152,7 @@
   @apply bg-warn text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -150,7 +163,7 @@
   @apply bg-help text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -161,7 +174,7 @@
   @apply bg-danger text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -172,7 +185,7 @@
   @apply bg-contrast text-contrast-foreground;
 
   @variant dark {
-    --btn-text: theme('colors.gray.900');
+    --btn-text: theme("colors.gray.900");
     @apply text-gray-900;
   }
 }
@@ -207,12 +220,24 @@
   @apply aspect-square !p-0 !px-0 justify-center items-center h-auto !min-w-0 w-auto;
 }
 
-.btn-icon-only.btn-xs { @apply w-7 h-7 min-h-0; }
-.btn-icon-only.btn-sm { @apply w-8 h-8 min-h-0; }
-.btn-icon-only.btn-md { @apply w-10 h-10 min-h-0; }
-.btn-icon-only.btn-lg { @apply w-12 h-12 min-h-0; }
-.btn-icon-only.btn-xl { @apply w-14 h-14 min-h-0; }
-.btn-icon-only.btn-2xl { @apply w-16 h-16 min-h-0; }
+.btn-icon-only.btn-xs {
+  @apply w-7 h-7 min-h-0;
+}
+.btn-icon-only.btn-sm {
+  @apply w-8 h-8 min-h-0;
+}
+.btn-icon-only.btn-md {
+  @apply w-10 h-10 min-h-0;
+}
+.btn-icon-only.btn-lg {
+  @apply w-12 h-12 min-h-0;
+}
+.btn-icon-only.btn-xl {
+  @apply w-14 h-14 min-h-0;
+}
+.btn-icon-only.btn-2xl {
+  @apply w-16 h-16 min-h-0;
+}
 
 /* --- Rounding --- */
 .round-none {
@@ -248,7 +273,39 @@
 }
 
 .btn-soft {
-  /* Implicitly handled by .btn defaults */
+  background-color: color-mix(
+    in srgb,
+    var(--btn-color),
+    transparent 85%
+  ) !important;
+  color: var(--btn-color) !important;
+  border-color: transparent !important;
+}
+
+.btn-soft:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--btn-color),
+    transparent 75%
+  ) !important;
+}
+
+/* Accessibility: Ensure contrast for light colors in soft mode */
+.btn-soft.btn-primary,
+.btn-soft:not([class*="btn-"]) {
+  /* Darken the primary color slightly to pass 4.5:1 contrast on white */
+  color: color-mix(in srgb, var(--btn-color), black 15%) !important;
+}
+
+@variant dark {
+  .btn-soft {
+    background-color: color-mix(
+      in srgb,
+      var(--btn-color),
+      transparent 80%
+    ) !important;
+    color: color-mix(in srgb, var(--btn-color), white 20%) !important;
+  }
 }
 
 /* --- Variants --- */
@@ -261,13 +318,21 @@
 }
 
 .btn-subtle {
-  background-color: color-mix(in srgb, var(--btn-color), transparent 90%) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--btn-color),
+    transparent 90%
+  ) !important;
   color: var(--btn-color) !important;
   border-color: transparent !important;
 }
 
 .btn-subtle:hover {
-  background-color: color-mix(in srgb, var(--btn-color), transparent 80%) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--btn-color),
+    transparent 80%
+  ) !important;
 }
 
 .btn-ghost {
@@ -309,7 +374,11 @@
 }
 
 .btn-ghost:hover {
-  background-color: color-mix(in srgb, var(--btn-color), transparent 90%) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--btn-color),
+    transparent 90%
+  ) !important;
 }
 
 .btn-link {
@@ -321,7 +390,11 @@
 
 /* Gradient - Boutons avec dégradés colorés */
 .btn-gradient {
-  background: linear-gradient(135deg, var(--btn-color), color-mix(in srgb, var(--btn-color), var(--primary) 50%)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--btn-color),
+    color-mix(in srgb, var(--btn-color), var(--primary) 50%)
+  ) !important;
   border-color: transparent !important;
   color: white !important;
   position: relative;
@@ -330,7 +403,7 @@
 }
 
 .btn-gradient::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
@@ -344,12 +417,13 @@
 
 .btn-gradient:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--btn-color), transparent 50%);
+  box-shadow: 0 10px 25px -5px
+    color-mix(in srgb, var(--btn-color), transparent 50%);
 }
 
 @variant dark {
   .btn-gradient {
-    color: theme('colors.gray.900') !important;
+    color: theme("colors.gray.900") !important;
   }
 }
 
@@ -360,14 +434,14 @@
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid color-mix(in srgb, var(--btn-color), transparent 70%) !important;
   color: var(--foreground) !important;
-  box-shadow: 
+  box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn-glass:hover {
   background: color-mix(in srgb, var(--btn-color), transparent 70%) !important;
-  box-shadow: 
+  box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
@@ -377,7 +451,7 @@
   background: var(--btn-color) !important;
   border: none !important;
   color: white !important;
-  box-shadow: 
+  box-shadow:
     0 4px 0 0 color-mix(in srgb, var(--btn-color), black 30%),
     0 6px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(0);
@@ -386,21 +460,21 @@
 
 .btn-3d:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 6px 0 0 color-mix(in srgb, var(--btn-color), black 30%),
     0 8px 15px rgba(0, 0, 0, 0.25);
 }
 
 .btn-3d:active {
   transform: translateY(2px) !important;
-  box-shadow: 
+  box-shadow:
     0 2px 0 0 color-mix(in srgb, var(--btn-color), black 30%),
     0 3px 5px rgba(0, 0, 0, 0.15) !important;
 }
 
 @variant dark {
   .btn-3d {
-    color: theme('colors.gray.900') !important;
+    color: theme("colors.gray.900") !important;
   }
 }
 
@@ -409,7 +483,7 @@
   background: transparent !important;
   border: 2px solid var(--btn-color) !important;
   color: var(--btn-color) !important;
-  box-shadow: 
+  box-shadow:
     0 0 5px var(--btn-color),
     0 0 10px var(--btn-color),
     inset 0 0 5px color-mix(in srgb, var(--btn-color), transparent 80%);
@@ -419,7 +493,7 @@
 
 .btn-neon:hover {
   background: color-mix(in srgb, var(--btn-color), transparent 90%) !important;
-  box-shadow: 
+  box-shadow:
     0 0 10px var(--btn-color),
     0 0 20px var(--btn-color),
     0 0 30px var(--btn-color),
@@ -434,25 +508,48 @@
 }
 
 /* --- Rings --- */
-.btn-ring-1 { --btn-ring-width: 1px; }
-.btn-ring-2 { --btn-ring-width: 2px; }
-.btn-ring-4 { --btn-ring-width: 4px; }
+.btn-ring-1 {
+  --btn-ring-width: 1px;
+}
+.btn-ring-2 {
+  --btn-ring-width: 2px;
+}
+.btn-ring-4 {
+  --btn-ring-width: 4px;
+}
 
-.btn-ring-primary { --btn-ring-color: var(--primary); }
-.btn-ring-secondary { --btn-ring-color: var(--secondary); }
-.btn-ring-success { --btn-ring-color: var(--success); }
-.btn-ring-info { --btn-ring-color: var(--info); }
-.btn-ring-warn { --btn-ring-color: var(--warn); }
-.btn-ring-help { --btn-ring-color: var(--help); }
-.btn-ring-danger { --btn-ring-color: var(--danger); }
-.btn-ring-contrast { --btn-ring-color: var(--contrast); }
+.btn-ring-primary {
+  --btn-ring-color: var(--primary);
+}
+.btn-ring-secondary {
+  --btn-ring-color: var(--secondary);
+}
+.btn-ring-success {
+  --btn-ring-color: var(--success);
+}
+.btn-ring-info {
+  --btn-ring-color: var(--info);
+}
+.btn-ring-warn {
+  --btn-ring-color: var(--warn);
+}
+.btn-ring-help {
+  --btn-ring-color: var(--help);
+}
+.btn-ring-danger {
+  --btn-ring-color: var(--danger);
+}
+.btn-ring-contrast {
+  --btn-ring-color: var(--contrast);
+}
 
 [class*="btn-ring-"] {
   box-shadow: 0 0 0 var(--btn-ring-width) var(--btn-ring-color) !important;
 }
 
 /* Ensure rings are still visible when mixed with link/ghost variants if needed */
-.btn-link[class*="btn-ring-"], .btn-ghost[class*="btn-ring-"] {
+.btn-link[class*="btn-ring-"],
+.btn-ghost[class*="btn-ring-"] {
   @apply !ring-0; /* Reset tailwind ring if any */
 }
 
@@ -461,11 +558,21 @@
   @apply h-auto py-3 px-4 min-w-[3.5rem] gap-1.5;
 }
 
-.btn-vertical.btn-xs { @apply py-1.5 px-2 min-w-[2.5rem] gap-0.5; }
-.btn-vertical.btn-sm { @apply py-2 px-3 min-w-[3rem] gap-1; }
-.btn-vertical.btn-lg { @apply py-4 px-5 min-w-[4rem] gap-2; }
-.btn-vertical.btn-xl { @apply py-5 px-6 min-w-[5rem] gap-2.5; }
-.btn-vertical.btn-2xl { @apply py-6 px-8 min-w-[6rem] gap-3; }
+.btn-vertical.btn-xs {
+  @apply py-1.5 px-2 min-w-[2.5rem] gap-0.5;
+}
+.btn-vertical.btn-sm {
+  @apply py-2 px-3 min-w-[3rem] gap-1;
+}
+.btn-vertical.btn-lg {
+  @apply py-4 px-5 min-w-[4rem] gap-2;
+}
+.btn-vertical.btn-xl {
+  @apply py-5 px-6 min-w-[5rem] gap-2.5;
+}
+.btn-vertical.btn-2xl {
+  @apply py-6 px-8 min-w-[6rem] gap-3;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /* AMÉLIORATIONS VISUELLES                                                      */
@@ -478,19 +585,25 @@
 }
 
 .btn-ripple::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   top: 50%;
   left: 50%;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10.01%);
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 10%,
+    transparent 10.01%
+  );
   background-repeat: no-repeat;
   background-position: 50%;
   transform: translate(-50%, -50%) scale(10);
   opacity: 0;
-  transition: transform 0.5s ease-out, opacity 0.8s ease-out;
+  transition:
+    transform 0.5s ease-out,
+    opacity 0.8s ease-out;
 }
 
 .btn-ripple:active::after {
@@ -501,12 +614,16 @@
 
 /* Variante ripple sombre pour boutons clairs */
 .btn-ripple-dark::after {
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.2) 10%, transparent 10.01%);
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.2) 10%,
+    transparent 10.01%
+  );
 }
 
 /* --- Transitions Fluides Améliorées --- */
 .btn-smooth {
-  transition: 
+  transition:
     all 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.25s ease-out;
@@ -531,8 +648,12 @@
 
 /* Rotation continue */
 @keyframes btn-icon-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .btn-icon-spin .btn-icon,
@@ -549,8 +670,15 @@
 
 /* Pulse */
 @keyframes btn-icon-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(0.9); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
 }
 
 .btn-icon-pulse .btn-icon,
@@ -561,8 +689,13 @@
 
 /* Bounce */
 @keyframes btn-icon-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 .btn-icon-bounce .btn-icon,
@@ -573,9 +706,23 @@
 
 /* Shake (pour attirer l'attention) */
 @keyframes btn-icon-shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-  20%, 40%, 60%, 80% { transform: translateX(2px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
 }
 
 .btn-icon-shake .btn-icon,
@@ -605,23 +752,31 @@
 
 /* --- État Success (Checkmark animé) --- */
 @keyframes btn-success-check {
-  0% { 
+  0% {
     stroke-dashoffset: 50;
     opacity: 0;
   }
   50% {
     opacity: 1;
   }
-  100% { 
+  100% {
     stroke-dashoffset: 0;
     opacity: 1;
   }
 }
 
 @keyframes btn-success-pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .btn-success-state {
@@ -678,9 +833,23 @@
 
 /* --- État Error (Shake + couleur) --- */
 @keyframes btn-error-shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-  20%, 40%, 60%, 80% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
 }
 
 .btn-error-state.is-error {
@@ -731,41 +900,49 @@
 
 /* Tooltip arrows */
 .btn-tooltip-top::after {
-  content: '';
+  content: "";
   @apply absolute top-full left-1/2 -translate-x-1/2;
   border: 4px solid transparent;
-  border-top-color: theme('colors.gray.900');
+  border-top-color: theme("colors.gray.900");
 }
 
 .btn-tooltip-bottom::after {
-  content: '';
+  content: "";
   @apply absolute bottom-full left-1/2 -translate-x-1/2;
   border: 4px solid transparent;
-  border-bottom-color: theme('colors.gray.900');
+  border-bottom-color: theme("colors.gray.900");
 }
 
 .btn-tooltip-left::after {
-  content: '';
+  content: "";
   @apply absolute left-full top-1/2 -translate-y-1/2;
   border: 4px solid transparent;
-  border-left-color: theme('colors.gray.900');
+  border-left-color: theme("colors.gray.900");
 }
 
 .btn-tooltip-right::after {
-  content: '';
+  content: "";
   @apply absolute right-full top-1/2 -translate-y-1/2;
   border: 4px solid transparent;
-  border-right-color: theme('colors.gray.900');
+  border-right-color: theme("colors.gray.900");
 }
 
 @variant dark {
   .btn-tooltip {
     @apply bg-gray-100 text-gray-900;
   }
-  .btn-tooltip-top::after { border-top-color: theme('colors.gray.100'); }
-  .btn-tooltip-bottom::after { border-bottom-color: theme('colors.gray.100'); }
-  .btn-tooltip-left::after { border-left-color: theme('colors.gray.100'); }
-  .btn-tooltip-right::after { border-right-color: theme('colors.gray.100'); }
+  .btn-tooltip-top::after {
+    border-top-color: theme("colors.gray.100");
+  }
+  .btn-tooltip-bottom::after {
+    border-bottom-color: theme("colors.gray.100");
+  }
+  .btn-tooltip-left::after {
+    border-left-color: theme("colors.gray.100");
+  }
+  .btn-tooltip-right::after {
+    border-right-color: theme("colors.gray.100");
+  }
 }
 
 /* --- Badge --- */
@@ -776,25 +953,51 @@
 }
 
 @keyframes badge-pop {
-  0% { transform: scale(0); }
-  70% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Badge colors */
-.btn-badge-primary { @apply bg-primary; }
-.btn-badge-secondary { @apply bg-secondary text-secondary-foreground; }
-.btn-badge-success { @apply bg-success; }
-.btn-badge-info { @apply bg-info; }
-.btn-badge-warn { @apply bg-warn; }
-.btn-badge-help { @apply bg-help; }
-.btn-badge-danger { @apply bg-danger; }
-.btn-badge-contrast { @apply bg-contrast text-contrast-foreground; }
+.btn-badge-primary {
+  @apply bg-primary;
+}
+.btn-badge-secondary {
+  @apply bg-secondary text-secondary-foreground;
+}
+.btn-badge-success {
+  @apply bg-success;
+}
+.btn-badge-info {
+  @apply bg-info;
+}
+.btn-badge-warn {
+  @apply bg-warn;
+}
+.btn-badge-help {
+  @apply bg-help;
+}
+.btn-badge-danger {
+  @apply bg-danger;
+}
+.btn-badge-contrast {
+  @apply bg-contrast text-contrast-foreground;
+}
 
 /* --- État Success (via prop) --- */
 @keyframes success-checkmark {
-  0% { stroke-dashoffset: 24; }
-  100% { stroke-dashoffset: 0; }
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 .btn-is-success {
@@ -839,8 +1042,8 @@
 @media (pointer: coarse) {
   .btn {
     @apply min-h-12 min-w-12; /* Minimum 48px height/width for touch targets */
-    padding-left: theme('spacing.6');
-    padding-right: theme('spacing.6');
+    padding-left: theme("spacing.6");
+    padding-right: theme("spacing.6");
   }
 }
 
@@ -861,7 +1064,7 @@
 /* --- Focus Visible Amélioré --- */
 .btn:focus-visible {
   @apply outline-none;
-  box-shadow: 
+  box-shadow:
     0 0 0 2px var(--background, white),
     0 0 0 4px var(--btn-color);
   position: relative;
@@ -870,8 +1073,17 @@
 
 /* Animation de focus pour attirer l'attention */
 @keyframes focus-pulse {
-  0%, 100% { box-shadow: 0 0 0 2px var(--background, white), 0 0 0 4px var(--btn-color); }
-  50% { box-shadow: 0 0 0 2px var(--background, white), 0 0 0 6px var(--btn-color); }
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px var(--background, white),
+      0 0 0 4px var(--btn-color);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px var(--background, white),
+      0 0 0 6px var(--btn-color);
+  }
 }
 
 .btn:focus-visible.btn-focus-animated {
@@ -1019,7 +1231,13 @@
 }
 
 .btn[aria-pressed="mixed"] {
-  background-image: linear-gradient(45deg, transparent 45%, currentColor 45%, currentColor 55%, transparent 55%);
+  background-image: linear-gradient(
+    45deg,
+    transparent 45%,
+    currentColor 45%,
+    currentColor 55%,
+    transparent 55%
+  );
   background-size: 6px 6px;
 }
 
@@ -1038,4 +1256,3 @@
 .btn-live-region {
   @apply sr-only;
 }
-

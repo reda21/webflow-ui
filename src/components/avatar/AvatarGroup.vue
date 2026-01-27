@@ -85,8 +85,8 @@ const ringStyle = computed(() => {
 // Count total avatars from slot
 const totalAvatars = computed(() => {
     if (!slots.default) return 0
-    const children = slots.default({})
-    return children.length
+    const children = slots.default()
+    return Array.isArray(children) ? children.length : 1
 })
 
 const remainingCount = computed(() => {

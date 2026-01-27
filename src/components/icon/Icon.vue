@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<{
   // Lazy loading
   lazy?: boolean
 }>(), {
-  mode: 'svg',
+  mode: 'css',
   size: 'md',
   ariaHidden: true,
   skeleton: false,
@@ -37,9 +37,8 @@ const props = withDefaults(defineProps<{
 })
 
 // State
-const isLoading = ref(true)
+const isLoading = ref(props.mode === 'svg')
 const hasError = ref(false)
-const cssIconUrl = ref<string | null>(null)
 const isVisible = ref(!props.lazy)
 const isMounted = ref(false)
 const iconRef = ref<HTMLElement | null>(null)
@@ -103,6 +102,15 @@ const setupLazyLoading = () => {
   )
 }
 
+// Compute CSS Icon URL for mask-image
+const cssIconUrl = computed(() => {
+  if (!props.name) return null
+  const [prefix, name] = props.name.includes(':')
+    ? props.name.split(':')
+    : ['mdi', props.name]
+  return `https://api.iconify.design/${prefix}/${name}.svg`
+})
+
 // Initialize
 onMounted(async () => {
   isMounted.value = true
@@ -114,13 +122,6 @@ onMounted(async () => {
   }
 
   if (!props.lazy || isVisible.value) {
-    if (props.mode === 'css' && props.name) {
-      const [prefix, name] = props.name.includes(':')
-        ? props.name.split(':')
-        : ['mdi', props.name]
-      cssIconUrl.value = `https://api.iconify.design/${prefix}/${name}.svg`
-    }
-
     if (props.mode === 'svg') {
       await loadAndCacheIcon(props.name)
     }
@@ -142,13 +143,6 @@ watch(isVisible, async (visible) => {
 watch(() => props.name, async (newName) => {
   if (newName && props.mode === 'svg' && isVisible.value) {
     await loadAndCacheIcon(newName)
-  }
-
-  if (newName && props.mode === 'css') {
-    const [prefix, name] = newName.includes(':')
-      ? newName.split(':')
-      : ['mdi', newName]
-    cssIconUrl.value = `https://api.iconify.design/${prefix}/${name}.svg`
   }
 })
 

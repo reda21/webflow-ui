@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, Button, Icon } from '@/index'
+import { Card, Button, Icon } from '../../../index'
 
 const props = defineProps<{
     card: {

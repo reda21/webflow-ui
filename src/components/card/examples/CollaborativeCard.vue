@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, Button, Avatar, Icon } from '@/index'
+import { Card, Button, Avatar, Icon } from '../../../index'
 
 const comments = ref([
     { id: 1, user: 'Marc L.', text: 'Design incroyable, bravo !', date: 'il y a 5m' },

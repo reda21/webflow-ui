@@ -134,7 +134,8 @@
 
 .card--hover-glow:hover {
   @apply border-indigo-500/50;
-  box-shadow: 0 0 20px -5px var(--color-indigo-500/30);
+  box-shadow: 0 0 20px -5px
+    color-mix(in srgb, var(--color-indigo-500) 30%, transparent);
 }
 
 /* ----------------------------------------

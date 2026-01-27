@@ -30,11 +30,12 @@ const handleNavClick = (item: NavItem, event: MouseEvent) => {
 <template>
     <div :class="['navbar-nav', $props.class]">
         <slot>
-            <a v-for="item in navItems" :key="item.label" :href="item.href" class="navbar-nav-item"
+            <a v-for="item in navItems" :key="item.label" :href="item.href"
+                class="navbar-nav-item inline-flex items-center gap-2"
                 :class="{ 'navbar-nav-item--active': item.active }" :target="item.external ? '_blank' : undefined"
                 :rel="item.external ? 'noopener noreferrer' : undefined" @click="handleNavClick(item, $event)">
-                <Icon v-if="item.icon" :name="item.icon" size="sm" />
-                {{ item.label }}
+                <Icon v-if="item.icon" :name="item.icon" size="sm" class="shrink-0" />
+                <span>{{ item.label }}</span>
                 <span v-if="item.badge" class="navbar-nav-item-badge">{{ item.badge }}</span>
                 <svg v-if="item.external" class="navbar-nav-item-external" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">

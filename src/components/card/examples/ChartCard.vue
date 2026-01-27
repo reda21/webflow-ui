@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Card, Icon } from '@/index'
+import { Card, Icon } from '../../../index'
 import { Chart, type ChartConfiguration, registerables } from 'chart.js'
 
 Chart.register(...registerables)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Card, Button, Icon } from '@/index'
+import { Card, Button, Icon } from '../../../index'
 
 const props = defineProps<{
     location: {

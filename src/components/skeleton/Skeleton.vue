@@ -4,13 +4,16 @@ import type { SkeletonProps } from './types'
 import './skeleton.css'
 
 const slots = useSlots()
+defineSlots<{
+    default?(): any
+}>()
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
     animation: 'pulse',
     as: 'div'
 })
 
-const hasContent = computed(() => !!slots.default)
+const hasContent = computed<boolean>(() => !!slots.default)
 
 const styles = computed(() => {
     const s: Record<string, string> = {}

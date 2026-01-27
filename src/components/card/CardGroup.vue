@@ -14,6 +14,10 @@ const props = withDefaults(defineProps<{
     threshold: 0.1
 })
 
+defineSlots<{
+    default(props: { item: any, index: number }): any
+}>()
+
 const containerRef = ref<HTMLElement | null>(null)
 const visibleIndices = ref<Set<number>>(new Set())
 

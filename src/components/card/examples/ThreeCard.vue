@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Card, Icon, Button } from '@/index'
+import { Card, Icon, Button } from '../../../index'
 import * as THREE from 'three'
 
 const props = defineProps<{

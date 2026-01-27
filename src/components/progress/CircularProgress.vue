@@ -53,7 +53,7 @@ const trackStyle = computed(() => {
         transform: `rotate(${props.startAngle}deg)`,
         transformOrigin: 'center',
         stroke: props.trackColor,
-        strokeLinecap: isFullCircle.value ? undefined : 'round'
+        strokeLinecap: (isFullCircle.value ? undefined : 'round') as any
     }
 })
 
@@ -68,7 +68,7 @@ const barStyle = computed(() => {
         strokeDasharray: `${currentLen} ${circumference.value}`,
         transform: `rotate(${props.startAngle}deg)`,
         transformOrigin: 'center',
-        strokeLinecap: 'round'
+        strokeLinecap: 'round' as any
     }
 
     if (props.variant === 'gradient') {
