@@ -11,13 +11,46 @@
 import { ref, computed, useSlots } from 'vue'
 import Icon from '../icon/Icon.vue'
 import NavLinks from './NavLinks.vue'
-import type { NavItem, NavbarProps, NavbarEmits } from './types'
 import './navbar.css'
+
+export interface NavItem {
+    label: string;
+    href: string;
+    active?: boolean;
+    icon?: string;
+    external?: boolean;
+    badge?: string | number;
+}
+
+export interface NavbarEmits {
+    (e: "logo-click", event: MouseEvent): void;
+    (e: "nav-click", item: NavItem, event: MouseEvent): void;
+    (e: "search-click", event: MouseEvent): void;
+    (e: "theme-toggle", event: MouseEvent): void;
+    (e: "cta-click", event: MouseEvent): void;
+    (e: "mobile-menu-toggle", isOpen: boolean): void;
+}
+
+interface NavbarProps {
+    brandName?: string;
+    logoHref?: string;
+    navItems?: NavItem[];
+    showSearch?: boolean;
+    showThemeToggle?: boolean;
+    isDark?: boolean;
+    ctaText?: string;
+    searchPlaceholder?: string;
+    sticky?: boolean;
+    blur?: boolean;
+    transparent?: boolean;
+    variant?: "default" | "minimal" | "centered" | "expanded";
+    size?: "sm" | "md" | "lg";
+}
 
 const props = withDefaults(defineProps<NavbarProps>(), {
     brandName: 'WebFlow',
     logoHref: '/',
-    navItems: () => [],
+    navItems: () => [] as NavItem[],
     showSearch: false,
     showThemeToggle: false,
     isDark: false,

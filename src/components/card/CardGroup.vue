@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
 })
 
 defineSlots<{
-    default(props: { item: any, index: number }): any
+    default(props: { item?: any, index?: number }): any
 }>()
 
 const containerRef = ref<HTMLElement | null>(null)

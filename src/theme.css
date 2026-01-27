@@ -1,15 +1,59 @@
 @reference "tailwindcss";
-/* ============================================================================ */
 
-/* ============================================================================ */
+/* 
+  WEBFLOW UI - GLOBAL THEME
+  =============================================================================
+  This file defines the core design tokens of the component library.
+  To customize the theme in your project (e.g., in @client):
+  
+  1. Set the CSS variables in :root:
+     :root { --primary: #my-color; }
+     
+  2. Or use Tailwind @theme extension in your own CSS:
+     @theme { --color-primary: #my-color; }
+  =============================================================================
+*/
 
 :root {
-  /* --- Base Backgrounds --- */
+  /* --- Colors: Primary --- */
+  --primary: #4f46e5;
+  --primary-foreground: #6058e7;
+
+  /* --- Colors: Semantic --- */
+  --success: #047857;
+  --success-foreground: #ffffff;
+  --success-content: #065f46;
+
+  --info: #0ea5e9;
+  --info-foreground: #ffffff;
+  --info-content: #0369a1;
+  --warn: #b45309;
+  --warn-foreground: #ffffff;
+  --warn-content: #92400e;
+
+  --help: #8b5cf6;
+  --help-foreground: #ffffff;
+  --help-content: #6d28d9;
+
+  --danger: #be123c;
+  --danger-foreground: #ffffff;
+  --danger-content: #9f1239;
+
+  --contrast: #171717;
+  --contrast-foreground: #ffffff;
+  --accent: #764ba2;
+  --accent-foreground: #ffffff;
+
+  /* --- Colors: Neutral/Secondary --- */
+  --secondary: #94a3b8;
+  --secondary-soft: #f3f4f6;
+  --secondary-foreground: #1f2937;
+
+  /* --- Surfacing --- */
   --background: #ffffff;
   --background-secondary: #f8fafc;
   --background-tertiary: #f1f5f9;
 
-  /* --- Foreground / Text --- */
   --foreground: #0f172a;
   --foreground-secondary: #475569;
   --foreground-muted: #94a3b8;
@@ -18,39 +62,6 @@
   --border: #e2e8f0;
   --border-hover: #cbd5e1;
 
-  /* --- Theme Colors (Base) --- */
-  --primary: #4f46e5; /* indigo-500 */
-  --primary-foreground: #6058e7;
-
-  --secondary: #94a3b8; /* slate-400 */
-  --secondary-soft: #f3f4f6; /* gray-100 */
-  --secondary-foreground: #1f2937; /* gray-800 */
-
-  --success: #047857; /* emerald-700 for better contrast */
-  --success-foreground: #ffffff;
-
-  --info: #0ea5e9; /* sky-500 */
-  --info-foreground: #ffffff;
-
-  --warn: #b45309; /* amber-700 for better contrast */
-  --warn-foreground: #ffffff;
-
-  --help: #8b5cf6; /* violet-500 */
-  --help-foreground: #ffffff;
-
-  --danger: #be123c; /* rose-700 for better contrast */
-  --danger-foreground: #ffffff;
-
-  --contrast: #171717; /* neutral-900 */
-  --contrast-foreground: #ffffff;
-
-  --accent: #764ba2;
-  --accent-foreground: #ffffff;
-
-  /* --- Transitions --- */
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-
   /* --- Radius --- */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
@@ -58,43 +69,51 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
+
+  /* --- Transitions --- */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .dark {
-  /* --- Base Backgrounds --- */
+  /* --- Surfacing Dark --- */
   --background: #0f172a;
   --background-secondary: #1e293b;
   --background-tertiary: #334155;
 
-  /* --- Foreground / Text --- */
   --foreground: #f1f5f9;
   --foreground-secondary: #94a3b8;
   --foreground-muted: #64748b;
 
-  /* --- Borders --- */
-  --border: #334155;
-  --border-hover: #475569;
-
-  /* --- Theme Colors (Overrides) --- */
-  --primary: #818cf8; /* indigo-400 */
-
-  --secondary-soft: #1e293b; /* slate-800 */
+  /* --- Semantic Overrides --- */
+  --primary: #818cf8;
+  --secondary-soft: #1e293b;
   --secondary-foreground: #f1f5f9;
 
-  --success: #34d399; /* emerald-400 */
-  --info: #38bdf8; /* sky-400 */
-  --warn: #fbbf24; /* amber-400 */
-  --help: #a78bfa; /* violet-400 */
-  --danger: #fb7185; /* rose-400 */
+  --success: #34d399;
+  --success-content: #a7f3d0;
+  --info: #38bdf8;
+  --info-content: #bae6fd;
+  --warn: #fbbf24;
+  --warn-content: #fde68a;
+  --help: #a78bfa;
+  --help-content: #ddd6fe;
+  --danger: #fb7185;
+  --danger-content: #fecdd3;
 
   --contrast: #ffffff;
   --contrast-foreground: #000000;
+
+  /* --- Borders Dark --- */
+  --border: #334155;
+  --border-hover: #475569;
 }
 
 @theme {
+  /* Variants */
   --variant-dark: .dark &;
 
-  --color-txt: oklch(0.704 0.04 256.788);
+  /* Color Palette Mappings */
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
   --color-background-tertiary: var(--background-tertiary);
@@ -102,11 +121,12 @@
   --color-foreground: var(--foreground);
   --color-foreground-secondary: var(--foreground-secondary);
   --color-foreground-muted: var(--foreground-muted);
+  --color-txt: oklch(0.704 0.04 256.788);
 
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
 
-  /* Main Semantic Colors */
+  /* Semantic Theme Mappings */
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -114,20 +134,32 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-success-content: var(--success-content);
+
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-info-content: var(--info-content);
+
   --color-warn: var(--warn);
   --color-warn-foreground: var(--warn-foreground);
+  --color-warn-content: var(--warn-content);
+
   --color-help: var(--help);
   --color-help-foreground: var(--help-foreground);
+  --color-help-content: var(--help-content);
+
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
+  --color-danger-content: var(--danger-content);
+
   --color-contrast: var(--contrast);
   --color-contrast-foreground: var(--contrast-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
-  /* Animations */
+  /* Transitions & Animations */
   --animate-fade-up: fade-up 0.6s var(--ease-smooth) forwards;
   --animate-slide-up: slide-up 0.3s var(--ease-smooth) forwards;
+  --default-transition-timing-function: var(--ease-smooth);
+  --default-transition-duration: 200ms;
 }

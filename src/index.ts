@@ -1,6 +1,10 @@
 // Styles
 import "./style.css";
 
+// Theme
+export { themeTokens } from "./theme/tokens";
+export type { ThemeTokens } from "./theme/tokens";
+
 // Components
 export { Navbar, NavLogo, NavLinks } from "./components/navbar/index";
 export type {
