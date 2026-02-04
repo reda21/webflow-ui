@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => ({
   // Dev server configuration
   server: {
     port: 5173,
-    open: true,
+    open: false,
   },
   
   // Build configuration (library mode)
@@ -38,7 +38,7 @@ export default defineConfig(({ command }) => ({
     minify: 'esbuild',
     target: 'esnext',
     // Enable source maps for debugging
-    sourcemap: false,
+    sourcemap: true,
     // CSS code splitting
     cssCodeSplit: true,
     rollupOptions: {
@@ -70,4 +70,3 @@ export default defineConfig(({ command }) => ({
     exclude: ['@iconify/vue'],
   },
 }));
-
