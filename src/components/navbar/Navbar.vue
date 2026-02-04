@@ -8,7 +8,7 @@
  * - Logo, navigation links, search, theme toggle, CTA
  * - Mobile responsive menu
  */
-import { ref, computed, useSlots } from 'vue'
+import { ref, computed, useSlots, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import Icon from '../icon/Icon.vue'
 import NavLinks from './NavLinks.vue'
 import './navbar.css'
@@ -45,6 +45,8 @@ interface NavbarProps {
     transparent?: boolean;
     variant?: "default" | "minimal" | "centered" | "expanded";
     size?: "sm" | "md" | "lg";
+    mobileMenuLabel?: string;
+    mobileMenuAriaLabel?: string;
 }
 
 const props = withDefaults(defineProps<NavbarProps>(), {
@@ -60,13 +62,18 @@ const props = withDefaults(defineProps<NavbarProps>(), {
     blur: true,
     transparent: false,
     variant: 'default',
-    size: 'md'
+    size: 'md',
+    mobileMenuLabel: 'Toggle menu',
+    mobileMenuAriaLabel: 'Mobile navigation'
 })
 
 const emit = defineEmits<NavbarEmits>()
 const slots = useSlots()
 
 const isMobileMenuOpen = ref(false)
+const mobileMenuRef = ref<HTMLElement | null>(null)
+const mobileMenuButtonRef = ref<HTMLButtonElement | null>(null)
+const mobileMenuId = `navbar-mobile-menu-${Math.random().toString(36).slice(2, 9)}`
 
 // Check if custom slots are being used
 const hasCustomStart = computed(() => !!slots.start)
@@ -91,8 +98,14 @@ const handleLogoClick = (event: MouseEvent) => {
     emit('logo-click', event)
 }
 
+const setMobileMenuOpen = (value: boolean) => {
+    if (isMobileMenuOpen.value === value) return
+    isMobileMenuOpen.value = value
+    emit('mobile-menu-toggle', value)
+}
+
 const handleNavClick = (item: NavItem, event: MouseEvent) => {
-    isMobileMenuOpen.value = false
+    setMobileMenuOpen(false)
     emit('nav-click', item, event)
 }
 
@@ -105,20 +118,58 @@ const handleThemeToggle = (event: MouseEvent) => {
 }
 
 const handleCtaClick = (event: MouseEvent) => {
-    isMobileMenuOpen.value = false
+    setMobileMenuOpen(false)
     emit('cta-click', event)
 }
 
 const toggleMobileMenu = () => {
-    isMobileMenuOpen.value = !isMobileMenuOpen.value
-    emit('mobile-menu-toggle', isMobileMenuOpen.value)
+    setMobileMenuOpen(!isMobileMenuOpen.value)
 }
+
+const focusFirstMobileItem = () => {
+    nextTick(() => {
+        const firstItem = mobileMenuRef.value?.querySelector<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+        firstItem?.focus()
+    })
+}
+
+const handleClickOutside = (event: MouseEvent) => {
+    if (!isMobileMenuOpen.value) return
+    const target = event.target as Node
+    if (mobileMenuRef.value?.contains(target) || mobileMenuButtonRef.value?.contains(target)) return
+    setMobileMenuOpen(false)
+}
+
+const handleKeydown = (event: KeyboardEvent) => {
+    if (event.key !== 'Escape' || !isMobileMenuOpen.value) return
+    event.stopPropagation()
+    setMobileMenuOpen(false)
+    mobileMenuButtonRef.value?.focus()
+}
+
+watch(isMobileMenuOpen, (isOpen) => {
+    if (isOpen) {
+        focusFirstMobileItem()
+    }
+})
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside)
+    document.addEventListener('keydown', handleKeydown)
+})
+
+onBeforeUnmount(() => {
+    document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('keydown', handleKeydown)
+})
 
 // Expose methods
 defineExpose({
     toggleMobileMenu,
-    closeMobileMenu: () => { isMobileMenuOpen.value = false },
-    openMobileMenu: () => { isMobileMenuOpen.value = true }
+    closeMobileMenu: () => { setMobileMenuOpen(false) },
+    openMobileMenu: () => { setMobileMenuOpen(true) }
 })
 </script>
 
@@ -204,7 +255,9 @@ defineExpose({
                         </slot>
 
                         <!-- Mobile Menu Button (always shown in custom mode) -->
-                        <button class="navbar-mobile-btn" aria-label="Toggle menu" @click="toggleMobileMenu">
+                        <button ref="mobileMenuButtonRef" class="navbar-mobile-btn" :aria-label="mobileMenuLabel"
+                            :aria-expanded="isMobileMenuOpen" :aria-controls="mobileMenuId"
+                            @click="toggleMobileMenu">
                             <svg v-if="!isMobileMenuOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
@@ -282,7 +335,9 @@ defineExpose({
                         </button>
 
                         <!-- Mobile Menu Button -->
-                        <button class="navbar-mobile-btn" aria-label="Toggle menu" @click="toggleMobileMenu">
+                        <button ref="mobileMenuButtonRef" class="navbar-mobile-btn" :aria-label="mobileMenuLabel"
+                            :aria-expanded="isMobileMenuOpen" :aria-controls="mobileMenuId"
+                            @click="toggleMobileMenu">
                             <svg v-if="!isMobileMenuOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
@@ -299,7 +354,8 @@ defineExpose({
 
         <!-- Mobile Menu -->
         <Transition name="navbar-mobile">
-            <div v-if="isMobileMenuOpen" class="navbar-mobile-menu">
+            <div v-if="isMobileMenuOpen" :id="mobileMenuId" ref="mobileMenuRef" class="navbar-mobile-menu"
+                role="navigation" :aria-label="mobileMenuAriaLabel">
                 <div class="navbar-mobile-menu-inner">
                     <slot name="mobile">
                         <slot name="mobile-nav">
@@ -307,6 +363,9 @@ defineExpose({
                                 <a v-for="item in navItems" :key="item.label" :href="item.href"
                                     class="navbar-mobile-nav-item"
                                     :class="{ 'navbar-mobile-nav-item--active': item.active }"
+                                    :aria-current="item.active ? 'page' : undefined"
+                                    :target="item.external ? '_blank' : undefined"
+                                    :rel="item.external ? 'noopener noreferrer' : undefined"
                                     @click="handleNavClick(item, $event)">
                                     <Icon v-if="item.icon" :name="item.icon" size="sm" class="mr-2" />
                                     {{ item.label }}
