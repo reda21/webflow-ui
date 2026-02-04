@@ -33,7 +33,8 @@ const handleNavClick = (item: NavItem, event: MouseEvent) => {
             <a v-for="item in navItems" :key="item.label" :href="item.href"
                 class="navbar-nav-item inline-flex items-center gap-2"
                 :class="{ 'navbar-nav-item--active': item.active }" :target="item.external ? '_blank' : undefined"
-                :rel="item.external ? 'noopener noreferrer' : undefined" @click="handleNavClick(item, $event)">
+                :rel="item.external ? 'noopener noreferrer' : undefined"
+                :aria-current="item.active ? 'page' : undefined" @click="handleNavClick(item, $event)">
                 <Icon v-if="item.icon" :name="item.icon" size="sm" class="shrink-0" />
                 <span>{{ item.label }}</span>
                 <span v-if="item.badge" class="navbar-nav-item-badge">{{ item.badge }}</span>

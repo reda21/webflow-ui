@@ -44,6 +44,10 @@ export interface NavbarProps {
   variant?: "default" | "minimal" | "centered" | "expanded";
   /** Navbar size */
   size?: "sm" | "md" | "lg";
+  /** Accessible label for the mobile menu toggle */
+  mobileMenuLabel?: string;
+  /** Accessible label for the mobile navigation container */
+  mobileMenuAriaLabel?: string;
 }
 
 export interface NavbarEmits {
