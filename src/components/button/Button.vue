@@ -79,7 +79,7 @@
         <!-- Badge -->
         <span v-if="props.badge !== undefined && props.badge !== ''" class="btn-badge" :class="badgeClasses">{{
             props.badge
-        }}</span>
+            }}</span>
 
         <!-- Live region for screen reader announcements -->
         <span class="btn-live-region" :aria-live="liveRegionPriority" aria-atomic="true" role="status">
@@ -169,6 +169,8 @@ const props = withDefaults(defineProps<{
     ariaHidden?: boolean
     ariaLabelledby?: string
     ariaLabel?: string
+    smooth?: boolean
+    shimmer?: boolean
 }>(), {
     variant: 'soft',
     severity: 'primary',
@@ -192,6 +194,8 @@ const props = withDefaults(defineProps<{
     fab: false,
     fabPosition: 'bottom-right',
     colorblind: false,
+    smooth: false,
+    shimmer: false
 })
 
 const emit = defineEmits<{
@@ -309,9 +313,9 @@ const getSeverityClasses = computed(() => {
 
     if (variant === 'outlined') classes.push('btn-outlined')
     else if (variant === 'subtle') classes.push('btn-subtle')
-    else if (variant === 'ghost') classes.push('btn-ghost')
+    else if (variant === 'ghost' || variant === 'text') classes.push('btn-ghost')
     else if (variant === 'link') classes.push('btn-link')
-    else classes.push(`btn-${variant}`)
+    else if (variant !== 'soft') classes.push(`btn-${variant}`)
 
     return classes.join(' ')
 })
@@ -447,6 +451,8 @@ const liveRegionPriority = computed(() => {
 const buttonClasses = computed(() => {
     return [
         'btn', // Base class from button.css
+        props.smooth ? 'btn-smooth' : '', // Optional smooth transitions
+        props.shimmer && (!['link', 'ghost', 'outlined'].includes(props.variant as string)) ? 'btn-shimmer' : '', // Optional shimmer effect
         isCurrentlyLoading.value ? 'btn-loading !shadow-none' : '',
         isDisabled.value ? 'btn-disabled opacity-50 cursor-not-allowed' : '',
         isSuccess.value ? 'btn-is-success' : '',

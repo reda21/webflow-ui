@@ -48,8 +48,8 @@
         },
         "./src": "./src/index.ts",
         "./src/*": "./src/*",
-        "./style.css": "./dist/main.css",
-        "./dist/main.css": "./dist/main.css",
+        "./style.css": "./dist/index.css",
+        "./dist/index.css": "./dist/index.css",
         "./nuxt": "./src/nuxt.ts",
         "./dist/*": "./dist/*"
     },

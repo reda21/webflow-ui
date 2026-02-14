@@ -270,23 +270,17 @@ const isClient = typeof window !== 'undefined'
 
 <template>
   <span v-bind="ariaAttrs">
-    <!-- Lazy loading placeholder -->
-    <span v-if="lazy && !isVisible" ref="iconRef" :class="iconClasses" :style="iconStyles" />
-
-    <!-- Loading Skeleton -->
-    <span v-else-if="(isLoading || loading) && skeleton && mode === 'svg'" :class="iconClasses" :style="iconStyles" />
-
-    <!-- Sprite Mode -->
+    <span v-if="lazy && !isVisible" ref="iconRef" :class="iconClasses" :style="iconStyles"></span>
+    <span v-else-if="(isLoading || loading) && skeleton && mode === 'svg'" :class="iconClasses"
+      :style="iconStyles"></span>
     <svg v-else-if="sprite" :class="iconClasses" :style="iconStyles">
       <use :href="spriteIcon!" />
     </svg>
-
-    <!-- SVG Mode (default) - uses Iconify -->
-    <IconifyIcon v-else-if="!isTestEnv && mode === 'svg' && isMounted" :icon="displayIcon" :width="iconifySize"
-      :height="iconifySize" :class="iconClasses" :style="iconStyles" />
-    <span v-else-if="mode === 'svg'" :class="iconClasses" :style="iconStyles" />
-
-    <!-- CSS Mode - uses mask-image -->
-    <span v-else :class="iconClasses" :style="iconStyles" />
+    <template v-else-if="mode === 'svg'">
+      <IconifyIcon v-if="!isTestEnv && isMounted" :icon="displayIcon" :width="iconifySize" :height="iconifySize"
+        :class="iconClasses" :style="iconStyles" />
+      <span v-else :class="iconClasses" :style="iconStyles"></span>
+    </template>
+    <span v-else :class="iconClasses" :style="iconStyles"></span>
   </span>
 </template>

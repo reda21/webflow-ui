@@ -1,29 +1,42 @@
 /* --- Base Button --- */
 .btn {
   /* Design Tokens (CSS Variables for easy theming) */
-  --btn-primary: var(--primary, #3b82f6);
-  --btn-secondary: var(--secondary, #64748b);
-  --btn-success: var(--success, #22c55e);
+  --btn-primary: var(--primary, #6366f1);
+  --btn-secondary: var(--secondary, #94a3b8);
+  --btn-success: var(--success, #10b981);
   --btn-info: var(--info, #0ea5e9);
   --btn-warn: var(--warn, #f59e0b);
-  --btn-help: var(--help, #a855f7);
-  --btn-danger: var(--danger, #ef4444);
+  --btn-help: var(--help, #8b5cf6);
+  --btn-danger: var(--danger, #f43f5e);
   --btn-contrast: var(--contrast, #0f172a);
 
   --btn-color: var(--btn-primary);
   --btn-text: white;
+  --btn-shadow-color: rgba(0, 0, 0, 0.1);
 
-  @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm min-h-10 font-semibold transition-all duration-300 active:scale-95 focus:outline-none cursor-pointer leading-none disabled:opacity-50 disabled:cursor-not-allowed bg-primary text-white hover:brightness-110;
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm min-h-10 font-medium transition-all duration-300 active:scale-95 focus:outline-none cursor-pointer leading-none disabled:opacity-50 disabled:cursor-not-allowed bg-[var(--btn-color)] text-[var(--btn-text)] shadow-sm;
+
+  &:hover:not(:disabled) {
+    @apply brightness-110;
+  }
+
+  &.btn-raised {
+    @apply shadow-md;
+    &:hover:not(:disabled) {
+      @apply -translate-y-0.5 shadow-lg;
+      box-shadow: 0 4px 12px var(--btn-shadow-color);
+    }
+  }
 
   &.btn-disabled {
-    @apply opacity-50 cursor-not-allowed pointer-events-none;
+    @apply opacity-50 cursor-not-allowed pointer-events-none grayscale;
   }
+
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
 
   @variant dark {
-    --btn-text: theme("colors.gray.900");
-    @apply text-gray-900;
+    --btn-shadow-color: rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -115,12 +128,12 @@
 
 .btn-secondary {
   --btn-color: var(--secondary);
-  --btn-text: var(--secondary-foreground);
-  @apply bg-secondary-soft text-secondary-foreground hover:bg-border;
+  --btn-text: white;
+  @apply bg-secondary text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: var(--foreground);
-    @apply text-foreground;
+    --btn-text: white;
+    @apply text-white;
   }
 }
 
@@ -130,8 +143,8 @@
   @apply bg-success text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme("colors.gray.900");
-    @apply text-gray-900;
+    --btn-text: white;
+    @apply text-white;
   }
 }
 
@@ -141,8 +154,8 @@
   @apply bg-info text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme("colors.gray.900");
-    @apply text-gray-900;
+    --btn-text: white;
+    @apply text-white;
   }
 }
 
@@ -152,8 +165,8 @@
   @apply bg-warn text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme("colors.gray.900");
-    @apply text-gray-900;
+    --btn-text: white;
+    @apply text-white;
   }
 }
 
@@ -163,8 +176,8 @@
   @apply bg-help text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme("colors.gray.900");
-    @apply text-gray-900;
+    --btn-text: white;
+    @apply text-white;
   }
 }
 
@@ -174,8 +187,7 @@
   @apply bg-danger text-white hover:brightness-110;
 
   @variant dark {
-    --btn-text: theme("colors.gray.900");
-    @apply text-gray-900;
+    --btn-text: white;
   }
 }
 
@@ -192,27 +204,27 @@
 
 /* --- Sizes --- */
 .btn-xs {
-  @apply px-2 py-1 text-xs min-h-7 gap-1;
+  @apply px-2.5 py-1 text-xs min-h-8 gap-1.5;
 }
 
 .btn-sm {
-  @apply px-3 py-1.5 text-sm min-h-8 gap-1.5;
+  @apply px-3.5 py-1.5 text-sm min-h-9 gap-2;
 }
 
 .btn-md {
-  @apply px-4 py-2 text-sm min-h-10 gap-2;
+  @apply px-5 py-2.5 text-sm min-h-11 gap-2.5;
 }
 
 .btn-lg {
-  @apply px-6 py-3 text-base min-h-12 gap-2.5;
+  @apply px-7 py-3.5 text-base min-h-13 gap-3;
 }
 
 .btn-xl {
-  @apply px-8 py-4 text-lg min-h-14 gap-3;
+  @apply px-10 py-4.5 text-lg min-h-16 gap-4;
 }
 
 .btn-2xl {
-  @apply px-10 py-5 text-xl min-h-16 gap-4;
+  @apply px-12 py-5.5 text-xl min-h-20 gap-5;
 }
 
 /* Icon-Only Styles */
@@ -386,6 +398,10 @@
   color: var(--btn-color) !important;
 }
 
+.btn-link:hover {
+  @apply !translate-y-0 !shadow-none brightness-110;
+}
+
 /* --- Nouvelles Variantes Avancées --- */
 
 /* Gradient - Boutons avec dégradés colorés */
@@ -393,13 +409,13 @@
   background: linear-gradient(
     135deg,
     var(--btn-color),
-    color-mix(in srgb, var(--btn-color), var(--primary) 50%)
+    color-mix(in srgb, var(--btn-color), #000 20%)
   ) !important;
   border-color: transparent !important;
   color: white !important;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .btn-gradient::before {
@@ -429,13 +445,13 @@
 
 /* Glass - Effet glassmorphism avec backdrop-blur */
 .btn-glass {
-  background: color-mix(in srgb, var(--btn-color), transparent 80%) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid color-mix(in srgb, var(--btn-color), transparent 70%) !important;
-  color: var(--foreground) !important;
+  background: color-mix(in srgb, var(--btn-color), transparent 85%) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--btn-color), transparent 60%) !important;
+  color: var(--btn-color) !important;
   box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -444,6 +460,22 @@
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+@variant dark {
+  .btn-glass {
+    background: color-mix(
+      in srgb,
+      var(--btn-color),
+      transparent 90%
+    ) !important;
+    border-color: color-mix(
+      in srgb,
+      var(--btn-color),
+      transparent 80%
+    ) !important;
+    color: color-mix(in srgb, var(--btn-color), white 20%) !important;
+  }
 }
 
 /* 3D - Effet de profondeur avec ombres décalées */
@@ -624,18 +656,47 @@
 /* --- Transitions Fluides Améliorées --- */
 .btn-smooth {
   transition:
-    all 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    all 0.4s cubic-bezier(0.23, 1, 0.32, 1),
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.25s ease-out;
+    box-shadow 0.3s ease-out;
 }
 
-.btn-smooth:hover {
-  transform: translateY(-2px);
-}
-
-.btn-smooth:active {
-  transform: translateY(0) scale(0.98);
+.btn-smooth:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
   transition-duration: 0.1s;
+}
+
+/* --- Shimmer Effect (Shine) --- */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.7s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-shimmer:hover:not(:disabled)::after {
+  left: 100%;
+  top: 100%;
+  opacity: 1;
 }
 
 .btn-smooth:focus-visible {

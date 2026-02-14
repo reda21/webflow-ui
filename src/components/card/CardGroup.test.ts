@@ -28,8 +28,8 @@ describe("CardGroup.vue", () => {
         items,
       },
       slots: {
-        default: (params: { item: any }) =>
-          h("div", { class: "test-card" }, params.item.title),
+        default: (params: { item?: any; index?: number }) =>
+          h("div", { class: "test-card" }, params.item?.title),
       },
     });
 
@@ -74,8 +74,8 @@ describe("CardGroup.vue", () => {
         virtual: true,
       },
       slots: {
-        default: (params: { item: any }) =>
-          h("div", { class: "test-card" }, params.item.title),
+        default: (params: { item?: any; index?: number }) =>
+          h("div", { class: "test-card" }, params.item?.title),
       },
     });
 

@@ -4,17 +4,21 @@ import Toast from "./Toast.vue";
 import { nextTick } from "vue";
 
 // Mock Icon, Button, Avatar components
-vi.mock("@/index", () => ({
-  Icon: {
+vi.mock("../icon/Icon.vue", () => ({
+  default: {
     name: "Icon",
     template: '<span class="mock-icon" :data-name="name"></span>',
     props: ["name", "size"],
   },
-  Button: {
+}));
+vi.mock("../button/Button.vue", () => ({
+  default: {
     name: "Button",
     template: '<button class="mock-button"><slot /></button>',
     props: ["size", "variant", "severity", "loading", "icon", "ariaLabel"],
   },
+}));
+vi.mock("../avatar/index", () => ({
   Avatar: {
     name: "Avatar",
     template: '<div class="mock-avatar"></div>',

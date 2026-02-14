@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<SkeletonProps>(), {
     as: 'div'
 })
 
-const hasContent = computed<boolean>(() => !!slots.default)
+const hasContent = computed((): boolean => !!slots.default)
 
 const styles = computed(() => {
     const s: Record<string, string> = {}

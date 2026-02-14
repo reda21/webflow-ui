@@ -15,8 +15,8 @@ describe("Card Performance Benchmarks", () => {
     mount(CardGroup, {
       props: { items },
       slots: {
-        default: (params: { item: any }) =>
-          h(Card, { title: params.item.title }),
+        default: (params: { item?: any; index?: number }) =>
+          h(Card, { title: params.item?.title }),
       },
     });
 
@@ -37,8 +37,8 @@ describe("Card Performance Benchmarks", () => {
         virtual: true,
       },
       slots: {
-        default: (params: { item: any }) =>
-          h(Card, { title: params.item.title }),
+        default: (params: { item?: any; index?: number }) =>
+          h(Card, { title: params.item?.title }),
       },
     });
 

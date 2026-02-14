@@ -20,24 +20,33 @@ body {
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--background-secondary); }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: var(--radius-full);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--foreground-muted); }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
+}
 
 /* --------------------------------------------------------------------------
-   4. COMPONENT CLASSES
+   4. COMPONENT STYLES (outside @layer for full specificity)
+   -------------------------------------------------------------------------- */
+@import "./components/button/button.css";
+@import "./components/button-group/button-group.css";
+@import "./components/social-button/social-button.css";
+@import "./components/split-button/split-button.css";
+
+/* --------------------------------------------------------------------------
+   5. COMPONENT UTILITY CLASSES
    -------------------------------------------------------------------------- */
 @layer components {
-  /* --- Buttons --- */
-  @import "./components/button/button.css";
-  @import "./components/button-group/button-group.css";
-  @import "./components/social-button/social-button.css";
-  @import "./components/split-button/split-button.css";
-
   /* --- Card --- */
   .card {
     background-color: var(--background);
@@ -63,11 +72,23 @@ body {
    5. ANIMATIONS
    -------------------------------------------------------------------------- */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
