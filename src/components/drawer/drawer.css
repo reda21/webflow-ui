@@ -1,0 +1,601 @@
+@reference "../../theme.css";
+
+/**
+ * Drawer Component Styles
+ *
+ * A premium slide-out panel with smooth animations.
+ */
+
+/* ============================================
+   Overlay
+   ============================================ */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.drawer-overlay--default {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.drawer-overlay--blur {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.drawer-overlay--dim {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.drawer-overlay--none {
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Overlay enter/leave */
+.drawer-overlay-enter-from,
+.drawer-overlay-leave-to {
+  opacity: 0;
+}
+
+.drawer-overlay-enter-active,
+.drawer-overlay-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+/* ============================================
+   Panel Base
+   ============================================ */
+.drawer-panel {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  outline: none;
+  @apply bg-white shadow-2xl;
+}
+
+:is(.dark .drawer-panel) {
+  @apply bg-slate-900 shadow-slate-900/60;
+}
+
+/* ── Variant: glass ── */
+.drawer-panel--glass {
+  @apply bg-white/80 backdrop-blur-xl border border-white/20;
+}
+
+:is(.dark .drawer-panel--glass) {
+  @apply bg-slate-900/80 border-slate-700/40;
+}
+
+/* ── Variant: minimal ── */
+.drawer-panel--minimal {
+  box-shadow: none;
+  @apply border border-slate-200;
+}
+
+:is(.dark .drawer-panel--minimal) {
+  @apply border-slate-800;
+}
+
+/* ── Variant: bordered ── */
+.drawer-panel--bordered {
+  @apply border-2 border-indigo-500/20 shadow-lg shadow-indigo-500/5;
+}
+
+:is(.dark .drawer-panel--bordered) {
+  @apply border-indigo-400/20 shadow-indigo-400/5;
+}
+
+/* ============================================
+   Placement
+   ============================================ */
+.drawer-panel--left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.drawer-panel--right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.drawer-panel--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.drawer-panel--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+/* ============================================
+   Sizes (width for left/right, height for top/bottom)
+   ============================================ */
+
+/* Left / Right widths */
+.drawer-panel--left.drawer-panel--xs,
+.drawer-panel--right.drawer-panel--xs {
+  width: 16rem; /* 256px */
+}
+
+.drawer-panel--left.drawer-panel--sm,
+.drawer-panel--right.drawer-panel--sm {
+  width: 20rem; /* 320px */
+}
+
+.drawer-panel--left.drawer-panel--md,
+.drawer-panel--right.drawer-panel--md {
+  width: 28rem; /* 448px */
+}
+
+.drawer-panel--left.drawer-panel--lg,
+.drawer-panel--right.drawer-panel--lg {
+  width: 36rem; /* 576px */
+}
+
+.drawer-panel--left.drawer-panel--xl,
+.drawer-panel--right.drawer-panel--xl {
+  width: 48rem; /* 768px */
+}
+
+.drawer-panel--left.drawer-panel--full,
+.drawer-panel--right.drawer-panel--full {
+  width: 100%;
+  border-radius: 0;
+}
+
+/* Top / Bottom heights */
+.drawer-panel--top.drawer-panel--xs,
+.drawer-panel--bottom.drawer-panel--xs {
+  height: 12rem;
+}
+
+.drawer-panel--top.drawer-panel--sm,
+.drawer-panel--bottom.drawer-panel--sm {
+  height: 16rem;
+}
+
+.drawer-panel--top.drawer-panel--md,
+.drawer-panel--bottom.drawer-panel--md {
+  height: 24rem;
+}
+
+.drawer-panel--top.drawer-panel--lg,
+.drawer-panel--bottom.drawer-panel--lg {
+  height: 32rem;
+}
+
+.drawer-panel--top.drawer-panel--xl,
+.drawer-panel--bottom.drawer-panel--xl {
+  height: 40rem;
+}
+
+.drawer-panel--top.drawer-panel--full,
+.drawer-panel--bottom.drawer-panel--full {
+  height: 100%;
+  border-radius: 0;
+}
+
+/* Responsive: cap width on small screens */
+@media (max-width: 640px) {
+  .drawer-panel--left,
+  .drawer-panel--right {
+    width: 100% !important;
+    border-radius: 0;
+  }
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.drawer-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid;
+  flex-shrink: 0;
+  @apply border-slate-200;
+}
+
+:is(.dark .drawer-header) {
+  @apply border-slate-800;
+}
+
+.drawer-header-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.drawer-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  @apply text-slate-900;
+}
+
+:is(.dark .drawer-title) {
+  @apply text-white;
+}
+
+.drawer-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  @apply text-slate-500;
+}
+
+:is(.dark .drawer-description) {
+  @apply text-slate-400;
+}
+
+/* ============================================
+   Close Button
+   ============================================ */
+.drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  @apply bg-transparent text-slate-400;
+}
+
+.drawer-close:hover {
+  @apply bg-slate-100 text-slate-600;
+}
+
+:is(.dark .drawer-close) {
+  @apply text-slate-500;
+}
+
+:is(.dark .drawer-close:hover) {
+  @apply bg-slate-800 text-slate-300;
+}
+
+/* ============================================
+   Body
+   ============================================ */
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.drawer-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.drawer-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  @apply bg-slate-200;
+}
+
+:is(.dark .drawer-body::-webkit-scrollbar-thumb) {
+  @apply bg-slate-700;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.drawer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid;
+  flex-shrink: 0;
+  @apply border-slate-200;
+}
+
+:is(.dark .drawer-footer) {
+  @apply border-slate-800;
+}
+
+/* ============================================
+   Loading
+   ============================================ */
+.drawer-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 3rem;
+}
+
+.drawer-loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid;
+  border-radius: 50%;
+  animation: drawer-spin 0.7s linear infinite;
+  @apply border-slate-200 border-t-indigo-500;
+}
+
+:is(.dark .drawer-loading-spinner) {
+  @apply border-slate-700 border-t-indigo-400;
+}
+
+@keyframes drawer-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   Slide Animations
+   ============================================ */
+
+/* ── Right ── */
+.drawer-right-enter-from,
+.drawer-right-leave-to {
+  transform: translateX(100%);
+}
+
+.drawer-right-enter-active,
+.drawer-right-leave-active {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Left ── */
+.drawer-left-enter-from,
+.drawer-left-leave-to {
+  transform: translateX(-100%);
+}
+
+.drawer-left-enter-active,
+.drawer-left-leave-active {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Top ── */
+.drawer-top-enter-from,
+.drawer-top-leave-to {
+  transform: translateY(-100%);
+}
+
+.drawer-top-enter-active,
+.drawer-top-leave-active {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Bottom ── */
+.drawer-bottom-enter-from,
+.drawer-bottom-leave-to {
+  transform: translateY(100%);
+}
+
+.drawer-bottom-enter-active,
+.drawer-bottom-leave-active {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   Alternative Transitions
+   ============================================ */
+
+/* Fade */
+.drawer-fade-enter-from,
+.drawer-fade-leave-to {
+  opacity: 0;
+}
+
+.drawer-fade-enter-active,
+.drawer-fade-leave-active {
+  transition: opacity 0.35s ease;
+}
+
+/* Scale */
+.drawer-scale-enter-from,
+.drawer-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.drawer-scale-enter-active,
+.drawer-scale-leave-active {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Spring */
+.drawer-spring-enter-from,
+.drawer-spring-leave-to {
+  opacity: 0;
+  transform: scale(0.9) translateX(20px);
+}
+
+.drawer-spring-enter-active {
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.drawer-spring-leave-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .drawer-panel,
+  .drawer-overlay,
+  .drawer-right-enter-active,
+  .drawer-right-leave-active,
+  .drawer-left-enter-active,
+  .drawer-left-leave-active,
+  .drawer-top-enter-active,
+  .drawer-top-leave-active,
+  .drawer-bottom-enter-active,
+  .drawer-bottom-leave-active,
+  .drawer-fade-enter-active,
+  .drawer-fade-leave-active,
+  .drawer-scale-enter-active,
+  .drawer-scale-leave-active,
+  .drawer-spring-enter-active,
+  .drawer-spring-leave-active {
+    transition: none !important;
+  }
+}
+
+/* ============================================
+   Pull Indicator
+   ============================================ */
+.drawer-pull-indicator {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem;
+  cursor: grab;
+}
+
+.drawer-pull-indicator:active {
+  cursor: grabbing;
+}
+
+.drawer-pull-indicator-bar {
+  width: 2.5rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  @apply bg-slate-300;
+}
+
+:is(.dark .drawer-pull-indicator-bar) {
+  @apply bg-slate-600;
+}
+
+/* ============================================
+   Resize Handle
+   ============================================ */
+.drawer-resize-handle {
+  position: absolute;
+  z-index: 10;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.drawer-resize-handle:hover {
+  @apply bg-indigo-500/20;
+}
+
+.drawer-resize-handle--vertical {
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.drawer-resize-handle--horizontal {
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+/* ============================================
+   Variant: Elevated
+   ============================================ */
+.drawer-panel--elevated {
+  box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 -2px 5px 0 rgba(0, 0, 0, 0.04);
+}
+
+:is(.dark .drawer-panel--elevated) {
+  box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 -2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Variant: Neumorphic
+   ============================================ */
+.drawer-panel--neumorphic {
+  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  box-shadow: 
+        8px 8px 16px #bebebe,
+        -8px -8px 16px #ffffff;
+}
+
+:is(.dark .drawer-panel--neumorphic) {
+  background: linear-gradient(145deg, #1a1a2e, #16162a);
+  box-shadow: 
+        8px 8px 16px #0d0d1a,
+        -8px -8px 16px #272745;
+}
+
+.drawer-panel--neumorphic .drawer-header {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+.drawer-panel--neumorphic .drawer-footer {
+  background: transparent;
+  border-top-color: transparent;
+}
+
+/* ============================================
+   Custom Size
+   ============================================ */
+.drawer-panel--custom {
+  width: auto;
+  height: auto;
+}
+
+/* ============================================
+   Persistent Mode
+   ============================================ */
+.drawer-panel--persistent {
+  position: relative;
+  z-index: 50;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.drawer-panel--no-overlay {
+  z-index: 40;
+}
+
+/* ============================================
+   Mini Mode
+   ============================================ */
+.drawer-panel--mini .drawer-header {
+  padding: 1rem;
+  justify-content: center;
+}
+
+.drawer-panel--mini .drawer-header-content {
+  display: none;
+}
+
+.drawer-panel--mini .drawer-body {
+  padding: 1rem;
+}
+
+.drawer-panel--mini .drawer-footer {
+  display: none;
+}

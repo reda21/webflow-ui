@@ -113,8 +113,10 @@ const cssIconUrl = computed(() => {
 
 // Initialize
 onMounted(async () => {
-  isMounted.value = true
-  if (isTestEnv) return
+  if (isTestEnv) {
+    isMounted.value = true
+    return
+  }
   setupLazyLoading()
 
   if (iconRef.value && observer) {
@@ -126,6 +128,11 @@ onMounted(async () => {
       await loadAndCacheIcon(props.name)
     }
   }
+
+  // Delay isMounted to after hydration so the initial client render
+  // matches the SSR placeholder (<span>), avoiding hydration mismatch
+  await nextTick()
+  isMounted.value = true
 })
 
 onUnmounted(() => {

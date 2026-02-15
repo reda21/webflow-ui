@@ -125,3 +125,13 @@ export type {
   SeparatorSize,
   SeparatorSeverity,
 } from "./components/separator/types";
+
+export { Drawer } from "./components/drawer/index";
+export type {
+  DrawerProps,
+  DrawerPlacement,
+  DrawerSize,
+  DrawerVariant,
+  DrawerOverlay,
+  DrawerEmits,
+} from "./components/drawer/types";
