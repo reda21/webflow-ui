@@ -59,3 +59,87 @@ provide('buttonGroup', {
     handleSelect
 })
 </script>
+
+<style scoped>
+.btn-group {
+    display: inline-flex;
+    border-radius: var(--radius-lg);
+    isolation: isolate;
+}
+
+.btn-group-horizontal {
+    flex-direction: row;
+}
+
+.btn-group-vertical {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Base button override when in group */
+.btn-group :deep(.btn-wrapper) {
+    flex: 1 1 auto;
+}
+
+.btn-group :deep(.btn) {
+    position: relative;
+}
+
+.btn-group-vertical :deep(.btn-wrapper) {
+    display: flex;
+}
+
+.btn-group-vertical :deep(.btn) {
+    width: 100%;
+}
+
+
+/* Specific rounding overrides to join buttons together */
+
+/* Middle buttons: square all corners */
+.btn-group :deep(.btn-wrapper:not(:first-child):not(:last-child) .btn) {
+    border-radius: 0 !important;
+}
+
+/* Horizontal group: zero out right corners of first button and left corners of last button */
+.btn-group-horizontal :deep(.btn-wrapper:first-child:not(:last-child) .btn) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.btn-group-horizontal :deep(.btn-wrapper:last-child:not(:first-child) .btn) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+/* Vertical group: zero out bottom corners of first button and top corners of last button */
+.btn-group-vertical :deep(.btn-wrapper:first-child:not(:last-child) .btn) {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.btn-group-vertical :deep(.btn-wrapper:last-child:not(:first-child) .btn) {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+
+/* Border overlapping to avoid double lines */
+.btn-group-horizontal :deep(.btn-wrapper:not(:first-child)) {
+    margin-left: -1px;
+}
+
+.btn-group-vertical :deep(.btn-wrapper:not(:first-child)) {
+    margin-top: -1px;
+}
+
+/* Z-index management for borders/focus */
+.btn-group :deep(.btn-wrapper:hover),
+.btn-group :deep(.btn-wrapper:focus-within) {
+    z-index: 1;
+}
+
+.btn-group :deep(.btn-selected) {
+    z-index: 2;
+}
+</style>

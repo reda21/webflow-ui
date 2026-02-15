@@ -176,24 +176,6 @@ const emit = defineEmits<{
 
                     <!-- Standard Content -->
                     <template v-else>
-                        <!-- Progress Bar -->
-                        <div v-if="progress !== undefined" class="card-progress">
-                            <div class="card-progress-bar"
-                                :style="typeof progress === 'number' ? { width: `${progress}%` } : {}"></div>
-                        </div>
-
-                        <!-- Badge -->
-                        <div v-if="badge" class="card-badge">{{ badge }}</div>
-
-                        <!-- Rating -->
-                        <div v-if="rating" class="card-rating">
-                            <span v-for="i in 5" :key="i" class="card-rating-star"
-                                :class="{ 'card-rating-star--filled': i <= rating }"> ★ </span>
-                        </div>
-
-                        <!-- Price -->
-                        <div v-if="price" class="card-price">{{ formattedPrice }}</div>
-
                         <!-- Like Indicator -->
                         <div v-if="doubleTapToLike && isLiked" class="card-like-indicator">❤️</div>
 
@@ -202,21 +184,51 @@ const emit = defineEmits<{
                             <input type="checkbox" class="card-checkbox-input" />
                         </div>
 
-                        <!-- Carousel (Dynamic) -->
-                        <CardCarousel v-if="images && images.length > 0" :images="images" :image-alt="imageAlt"
-                            :title="title" @change="emit('image-change', $event)" />
-
-                        <!-- Single Image Header -->
-                        <div v-else-if="image || $slots.image" :class="['card-image-wrapper', imageClass]">
-                            <slot name="image">
-                                <img :src="image" :alt="imageAlt" class="card-image" loading="lazy" decoding="async" />
-                            </slot>
+                        <!-- Progress Bar -->
+                        <div v-if="progress !== undefined" class="card-progress">
+                            <div class="card-progress-bar"
+                                :style="typeof progress === 'number' ? { width: `${progress}%` } : {}"></div>
                         </div>
 
+                        <!-- Top markers (Badge, Rating) - Only show here as absolute if there is an image/carousel -->
+                        <template v-if="images?.length || image || $slots.image">
+                            <!-- Badge Overlay -->
+                            <div v-if="badge" class="card-badge card-badge--overlay">{{ badge }}</div>
+
+                            <!-- Rating Overlay -->
+                            <div v-if="rating" class="card-rating card-rating--overlay">
+                                <span v-for="i in 5" :key="i" class="card-rating-star"
+                                    :class="{ 'card-rating-star--filled': i <= rating }"> ★ </span>
+                            </div>
+
+                            <!-- Carousel (Dynamic) -->
+                            <CardCarousel v-if="images && images.length > 0" :images="images" :image-alt="imageAlt"
+                                :title="title" @change="emit('image-change', $event)" />
+
+                            <!-- Single Image -->
+                            <div v-else :class="['card-image-wrapper', imageClass]">
+                                <slot name="image">
+                                    <img :src="image" :alt="imageAlt" class="card-image" loading="lazy"
+                                        decoding="async" />
+                                </slot>
+                            </div>
+                        </template>
+
                         <!-- Header -->
-                        <header v-if="title || subtitle || $slots.header || $slots.title || $slots.subtitle"
+                        <header
+                            v-if="title || subtitle || $slots.header || $slots.title || $slots.subtitle || (!image && !images?.length && (rating || badge))"
                             :class="['card-header', headerClass]">
                             <slot name="header">
+                                <!-- Meta markers when no image -->
+                                <div v-if="!image && (!images || !images.length) && (rating || badge)"
+                                    class="card-header-meta">
+                                    <div v-if="rating" class="card-rating card-rating--inline">
+                                        <span v-for="i in 5" :key="i" class="card-rating-star"
+                                            :class="{ 'card-rating-star--filled': i <= rating }"> ★ </span>
+                                    </div>
+                                    <div v-if="badge" class="card-badge card-badge--inline">{{ badge }}</div>
+                                </div>
+
                                 <div v-if="title || $slots.title" class="card-title">
                                     <slot name="title">{{ title }}</slot>
                                 </div>
@@ -229,6 +241,12 @@ const emit = defineEmits<{
                         <!-- Body -->
                         <div :class="bodyClasses" @click="toggleExpand">
                             <slot />
+
+                            <!-- Price (Inline in body if not overlayed and no footer) -->
+                            <div v-if="price && !$slots.footer && !(image || images?.length)" class="card-price-inline">
+                                {{ formattedPrice }}
+                            </div>
+
                             <div v-if="expandable" class="card-expand-indicator">
                                 <span v-if="!isExpanded">▼</span>
                                 <span v-else>▲</span>
@@ -241,9 +259,15 @@ const emit = defineEmits<{
                         </div>
 
                         <!-- Footer -->
-                        <footer v-if="$slots.footer" :class="['card-footer', footerClass]">
+                        <footer v-if="$slots.footer || (price && (image || images?.length))"
+                            :class="['card-footer', footerClass]">
                             <slot name="footer" />
+                            <!-- Price in footer if it exists and we have an image (to avoid bottom-right overlap) -->
+                            <div v-if="price" class="card-price-footer">
+                                {{ formattedPrice }}
+                            </div>
                         </footer>
+
                     </template>
                 </div>
             </div>

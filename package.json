@@ -63,6 +63,7 @@
         "test:watch": "vitest",
         "test:coverage": "vitest run --coverage",
         "test:ui": "vitest --ui",
+        "typecheck": "vue-tsc --noEmit",
         "prepublishOnly": "pnpm build"
     },
     "dependencies": {
@@ -100,6 +101,7 @@
         "vite": "^6.4.1",
         "vite-plugin-dts": "^4.3.0",
         "vitest": "^4.0.14",
+        "vue-tsc": "^2.2.0",
         "yup": "^1.7.1",
         "zod": "^4.1.13"
     }

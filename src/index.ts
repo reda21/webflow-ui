@@ -100,6 +100,9 @@ export type {
   ToastPosition,
 } from "./components/toast/types";
 
+export { Input } from "./components/input/index";
+export type { InputProps, InputType } from "./components/input/types";
+
 export {
   Progress,
   UProgress,
