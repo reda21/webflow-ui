@@ -141,6 +141,7 @@ provide('toast', api)
 
 <template>
     <div v-if="isClient" class="toast-containers">
+        <slot />
         <template v-for="(list, position) in toasts" :key="position">
             <div v-if="list.length > 0" class="toast-viewport" role="region" :aria-label="`Notifications ${position}`"
                 :class="[
@@ -155,7 +156,6 @@ provide('toast', api)
                 </TransitionGroup>
             </div>
         </template>
-        <slot />
     </div>
 </template>
 

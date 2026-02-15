@@ -79,7 +79,7 @@
         <!-- Badge -->
         <span v-if="props.badge !== undefined && props.badge !== ''" class="btn-badge" :class="badgeClasses">{{
             props.badge
-            }}</span>
+        }}</span>
 
         <!-- Live region for screen reader announcements -->
         <span class="btn-live-region" :aria-live="liveRegionPriority" aria-atomic="true" role="status">
@@ -388,7 +388,10 @@ const spinnerSizeClass = computed(() => {
 const isVertical = computed(() => props.iconPos === 'top' || props.iconPos === 'bottom')
 
 const labelClass = computed(() => {
-    return isVertical.value ? 'text-center whitespace-nowrap' : 'whitespace-nowrap'
+    return [
+        'whitespace-nowrap',
+        isVertical.value ? 'flex flex-col items-center' : 'inline-flex items-center gap-2'
+    ].join(' ')
 })
 
 // Display label logic

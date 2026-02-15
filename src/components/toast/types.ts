@@ -74,7 +74,7 @@ export interface ToastProps {
   /** Optional action button config */
   action?: {
     label: string;
-    onClick: <T = any>(event?: MouseEvent) => T | Promise<T>;
+    onClick: (event?: MouseEvent) => any | Promise<any>;
     loading?: boolean;
     autoClose?: boolean;
     retry?: number | { attempts: number; delay?: number };
@@ -82,7 +82,7 @@ export interface ToastProps {
   /** Optional array of action buttons */
   actions?: Array<{
     label: string;
-    onClick: <T = any>(event?: MouseEvent) => T | Promise<T>;
+    onClick: (event?: MouseEvent) => any | Promise<any>;
     icon?: string;
     color?: any;
     variant?: any;
